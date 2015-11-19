@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_OPER_GR">
+  <guid>{055ec577-1340-1910-c8e4-24d51e68be66}</guid>
+  <label>#CONST# OPERATION GENERIC REPLY</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "GENREPIRTO";]]></script>
+</script>

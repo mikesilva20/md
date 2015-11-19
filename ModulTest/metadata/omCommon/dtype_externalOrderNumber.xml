@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.externalOrderNumber">
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>External Order Number</label>
+  <length>128</length>
+  <metaVersion>4</metaVersion>
+</dataType>

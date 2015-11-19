@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.inboundPartREF">
+  <extends>dtype_cwf.sReference</extends>
+  <label>Reference - Inbound Participant</label>
+  <length>256</length>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elslct">
+    <sorted>true</sorted>
+  </propertyElement>
+  <reference>findDoc_omMessaging.inboundParticipantFnd</reference>
+</dataType>

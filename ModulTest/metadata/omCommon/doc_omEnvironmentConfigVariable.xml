@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEnvironmentConfigVariable">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{54a7a74b-bb2f-4160-b000-d30d91a156a5}</guid>
+  <label>OM Environment Global Value</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="name" type="leaf">
+      <column>NAME</column>
+      <key>1</key>
+      <table>omEnvironmentConfigVariable</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="value" type="leaf">
+      <column>VALUE</column>
+      <table>omEnvironmentConfigVariable</table>
+      <valueType>dtype_cwf.String64</valueType>
+    </variable>
+    <variable name="description" type="leaf">
+      <column>DESCRIPTION</column>
+      <table>omEnvironmentConfigVariable</table>
+      <valueType>dtype_cwf_oe.string128</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEnvironmentConfigVariable</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

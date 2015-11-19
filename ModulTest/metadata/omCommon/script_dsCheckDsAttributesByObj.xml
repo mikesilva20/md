@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsCheckDsAttributesByObj">
+  <label>dsCheckDsAttributesByObj</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="id" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - For a given DataStructure array "ds"  find if name, id and attributes match with "name", "id" and  a source Object "sourceObj".
+     * All Object leaves must have a correspondente data type and name in the destination DataStruture.
+     * @param    {DataStructure}  ds - DataStrucure to compare
+     * @param    {String}  id - Id
+     * @param    {Object}  sourceObj - Object that contains the leaves to check
+     * @param    {[Array]}  includeLeaves - Leaves to included
+     * @param    {[Array]}  excludeLeaves - Leaves to excluded
+     * @returns  {DataStructure} Returns a DataStructure
+     * @version  1.0
+     */
+
+    var objLeaves    = null;
+    var msgError     = "";
+    var ok           = true;
+    var auxAttribute = null;
+
+    // Validations
+    if ((name && ds.name != name) || (id && ds.id != id))
+    return null;
+
+    // checked only by name or id
+    if (!sourceObj)
+        return ds;
+
+    // Include or Remove the leaves to check from the source object
+    objLeaves = omCommon.getLeaveNamesFromObject(sourceObj, includeLeaves, excludeLeaves);
+
+    if (objLeaves == null) {
+        msgError = "include or exclude leaves don't match source attributes/leaves";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.dsCheckDsAttributesByObj");
+        return null;
+    }
+
+    for (var i=0; i<objLeaves.length; i++) {
+
+        auxAttribute = omCommon.dsGetAttribute(ds, objLeaves[i]);
+
+        if (auxAttribute == null) {
+            msgError = "source and destination leaves don't match by attributes/leaves";
+            omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.dsCheckDsAttributesByObj");
+            return null;
+        }
+        if ( auxAttribute.value != omCommon.getLeaveValue(sourceObj, objLeaves[i]))
+            return null;
+    }
+
+    return ds;
+  ]]></script>
+</script>

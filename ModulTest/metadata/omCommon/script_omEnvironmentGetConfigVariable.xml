@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.omEnvironmentGetConfigVariable">
+  <highlight>18</highlight>
+  <label>OM Get Config Variable</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="variableName" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="defaultValue" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Retrieve Environment Config Variable value
+     * @param    {String 1024}   variableName - Variable Name
+     * @param    {String 1024}   defaultValue - Default Value
+     * Return    returns variable value if it defined, otherwise it returns the default value received
+     * @version  1.0
+     */
+
+     var doc = Document.readDoc("omCommon.omEnvironmentConfigVariable",[variableName]);
+     if(doc)
+         return doc.value;
+
+     omCommon.writeLog(0, "Config Variable " + variableName + " not found.", "omCommon.omEnvironmentGetConfigVariable");
+     return defaultValue;
+  ]]></script>
+</script>

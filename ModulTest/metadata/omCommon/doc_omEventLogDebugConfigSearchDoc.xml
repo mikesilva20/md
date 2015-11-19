@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEventLogDebugConfigSearchDoc">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{a475b9cf-8650-4d2e-b820-f18f174f8250}</guid>
+  <label>OM Event Log Debug Config Search Doc</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="namespace" type="leaf">
+      <valueType>dtype_omCommon.omEventLogNameSpace</valueType>
+    </variable>
+    <variable name="mdFullName" type="leaf">
+      <valueType>dtype_omCommon.omEventLogMdFullName</valueType>
+    </variable>
+    <variable name="orderId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogOrderId</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogProcId</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEventLogDebugConfigSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

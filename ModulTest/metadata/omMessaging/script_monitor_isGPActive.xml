@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.monitor_isGPActive">
+  <label>monitor_isGPActive</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="gpId" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var key = "MESSAGING_MONITOR";
+
+
+    var doc = Document.readDoc("omMessaging.backupModeControl", key);
+
+
+    if(doc && doc.GPId == gpId){
+         return true;
+    }
+
+
+    return false;
+  ]]></script>
+</script>

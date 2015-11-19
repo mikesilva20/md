@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.calculateEnvironment">
+  <highlight>66</highlight>
+  <label>Calculate Environment</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="result" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Calculates the enviroment
+     * @param    {List}  result - List of environments
+     * @returns  {orderEnvironmentDoc} Document Enviorment
+     * @version  1.0
+     */
+    return result[0];
+  ]]></script>
+</script>

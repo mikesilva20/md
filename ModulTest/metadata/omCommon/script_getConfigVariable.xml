@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getConfigVariable">
+  <label>Get Config Variable</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="key" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(key)
+    {
+        var doc = Global.getTemplateConfigDocument("omCommon.omConfigVariables");
+        return doc[key];
+    }
+    return null;
+  ]]></script>
+</script>

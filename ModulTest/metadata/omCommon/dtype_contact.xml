@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.contact">
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Contact</label>
+  <length>32</length>
+  <metaVersion>4</metaVersion>
+</dataType>

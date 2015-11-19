@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.addAuxGroupAttributeDoc">
+  <label>Add Aux Group Attribute Doc</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="cwOrderId" type="rifp">
+      <type>dtype_cwf.cwOrderId</type>
+    </parameter>
+    <parameter name="itemId" type="rifp">
+      <type>dtype_cwf.docId</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+    <parameter name="value" type="rifp">
+      <type>dtype_omCommon.value</type>
+    </parameter>
+    <parameter name="groupAttributes" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="status" type="rifp">
+      <type>dtype_omCommon.state</type>
+    </parameter>
+    <parameter name="type" type="rifp">
+      <type>dtype_cwt_common.string3</type>
+    </parameter>
+    <parameter name="coordinate" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="groupAttributeParent" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="groupName" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Add a group or a atribute to auxiliaryGroup
+     * @param    {String}  cwOrderId            - order Id
+     * @param    {String}  itemId               - Item id
+     * @param    {String}  name                 - attribute or group name
+     * @param    {String}  value                - Value
+     * @param    {String}  groupAttributes      - Name of group attributes
+     * @param    {String}  status               - Status
+     * @param    {String}  type                 - indicates if is a group or atribute
+     * @param    {String}  coordinate           - Coordinate
+     * @param    {String}  groupAttributeParent - Group parent
+     * @param    {String}  groupName            - Group name
+     * @version  1.0
+     */
+
+    var doc = new Document("omCommon.omAuxiliaryGroup");
+    doc.cwOrderId             = cwOrderId;
+    doc.itemId                      = itemId;
+    doc.name                  = name;
+    doc.value                 = value;
+    doc.groupAttributes             = groupAttributes;
+    doc.status                = status;
+    doc.type                  = type;
+    doc.coordinate            = coordinate;
+    doc.groupAttributeParent  = groupAttributeParent;
+    doc.groupName             = groupName;
+
+    doc.save();
+  ]]></script>
+</script>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.statusText">
+  <doAutoComma>false</doAutoComma>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Status Text</label>
+  <length>500</length>
+  <metaVersion>3</metaVersion>
+</dataType>

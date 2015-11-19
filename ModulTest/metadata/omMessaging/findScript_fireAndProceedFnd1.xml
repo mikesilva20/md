@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findScript name="omMessaging.fireAndProceedFnd1">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.fireAndProceedSrc</input>
+  <label>fireAndProceedFnd1</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.fireAndProceedRes</output>
+  <type>script</type>
+  <methodList>
+    <method name="cwOnFinderSel" type="action">
+      <system>true</system>
+      <script>return omMessaging.runSqlFinder(this.searchDocument);</script>
+    </method>
+    <method name="editablePerm" type="permMethod">
+      <script>return this.enabled;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="FinderUserInterface" type="leaf">
+        <label>Finder User Interface</label>
+        <valueType>ui_com.conceptwave.system.FinderUserInterface</valueType>
+      </variable>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Fire And Proceed - Result Document</label>
+        <valueType>doc_omMessaging.fireAndProceedRes</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.fireAndProceedSrc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.fireAndProceedRes/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="result" type="eltabl">
+                    <headerHeight>30</headerHeight>
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <showDetailColumn>false</showDetailColumn>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <wrapCell>true</wrapCell>
+                    <wrapHeaderLabel>true</wrapHeaderLabel>
+                    <elementList>
+                      <element name="businessId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_businessId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>75px</width>
+                      </element>
+                      <element name="Error_Code" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_eCode</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>90px</width>
+                      </element>
+                      <element name="NPU" type="ellab">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_npu</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="Correlation_NPU" type="ellab">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_correlationNpu</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="Receive_Date" type="eldatetime">
+                        <displayFormat>dd/MM/yyyy HH:mm</displayFormat>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_receiveDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>120px</width>
+                      </element>
+                      <element name="Action" type="elslct">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedRes/leaf_action</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>105px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfUpdate" type="elext"/>
+              <override name="detailMenu" type="eldel"/>
+              <override name="finderMenuLayout" type="elext">
+                <elementList>
+                  <element name="fpResubmit" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/usrActionMethod_fpResubmit_menu</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/produce.gif</icon>
+                    <label>Resubmit</label>
+                    <menuType>5</menuType>
+                    <showDown>true</showDown>
+                    <showRollOver>true</showRollOver>
+                  </element>
+                  <element name="fpDelete" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/usrActionMethod_fpDelete_menu</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/MenuIconDelete.gif</icon>
+                    <label>Delete</label>
+                    <menuType>5</menuType>
+                    <showDown>true</showDown>
+                    <showRollOver>true</showRollOver>
+                  </element>
+                  <element name="detailMenuEx" type="elovf">
+                    <formReference type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_detail</variablePath>
+                        <variablePath>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</variablePath>
+                      </variablePathList>
+                    </formReference>
+                    <overflow>visible</overflow>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/uivar_detail</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>1px</width>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="doubleClick" type="usrActionMethod">
+        <dialogHeight>600</dialogHeight>
+        <dialogWidth>800</dialogWidth>
+        <parameterList>
+          <parameter name="document" type="rifp">
+            <mandatory>true</mandatory>
+            <type>doc_omMessaging.fireAndProceedRes</type>
+          </parameter>
+        </parameterList>
+        <showInPopup>true</showInPopup>
+        <script><![CDATA[
+          if(this.model.selected){
+                var msg = this.model.selected[0];
+                return Document.readDoc(msg.metadataType, msg.npu);
+          }
+        ]]></script>
+      </method>
+      <method name="fpResubmit" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var selectList = this.result.selected;
+          var finder = this.model;
+                // Set the Action and Action Date
+                 var date = new Date();
+                 var action = omMessaging.RESUBMITED();
+                 // Delete the Message
+                omMessaging.resubmitMessage(selectList, date, action);
+                // Refresh the Finder
+                this.searchAction();
+                finder.updateUI();
+        ]]></script>
+      </method>
+      <method name="fpResubmit_menu" type="usrActionMethod">
+        <script><![CDATA[
+          var result = this.fpResubmit();
+          Global.runContentDisplayScript(this, "displayScript");
+          return result;
+        ]]></script>
+      </method>
+      <method name="fpDelete" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var selectList = this.result.selected;
+          var finder = this.model;
+                 // Set the Action and Action Date
+                 var date = new Date();
+                 var action = omMessaging.DELETED();
+                 // Delete the Message
+                omMessaging.deleteMessage(selectList, date, action);
+                // Refresh the Finder
+                this.searchAction();
+                finder.updateUI();
+        ]]></script>
+      </method>
+      <method name="fpDelete_menu" type="usrActionMethod">
+        <script><![CDATA[
+          var result = this.fpDelete();
+          Global.runContentDisplayScript(this, "displayScript");
+          return result;
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="fireAndProceedFndView" type="findVView">
+      <inputOverlay>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/frmui_Forms/vform_Search</inputOverlay>
+      <outputOverlay>findScript_omMessaging.fireAndProceedFnd1/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findScript>

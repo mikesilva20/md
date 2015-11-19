@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getSystemToStack_Inbound">
+  <label>aux_getSystemToStack_Inbound</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="system" type="rifp">
+      <type>dtype_omMessaging.system</type>
+    </parameter>
+  </parameterList>
+  <valueType>nmeta_com.conceptwave.system.Object</valueType>
+  <script><![CDATA[
+    var dataList = getCachedScriptableObject();
+    var result = new Array();
+
+    for(var n=0; n < dataList.length; n++){
+
+        if(dataList[n].system == system){
+            result.push( dataList[n]);
+        }
+    }
+
+
+    return result;
+
+
+    function getCachedScriptableObject() {
+        var operationCache = theAVM.getCache("InterfaceData");
+        var operationRuleDS = operationCache.getObject("SYSTEM_TO_STACK_IN_CACHE_ID", "SYSTEM_TO_STACK_IN_CACHE_TYPE");
+
+        if(operationRuleDS == null)
+           operationRuleDS = omMessaging.cache_getSystemToStackInbound();
+
+        return operationRuleDS.getScriptObject();
+
+    }
+  ]]></script>
+</script>

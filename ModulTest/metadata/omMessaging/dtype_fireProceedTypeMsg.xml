@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.fireProceedTypeMsg">
+  <enumeration type="enum">
+    <valueList>
+      <value name="inbound" type="enumItem" code="0"/>
+      <value name="outbound" type="enumItem" code="1"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.Integer</extends>
+  <label>type Msg</label>
+  <metaVersion>4</metaVersion>
+</dataType>

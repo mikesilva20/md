@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_npu_save">
+  <guid>{0ae8645b-2875-f865-3288-5bd5d5c791ac}</guid>
+  <label>aux_npu_save</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = new Document("omMessaging:npuValidationDoc");
+    doc.npu = npu;
+    doc.creationDate = new Date();
+    doc.save();
+  ]]></script>
+</script>

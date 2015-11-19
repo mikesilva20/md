@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_isCancelation">
+  <label>aux_isCancelation</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var op = omMessaging.npu_getOper(msg.header.npu);
+    if(op == omMessaging.CONST_CANCELLATION())
+        return true;
+    return false;
+  ]]></script>
+</script>

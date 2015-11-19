@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.msgDebugSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{070f9bb4-f64d-ec73-cd97-93155864d48f}</guid>
+  <label>Msg - Debug Search</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="startTime" type="leaf">
+      <label>Start DateTime</label>
+      <propertyElement type="eldatetime">
+        <displayFormat>yyyy-MM-dd HH:mm:ss </displayFormat>
+        <label>Start DateTime</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.DateTime</valueType>
+    </variable>
+    <variable name="endTime" type="leaf">
+      <label>End DateTime</label>
+      <propertyElement type="eldatetime">
+        <label>End DateTime</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.DateTime</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.msgDebugSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="defaultGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="defaultGrid" type="elgrd">
+                    <colWidths>195,195,195,195</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>780px</width>
+                    <elementList>
+                      <element name="startTime" type="eldate">
+                        <columnSpan>1</columnSpan>
+                        <hint>yyyy-MM-dd HH:mm:ss </hint>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.msgDebugSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.msgDebugSearchDoc/leaf_startTime</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="endTime" type="eldate">
+                        <columnSpan>1</columnSpan>
+                        <hint>yyyy-MM-dd HH:mm:ss </hint>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.msgDebugSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.msgDebugSearchDoc/leaf_endTime</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

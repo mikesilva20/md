@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.stackId">
+  <extends>dtype_com.conceptwave.system.Integer</extends>
+  <label>stackId</label>
+  <length>10</length>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elfld">
+    <label>Stack Id</label>
+  </propertyElement>
+  <textLength>32</textLength>
+</dataType>

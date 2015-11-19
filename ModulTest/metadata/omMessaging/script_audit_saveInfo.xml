@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.audit_saveInfo">
+  <guid>{0d5e8ebd-c90c-389f-227b-5ee630246ebe}</guid>
+  <label>audit_saveInto</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="type" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = new Document("omMessaging:msgAuditDoc");
+
+    doc.auditType              = type;
+    doc.eventTime              = new Date();
+    doc.system                 = msg.system;
+    doc.interfaceToInvoke      = msg.interfaceToInvoke;
+    doc.operation              = msg.operation;
+    doc.processingTime         = -1;
+    doc.stackId                = msg.stackId;
+
+    if(msg.processDate != null && msg.creationDate != null){
+        doc.processingTime         = (msg.processDate.getTime() - msg.creationDate.getTime());
+    }
+    doc.save();
+
+    return doc;
+  ]]></script>
+</script>

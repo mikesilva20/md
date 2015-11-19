@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_OperToQueue">
+  <description><![CDATA[
+    <p style="margin-top: 0">
+      Lista das opera&#231;oes que sao enviadas para Queues de Global Process e nao
+      para processos.
+    </p>
+  ]]></description>
+  <guid>{026ad054-3993-72c3-d7ff-f957da52e37e}</guid>
+  <label>aux_OperToQueue</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="oper" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceInvoked" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationInvoked" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    // Lista das operaçoes que sao enviadas para Queues de Global Process e nao para processos.
+
+    var result = null;
+    var list = getCachedScriptableObject();
+
+    if(list.length == 0){
+
+        list = loadDefaults();
+        omMessaging.cache_resetAll();
+    }
+
+    for(var i=0; i<list.length; i++){
+
+        var conf = list[i];
+
+        if(interfaceInvoked == conf.interfaceInvoked && operationInvoked == conf.operationInvoked){
+            return [conf.queueGP, conf.queueOperation];
+        }
+    }
+
+    for(var i=0; i<list.length; i++){
+
+        var conf = list[i];
+
+        if(oper == conf.operation){
+            return [conf.queueGP, conf.queueOperation];
+        }
+    }
+
+    return null;
+
+
+    /*
+    * ######################################3
+    *             AUXILIAR METHODS
+    * #######################################
+    */
+
+
+    function getCachedScriptableObject() {
+        var operationCache = theAVM.getCache("InterfaceData");
+        var operationRuleDS = operationCache.getObject("OPERATION_TO_QUEUE_CACHE_ID", "OPERATION_TO_QUEUE_CACHE_TYPE");
+
+        if(operationRuleDS == null)
+            operationRuleDS = omMessaging.cache_getOperationToQueue();
+
+        return operationRuleDS.getScriptObject();
+
+    }
+
+    function loadDefaults(){
+         var arr = new Array();
+
+         return arr;
+    }
+  ]]></script>
+</script>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project>
+  <DefaultDB>MODULTEST</DefaultDB>
+  <applicationString>modulTest</applicationString>
+  <applicationVersionString>1</applicationVersionString>
+  <breakpointMap>
+    <breakpoint key="omMessaging.audit_saveInfo">0</breakpoint>
+  </breakpointMap>
+  <databasesMap>
+    <databases key="MODULTEST" type=".configdb">
+      <dbname>MODULTEST</dbname>
+      <driver type=".dbdriver">
+        <attributes>localhost;1521;orcl;false</attributes>
+        <driverType>Oracle thin</driverType>
+      </driver>
+      <password>96FB553376D8D1F9F153EC9488562076</password>
+      <user>modulTest</user>
+    </databases>
+  </databasesMap>
+  <excludedBuildWar>.bak</excludedBuildWar>
+  <excludedResource>.svn</excludedResource>
+  <joinCluster>true</joinCluster>
+  <nodeString>PE_UI</nodeString>
+  <skin>Enterprise</skin>
+</project>

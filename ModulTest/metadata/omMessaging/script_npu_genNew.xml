@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.npu_genNew">
+  <guid>{01dca3ec-4ea9-ecc2-38f4-6c1c745835d4}</guid>
+  <label>npu_genNew</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="operation" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="oldNpu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    // Variables declaration
+    var npu                  = null;
+    var oper            = null;
+    var reserved      = Global.getConfigVariable("NPU_RESERVED", '0');
+    var retryCount      = Global.getConfigVariable("NPU_RETRY_COUNT", '00');
+    var syscode            = null;
+    var tStamp            = null;
+    var uniqueId      = null;
+
+    syscode = omMessaging.aux_getSysCode(operation);
+
+    oper = operation;
+    tStamp = Calendar.formatDate(new Date(), omMessaging.CONST_TIMESTAMP_FORMAT());
+
+    uniqueId = Global.nextInSequence("OM_UNIQUE_MSG_ID");
+    uniqueId = uniqueId.leftPad(16, "0");
+
+      if (oldNpu != null) {
+          retryCount = Math.round(omMessaging.npu_getRetryCount(oldNpu)) + 1;
+          retryCount = retryCount + "";
+          retryCount = retryCount.leftPad(2, "0");
+    }
+
+    npu = syscode + oper + tStamp + uniqueId + reserved + retryCount;
+
+    return npu;
+  ]]></script>
+</script>

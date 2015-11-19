@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.npu_getOper">
+  <label>npu_getOper</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceInvoked" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var operation = null;
+
+    if(npu == null)
+        return operation;
+
+
+    if(!interfaceInvoked && !operationToInvoke)
+        return npu.substr(4, 10);
+
+
+    //var conf = omConfig.configData("messagingOperationConf", ["interfaceInvoked", interfaceInvoked,"operation",operationToInvoke], false, true);
+    var conf = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+    if(conf && conf.length > 0)
+        operation = conf[0].value3;
+
+    if(operation == null && npu) operation = npu.substr(4, 10);
+
+    return operation;
+  ]]></script>
+</script>

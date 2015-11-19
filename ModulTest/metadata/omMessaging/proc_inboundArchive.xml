@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omMessaging.inboundArchive">
+  <activity name="start" type="seqActivity">
+    <label>Start</label>
+    <x>108.0</x>
+    <y>199.0</y>
+    <childList>
+      <child name="loop" type="seqActivity">
+        <label>Loop</label>
+        <x>212.0</x>
+        <y>199.0</y>
+        <childList>
+          <child name="Run" type="scriptActivity">
+            <label>Run</label>
+            <x>323.0</x>
+            <y>198.0</y>
+            <methodList>
+              <method name="cwOnProcActBefore" type="action">
+                <category>before</category>
+                <system>true</system>
+                <script>omMessaging.in_archiveProcess();</script>
+              </method>
+            </methodList>
+          </child>
+          <child name="repeat" type="repeatActivity">
+            <element>proc_omMessaging.inboundArchive/seqActivity_start/seqActivity_loop</element>
+            <label>Repeat</label>
+            <schedule type="sched">
+              <duration type="dur">
+                <length>P0Y0M0DT0H2M0S</length>
+              </duration>
+            </schedule>
+            <x>265.0</x>
+            <y>293.0</y>
+          </child>
+        </childList>
+      </child>
+    </childList>
+  </activity>
+  <curRevision>true</curRevision>
+  <document>doc_omMessaging.globalProcDoc</document>
+  <label>Inbound Msg: Archive</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <type>Global</type>
+</process>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.jeopardy">
+  <container>true</container>
+  <description>Jeopardy</description>
+  <label>jeopardy</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="system" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.String</element>
+      <label>system</label>
+    </child>
+    <child name="cwDocId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_cwf.cwDocId</element>
+      <label>cwDocId</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.jeopardy</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.jeopardy</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

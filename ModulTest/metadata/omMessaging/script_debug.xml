@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.debug">
+  <guid>{0c229c72-149f-41e9-6ed6-fbfd7a3e6765}</guid>
+  <label>debug</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var configs = omMessaging.aux_getConfig();
+    var _debugModeOn = true;
+
+    if(configs &&  configs.logLevel == "OFF"){
+        _debugModeOn = false;
+    }
+
+
+
+    if(_debugModeOn){
+          var now = new Date();
+          debugPrintln("[OM_MSG " + Calendar.formatDate(now, "yyyy-MM-dd HH:mm:ss") + "] " +  msg);
+
+          var doc = new Document("omMessaging:msgDebugDoc");
+          doc.debugMsg = msg;
+          doc.debugTime = now;
+          doc.save();
+    }
+  ]]></script>
+</script>

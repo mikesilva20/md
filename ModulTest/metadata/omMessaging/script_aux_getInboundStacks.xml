@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getInboundStacks">
+  <label>aux_getInboundStacks</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="includeInactive" type="rifp">
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var dataList = omMessaging.cache_getCachedConfigurationStacks();
+    var result = new Array();
+
+    for(var n=0; n < dataList.length; n++){
+
+        if( (dataList[n].isActive || includeInactive ) && dataList[n].GPType == "IN"){
+            result.push(dataList[n]);
+        }
+    }
+
+
+    return result;
+  ]]></script>
+</script>

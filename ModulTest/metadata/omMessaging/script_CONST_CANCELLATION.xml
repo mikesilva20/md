@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_CANCELLATION">
+  <label>CONST_CANCELLATION</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "COCANCEL00";]]></script>
+</script>

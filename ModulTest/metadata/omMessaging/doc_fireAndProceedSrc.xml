@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.fireAndProceedSrc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{03d495eb-c29a-4765-4546-5b9c90b101a5}</guid>
+  <label>Fire And Proceed - Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="businessId" type="leaf">
+      <label>Business Id</label>
+      <propertyElement type="elfld">
+        <label>Business Id</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.businessId</valueType>
+    </variable>
+    <variable name="eCode" type="leaf">
+      <label>eCode</label>
+      <valueType>dtype_omCommon.eCode</valueType>
+    </variable>
+    <variable name="interType" type="leaf">
+      <label>Numeric interface type</label>
+      <valueType>dtype_cwf.metaInterfacesId</valueType>
+    </variable>
+    <variable name="npu" type="leaf">
+      <label>NPU</label>
+      <propertyElement type="elfld">
+        <label>NPU</label>
+      </propertyElement>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+    <variable name="action" type="leaf">
+      <label>Action</label>
+      <propertyElement type="elslct">
+        <label>Action</label>
+        <sorted>false</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.fireProceedAction</valueType>
+    </variable>
+    <variable name="correlationNpu" type="leaf">
+      <label>Correlation NPU</label>
+      <propertyElement type="elfld">
+        <label>Correlation NPU</label>
+      </propertyElement>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+    <variable name="resubmissionNpu" type="leaf">
+      <label>Resubmission Npu</label>
+      <propertyElement type="elfld">
+        <label>Resubmission Npu</label>
+      </propertyElement>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.fireAndProceedSrc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Search" type="vform">
+            <label>Search</label>
+            <root name="SearchGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="fireAndProceedSrcHeader" type="elhdr">
+                  <label>Search</label>
+                  <showValidation>true</showValidation>
+                  <style>CwFOT</style>
+                </element>
+                <element name="SearchGrid" type="elgrd">
+                  <colWidths>195,195,195,195</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>780px</width>
+                  <elementList>
+                    <element name="businessId" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/leaf_businessId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="npu" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <label>% NPU</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/leaf_npu</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="action" type="elslct">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/leaf_action</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="correlationNpu" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/leaf_correlationNpu</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="eCode" type="elfld">
+                      <columnSpan>1</columnSpan>
+                      <label>ErrorCode</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.fireAndProceedSrc/leaf_eCode</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

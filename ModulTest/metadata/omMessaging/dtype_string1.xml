@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.string1">
+  <enumeration type="enum">
+    <valueList>
+      <value name="S" type="enumItem" code="S"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>String1</label>
+  <length>1</length>
+  <metaVersion>3</metaVersion>
+</dataType>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.errorEventRuleAction">
+  <enumeration type="enum">
+    <valueList>
+      <value name="task" type="enumItem" code="TASK"/>
+      <value name="resume" type="enumItem" code="RESUME"/>
+      <value name="resubmit" type="enumItem" code="RESUBMIT"/>
+      <value name="reject" type="enumItem" code="REJECT"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Error Event Rule Action</label>
+  <length>10</length>
+  <metaVersion>4</metaVersion>
+</dataType>

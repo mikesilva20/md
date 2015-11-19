@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_addError">
+  <guid>{07911605-9498-215c-aa82-d737fc914987}</guid>
+  <label>aux_addError</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="list" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="code" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="desc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(list == null)
+          list = new Array();
+
+
+    var tam = list.length;
+    var item = new DataStructure("omMessaging.eCodes");
+    item.code = code;
+    item.description = desc;
+
+    list[tam] = item;
+
+    return list;
+  ]]></script>
+</script>

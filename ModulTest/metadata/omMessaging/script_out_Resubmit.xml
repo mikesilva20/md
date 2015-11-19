@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_Resubmit">
+  <label>out_Resubmit</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var msgDS      = Global.getItemsFromXML(doc.message, doc.payloadType)[0];
+
+    var msgNPU     = doc.active? doc.gen_npu : doc.msg_npu;
+    var msgCorrNPU = doc.corr_npu;
+
+    //var header = new DataStructure("omCommon.headerRequest");
+    var header = publishEvent("OM_COMMON",FIRST_ONE,null);
+    header.npu                               = msgNPU;
+    header.correlationNpu             = msgCorrNPU;
+    header.processId                   = doc.processId;
+    header.businessId                   = doc.correlationId;
+    header.certificationNeeded      = doc.certificationNeeded;
+
+    var headerDS = null;
+
+    if(msgDS.has("headerRequest")){
+        headerDS = msgDS.HeaderRequest;
+    }else if(msgDS.has("headerReport")){
+        headerDS = msgDS.HeaderReport;
+    }
+
+
+    if(headerDS)
+        headerDS.npu = msgNPU;
+
+
+    var system = omMessaging.npu_getSystem(msgNPU);
+
+    omMessaging.out_publishMsg(msgDS, header, system, false, doc.interfaceName, doc.operationName );
+
+    doc.result = "Message publish in Outbound Queue.";
+  ]]></script>
+</script>

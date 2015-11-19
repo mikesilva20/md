@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.fireProceedAction">
+  <enumeration type="enum">
+    <valueList>
+      <value name="Waiting Action" type="enumItem" code="0"/>
+      <value name="Resubmitted" type="enumItem" code="1"/>
+      <value name="Deleted" type="enumItem" code="2"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Action</label>
+  <length>1</length>
+  <metaVersion>4</metaVersion>
+</dataType>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omMessaging.messagingMonitor">
+  <activity name="startMonitor" type="seqActivity">
+    <label>start Monitor</label>
+    <x>-15.999994</x>
+    <y>145.0</y>
+    <childList>
+      <child name="cpRestart" type="scriptActivity">
+        <label>cpRestart</label>
+        <x>127.0</x>
+        <y>145.0</y>
+        <childList>
+          <child name="cpRest" type="compensateActivity">
+            <label>cpRest</label>
+            <x>128.0</x>
+            <y>244.0</y>
+            <childList>
+              <child name="doStuff" type="scriptActivity">
+                <label>doStuff</label>
+                <x>135.0</x>
+                <y>245.0</y>
+                <methodList>
+                  <method name="cwOnProcActBefore" type="action">
+                    <category>before</category>
+                    <system>true</system>
+                    <script><![CDATA[omMessaging.log("Restarting...", "MessagingMonitor");]]></script>
+                  </method>
+                </methodList>
+              </child>
+            </childList>
+          </child>
+        </childList>
+      </child>
+      <child name="pChanges" type="allActivity">
+        <label>pChanges</label>
+        <x>237.0</x>
+        <y>144.0</y>
+        <childList>
+          <child name="sChanges" type="seqActivity">
+            <label>sChanges</label>
+            <x>202.0</x>
+            <y>293.0</y>
+            <childList>
+              <child name="ReceiveConfigurations" type="opActivity">
+                <element>iface_omMessaging.GPConf/oper_receiveConfiguration</element>
+                <label>Receive Configurations</label>
+                <participant>part_omMessaging.GPConfPart</participant>
+                <x>304.0</x>
+                <y>425.0</y>
+                <methodList>
+                  <method name="cwOnProcActAfter" type="action">
+                    <category>script</category>
+                    <system>true</system>
+                    <script>omMessaging.aux_changeConfigGP(this);</script>
+                  </method>
+                </methodList>
+              </child>
+              <child name="rChanges" type="repeatActivity">
+                <element>proc_omMessaging.messagingMonitor/seqActivity_startMonitor/allActivity_pChanges/seqActivity_sChanges</element>
+                <label>rChanges</label>
+                <x>146.0</x>
+                <y>436.0</y>
+              </child>
+            </childList>
+          </child>
+          <child name="regularFlow" type="seqActivity">
+            <label>Regular Flow</label>
+            <x>341.0</x>
+            <y>328.0</y>
+            <childList>
+              <child name="inBackupMode" type="switchActivity">
+                <label>in Backup Mode?</label>
+                <x>463.0</x>
+                <y>136.0</y>
+                <childList>
+                  <child name="No" type="caseActivity">
+                    <label>No</label>
+                    <x>450.0</x>
+                    <y>241.0</y>
+                    <childList>
+                      <child name="sWork" type="seqActivity">
+                        <label>sWork</label>
+                        <x>602.0</x>
+                        <y>142.0</y>
+                        <childList>
+                          <child name="pWork" type="allActivity">
+                            <label>pWork</label>
+                            <x>742.0</x>
+                            <y>145.0</y>
+                            <childList>
+                              <child name="sRegistration" type="seqActivity">
+                                <label>sRegistration</label>
+                                <x>883.0</x>
+                                <y>78.0</y>
+                                <childList>
+                                  <child name="receiveRegistration" type="opActivity">
+                                    <element>iface_omMessaging.GPConf/oper_GPRegistration</element>
+                                    <label>Receive Registration</label>
+                                    <x>1043.0</x>
+                                    <y>81.0</y>
+                                    <methodList>
+                                      <method name="cwOnProcActAfter" type="action">
+                                        <category>script</category>
+                                        <system>true</system>
+                                        <script><![CDATA[
+                                          var isActive = omMessaging.monitor_isGPActive(this.process.id);
+
+                                          if(!isActive){
+
+                                              omMessaging.breakpoint();
+                                              omMessaging.log("Vou entrar em modo Backup... GPId: "  + this.process.id, "messagingMonitor", "WARN");
+
+                                              Process.sendMessageToQueue("omMessaging.messagingMonitor", "GPRegistration", document);
+
+                                              this.raiseProcessException("omMessaging.restartGP");
+                                              return;
+                                          }
+
+                                          omMessaging.monitor_pingBackupControl(this.process.id);
+
+                                          return omMessaging.aux_registGP(document);
+                                        ]]></script>
+                                      </method>
+                                    </methodList>
+                                  </child>
+                                  <child name="rRegister" type="repeatActivity">
+                                    <element>proc_omMessaging.messagingMonitor/seqActivity_startMonitor/allActivity_pChanges/seqActivity_regularFlow/switchActivity_inBackupMode/caseActivity_No/seqActivity_sWork/allActivity_pWork/seqActivity_sRegistration</element>
+                                    <label>rRegister</label>
+                                    <x>998.0</x>
+                                    <y>-24.0</y>
+                                  </child>
+                                </childList>
+                              </child>
+                              <child name="sMonitor" type="seqActivity">
+                                <label>sMonitor</label>
+                                <x>826.0</x>
+                                <y>249.0</y>
+                                <childList>
+                                  <child name="checkThroughput" type="scriptActivity">
+                                    <label>Check Throughput</label>
+                                    <x>967.0</x>
+                                    <y>241.0</y>
+                                    <methodList>
+                                      <method name="cwOnProcActBefore" type="action">
+                                        <category>before</category>
+                                        <system>true</system>
+                                        <script><![CDATA[
+                                          omMessaging.monitor_pingBackupControl(this.process.id);
+
+                                          omMessaging.monitor_checkInbound();
+
+                                          omMessaging.monitor_checkOutbound();
+                                        ]]></script>
+                                      </method>
+                                    </methodList>
+                                  </child>
+                                  <child name="rCheck" type="repeatActivity">
+                                    <element>proc_omMessaging.messagingMonitor/seqActivity_startMonitor/allActivity_pChanges/seqActivity_regularFlow/switchActivity_inBackupMode/caseActivity_No/seqActivity_sWork/allActivity_pWork/seqActivity_sMonitor</element>
+                                    <label>rCheck</label>
+                                    <schedule type="sched">
+                                      <duration type="dur">
+                                        <methodList>
+                                          <method name="cwOnDuration" type="action">
+                                            <system>true</system>
+                                            <script>return this.processDocument.intervalBetweenChecks;</script>
+                                          </method>
+                                        </methodList>
+                                      </duration>
+                                    </schedule>
+                                    <x>913.0</x>
+                                    <y>368.0</y>
+                                  </child>
+                                </childList>
+                                <methodList>
+                                  <method name="cwOnProcActBefore" type="action">
+                                    <category>before</category>
+                                    <system>true</system>
+                                    <script><![CDATA[
+                                      var isActive = omMessaging.monitor_isGPActive(this.process.id);
+
+                                      if(!isActive){
+                                           omMessaging.log("Vou entrar em modo Backup... GPId: "  + this.process.id, "messagingMonitor", "WARN");
+                                       this.raiseProcessException("omMessaging.restartGP");
+
+                                      }
+                                    ]]></script>
+                                  </method>
+                                </methodList>
+                              </child>
+                            </childList>
+                          </child>
+                        </childList>
+                        <methodList>
+                          <method name="cwOnProcActBefore" type="action">
+                            <category>before</category>
+                            <system>true</system>
+                            <script><![CDATA[
+                              var pd = this.process.processDocument;
+
+                              pd.inBackupMode = false;
+
+                              omMessaging.log("Estou ativo... GPId: "  + this.process.id, "messagingMonitor", "WARN");
+                            ]]></script>
+                          </method>
+                        </methodList>
+                      </child>
+                    </childList>
+                    <methodList>
+                      <method name="cwOnProcActCond" type="action">
+                        <category>cond</category>
+                        <system>true</system>
+                        <script><![CDATA[
+                          var pd = this.process.processDocument;
+
+                          var isActive = omMessaging.monitor_isGPActive(this.process.id);
+
+
+                          return isActive;
+                        ]]></script>
+                      </method>
+                    </methodList>
+                  </child>
+                  <child name="Yes" type="caseActivity">
+                    <label>Yes</label>
+                    <x>450.0</x>
+                    <y>241.0</y>
+                    <childList>
+                      <child name="repeat" type="repeatActivity">
+                        <element>proc_omMessaging.messagingMonitor/seqActivity_startMonitor/allActivity_pChanges/seqActivity_regularFlow</element>
+                        <label>repeat</label>
+                        <schedule type="sched">
+                          <duration type="dur">
+                            <methodList>
+                              <method name="cwOnDuration" type="action">
+                                <system>true</system>
+                                <script>return this.processDocument.intervalCheckBackup;</script>
+                              </method>
+                            </methodList>
+                          </duration>
+                        </schedule>
+                        <x>400.0</x>
+                        <y>279.0</y>
+                      </child>
+                    </childList>
+                  </child>
+                </childList>
+              </child>
+            </childList>
+            <methodList>
+              <method name="cwOnProcActBefore" type="action">
+                <category>before</category>
+                <system>true</system>
+                <script>omMessaging.monitor_tryRegistGP(process.id);</script>
+              </method>
+            </methodList>
+          </child>
+        </childList>
+      </child>
+      <child name="resetGP" type="onExceptionActivity">
+        <element>excp_omMessaging.restartGP</element>
+        <label>resetGP</label>
+        <x>79.0</x>
+        <y>238.0</y>
+        <childList>
+          <child name="SException" type="seqActivity">
+            <label>SException</label>
+            <x>-11.0</x>
+            <y>264.0</y>
+            <childList>
+              <child name="restartRollback" type="rollbackActivity">
+                <label>restartRollback</label>
+                <x>-30.0</x>
+                <y>346.0</y>
+                <methodList>
+                  <method name="cwOnProcActBefore" type="action">
+                    <category>before</category>
+                    <system>true</system>
+                    <script>return [];</script>
+                  </method>
+                </methodList>
+              </child>
+              <child name="resumeRestart" type="resumeActivity">
+                <label>resumeRestart</label>
+                <x>-19.0</x>
+                <y>433.0</y>
+              </child>
+            </childList>
+          </child>
+        </childList>
+      </child>
+      <child name="GPConfPart" type="participantActivity">
+        <label>GPConfPart</label>
+        <participant>part_omMessaging.GPConfPart</participant>
+        <x>490.0</x>
+        <y>419.0</y>
+      </child>
+    </childList>
+    <methodList>
+      <method name="cwOnProcActBefore" type="action">
+        <category>before</category>
+        <system>true</system>
+        <script><![CDATA[
+          var pd = this.process.processDocument;
+
+          pd.inBackupMode = true;
+          pd.forceStart = false;
+          pd.intervalCheckBackup = 60 * 15;
+          pd.intervalBetweenChecks = 60 * 5;
+        ]]></script>
+      </method>
+    </methodList>
+  </activity>
+  <curRevision>true</curRevision>
+  <document>doc_omMessaging.procDocMonitor</document>
+  <interface>iface_omMessaging.GPConf</interface>
+  <label>Messaging  - Monitor</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <revision>12</revision>
+  <type>Global</type>
+</process>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_getNpuRoutes">
+  <label>route_getNpuRoutes</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="processId" type="rifp">
+      <type>dtype_cwf_pm.PROCESS_ID</type>
+    </parameter>
+    <parameter name="npu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omCommon.operation</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!processId && !npu && !operation)
+        return;
+
+    var omCreateOMnpuFnd = new Finder("omMessaging.routesFinder");
+    var searchDoc = omCreateOMnpuFnd.searchDocument;
+
+    //Retreives every creatSOM NPU for this COM process avalilable
+    //This enables us to identify all SOM notification channels
+    searchDoc.processId = processId;
+
+    searchDoc.npu = (npu!=null) ? npu :omMessaging.aux_getSysCode()+operation+'%';
+
+    return omCreateOMnpuFnd.search();
+  ]]></script>
+</script>

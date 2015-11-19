@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.getMsg">
+  <guid>{0b017053-4601-2a66-4c26-5d4b99892297}</guid>
+  <highlight>68</highlight>
+  <label>getMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var msg = omMessaging.out_getMsg(npu, true);
+
+
+    if(!msg)
+          msg = omMessaging.in_getMsg(npu, true);
+
+
+    return msg;
+  ]]></script>
+</script>

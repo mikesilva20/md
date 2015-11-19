@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omDependentsOrderSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{76d59b67-2dd0-4842-9f22-d4f2e4657d50}</guid>
+  <label>OM Dependents Order Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="sourceOrderId" type="leaf">
+      <valueType>dtype_omCommon.orderId</valueType>
+    </variable>
+    <variable name="provisioningItemId" type="leaf">
+      <valueType>dtype_omCommon.itemId</valueType>
+    </variable>
+    <variable name="destinationOrderId" type="leaf">
+      <valueType>dtype_omCommon.orderId</valueType>
+    </variable>
+    <variable name="environment" type="leaf">
+      <valueType>dtype_omCommon.environment</valueType>
+    </variable>
+    <variable name="orderCreationNpu" type="leaf">
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omDependentsOrderSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetCatalogDsArrayByObj">
+  <label>dsSetCatalogDsArrayByObj</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="id" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - For a given DataStructure array "ds"  find if name, id and attributes match with "name", "id" and  a source Object "sourceObj".
+     * All Object leaves must have a correspondente data type and name in the destination DataStruture.
+     * @param    {DataStructure}  ds            - Data structure to check
+     * @param    {String}         name          - Name to set
+     * @param    {String}         id            - Id to set
+     * @param    {Object}         sourceObj     - Object that contains the leaves to set
+     * @param    {Array}          includeLeaves - Leaves to include
+     * @param    {Array}          excludeLeaves - Leaves to exclude
+     * @returns  {DataStructure} Returns DataStrucure
+     * @version  1.0
+     */
+
+
+    var objLeaves     = null;
+    var msgError      = "";
+    var ok            = true;
+    var valueToUpdate = null;
+
+    // Include or Remove the leaves to check from the source object
+    objLeaves = omCommon.getLeaveNamesFromObject(sourceObj, includeLeaves, excludeLeaves);
+
+    if (objLeaves == null) {
+        msgError = "source and destination don't match in attributes/leaves";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setCatalogDsAttributesByObj");
+        return null;
+    }
+
+    if (name) ds.name = name;
+    if (id) ds.id = id;
+
+    // set/update leaves
+    for (var i=0; i<objLeaves.length; i++) {
+
+        valueToUpdate = omCommon.getLeaveValue(sourceObj, objLeaves[i]);
+
+        if ((valueToUpdate != null) && ((valueToUpdate+"") != "")){
+            omCommon.dsSetAttribute(ds, objLeaves[i], valueToUpdate);
+        }
+    }
+
+    return ds;
+  ]]></script>
+</script>

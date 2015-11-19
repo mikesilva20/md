@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.monitor_stackThroughput">
+  <label>monitor_stackThroughput</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="dol" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="rangeSeconds" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var keys    = new Array();
+
+    var now     = new Date();
+    var stacks  = new Array();
+    var tmpMax  = null;
+    var tmpMin  = null;
+    var group   = new Object();
+    var results = dol;
+    var config  = omMessaging.cache_getCachedConfigurationStacks();
+
+    var timeZone = Calendar.formatDate(now, 'z');
+
+    var header = new Array();
+    var data = new Array();
+
+
+    // 1 minute / throughput
+    for(var i=0; i<6; i++){
+        tmpMax = subtractMinutes(now, (i * rangeSeconds));
+        tmpMin = subtractMinutes(now, (i* rangeSeconds) + rangeSeconds);
+        var key = Calendar.formatDate(tmpMax, "HH:mm");
+
+        var obj = new Object();
+        obj.name = key;
+        obj.display = "[" + key + ", " + Calendar.formatDate(tmpMin, "HH:mm") + "[";
+        obj.max = tmpMax.getTime();
+        obj.min = tmpMin.getTime();
+
+        keys.push(obj);
+    }
+
+
+    for(var i=0; i< config.length; i++){
+        var obj = new Object();
+        obj.name = config[i].stackId;
+        obj.type = config[i].GPType;
+
+        stacks.push(obj);
+    }
+
+    for(var i=0; i< results.length; i++){
+
+        var stackId = results[i].id;
+        var time = results[i].value1;
+        var count = results[i].value2;
+
+        if(group[stackId] == null){
+
+            group[stackId] = new Object();
+        }
+
+        var range = findRange(keys, time);
+
+        if(group[stackId][range] == null){
+            group[stackId][range] = 0;
+        }
+
+        var value = new Number(count);
+        group[stackId][range] += value;
+    }
+
+    for(var k=0; k< keys.length; k++){
+        header.push(keys[k].display);
+    }
+
+
+
+    for(var s=0; s<stacks.length; s++){
+
+        var obj     = stacks[s];
+        var stackId = obj.name;
+        var row = new Array();
+        var stackInfo =  group[stackId];
+
+        row.push(stackId + " - " + obj.type);
+
+        for(var k=0; k< keys.length; k++){
+
+            var value = 0;
+            var time = keys[k].name;
+
+            if(stackInfo != null && stackInfo[time] != null){
+                value = stackInfo[time];
+            }
+            row.push( value);
+        }
+
+        data.push(row);
+    }
+
+
+    return [header, data];
+
+
+    /*##############################
+     *     AUXILIAR METHODS
+     * ##############################
+     */
+
+     function findRange(listKeys, time){
+
+         var tmpDate = Calendar.parseDate(time , "HH:mm");
+         var date = Calendar.today();
+         date.setHours(tmpDate.getHours());
+         date.setMinutes(tmpDate.getMinutes() - date.getTimezoneOffset());
+
+         date = date.getTime();
+
+
+         for(var i=0; i<listKeys.length; i++){
+
+             var obj = listKeys[i];
+
+             if( obj.min < date && date <= obj.max){
+                 return obj.name;
+             }
+         }
+
+         return time;
+     }
+
+
+     function subtractMinutes(date, sub){
+
+          var time = date.getTime();
+          var minutes = sub * 60 * 1000;
+
+          time = time - minutes;
+           var newDate = new Date(time);
+
+          return  newDate;
+    }
+  ]]></script>
+</script>

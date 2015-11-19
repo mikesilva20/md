@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.OM_COMMON_GETENVIRONMENTINTERFACE">
+  <eventType>OM_COMMON_GETENVIRONMENTINTERFACE</eventType>
+  <label>OM_COMMON_GETENVIRONMENTINTERFACE</label>
+  <metaVersion>25</metaVersion>
+  <parametersList>
+    <parameters name="environment" type="rifp">
+      <type>dtype_omCommon.environment</type>
+    </parameters>
+    <parameters name="environmentType" type="rifp">
+      <type>dtype_omCommon.environmentType</type>
+    </parameters>
+    <parameters name="isOM" type="rifp">
+      <type>dtype_omCommon.active</type>
+    </parameters>
+    <parameters name="nodeId" type="rifp">
+      <type>dtype_cwf_pm.nodeID</type>
+    </parameters>
+  </parametersList>
+</event>

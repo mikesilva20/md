@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.errorCodeDescription">
+  <enumeration type="enum">
+    <valueList>
+      <value name="Message Missing" type="enumItem" code="5E0000"/>
+      <value name="Header Missing" type="enumItem" code="5E0001"/>
+      <value name="Missing field: NPU" type="enumItem" code="5E0002"/>
+      <value name="Invalid value in field: NPU" type="enumItem" code="5E0003"/>
+      <value name="Duplicate NPU" type="enumItem" code="5E0004"/>
+      <value name="Missing correlationNpu or processId" type="enumItem" code="5E0005"/>
+      <value name="Unexpected combination of values (orderEntryId,requestNumber,orderId)" type="enumItem" code="5E0006"/>
+      <value name="Error on message validation" type="enumItem" code="5E0007"/>
+      <value name="Invalid combination (offer,action,specificAction)" type="enumItem" code="5E0030"/>
+      <value name="Offer code missing" type="enumItem" code="5E0031"/>
+      <value name="Action missing" type="enumItem" code="5E0032"/>
+      <value name="Specific action missing" type="enumItem" code="5E0033"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Error Code Description</label>
+  <metaVersion>4</metaVersion>
+</dataType>

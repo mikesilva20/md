@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.omEventLogSeverity">
+  <extends>dtype_cwf.severity</extends>
+  <label>Severity</label>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elslct">
+    <sorted>false</sorted>
+  </propertyElement>
+</dataType>

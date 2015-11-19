@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_publishMsg">
+  <highlight>34</highlight>
+  <label>in_publishMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="input" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceInvoked" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="ackType" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="validationOff" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="process_Id" type="rifp">
+      <type>dtype_cwf.String64</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    try{
+        var eCodes             = new Array();
+        var ack             = null;
+        var npu             = null;
+        var corrNpu            = null;
+        var msgId         = UserProfile.getMsgLogId();
+        var procId             = null;
+        var reqNumber       = null;
+        var msgDoc             = null;
+        var oper             = null;
+        var header             = null;
+        var validated = false;
+        var displayProcId = null;
+
+        if(input.has("header")){
+            header = input.header;
+        }else{
+            // No caso do header vir dentro do soapHeader e nao no soapBody
+            //header = UserProfile.getSoapRequestHeader("omCommon:msgHeader");
+            header = publishEvent("OM_COMMON",FIRST_ONE,null);
+        }
+
+        if(header && header.has("npu"))
+            npu = header.npu;
+
+        //No caso de Msg Internas nao 'a validaçao
+        if(!validationOff){
+
+            // Valida header da mensagem
+            eCodes = omMessaging.aux_msgHeaderValid(header, (process_Id) ? true : false, interfaceInvoked, operationToInvoke);
+
+            // Valida Mensagem com base na definiçao da DataStructure
+            if(eCodes == null || eCodes.length == 0){
+                eCodes = omMessaging.aux_msgValid(input);
+            }
+        }
+
+        oper = omMessaging.npu_getOper(npu, interfaceInvoked, operationToInvoke);
+        corrNpu = header.correlationNpu;
+
+        if(header && header.has("processId")){
+            procId                   = header.processId;
+            displayProcId       = header.processId;
+        }
+
+        var msgOut = omMessaging.out_getMsg(corrNpu,  true);
+
+        if(msgOut){
+            reqNumber             = msgOut.businessId;
+            //Apenas para uso informativo no messageLog
+            displayProcId      = msgOut.processId;
+
+        }
+        else if(header){
+
+            reqNumber = omMessaging.aux_msgGet_ReqNumber(input, header, procId);
+
+            if (process_Id != null) {
+                if (process_Id == 'NotFound') {
+                    omMessaging.aux_addError(eCodes, "22E0005", "Unexpected combination of values (orderEntryId,requestNumber,orderId)");
+                } else {
+                    procId = process_Id;
+                    displayProcId = process_Id;
+                }
+            }
+        }
+
+        ack = omMessaging.in_createSyncAck(header, eCodes, ackType);
+
+        if(eCodes.length == 0){
+            msgDoc = omMessaging.in_saveMsg(input, header, ack, interfaceInvoked, operationToInvoke, reqNumber, procId);
+        }
+
+        omMessaging.aux_saveLogData(npu, corrNpu, displayProcId, reqNumber, msgId );
+
+        return ack;
+
+    }catch(ex){
+
+        var stack = "n/a";
+
+        if(ex.stack){
+            stack = ex.stack;
+        }
+
+        omMessaging.log("Erro ocorrido: " + ex.message +" \nSTACK:" + stack  +" \nNPU: " + npu  + " \nMsgID: " + msgId, "in_publishMsg");
+
+        var eCode = omMessaging.aux_addError(null, "22E9999", "Ocorreu erro em OM");
+        var ack = omMessaging.in_createSyncAck(header, eCode, ackType);
+
+        omMessaging.aux_saveLogData(npu, corrNpu, procId, reqNumber, msgId );
+
+        return ack;
+    }
+  ]]></script>
+</script>

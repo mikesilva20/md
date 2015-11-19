@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.isPrimaryAddress">
+  <extends>dtype_com.conceptwave.system.Boolean</extends>
+  <label>Primary Address</label>
+  <metaVersion>4</metaVersion>
+</dataType>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.msgAuditResultDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{03ebf75f-8568-847f-ae0a-d08f31c1f347}</guid>
+  <label>Monitor - Counts by Interface</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="auditType" type="leaf">
+      <label>Audit Type</label>
+      <propertyElement type="elslct">
+        <label>Audit Type</label>
+        <sorted>false</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.auditType</valueType>
+    </variable>
+    <variable name="interfaceToInvoke" type="leaf">
+      <key>1</key>
+      <label>Interface To invoke</label>
+      <propertyElement type="elfld">
+        <label>Interface To invoke</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.interfaceToInvoke</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <key>3</key>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="count" type="leaf">
+      <label>Count</label>
+      <propertyElement type="elfld">
+        <label>Count</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="time" type="leaf">
+      <key>2</key>
+      <label>Time</label>
+      <propertyElement type="elfld">
+        <label>Time</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.msgAuditResultDoc</valueType>
+      </variable>
+      <variable name="html" type="leaf">
+        <label>String</label>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+      </variable>
+      <variable name="lastUpdate" type="leaf">
+        <label>Last Update</label>
+        <propertyElement type="elfld">
+          <label>Last Update</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="DefaultGrid_vCentering" type="elvltstck">
+                <alignment>center,top</alignment>
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="HorizontalLayout" type="elhlt">
+                    <alignment>center,center</alignment>
+                    <elementList>
+                      <element name="btnRefresh" type="elbtn">
+                        <cellAlignment>center,center</cellAlignment>
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.msgAuditResultDoc/ui_UserInterface/usrActionMethod_fillResult</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/refresh.gif</icon>
+                        <label>Refresh</label>
+                      </element>
+                      <element name="lastUpdate" type="ellab">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.msgAuditResultDoc/ui_UserInterface/leaf_lastUpdate</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <wrap>false</wrap>
+                      </element>
+                    </elementList>
+                  </element>
+                  <element name="GridLayout" type="elgrd">
+                    <width>100%</width>
+                    <elementList>
+                      <element name="html" type="ellab">
+                        <canSort>false</canSort>
+                        <columnSpan>6</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <showLabel>false</showLabel>
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.msgAuditResultDoc/ui_UserInterface/leaf_html</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                        <wrap>false</wrap>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="fillResult" type="usrActionMethod">
+        <script><![CDATA[
+          //this.html =  "<html><body><font size=\"1\"> </font></body></html>" + omMessaging.displayAudit();
+          this.html =   omMessaging.displayAudit();
+          var now = new Date();
+          this.lastUpdate = Calendar.formatDate(now, "HH:mm:ss dd/MM/yyyy");
+        ]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.fillResult();
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_shortSystemCode">
+  <guid>{0991e850-f52b-3de7-ed80-7c5169bd51f8}</guid>
+  <label>aux_shortSystemCode</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="code" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var returnCode = "";
+    var start = false;
+
+    for(var i=0; i < code.length; i++){
+          var c = code[i];
+          if(c != '0' || start){
+                returnCode += c;
+                start = true;
+          }
+    }
+
+
+    return returnCode;
+  ]]></script>
+</script>

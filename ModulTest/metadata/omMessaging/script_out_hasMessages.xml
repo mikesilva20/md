@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_hasMessages">
+  <label>out_hasMessages</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="proc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var pDoc = proc.processDocument;
+    var retryNumber = pDoc.retryNumber;
+    var stackId      = pDoc.stackId;
+
+    var inactivityDelayGrowingRateMax  = Number(Global.getConfigVariable("TIMER_MSG_OUT_DISP_RATE_MAX", "1"));
+    var inactivityDelayGrowingRate = inactivityDelayGrowingRateMax > pDoc.inactivityDelayGrowingRate? pDoc.inactivityDelayGrowingRate++ : inactivityDelayGrowingRateMax>1? inactivityDelayGrowingRateMax : 1;
+
+    var fnd = new Finder("omMessaging:hasOutboundMsg");
+    fnd.searchDocument.stackId = stackId;
+
+    var list = fnd.search();
+
+    if(list && list.size > 0){
+
+         pDoc.inactivityDelayGrowingRate = 1;
+        return 0;
+    }
+
+
+    return (pDoc.inactivityDelay * inactivityDelayGrowingRate);
+  ]]></script>
+</script>

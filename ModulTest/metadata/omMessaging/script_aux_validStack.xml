@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_validStack">
+  <label>aux_validStack</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="stackId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="type" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var dataList = omMessaging.cache_getCachedConfigurationStacks();
+    var result = new Array();
+
+    for(var n=0; n < dataList.length; n++){
+
+        if(dataList[n].isActive && dataList[n].stackId == stackId && dataList[n].GPType == type){
+            return true;
+        }
+    }
+
+
+    return false;
+  ]]></script>
+</script>

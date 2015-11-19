@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processException name="omMessaging.restartGP">
+  <guid>{884295be-3ca4-43a6-ae0d-ceff7ce4d3b4}</guid>
+  <label>Restart GP Exception</label>
+  <metaVersion>4</metaVersion>
+</processException>

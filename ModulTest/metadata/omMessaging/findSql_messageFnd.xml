@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.messageFnd">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.fireAndProceedMsgSearch</input>
+  <label>Message Finder</label>
+  <maxRowsLimit>2000</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.fireAndProceedMsg</output>
+  <type>SQL</type>
+  <uiQueryTimeout>0</uiQueryTimeout>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        SELECT {+*+}
+        FROM OM_FIREANDPROCEED_MESSAGE
+        WHERE ACTION = '0'
+        {[0] AND npu = ?}
+      ]]></script>
+    </method>
+    <method name="editablePerm" type="permMethod">
+      <script>return this.enabled;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="finder" type="uivar">
+        <label>Finder User Interface</label>
+        <valueType>ui_com.conceptwave.system.FinderUserInterface</valueType>
+      </variable>
+      <variable name="model" type="uivar">
+        <label>Message Finder</label>
+        <valueType>findSql_omMessaging.messageFnd</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.fireAndProceedMsgSearch/ui_UserInterface</valueType>
+      </variable>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Fire And Proceed - Message</label>
+        <valueType>doc_omMessaging.fireAndProceedMsg</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.fireAndProceedMsg/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="finderHeader" type="elsecth">
+                <label>Finder</label>
+                <style>CwFIT</style>
+                <elementList>
+                  <element name="back" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_hideDetailAction</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwfv/nav_left_blue.png</icon>
+                    <tooltip>Back to results</tooltip>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_backVisible</variablePath>
+                      </variablePathList>
+                    </visible>
+                  </element>
+                  <element name="pref" type="elmnu">
+                    <icon>/cwt/images/16/preferences.png</icon>
+                    <showMenuDropDown>true</showMenuDropDown>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_resultVisible</variablePath>
+                      </variablePathList>
+                    </visible>
+                    <elementList>
+                      <element name="toggleMenu" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_toggleSearchAction</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/funnel.png</icon>
+                        <label>Show/hide search</label>
+                        <tooltip>Show/hide search</tooltip>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_toggleVisible</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="openView" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_findCustomView</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/user_view.gif</icon>
+                        <label>Open Custom View</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_isCustomViewAllowed</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="addView" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_addCustomView</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/table_add.gif</icon>
+                        <label>Add Custom View</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_isCustomViewAllowed</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="chart" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/uimthd_showChart</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/Chart.gif</icon>
+                        <label>Chart</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_hasChart</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="Separator" type="elsep"/>
+                      <element name="cwfXLS" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadXls</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/excel.gif</icon>
+                        <label>Download as XLS</label>
+                      </element>
+                      <element name="cwfCSV" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadCsv</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/text_marked.png</icon>
+                        <label>Download as CSV</label>
+                      </element>
+                      <element name="cwfXML" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadXml</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/code.png</icon>
+                        <label>Download as XML</label>
+                      </element>
+                      <element name="Separator1" type="elsep"/>
+                      <element name="Iterator" type="eliter">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <elementList>
+                          <element name="viewItem" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                                <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/uimthd_changeView</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <label>a</label>
+                            <variable type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/leaf_view</variablePath>
+                              </variablePathList>
+                            </variable>
+                          </element>
+                        </elementList>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="_genForm_" type="vform">
+            <label>_genForm_</label>
+            <root name="result" type="eltabl">
+              <doubleClickMethod type="varPath">
+                <variablePathList>
+                  <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_showDetailAction</variablePath>
+                </variablePathList>
+              </doubleClickMethod>
+              <headerHeight>30</headerHeight>
+              <showDetailColumn>false</showDetailColumn>
+              <variable type="varPath">
+                <variablePathList>
+                  <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                </variablePathList>
+              </variable>
+              <wrapHeaderLabel>true</wrapHeaderLabel>
+              <elementList>
+                <element name="Business_Id" type="elfld">
+                  <label>Business Id</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_businessId</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>765px</width>
+                </element>
+                <element name="NPU" type="elfld">
+                  <label>NPU</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_npu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>360px</width>
+                </element>
+                <element name="Error_Code" type="elfld">
+                  <label>Error Code</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_eCode</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>195px</width>
+                </element>
+                <element name="Error_Description" type="elfld">
+                  <label>Error Description</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_eDescription</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>3000px</width>
+                </element>
+                <element name="Correlation_NPU" type="elfld">
+                  <label>Correlation NPU</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_correlationNpu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>360px</width>
+                </element>
+                <element name="Receive_Date" type="eldatetime">
+                  <label>Receive Date</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_receiveDate</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>120px</width>
+                </element>
+                <element name="Action" type="elslct">
+                  <label>Action</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_action</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>145px</width>
+                </element>
+                <element name="dataType" type="elfld">
+                  <label>dataType</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_dataType</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>1535px</width>
+                </element>
+                <element name="message" type="elfld">
+                  <label>message</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_message</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>107px</width>
+                </element>
+                <element name="payload" type="elfld">
+                  <label>payload</label>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_payload</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>107px</width>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+          </overlay>
+          <overlay name="Details" type="vform">
+            <label>Details</label>
+            <root name="result" type="eltabl">
+              <doubleClickMethod type="varPath">
+                <variablePathList>
+                  <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_showDetailAction</variablePath>
+                </variablePathList>
+              </doubleClickMethod>
+              <headerHeight>30</headerHeight>
+              <onSelectChange type="varPath">
+                <variablePathList>
+                  <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                </variablePathList>
+              </onSelectChange>
+              <showDetailColumn>false</showDetailColumn>
+              <variable type="varPath">
+                <variablePathList>
+                  <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                </variablePathList>
+              </variable>
+              <wrapCell>true</wrapCell>
+              <wrapHeaderLabel>true</wrapHeaderLabel>
+              <elementList>
+                <element name="Business_Id" type="elfld">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_businessId</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>75px</width>
+                </element>
+                <element name="NPU" type="ellab">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_npu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>300px</width>
+                </element>
+                <element name="Error_Code" type="elfld">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_eCode</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>90px</width>
+                </element>
+                <element name="Error_Description" type="ellab">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_eDescription</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>600px</width>
+                </element>
+                <element name="Correlation_NPU" type="ellab">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_correlationNpu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>300px</width>
+                </element>
+                <element name="Action" type="elslct">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_action</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>105px</width>
+                </element>
+                <element name="Receive_Date" type="eldatetime">
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedMsg/leaf_receiveDate</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>120px</width>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="ReferenceForm" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_ReferenceForm</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_ReferenceForm</extends>
+            <label>ReferenceForm</label>
+            <overrideList>
+              <override name="topStack" type="elsectnstck">
+                <height>100%</height>
+                <visibilityMode>multiple</visibilityMode>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_model</variablePath>
+                    <variablePath>find_com.conceptwave.system.Finder/permMethod_visiblePerm</variablePath>
+                  </variablePathList>
+                </visible>
+                <width>100%</width>
+                <elementList>
+                  <element name="topSection" type="elsect">
+                    <header type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_header</variablePath>
+                      </variablePathList>
+                    </header>
+                    <onEnter type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_searchAction</variablePath>
+                      </variablePathList>
+                    </onEnter>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>dtype_com.conceptwave.system.Boolean/leaf_TRUE</variablePath>
+                      </variablePathList>
+                    </visible>
+                    <elementList>
+                      <element name="finderHeader" type="elsecth">
+                        <label>Finder</label>
+                        <elementList>
+                          <element name="back" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_hideDetailAction</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <icon>/cwfv/nav_left_blue.png</icon>
+                            <tooltip>Back to results</tooltip>
+                            <visible type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                              </variablePathList>
+                            </visible>
+                          </element>
+                          <element name="pref" type="elmnu">
+                            <icon>/cwt/images/16/preferences.png</icon>
+                            <showMenuDropDown>true</showMenuDropDown>
+                            <elementList>
+                              <element name="toggleMenu" type="elmnu">
+                                <clickMethod type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_toggleSearchAction</variablePath>
+                                  </variablePathList>
+                                </clickMethod>
+                                <icon>/cwfv/funnel.png</icon>
+                                <label>Show/hide search</label>
+                                <tooltip>Show/hide search</tooltip>
+                                <visible type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_toggleVisible</variablePath>
+                                  </variablePathList>
+                                </visible>
+                              </element>
+                              <element name="openView" type="elmnu">
+                                <clickMethod type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_findCustomView</variablePath>
+                                  </variablePathList>
+                                </clickMethod>
+                                <icon>/cwf/user_view.gif</icon>
+                                <label>Open Custom View</label>
+                              </element>
+                              <element name="addView" type="elmnu">
+                                <clickMethod type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_addCustomView</variablePath>
+                                  </variablePathList>
+                                </clickMethod>
+                                <icon>/cwf/table_add.gif</icon>
+                                <label>Add Custom View</label>
+                              </element>
+                              <element name="Separator" type="elsep"/>
+                              <element name="Iterator" type="eliter">
+                                <variable type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                                  </variablePathList>
+                                </variable>
+                                <elementList>
+                                  <element name="viewItem" type="elmnu">
+                                    <clickMethod type="varPath">
+                                      <variablePathList>
+                                        <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                                        <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/uimthd_changeView</variablePath>
+                                      </variablePathList>
+                                    </clickMethod>
+                                    <label>a</label>
+                                    <variable type="varPath">
+                                      <variablePathList>
+                                        <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/leaf_view</variablePath>
+                                      </variablePathList>
+                                    </variable>
+                                  </element>
+                                </elementList>
+                              </element>
+                            </elementList>
+                          </element>
+                        </elementList>
+                      </element>
+                      <element name="sStack" type="elsectnstck">
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_topSectionVisible</variablePath>
+                          </variablePathList>
+                        </visible>
+                        <width>100%</width>
+                        <elementList>
+                          <element name="detailSection" type="elsect">
+                            <formReference type="varPath">
+                              <variablePathList>
+                                <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_detail</variablePath>
+                                <variablePath>doc_omMessaging.fireAndProceedMsg/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                              </variablePathList>
+                            </formReference>
+                            <variable type="varPath">
+                              <variablePathList>
+                                <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_detail</variablePath>
+                              </variablePathList>
+                            </variable>
+                            <visible type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                              </variablePathList>
+                            </visible>
+                          </element>
+                          <element name="searchFormSection" type="elsect">
+                            <formReference type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                              </variablePathList>
+                            </formReference>
+                            <variable type="varPath">
+                              <variablePathList>
+                                <variablePath>findSql_omMessaging.messageFnd/ui_UserInterface/uivar_search</variablePath>
+                              </variablePathList>
+                            </variable>
+                            <visible type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                              </variablePathList>
+                            </visible>
+                          </element>
+                        </elementList>
+                      </element>
+                      <element name="resStack" type="elsectnstck">
+                        <height>100%</height>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_resultVisible</variablePath>
+                          </variablePathList>
+                        </visible>
+                        <elementList>
+                          <element name="resSection" type="elsect">
+                            <visible type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_resultVisible</variablePath>
+                              </variablePathList>
+                            </visible>
+                            <elementList>
+                              <element name="resultFrame" type="elovf">
+                                <formReference type="varPath">
+                                  <variablePathList>
+                                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_resultForm</variablePath>
+                                  </variablePathList>
+                                </formReference>
+                              </element>
+                            </elementList>
+                          </element>
+                        </elementList>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="Default" type="findVView">
+      <label>Message Finder</label>
+      <outputOverlay>findSql_omMessaging.messageFnd/ui_UserInterface/frmui_Forms/vform__genForm_</outputOverlay>
+    </view>
+  </viewList>
+</findSql>

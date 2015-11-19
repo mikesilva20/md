@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omConfigVariables">
+  <extends>doc_cwt_common.templateConfig</extends>
+  <guid>{28107d5a-6ad2-444a-8ffd-519e89abdfc8}</guid>
+  <label>OM Config Variables</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="debug" type="leaf">
+      <valueType>dtype_omCommon.debug</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafInitAction$debug" type="laction">
+      <path>doc_omCommon.omConfigVariables/leaf_debug</path>
+      <type>initializer</type>
+      <script>return false;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_cwt_common.templateConfig/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omConfigVariables</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_cwt_common.templateConfig/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

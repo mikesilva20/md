@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_publishMsg">
+  <guid>{0c626287-6fc8-afa8-752a-490589431925}</guid>
+  <highlight>34</highlight>
+  <label>out_publishMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="header" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="system" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="transform" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="endPoint" type="rifp">
+      <type>dtype_cwt_common.URL</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var hr                        = null;
+    var npu                       = null;
+
+    var hr                        = null;
+    var finalMsg                  = null;
+
+
+    if(header != null)
+          hr = header;
+    else if(msg.has("headerRequest")){
+          hr = msg.headerRequest;
+    }else{
+          omMessaging.SEND_EXCEPTION_INVALID_HEADER_REQUEST();
+    }
+
+    npu       = hr.npu;
+
+
+    finalMsg = msg;
+
+    omMessaging.out_saveMsg(finalMsg, hr, system, interfaceToInvoke, operationToInvoke, endPoint);
+  ]]></script>
+</script>

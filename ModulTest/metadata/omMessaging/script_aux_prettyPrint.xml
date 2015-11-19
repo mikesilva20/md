@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_prettyPrint">
+  <guid>{0d906287-d8d5-cff7-b52e-0f9a38843cd7}</guid>
+  <label>aux_prettyPrint</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(ds == null)
+          return null;
+
+    if(!(ds instanceof DataStructure))
+          return ds;
+
+    var abc = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">";
+
+    abc += "<xsl:output method=\"xml\"/><xsl:param name=\"indent-increment\" select=\"'   '\" />";
+    abc += "<xsl:template match=\"*\"><xsl:param name=\"indent\" select=\"'&#xA;'\"/>";
+    abc += '<xsl:value-of select="$indent"/><xsl:copy><xsl:copy-of select="@*" />';
+    abc += '<xsl:apply-templates><xsl:with-param name="indent" select="concat($indent, $indent-increment)"/></xsl:apply-templates><xsl:if test="*">';
+    abc += '<xsl:value-of select="$indent"/>   </xsl:if>   </xsl:copy></xsl:template> <xsl:template match="comment()|processing-instruction()"> <xsl:copy /></xsl:template>';
+    abc +=  "<!-- WARNING: this is dangerous. Handle with care --> <xsl:template match=\"text()[normalize-space(.)='']\"/></xsl:stylesheet>";
+
+    var result = ds.transform(abc, false);
+    result = result.replace('<?xml version="1.0" encoding="UTF-8"?>\r\n', "");
+
+    return result;
+  ]]></script>
+</script>

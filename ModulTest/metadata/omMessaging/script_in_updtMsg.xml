@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_updtMsg">
+  <label>in_updtMsg</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="header" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="ack" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="businessId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="status" type="rifp">
+      <type>dtype_omMessaging.status</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = omMessaging.getMsg(header.npu);
+    if (doc == null)
+        return  omMessaging.in_saveMsg(msg,header,ack,interfaceToInvoke,operationToInvoke,businessId,processId, status);
+
+    doc.status               = status? status : omMessaging.CONST_STATUS_PUBLISHED();
+    doc.creationDate         = new Date();
+
+    doc.payload = msg.toXML();
+
+    if (ack) {
+        doc.receivedData     = ack.toXML();
+    }
+    doc.save();
+
+    omMessaging.aux_saveMsgData(doc);
+
+    return doc;
+  ]]></script>
+</script>

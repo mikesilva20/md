@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.auditInterfacesConfSearch">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{e73c91b6-62f4-4ed8-8e93-1435050ebdb0}</guid>
+  <label>Audit - Interface Conf. Search</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="interfaceToInvoke" type="leaf">
+      <label>Interface to Invoke</label>
+      <propertyElement type="elfld">
+        <label>Interface to Invoke</label>
+      </propertyElement>
+      <valueType>dtype_cwf.metadataId</valueType>
+    </variable>
+    <variable name="prettyName" type="leaf">
+      <label>Pretty Name</label>
+      <propertyElement type="elfld">
+        <label>Pretty Name</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.auditInterfacesConfSearch</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="SearchDoc" type="vform">
+            <label>SearchDoc</label>
+            <root name="SearchDocGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="auditInterfacesConfSearchGrid" type="elgrd">
+                  <colWidths>160px,160px,160px,160px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="auditInterfacesConfSearchHeader" type="elhdr">
+                      <label>Audit - Search Configuration</label>
+                    </element>
+                    <element name="interfaceToInvoke" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <dataLength>25</dataLength>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.auditInterfacesConfSearch/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.auditInterfacesConfSearch/leaf_interfaceToInvoke</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="prettyName" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.auditInterfacesConfSearch/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.auditInterfacesConfSearch/leaf_prettyName</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

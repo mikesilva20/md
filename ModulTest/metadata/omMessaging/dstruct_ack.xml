@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omMessaging.ack">
+  <flags enum-type="metadataFlag">PRIVATE</flags>
+  <container>true</container>
+  <label>ack</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="HeaderReply" type="dstruct">
+      <container>true</container>
+      <label>HeaderReply</label>
+      <childList>
+        <child name="npu" type="dstruct">
+          <datatype>true</datatype>
+          <element>dtype_omMessaging.npu</element>
+          <label>npu</label>
+        </child>
+        <child name="Status" type="dstruct">
+          <container>true</container>
+          <label>Status</label>
+          <childList>
+            <child name="eCodes" type="dstruct">
+              <array>true</array>
+              <container>true</container>
+              <label>eCodes</label>
+              <maxInstance>-1</maxInstance>
+              <childList>
+                <child name="eCode" type="dstruct">
+                  <datatype>true</datatype>
+                  <element>dtype_omMessaging.eCode</element>
+                  <label>eCode</label>
+                </child>
+                <child name="eDescription" type="dstruct">
+                  <datatype>true</datatype>
+                  <element>dtype_omMessaging.eCode</element>
+                  <label>eDescription</label>
+                </child>
+                <child name="eActor" type="dstruct">
+                  <datatype>true</datatype>
+                  <element>dtype_omMessaging.eCode</element>
+                  <label>eActor</label>
+                </child>
+              </childList>
+            </child>
+          </childList>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omMessaging.ack</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omMessaging.ack</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

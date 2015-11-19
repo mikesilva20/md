@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsGetAttribute">
+  <label>DataStructure: Get Attribute</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Return an attribute of datastructure "omCommon:attribute" from a specific name
+     * @param    {Object}         ds     - "omCommon:attribute"
+     * @param    {String}         name   - name of attribute
+     * @returns  {DataStructure}  return - attribute dataStructure if the attribute is found or null
+     * @version  1.0
+     */
+
+    // validate parameters
+    if(!name || !ds){
+        var msgError = "Name or ds not found";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.dsGetAttribute");
+        return null;
+    }
+
+    //Find attribute
+    for(var i = 0; name && i < ds.attributes.attribute.length; i++){
+        if(ds.attributes.attribute[i].name == name){
+                return ds.attributes.attribute[i];
+        }
+    }
+
+    // return null if don't find any attribute
+    return null;
+  ]]></script>
+</script>

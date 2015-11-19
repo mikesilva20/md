@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.messagingMonitorDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{1355b9c5-681e-4fae-863d-5a8fefdd5000}</guid>
+  <label>Monitor - Messaging Monitor</label>
+  <metaVersion>21</metaVersion>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.messagingMonitorDoc</valueType>
+      </variable>
+      <variable name="invalidInboundStacks" type="leaf">
+        <label>Nº Invalid msgs - Inbound</label>
+        <propertyElement type="elfld">
+          <label>Nº Invalid msgs - Inbound</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.Integer</valueType>
+      </variable>
+      <variable name="invalidOutBoundStacks" type="leaf">
+        <label>Nº Invalid msgs - Outbound</label>
+        <propertyElement type="elfld">
+          <label>Nº Invalid msgs - Outbound</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.Integer</valueType>
+      </variable>
+      <variable name="unprocessedInbound" type="leaf">
+        <label>Unprocessed msgs - Inbound</label>
+        <propertyElement type="elfld">
+          <label>Unprocessed msgs - Inbound</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.Integer</valueType>
+      </variable>
+      <variable name="unprocessedOutbound" type="leaf">
+        <label>Unprocessed msgs - Outbound</label>
+        <propertyElement type="elfld">
+          <label>Unprocessed msgs - Outbound</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.Integer</valueType>
+      </variable>
+      <variable name="processingBySystem5Minutes" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingBySystem30" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingBySystem1Hour" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingBySystem6hour" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface</valueType>
+      </variable>
+      <variable name="alerts" type="leaf">
+        <valueType>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingByInterface5Minutes" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingByInterface30" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingByInterface1Hour" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface</valueType>
+      </variable>
+      <variable name="processingByInterface6Hour" type="leaf">
+        <valueType>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+          </overlay>
+          <overlay name="Monitor" type="vform">
+            <label>Monitor</label>
+            <root name="MonitorGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="messagingMonitorDocGrid" type="elgrd">
+                  <colWidths>160px,160px,60px,100px,160px,160px,50px</colWidths>
+                  <numOfCols>7</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>960px</width>
+                  <elementList>
+                    <element name="hUnprocess" type="ellab">
+                      <fontProperties type="pfnt">
+                        <bold>true</bold>
+                        <size>14</size>
+                      </fontProperties>
+                      <label>Unprocess Messages</label>
+                      <width>200px</width>
+                    </element>
+                    <element name="CellSpacer1" type="elcsp">
+                      <columnSpan>3</columnSpan>
+                    </element>
+                    <element name="hInvalid" type="ellab">
+                      <fontProperties type="pfnt">
+                        <bold>true</bold>
+                        <size>14</size>
+                      </fontProperties>
+                      <label>Invalid messages</label>
+                      <width>200px</width>
+                    </element>
+                    <element name="unprocessedInbound" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <label> Inbound</label>
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_unprocessedInbound</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="unprocessedOutbound" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <label>Outbound</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_unprocessedOutbound</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="btnSearch" type="elbtn">
+                      <autofit>true</autofit>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/usrActionMethod_showUnprocessedMsgIn</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <icon>/cwf/MenuIconSearch.gif</icon>
+                      <showLabel>false</showLabel>
+                      <width>50px</width>
+                    </element>
+                    <element name="CellSpacer" type="elcsp"/>
+                    <element name="invalidInboundStacks" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <label>Inbound</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_invalidInboundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="invalidOutBoundStacks" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <label>Outbound</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_invalidOutBoundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="btnSearchInvalid" type="elbtn">
+                      <autofit>true</autofit>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/usrActionMethod_showUnprocessedMsgIn</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <icon>/cwf/MenuIconSearch.gif</icon>
+                      <showLabel>false</showLabel>
+                      <width>50px</width>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="Header" type="elhdr">
+                  <label>Processing Time by System </label>
+                </element>
+                <element name="HorizontalLayout" type="elhlt">
+                  <height>250px</height>
+                  <membersMargin>10</membersMargin>
+                  <width>100%</width>
+                  <elementList>
+                    <element name="VerticalLayout" type="elvlt">
+                      <height>250px</height>
+                      <width>50%</width>
+                      <elementList>
+                        <element name="HeaderIn" type="elhdr">
+                          <label>Last 5 Minutes</label>
+                        </element>
+                        <element name="processingBySysIN" type="elovf">
+                          <formReference type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem5Minutes</variablePath>
+                              <variablePath>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                            </variablePathList>
+                          </formReference>
+                          <height>100%</height>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem5Minutes</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="VerticalLayout1" type="elvlt">
+                      <height>250px</height>
+                      <width>50%</width>
+                      <elementList>
+                        <element name="HeaderOut" type="elhdr">
+                          <label>More</label>
+                        </element>
+                        <element name="Tabset" type="eltset">
+                          <tabChangedMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/usrActionMethod_onTabSystemChange</variablePath>
+                            </variablePathList>
+                          </tabChangedMethod>
+                          <elementList>
+                            <element name="tf30Minutes" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem30</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last 30 minutes</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem30</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                            <element name="tf1Hours" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem1Hour</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last hour</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem1Hour</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                            <element name="tf6Hours" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem6hour</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingBySystem/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last 6 hours</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingBySystem6hour</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                          </elementList>
+                        </element>
+                      </elementList>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="Header_ProcessingByInterface" type="elhdr">
+                  <label>Processing Time by Interface </label>
+                </element>
+                <element name="HorizontalLayout_Interface" type="elhlt">
+                  <height>250px</height>
+                  <membersMargin>10</membersMargin>
+                  <width>100%</width>
+                  <elementList>
+                    <element name="VerticalLayout2" type="elvlt">
+                      <height>250px</height>
+                      <width>50%</width>
+                      <elementList>
+                        <element name="HeaderIn1" type="elhdr">
+                          <label>Last 5 minutes</label>
+                        </element>
+                        <element name="processingBySysIN1" type="elovf">
+                          <formReference type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface5Minutes</variablePath>
+                              <variablePath>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                            </variablePathList>
+                          </formReference>
+                          <height>100%</height>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface5Minutes</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="VerticalLayout11" type="elvlt">
+                      <height>250px</height>
+                      <width>50%</width>
+                      <elementList>
+                        <element name="HeaderOut1" type="elhdr">
+                          <label>More</label>
+                        </element>
+                        <element name="Tabset1" type="eltset">
+                          <tabChangedMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/usrActionMethod_onTabInterfaceChange</variablePath>
+                            </variablePathList>
+                          </tabChangedMethod>
+                          <elementList>
+                            <element name="tf30Minutes2" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface30</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last 30 minutes</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface30</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                            <element name="tf1Hour2" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface1Hour</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last hour</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface1Hour</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                            <element name="tf6Hours2" type="eltab">
+                              <formReference type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface6Hour</variablePath>
+                                  <variablePath>findSql_omMessaging.auditProcessingByInterface/ui_UserInterface/frmui_Forms/exov_Default</variablePath>
+                                </variablePathList>
+                              </formReference>
+                              <label>Last 6 hours</label>
+                              <variable type="varPath">
+                                <variablePathList>
+                                  <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_processingByInterface6Hour</variablePath>
+                                </variablePathList>
+                              </variable>
+                            </element>
+                          </elementList>
+                        </element>
+                      </elementList>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="VerticalLayout3" type="elvlt">
+                  <height>200px</height>
+                  <width>100%</width>
+                  <elementList>
+                    <element name="Header1" type="elhdr">
+                      <label>Alerts</label>
+                    </element>
+                    <element name="FormFrame" type="elovf">
+                      <formReference type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_alerts</variablePath>
+                          <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/frmui_Forms/exov_Result</variablePath>
+                        </variablePathList>
+                      </formReference>
+                      <height>100%</height>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/leaf_alerts</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>100%</width>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</base>
+            <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfSave" type="eldel"/>
+              <override name="hl1" type="elext">
+                <elementList>
+                  <element name="miRefresh" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/usrActionMethod_refreshFills</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/refresh.gif</icon>
+                    <label>Refresh</label>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="refreshFills" type="usrActionMethod">
+        <script><![CDATA[
+          var CONNECTION = "ORDER";
+          var DBDOC = "omMessaging.GenericDBDoc";
+
+
+          var sqlInvalid_In = "select 1, count(1) from om_msg_inbound where status = '1' and stackid = '-1'";
+          var sql_In = "select 1, count(1) from om_msg_inbound where status = '1' and stackid <> '-1'";
+          var sqlInvalid_Out = "select 1, count(1) from om_msg_outbound where status = '1' and stackid = '-1'";
+          var sql_Out = "select 1, count(1) from om_msg_outbound where status = '1' and stackid <> '-1'";
+
+          var listInvalid_In   = Global.runSQLQuery(CONNECTION, DBDOC, 99999, null, sqlInvalid_In);
+          var list_In          = Global.runSQLQuery(CONNECTION, DBDOC, 99999, null, sql_In);
+          var listInvalid_Out  = Global.runSQLQuery(CONNECTION, DBDOC, 99999, null, sqlInvalid_Out);
+          var list_Out         = Global.runSQLQuery(CONNECTION, DBDOC, 99999, null, sql_Out);
+
+
+          this.invalidInboundStacks  = 0;
+          this.unprocessedInbound    = 0;
+          this.invalidOutBoundStacks = 0;
+          this.unprocessedOutbound   = 0;
+
+
+          if(listInvalid_In.length > 0)
+              this.invalidInboundStacks = listInvalid_In[0].value1;
+
+          if(list_In.length > 0)
+              this.unprocessedInbound   = list_In[0].value1;
+
+          if(listInvalid_Out.length > 0)
+              this.invalidOutBoundStacks = listInvalid_Out[0].value1;
+
+          if(list_Out.length > 0)
+              this.unprocessedOutbound = list_Out[0].value1;
+
+
+          this.processingBySystem30.model.search();
+          this.processingBySystem5Minutes.model.search();
+
+          this.processingByInterface5Minutes.model.search();
+          this.processingByInterface30.model.search();
+
+          this.alerts.model.search();
+        ]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.processingBySystem5Minutes = new omMessaging.auditProcessingBySystem.UserInterface(null, this);
+          this.processingBySystem1Hour    = new omMessaging.auditProcessingBySystem.UserInterface(null, this);
+          this.processingBySystem30       = new omMessaging.auditProcessingBySystem.UserInterface(null, this);
+          this.processingBySystem6hour    = new omMessaging.auditProcessingBySystem.UserInterface(null, this);
+
+          this.processingBySystem5Minutes.model.searchDocument.auditType = "5";
+          this.processingBySystem30.model.searchDocument.auditType       = "30";
+          this.processingBySystem1Hour.model.searchDocument.auditType    = "60";
+          this.processingBySystem6hour.model.searchDocument.auditType    = "360";
+
+
+          this.processingByInterface5Minutes  = new omMessaging.auditProcessingByInterface.UserInterface(null, this);
+          this.processingByInterface30        = new omMessaging.auditProcessingByInterface.UserInterface(null, this);
+          this.processingByInterface1Hour     = new omMessaging.auditProcessingByInterface.UserInterface(null, this);
+          this.processingByInterface6Hour     = new omMessaging.auditProcessingByInterface.UserInterface(null, this);
+
+
+          this.processingByInterface5Minutes.model.searchDocument.auditType = "6";
+          this.processingByInterface30.model.searchDocument.auditType       = "30";
+          this.processingByInterface1Hour.model.searchDocument.auditType    = "60";
+          this.processingByInterface6Hour.model.searchDocument.auditType    = "360";
+
+
+          this.alerts = new omMessaging.ui.messagingAlertsFnd.UserInterface(null, this);
+
+
+          this.refreshFills();
+
+
+
+
+
+
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+      <method name="showUnprocessedMsgIn" type="usrActionMethod">
+        <script><![CDATA[
+          var fnd = new Finder("omMessaging.msgFinder");
+
+          fnd.searchDocument.status = '1';
+
+          fnd.search();
+
+          return fnd;
+        ]]></script>
+      </method>
+      <method name="onTabSystemChange" type="usrActionMethod">
+        <parameterList>
+          <parameter name="tab" type="rifp"/>
+        </parameterList>
+        <script><![CDATA[
+          if(tab == "tf30Minutes"){
+              this.processingBySystem30.model.search();
+          }else if(tab == "tf1Hours"){
+              this.processingBySystem1Hour.model.search();
+          }else if(tab == "tf6Hours"){
+              this.processingBySystem6hour.model.search();
+          }
+        ]]></script>
+      </method>
+      <method name="onTabInterfaceChange" type="usrActionMethod">
+        <parameterList>
+          <parameter name="tab" type="rifp"/>
+        </parameterList>
+        <script><![CDATA[
+          if(tab == "tf30Minutes2"){
+              this.processingByInterface30.model.search();
+          }else if(tab == "tf1Hour2"){
+              this.processingByInterface1Hour.model.search();
+          }else if(tab == "tf6Hours2"){
+              this.processingByInterface6Hour.model.search();
+          }
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

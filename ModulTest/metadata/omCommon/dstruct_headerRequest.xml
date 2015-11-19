@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.headerRequest">
+  <container>true</container>
+  <label>headerRequest</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="npu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>npu</label>
+    </child>
+    <child name="correlationNpu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>correlationNpu</label>
+    </child>
+    <child name="creationTime" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.DateTime</element>
+      <label>creationTime</label>
+    </child>
+    <child name="futureDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.DateTime</element>
+      <label>futureDate</label>
+    </child>
+    <child name="timeout" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.Integer</element>
+      <label>timeout</label>
+    </child>
+    <child name="processName" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.processName</element>
+      <label>processName</label>
+    </child>
+    <child name="processId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.processId</element>
+      <label>processId</label>
+    </child>
+    <child name="sequence" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.sequence</element>
+      <label>sequence</label>
+    </child>
+    <child name="credentials" type="dstruct">
+      <element>dstruct_omCommon.credentials</element>
+      <label>credentials</label>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.headerRequest</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.headerRequest</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

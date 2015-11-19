@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event__handler name="omCommon.omCommonHandler">
+  <flags enum-type="metadataFlag">FINAL</flags>
+  <event>evt_omCommon.omCommon</event>
+  <eventID>OM_COMMON_HANDLER</eventID>
+  <eventType>OM_COMMON</eventType>
+  <label>Om Common Handler</label>
+  <metaVersion>25</metaVersion>
+  <script>return true;</script>
+</event__handler>

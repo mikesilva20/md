@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetAttributeValue">
+  <label>dsSetAttributeValue</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+    <parameter name="value" type="rifp">
+      <type>dtype_omCommon.value</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Update the value and the name of dataStructure
+     * @param    {DataStructure}  ds            - Data structure
+     * @param    {String}         name          - Attribute name
+     * @param    {String}         value         - Attribute value
+     * @returns  {DataStructure}  return        - Data structure updated
+     * @version  1.0
+     */
+
+
+    var msgError = "";
+    var ok = true;
+
+    // Validations
+    if (name && ds.name && ds.name != name) {
+        ok = false; msgError = "name (" + name + ") doesn't match attribute name (" + ds.name + ")";
+    }
+    if (!ds.name && !name) {
+        ok = false; msgError = "attribute name not defined and doesn't have it to set";
+    }
+    if (!ok) {
+          omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setAttributeValue");
+          return null;
+    }
+
+    if (!ds.name && name){
+        ds.name = name;
+    }
+    ds.value = value;
+
+    return ds;
+  ]]></script>
+</script>

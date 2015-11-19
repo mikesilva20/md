@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.relatedRequestNumber">
+  <extends>dtype_omCommon.requestNumber</extends>
+  <label>Related Request Number</label>
+  <metaVersion>4</metaVersion>
+</dataType>

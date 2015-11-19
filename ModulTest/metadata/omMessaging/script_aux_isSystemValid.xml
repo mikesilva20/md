@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_isSystemValid">
+  <guid>{02797320-bbd8-4688-4d49-8684da7623dc}</guid>
+  <label>aux_isSystemValid</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="system" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var configs = omMessaging.aux_getConfig();
+    //#-> Criar defaultSystem
+    var defaultSystem = omMessaging.CONST_SYS_CODE();
+    if(!system)
+        system = defaultSystem;
+    system = system.leftPad(4, "0");
+
+    var founded = -1;
+
+    if(configs.validSystems){
+        founded = configs.validSystems.search(system);
+    }
+
+
+    if(founded >= 0){
+        return system;
+    }
+
+    omMessaging.log("Invalid System Code: " + system, "aux_isSystemValid");
+    return defaultSystem;
+  ]]></script>
+</script>

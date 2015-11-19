@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.procIdErrorDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{06cab01d-b043-f87b-0cbe-5631e5d08193}</guid>
+  <label>Error - Process ID</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="processId" type="leaf">
+      <column>PROCESSID</column>
+      <key>1</key>
+      <label>processId</label>
+      <propertyElement type="elfld">
+        <label>processId</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.processId</valueType>
+    </variable>
+    <variable name="npu" type="leaf">
+      <column>NPU</column>
+      <label>Npu</label>
+      <propertyElement type="elfld">
+        <label>Npu</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="correlationNpu" type="leaf">
+      <column>CORRELATIONNPU</column>
+      <label>Correlation Npu</label>
+      <propertyElement type="elfld">
+        <label>Correlation Npu</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <column>SYSTEM</column>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="error" type="leaf">
+      <column>ERROR</column>
+      <label>Error</label>
+      <propertyElement type="elfld">
+        <label>Error</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.statusCode</valueType>
+    </variable>
+    <variable name="errorDescription" type="leaf">
+      <column>ERRORDESCRIPTION</column>
+      <label>Error Description</label>
+      <propertyElement type="elfld">
+        <label>Error Description</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.statusText</valueType>
+    </variable>
+    <variable name="creationDate" type="leaf">
+      <column>CREATIONDATE</column>
+      <label>Creation Date</label>
+      <propertyElement type="eldatetime">
+        <label>Creation Date</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="errorNative" type="leaf">
+      <column>ERRORNATIVE</column>
+      <label>Error</label>
+      <propertyElement type="elfld">
+        <label>Error</label>
+      </propertyElement>
+      <table>OM_MSG_PROCID_ERROR</table>
+      <valueType>dtype_omMessaging.statusCode</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.procIdErrorDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

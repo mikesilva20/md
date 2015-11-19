@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon_override_cwf_up.allCompensates">
+  <extends>dtype_cwf.compensate</extends>
+  <label>All Compensates</label>
+  <metaVersion>4</metaVersion>
+  <overrides>dtype_cwf.allCompensates</overrides>
+</dataType>

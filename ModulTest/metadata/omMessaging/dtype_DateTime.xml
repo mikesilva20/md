@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.DateTime">
+  <extends>dtype_com.conceptwave.system.DateTime</extends>
+  <length>0</length>
+  <metaVersion>3</metaVersion>
+  <propertyElement name="DateTime" type="eldatetime">
+    <displayFormat>yyyy-MM-dd HH:mm:ss </displayFormat>
+    <hint>yyyy-MM-dd HH:mm:ss </hint>
+  </propertyElement>
+</dataType>

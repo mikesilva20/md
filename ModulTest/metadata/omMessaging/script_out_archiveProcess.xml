@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_archiveProcess">
+  <guid>{09b6cf64-1cdf-ceb9-258b-d71cdd8dc0a9}</guid>
+  <label>out_archiveProcess</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[
+    var conf = omMessaging.aux_getConfig();
+
+    if(conf.outboundArchiveEnable == false)
+        return;
+
+    var fnd = new Finder("omMessaging:outboundArchiveFnd");
+    var list = fnd.search();
+
+    omMessaging.debug("Starting Outbound Archive. Archiving:" + list.size());
+
+    for(var i = 0; i < list.length; i++)
+    {
+        try{
+            var archive = new Document("omMessaging:archiveOutboundDoc");
+            omMessaging.aux_loadMsgData(list[i]);
+            list[i].mapDocToDoc(archive)
+            archive.save();
+            omMessaging.aux_saveMsgData(archive);
+            list[i].deleteFromDB();
+        }catch(ex){
+            omMessaging.log("EXCEPTION: " + ex.message, "out_archiveProcess");
+        }
+    }
+  ]]></script>
+</script>

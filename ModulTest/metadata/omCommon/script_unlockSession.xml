@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.unlockSession">
+  <label>Unlock Session</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sessionId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_cwf_oe.string128</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(omCommon.isEmpty(sessionId))
+        return false;
+
+    var result = Global.runDBStoredProcedure("ORDER",  "call UNLOCK_SESSION(?)", [sessionId],null,true,false,null,"I");
+
+    return true;
+  ]]></script>
+</script>

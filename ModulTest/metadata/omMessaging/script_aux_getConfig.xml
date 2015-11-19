@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getConfig">
+  <label>aux_getConfig</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var doc = getCachedScriptableObject();
+
+
+    return doc;
+
+
+    function getCachedScriptableObject() {
+        var operationCache = theAVM.getCache("InterfaceData");
+        var operationRuleDS = operationCache.getObject("MESSAGING_CONFIG_CACHE_ID", "MESSAGING_CONFIG_CACHE_TYPE");
+
+        if(operationRuleDS == null)
+           operationRuleDS = omMessaging.cache_getConfiguration();
+
+        return operationRuleDS.getScriptObject();
+
+    }
+  ]]></script>
+</script>

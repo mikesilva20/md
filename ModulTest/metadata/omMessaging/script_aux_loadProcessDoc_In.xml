@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_loadProcessDoc_In">
+  <guid>{021e2b4c-3e7e-7777-d183-70e86ca90f42}</guid>
+  <label>aux_loadProcessDoc_In</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="procDoc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    procDoc.activityTimeout               = Global.getConfigVariable("MESSAGING_TIMER_ACTIVITY_DELAY_IN", '15');
+    procDoc.inactivityDelay               = Global.getConfigVariable("MESSAGING_TIMER_DISP_IN", '5');
+    procDoc.msgPerCycle                   = Global.getConfigVariable("MESSAGING_MSG_PER_CICLE_IN", '300');
+
+    procDoc.inactivityDelayGrowingRateMax = Number(Global.getConfigVariable("MESSAGING_TIMER_RATE_MAX_IN", "1"));
+    procDoc.inactivityDelayGrowingRate    = 1;
+
+    procDoc.stackId                       = null;
+  ]]></script>
+</script>

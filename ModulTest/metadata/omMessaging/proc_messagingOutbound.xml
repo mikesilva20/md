@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omMessaging.messagingOutbound">
+  <activity name="start" type="seqActivity">
+    <label>start</label>
+    <x>11.0</x>
+    <y>187.0</y>
+    <childList>
+      <child name="RegistGP" type="scriptActivity">
+        <label>Regist GP</label>
+        <x>102.0</x>
+        <y>191.0</y>
+        <childList>
+          <child name="cpRestart" type="compensateActivity">
+            <label>cpRestart</label>
+            <x>102.0</x>
+            <y>291.0</y>
+            <childList>
+              <child name="doStuff" type="scriptActivity">
+                <label>doStuff</label>
+                <x>102.0</x>
+                <y>291.0</y>
+                <methodList>
+                  <method name="cwOnProcActBefore" type="action">
+                    <category>before</category>
+                    <system>true</system>
+                    <script><![CDATA[
+                      omMessaging.log("Restarting... GPid: " + this.process.id, "Messaging - Outbound");
+
+                      var pd = this.process.processDocument;
+                      omMessaging.aux_loadProcessDoc_Out(pd);
+                    ]]></script>
+                  </method>
+                </methodList>
+              </child>
+            </childList>
+          </child>
+        </childList>
+        <methodList>
+          <method name="cwOnProcActBefore" type="action">
+            <category>before</category>
+            <system>true</system>
+            <script><![CDATA[
+              var msg = new DataStructure("omMessaging.ConfMsg");
+
+              msg.attribute[0].name = 'GPId';
+              msg.attribute[0].value = this.process.id;
+
+              msg.attribute[1].name = 'TYPE';
+              msg.attribute[1].value = "OUT";
+
+
+
+              Process.sendMessageToQueue("omMessaging.messagingMonitor", "GPRegistration", msg);
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="receiveRegistration" type="opActivity">
+        <element>iface_omMessaging.GPConf/oper_receiveConfiguration</element>
+        <label>Receive Registration</label>
+        <participant>part_omMessaging.GPConfPart</participant>
+        <x>208.0</x>
+        <y>180.0</y>
+        <methodList>
+          <method name="cwOnProcActAfter" type="action">
+            <category>script</category>
+            <system>true</system>
+            <script>omMessaging.aux_changeConfigGP(this);</script>
+          </method>
+        </methodList>
+      </child>
+      <child name="startGP" type="allActivity">
+        <label>startGP</label>
+        <x>348.0</x>
+        <y>187.0</y>
+        <childList>
+          <child name="waitChanges" type="seqActivity">
+            <label>wait Changes</label>
+            <x>433.0</x>
+            <y>96.0</y>
+            <childList>
+              <child name="ReceiveConfigurations" type="opActivity">
+                <element>iface_omMessaging.GPConf/oper_receiveConfiguration</element>
+                <label>Receive Configurations</label>
+                <participant>part_omMessaging.GPConfPart</participant>
+                <x>568.0</x>
+                <y>86.0</y>
+                <methodList>
+                  <method name="cwOnProcActAfter" type="action">
+                    <category>script</category>
+                    <system>true</system>
+                    <script>omMessaging.aux_changeConfigGP(this);</script>
+                  </method>
+                </methodList>
+              </child>
+              <child name="repeat" type="repeatActivity">
+                <element>proc_omMessaging.messagingOutbound/seqActivity_start/allActivity_startGP/seqActivity_waitChanges</element>
+                <label>repeat</label>
+                <x>502.0</x>
+                <y>-9.0</y>
+              </child>
+            </childList>
+          </child>
+          <child name="sProcess" type="seqActivity">
+            <label>sProcess</label>
+            <x>439.0</x>
+            <y>288.0</y>
+            <childList>
+              <child name="ProcessStack" type="pollActivity">
+                <label>Process Stack</label>
+                <x>556.0</x>
+                <y>280.0</y>
+                <methodList>
+                  <method name="cwOnProcActBefore" type="action">
+                    <category>before</category>
+                    <system>true</system>
+                    <script>return omMessaging.out_hasMessages(this.process);</script>
+                  </method>
+                  <method name="cwOnProcActAfter" type="action">
+                    <category>script</category>
+                    <system>true</system>
+                    <script>omMessaging.out_processMessages(this.process);</script>
+                  </method>
+                </methodList>
+              </child>
+              <child name="loop" type="repeatActivity">
+                <element>proc_omMessaging.messagingOutbound/seqActivity_start/allActivity_startGP/seqActivity_sProcess</element>
+                <label>loop</label>
+                <schedule type="sched">
+                  <duration type="dur">
+                    <methodList>
+                      <method name="cwOnDuration" type="action">
+                        <system>true</system>
+                        <script>return this.processDocument.inactivityDelay;</script>
+                      </method>
+                    </methodList>
+                  </duration>
+                </schedule>
+                <x>514.0</x>
+                <y>413.0</y>
+              </child>
+            </childList>
+          </child>
+        </childList>
+      </child>
+      <child name="restartExeption" type="onExceptionActivity">
+        <element>excp_omMessaging.restartGP</element>
+        <label>restartExeption</label>
+        <x>11.0</x>
+        <y>287.0</y>
+        <childList>
+          <child name="sRestart" type="seqActivity">
+            <label>sRestart</label>
+            <x>11.0</x>
+            <y>287.0</y>
+            <childList>
+              <child name="restartRollback" type="rollbackActivity">
+                <label>restartRollback</label>
+                <x>-15.0</x>
+                <y>410.0</y>
+                <methodList>
+                  <method name="cwOnProcActBefore" type="action">
+                    <category>before</category>
+                    <system>true</system>
+                    <script>return [];</script>
+                  </method>
+                </methodList>
+              </child>
+              <child name="restartResume" type="resumeActivity">
+                <label>restartResume</label>
+                <x>-16.0</x>
+                <y>514.0</y>
+              </child>
+            </childList>
+          </child>
+        </childList>
+      </child>
+      <child name="GPConfPart" type="participantActivity">
+        <label>GPConfPart</label>
+        <participant>part_omMessaging.GPConfPart</participant>
+        <x>167.0</x>
+        <y>0.0</y>
+      </child>
+    </childList>
+    <methodList>
+      <method name="cwOnProcActBefore" type="action">
+        <category>before</category>
+        <system>true</system>
+        <script><![CDATA[
+          var pd = this.process.processDocument;
+          omMessaging.aux_loadProcessDoc_Out(pd);
+        ]]></script>
+      </method>
+    </methodList>
+  </activity>
+  <curRevision>true</curRevision>
+  <document>doc_omMessaging.globalProcDoc</document>
+  <label>Messaging - Outbound</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <type>Global</type>
+</process>

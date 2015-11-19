@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_registerToReceive_MSG">
+  <label>route_registerToReceive_MSG</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceProcessId" type="rifp">
+      <type>dtype_cwf_pm.PROCESS_ID</type>
+    </parameter>
+    <parameter name="destinationProcessId" type="rifp">
+      <type>dtype_omCommon.processId</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omCommon.operation</type>
+    </parameter>
+    <parameter name="npu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="destinationNPU" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="typeOfOm" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!destinationProcessId)
+        return;
+    if(operation && npu)
+        return;
+
+    if(destinationNPU){
+        omMessaging.route_addProcId(destinationNPU, destinationProcessId);
+        return;
+    }
+
+    var NPURoutesArray = omMessaging.route_getNpuRoutes(sourceProcessId, npu, omMessaging.CONSTANT_ORDER_OP(typeOfOm));
+
+    for(var i = 0;i < NPURoutesArray.length;i++){
+        omMessaging.route_addProcId(omMessaging.getCorrelationNPU(NPURoutesArray[i].npu, operation), destinationProcessId);
+    }
+  ]]></script>
+</script>

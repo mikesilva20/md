@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.operationsToQueue">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{9af4fde5-3da9-40f8-acff-1a508ef3d5a3}</guid>
+  <label>Config - Operations to Queue</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>System document ID</label>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <label>NPU Operation</label>
+      <propertyElement type="elfld">
+        <label>NPU Operation</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="interfaceInvoked" type="leaf">
+      <column>INTERFACEINVOKED</column>
+      <label>Interface to Invoke</label>
+      <propertyElement type="elfld">
+        <label>Interface to Invoke</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="operationInvoked" type="leaf">
+      <column>OPERATIONINVOKED</column>
+      <label>Operation To Invoke</label>
+      <propertyElement type="elfld">
+        <label>Operation To Invoke</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_omMessaging.string128</valueType>
+    </variable>
+    <variable name="queueGP" type="leaf">
+      <column>QUEUEGP</column>
+      <label>Queue GP</label>
+      <propertyElement type="elfld">
+        <label>Queue GP</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="queueOperation" type="leaf">
+      <column>QUEUEOPERATION</column>
+      <label>Queue Operation</label>
+      <propertyElement type="elfld">
+        <label>Queue Operation</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATIONS_TO_QUEUE</table>
+      <valueType>dtype_omMessaging.string128</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.operationsToQueue</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="MyDefault" type="vform">
+            <label>MyDefault</label>
+            <root name="MyDefaultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="operationsToQueueGrid" type="elgrd">
+                  <colWidths>160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>160px</width>
+                  <elementList>
+                    <element name="operationsToQueueHeader" type="elhdr">
+                      <label>Config - Operations to Queue</label>
+                    </element>
+                    <element name="operation" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationsToQueue/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationsToQueue/leaf_operation</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="interfaceInvoked" type="elfld">
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationsToQueue/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationsToQueue/leaf_interfaceInvoked</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>400px</width>
+                    </element>
+                    <element name="operationInvoked" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationsToQueue/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationsToQueue/leaf_operationInvoked</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>200px</width>
+                    </element>
+                    <element name="queueGP" type="elfld">
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationsToQueue/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationsToQueue/leaf_queueGP</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>400px</width>
+                    </element>
+                    <element name="queueOperation" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationsToQueue/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationsToQueue/leaf_queueOperation</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>200px</width>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          this.cw$super_save();
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

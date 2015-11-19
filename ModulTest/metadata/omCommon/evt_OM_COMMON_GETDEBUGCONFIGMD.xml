@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.OM_COMMON_GETDEBUGCONFIGMD">
+  <eventType>OM_COMMON_GETDEBUGCONFIGMD</eventType>
+  <label>OM_COMMON_GETDEBUGCONFIGMD</label>
+  <metaVersion>25</metaVersion>
+  <parametersList>
+    <parameters name="severity" type="rifp">
+      <type>dtype_cwf.severity</type>
+    </parameters>
+    <parameters name="module" type="rifp">
+      <type>dtype_omCommon.omEventLogNameSpace</type>
+    </parameters>
+    <parameters name="mdFullName" type="rifp">
+      <type>dtype_omCommon.omEventLogMdFullName</type>
+    </parameters>
+    <parameters name="orderId" type="rifp">
+      <type>dtype_omCommon.omEventLogOrderId</type>
+    </parameters>
+    <parameters name="processId" type="rifp">
+      <type>dtype_omCommon.omEventLogProcId</type>
+    </parameters>
+    <parameters name="actIndex" type="rifp">
+      <type>dtype_cwf_pm.activity</type>
+    </parameters>
+  </parametersList>
+</event>

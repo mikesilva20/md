@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.npu_getSystem">
+  <guid>{0b630620-a3e7-80b3-1376-bf3734227f89}</guid>
+  <label>npu_getSystem</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(npu)
+          return npu.substr(0,4);
+
+    return null;
+  ]]></script>
+</script>

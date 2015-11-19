@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_SYS_CODE">
+  <guid>{0c22f80a-c834-adc9-3b75-57efe5f6707e}</guid>
+  <label>#CONST# NSOM SYS CODE</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return Global.getConfigVariable("NPU_SYS_CODE", '0000');]]></script>
+</script>

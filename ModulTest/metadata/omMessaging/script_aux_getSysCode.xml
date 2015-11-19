@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getSysCode">
+  <guid>{03632eb0-0241-e6bf-1a29-23a85b0dda32}</guid>
+  <label>aux_getSysCode</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="operation" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script>return omMessaging.CONST_SYS_CODE();</script>
+</script>

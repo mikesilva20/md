@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.omEventLogOrderId">
+  <extends>dtype_cwf.orderId</extends>
+  <label>Order Id</label>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elfld"/>
+</dataType>

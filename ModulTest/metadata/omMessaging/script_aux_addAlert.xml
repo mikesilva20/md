@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_addAlert">
+  <label>aux_addAlert</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="description" type="rifp"/>
+    <parameter name="type" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var alert = new Document("omMessaging.ui.messagingAlerts");
+
+    alert.alertDate = new Date();
+    alert.description = description;
+    alert.type = type;
+    alert.save();
+  ]]></script>
+</script>

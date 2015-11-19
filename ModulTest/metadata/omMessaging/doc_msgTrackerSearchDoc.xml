@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.msgTrackerSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{031011a7-6d75-f711-a625-9841f8794b83}</guid>
+  <label>Msg Tracker - Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="npu" type="leaf">
+      <label>Npu</label>
+      <propertyElement type="elfld">
+        <label>Npu</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="correlationNpu" type="leaf">
+      <label>Correlation Npu</label>
+      <propertyElement type="elfld">
+        <label>Correlation Npu</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="businessId" type="leaf">
+      <label>Business Id</label>
+      <propertyElement type="elfld">
+        <label>Business Id</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.businessId</valueType>
+    </variable>
+    <variable name="hierarchy" type="leaf">
+      <label>Show Hierarchy</label>
+      <propertyElement type="elrgrp">
+        <label>Show Hierarchy</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="status" type="leaf">
+      <label>Status</label>
+      <propertyElement type="elslct">
+        <label>Status</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.status</valueType>
+    </variable>
+    <variable name="auxInternalMsg" type="leaf">
+      <label>auxInternalMsg</label>
+      <propertyElement type="elslct">
+        <label>auxInternalMsg</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string1</valueType>
+    </variable>
+    <variable name="dontShowInt" type="leaf">
+      <label>Don&apos;t Show Internal Msg</label>
+      <propertyElement type="elrgrp">
+        <label>Don&apos;t Show Internal Msg</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="dateGreater" type="leaf">
+      <label>Creation Date &gt;=</label>
+      <propertyElement type="eldatetime">
+        <label>Creation Date &gt;=</label>
+      </propertyElement>
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="dateLess" type="leaf">
+      <label>Creation Date &lt;=</label>
+      <propertyElement type="eldatetime">
+        <displayFormat>MM/dd/yyyy HH:mm:ss</displayFormat>
+        <label>Creation Date &lt;=</label>
+      </propertyElement>
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <label>Process Id</label>
+      <valueType>dtype_omMessaging.processId</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <label>Stack Id</label>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafTriggerAction$dontShowInt" type="laction">
+      <path>doc_omMessaging.msgTrackerSearchDoc/leaf_dontShowInt</path>
+      <type>trigger</type>
+      <script><![CDATA[
+        if(this.dontShowInt && this.dontShowInt == true){
+
+              this.auxInternalMsg = 'S';
+
+        }else{
+              this.auxInternalMsg = null;
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.msgTrackerSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="search" type="vform">
+            <label>search</label>
+            <root name="searchGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="searchGrid" type="elgrd">
+                  <colWidths>195,195,195,195,195,195</colWidths>
+                  <numOfCols>6</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>1170px</width>
+                  <elementList>
+                    <element name="npu" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_npu</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="correlationNpu" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_correlationNpu</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="businessId" type="elfld">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_businessId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="status" type="elslct">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_status</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="Creation_Date___" type="eldatetime">
+                      <columnSpan>1</columnSpan>
+                      <hint>MM/dd/yyyy HH:mm:ss</hint>
+                      <label>Creation Date &gt;=</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_dateGreater</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="___Creation_Date" type="eldatetime">
+                      <columnSpan>1</columnSpan>
+                      <hint>MM/dd/yyyy HH:mm:ss</hint>
+                      <label>&lt;= Creation Date</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_dateLess</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="processId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_processId</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/permMethod_isRootUser</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="stackId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_stackId</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/permMethod_isRootUser</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Search_BusinessId" type="vform">
+            <label>Search_BusinessId</label>
+            <root name="Search_BusinessIdGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="Search_BusinessIdGrid" type="elgrd">
+                  <colWidths>195,195,195,195</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>780px</width>
+                  <elementList>
+                    <element name="businessId2" type="elfld">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_businessId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="hierarchy" type="elchk">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_hierarchy</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="dontShowInt" type="elchk">
+                      <columnSpan>1</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.msgTrackerSearchDoc/leaf_dontShowInt</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+      <method name="isRootUser" type="permMethod">
+        <reference>permMethod_omMessaging.isRootUser</reference>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

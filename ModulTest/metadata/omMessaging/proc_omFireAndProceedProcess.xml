@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omMessaging.omFireAndProceedProcess">
+  <activity name="Start" type="seqActivity">
+    <label>Start</label>
+    <x>59.0</x>
+    <y>131.0</y>
+    <childList>
+      <child name="Loop" type="seqActivity">
+        <label>Loop</label>
+        <x>160.0</x>
+        <y>131.0</y>
+        <childList>
+          <child name="fireAndProceed" type="opActivity">
+            <element>iface_omMessaging.omFireAndProceed/oper_fireAndProceedErrorMessage</element>
+            <label>Fire And Proceed</label>
+            <x>254.0</x>
+            <y>118.0</y>
+            <childList>
+              <child name="canResubmit" type="switchActivity">
+                <label>Can Resubmit</label>
+                <x>345.0</x>
+                <y>118.0</y>
+                <childList>
+                  <child name="yes" type="caseActivity">
+                    <label>Yes</label>
+                    <x>355.0</x>
+                    <y>218.0</y>
+                    <childList>
+                      <child name="automaticResubmission" type="scriptActivity">
+                        <label>Automatic Resubmission</label>
+                        <x>333.0</x>
+                        <y>235.0</y>
+                        <methodList>
+                          <method name="cwOnProcActBefore" type="action">
+                            <category>before</category>
+                            <system>true</system>
+                            <script><![CDATA[
+                              //#->: Script to Perform the resubmission and save to the Archive table
+                              return;
+                            ]]></script>
+                          </method>
+                        </methodList>
+                      </child>
+                    </childList>
+                  </child>
+                  <child name="no" type="caseActivity">
+                    <label>No</label>
+                    <x>450.0</x>
+                    <y>118.0</y>
+                    <childList>
+                      <child name="sendEmail" type="scriptActivity">
+                        <label>Send Email</label>
+                        <x>452.0</x>
+                        <y>117.0</y>
+                        <methodList>
+                          <method name="cwOnProcActBefore" type="action">
+                            <category>before</category>
+                            <system>true</system>
+                            <script><![CDATA[
+                              // Send Email to ST
+                              omMessaging.sendEmail();
+                            ]]></script>
+                          </method>
+                        </methodList>
+                      </child>
+                    </childList>
+                    <methodList>
+                      <method name="cwOnProcActCond" type="action">
+                        <category>cond</category>
+                        <system>true</system>
+                        <script>return true;</script>
+                      </method>
+                    </methodList>
+                  </child>
+                </childList>
+              </child>
+            </childList>
+            <methodList>
+              <method name="cwOnProcActAfter" type="action">
+                <category>script</category>
+                <system>true</system>
+                <script><![CDATA[
+                  //#->: Cut the Operation from NPU and see if it can be automatically resubmitted
+                  //Save the Message to the Fire And Proceed Message Table
+                  omMessaging.saveMsg(this);
+                ]]></script>
+              </method>
+            </methodList>
+          </child>
+          <child name="Repeat" type="repeatActivity">
+            <element>proc_omMessaging.omFireAndProceedProcess/seqActivity_Start/seqActivity_Loop</element>
+            <label>Repeat</label>
+            <x>351.0</x>
+            <y>353.0</y>
+          </child>
+        </childList>
+      </child>
+    </childList>
+  </activity>
+  <curRevision>true</curRevision>
+  <interface>iface_omMessaging.omFireAndProceed</interface>
+  <label>Fire And Proceed (Global Process)</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <type>Global</type>
+</process>

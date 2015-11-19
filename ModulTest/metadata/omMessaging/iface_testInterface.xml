@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface name="omMessaging.testInterface">
+  <flags enum-type="metadataFlag">PRIVATE</flags>
+  <guid>{0b5db63b-c2fc-dffd-ed67-a4ba3f2380e6}</guid>
+  <label>TEST ONLY - Internal Interface</label>
+  <metaVersion>3</metaVersion>
+  <operationList>
+    <operation name="pubMessage" type="oper">
+      <guid>{07fe7d52-3a1f-185a-cd55-0b8c01912a53}</guid>
+      <input>dstruct_omMessaging.message</input>
+      <label>pubMessage</label>
+      <type>Notification</type>
+    </operation>
+    <operation name="pub2" type="oper">
+      <input>dstruct_omMessaging.message</input>
+      <label>pub2</label>
+      <type>Notification</type>
+    </operation>
+    <operation name="pub3" type="oper">
+      <input>dstruct_omMessaging.message</input>
+      <label>pub3</label>
+      <type>Notification</type>
+    </operation>
+  </operationList>
+  <revision>4</revision>
+</interface>

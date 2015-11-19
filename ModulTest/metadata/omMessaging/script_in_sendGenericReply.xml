@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_sendGenericReply">
+  <guid>{09548629-f15b-48b1-8b9f-761f6de8d1e5}</guid>
+  <label>in_sendGenericReply</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var npu                         = null;
+    var correlationNpu            = null;
+    var processId                  = null;
+    var corrProcessId            = null;
+    var oper                        = null;
+    var errorCode                   = null;
+    var errorDesc                  = null;
+    var nativeCode                  = null;
+    var nativeDesc                  = null;
+    var sysCode                        = null;
+    var msgOut                         = null;
+    var statusText                  = null;
+    var exceptionSent            = false;
+
+
+    try{
+
+          npu                   = doc.npu;
+          correlationNpu        = doc.correlationNpu;
+          oper                  = doc.interfaceToInvoke + '/' + doc.operation;
+
+          msgOut                = omMessaging.out_getMsg(correlationNpu, true);
+
+          if(!msgOut){
+
+              omMessaging.log("Message document was not found. NPU:" + correlationNpu, "in_sendGenericReply" );
+              //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"ERROR","Message document was not found.",doc.processId,doc.retryDate,doc.retryCounter);
+
+              doc.status            = omMessaging.CONST_STATUS_ERROR();
+              doc.statusCode        = "ERROR";
+              doc.statusText        = "Message document was not found.";
+              doc.deliveryDate      = new Date();
+              doc.save();
+
+              omMessaging.audit_saveInfo("Error", doc);
+
+              return;
+
+          }
+
+          processId = msgOut.processId;
+          errorCode = ds.status.eCode.eCode;
+          errorDesc = ds.status.eCode.eDescription;
+
+          var destinationStatus = ds.status.destinationStatus;
+
+          if (destinationStatus.length != 0 && destinationStatus[0].eNative != null && destinationStatus[0].eNative.length != 0) {
+                      nativeCode       = destinationStatus[0].eNative[0].eCode;
+                      nativeDesc       = destinationStatus[0].eNative[0].eDescription;
+                sysCode       = destinationStatus[0].eNative[0].eActor;
+        }
+
+
+          if(errorCode == 'I1'){
+                //Entregue no destino
+
+                switch(msgOut.certificationNeeded){
+                      case omMessaging.OM_MSG_FIRE_AND_FORGET(): // Fire & Forget
+                      case omMessaging.OM_MSG_WAIT_FOR_PROCESS():// Wait for Processed
+                            // Do Nothing.
+                            statusText            = "Do nothing.";
+                            break;
+                      case omMessaging.OM_MSG_WAIT_FOR_DELIVERY():
+                            // Wait for Delivered
+                            Process.sendMessageToProcess(msgOut.processId, null, oper , ds);
+                            statusText            = "Message was sent to Process, procID: " + processId;
+                            break;
+                      case omMessaging.OM_MSG_FIRE_AND_PROCEED():
+
+                            var conf = omMessaging.aux_getConfig();
+                            var FIRE_AND_PROCEED_GP = conf.fireAndProceedGP;
+                            var FIRE_AND_PROCEED_OP = conf.fireAndProceedOperation;
+
+                            // Fire & Proceed
+                            Process.sendMessageToQueue(FIRE_AND_PROCEED_GP, FIRE_AND_PROCEED_OP, ds);
+                            statusText            = "Message was sent to the Fire & Proceed Error Manager";
+                            break;
+                case omMessaging.OM_MSG_SEND_GENERIC_REPLY_TO_PROC():
+                // Deliver to Process
+                Process.sendMessageToProcess(msgOut.processId, null, oper , ds);
+                statusText      = "Message was sent to Process, procID: " + processId;
+                }
+
+          }else if(errorCode == 'I2'){
+                //Processada no destino
+
+            if(sysCode != '88' && (msgOut.certificationNeeded == omMessaging.OM_MSG_WAIT_FOR_PROCESS() || msgOut.certificationNeeded == omMessaging.OM_MSG_WAIT_FOR_DELIVERY() || msgOut.certificationNeeded == omMessaging.OM_MSG_SEND_GENERIC_REPLY_TO_PROC())){
+                      Process.sendMessageToProcess(msgOut.processId, null, oper , ds);
+                      statusText            = "Message was sent to Process, procID: " + processId;
+                }
+
+          }else{
+
+                //Fire And Proceed
+                var fpOp = omMessaging.npu_getOper(correlationNpu);
+                if( msgOut.certificationNeeded == omMessaging.OM_MSG_FIRE_AND_PROCEED()){
+
+                    var conf = omMessaging.aux_getConfig();
+                    var FIRE_AND_PROCEED_GP = conf.fireAndProceedGP;
+                    var FIRE_AND_PROCEED_OP = conf.fireAndProceedOperation;
+                    Process.sendMessageToQueue(FIRE_AND_PROCEED_GP, FIRE_AND_PROCEED_OP, ds);
+                    statusText            = "Message was sent to the Fire & Proceed Error Manager";
+                }
+
+            else if(msgOut.certificationNeeded == omMessaging.OM_MSG_SEND_GENERIC_REPLY_TO_PROC()){
+                // Deliver to Process
+                Process.sendMessageToProcess(msgOut.processId, null, oper , ds);
+                statusText      = "Message was sent to Process, procID: " + processId;
+
+                }else{
+                      // All the others
+                      var rules = omMessaging.aux_getMsgRules(nativeCode, sysCode);
+
+                       if(rules){
+
+                             var action = rules.actionType;
+
+                             switch(action){
+
+                                   case "DE":// Deliver to Process
+                                         Process.sendMessageToProcess(msgOut.processId, null, oper , ds);
+                                        statusText      = "Message was sent to Process, procID: " + processId;
+                                         break;
+
+                                   case "SU":// Success
+                                         statusText            = "Do nothing.";
+                                         break;
+
+                                   case "RP":// Republish
+
+                                         sendException();
+                                         statusText =  "Exception sent to Process. Error: " + errorDesc + "\nNative:" + nativeDesc;
+                                         exceptionSent = true;
+                                         break;
+
+                                   default:
+                                         sendException();
+                                         statusText =  "Exception sent to Process. Error: " + errorDesc + "\nNative:" + nativeDesc;
+                                         exceptionSent = true;
+                                         break;
+                             }
+
+                       }else{
+                    //Sem regra definida, envia para o processo  envia excepçao para o processo.
+
+                             sendException();
+                             exceptionSent = true;
+                             statusText =  "Exception sent to Process. Error: " + errorDesc + "\nNative:" + nativeDesc;
+                       }
+                }
+
+          }
+
+          if(!statusText)
+                statusText  = errorDesc + "\nNative:" + nativeDesc;
+
+          //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_PROCESSED(),errorCode,statusText,processId,doc.retryDate,doc.retryCounter);
+          doc.deliveryDate       = new Date();
+          doc.status                  = omMessaging.CONST_STATUS_PROCESSED();
+          doc.statusCode            = errorCode;
+          doc.statusText            = statusText;
+          doc.processId            = processId;
+          doc.save();
+
+          omMessaging.audit_saveInfo("Success", doc);
+
+
+          if(exceptionSent && msgOut && msgOut.metadataType.startsWith("omMessaging:")){
+                msgOut.statusCode = "GP-ERROR:" + errorCode;
+                msgOut.save();
+          }
+
+
+    }catch(ex){
+
+          omMessaging.log("EXCEPTION - Processing GP. Process: "  +  processId + " NPU:" + doc.npu  + "\r\n " + ex.message, "in_sendGenericReply");
+
+          //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"EXCEPTION",ex.message,doc.processId,doc.retryDate,doc.retryCounter);
+          doc.status                  = omMessaging.CONST_STATUS_ERROR();
+          doc.statusCode            = "EXCEPTION";
+          doc.statusText            = ex.message;
+          doc.deliveryDate      = new Date();
+          doc.save();
+
+          omMessaging.audit_saveInfo("Error", doc);
+    }
+
+    function sendException(){
+                var err = nativeCode ? nativeCode : errorCode;
+                var errDesc = nativeDesc ? nativeDesc : errorDesc;
+                var pad = "0000";
+
+                sysCode=pad.substring(0, pad.length - sysCode.length) + sysCode;
+
+                omMessaging.aux_sendException(msgOut,err, errorDesc, nativeCode,sysCode);
+
+    }
+  ]]></script>
+</script>

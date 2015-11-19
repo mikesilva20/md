@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.OM_COMMON_WRITELOG">
+  <eventType>OM_COMMON_WRITELOG</eventType>
+  <label>OM_COMMON_WRITELOG</label>
+  <metaVersion>25</metaVersion>
+  <parametersList>
+    <parameters name="severity" type="rifp">
+      <type>dtype_cwf.severity</type>
+    </parameters>
+    <parameters name="eventDescription" type="rifp">
+      <type>dtype_omCommon.omEventLogDescription</type>
+    </parameters>
+    <parameters name="fullQualifiedName" type="rifp">
+      <type>dtype_omCommon.omEventLogMdFullName</type>
+    </parameters>
+    <parameters name="omModuleErrorCode" type="rifp">
+      <type>dtype_omCommon.omEventLogErrorCode</type>
+    </parameters>
+    <parameters name="stackTrace" type="rifp">
+      <type>dtype_omCommon.omEventLogStackTrace</type>
+    </parameters>
+    <parameters name="orderId" type="rifp">
+      <type>dtype_cwf.orderId</type>
+    </parameters>
+    <parameters name="stackTraceDynamic" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameters>
+  </parametersList>
+</event>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramAlignHorizontal">
+  <label>Diagram Align Horizontal</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="rootId" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="connections" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /* retorna um array de elementos, cada um com a sua largura
+     * dimensionamento horizontal
+     * Created by Tiago Barreiros
+     */
+
+    // retorna o array de elementos passado, acrescentando a respetiva largura a cada node
+    function getLength(node,elements){
+        var childId;                                           // id de uma child
+        var nodeChild;                                         // node de uma child
+        var xlvl = 0;                                          // largura de um node
+
+        if (node[2].length == 0){                              // se o node nao tem childs
+            xlvl = 1;                                          // a sua largura é 1 unidade
+        }
+        else{                                                  // se o node tem childs
+            for (var i=0; i < node[2].length; i++){            // por cada child
+                childId = node[2][i];                          // ve qual é o id da child atual
+                for (var j=0; j < elements.length; j++){       // recolhe o elemento correspondente à id
+                    if (childId == elements[j][0]){
+                        nodeChild = elements[j];
+                        break;                                 // encontrado o node correto, nao procura mais no array de elementos
+                    }
+                }
+                if(nodeChild[3] == null || nodeChild[3] == 0){ // se a child nao tiver largura definida
+                    elements = getLength(nodeChild,elements);  // define a sua largura
+                }
+                xlvl = xlvl + nodeChild[3];                    // a sua largura é a soma das larguras das childs
+            }
+        }
+
+        // adiciona largura ao node correto
+        for (var i=0; i < elements.length; i++){
+            if (node[0] == elements[i][0]){
+                elements[i][3] = xlvl;
+                break;                                         // encontrado o node correto, nao procura mais no array de elementos
+            }
+        }
+
+        // retorna node com a sua largura
+        return elements;
+    }
+
+    /*
+     * Codigo desta funcao
+     */
+
+    var nodesWithLength;
+    var nodeRoot;
+
+    // recolhe o node root a partir do seu uniqueCode
+    for (var i=0; i < connections.length; i++){
+        if (rootId == connections[i][0]){
+            nodeRoot = connections[i];
+            break;                                             // assim que encontra o id correto, deixa de procura no array de connections
+        }
+    }
+
+    // recolhe elementos com larguras (a partir de um node root)
+    nodesWithLength = getLength(nodeRoot,connections);
+
+    // retorna array de ligacoes com a respetiva largura
+    return nodesWithLength;
+  ]]></script>
+</script>

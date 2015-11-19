@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.saveMsg">
+  <guid>{06f6be81-dc68-bea1-519d-8b57c10263c1}</guid>
+  <label>Save Message</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="procAct" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**********************************************************************************************************************************
+     *
+     *  Create a new entry at Fire And Proceed Message Table
+     *
+     * @author                  Fabio Afonso
+     * @created date      2011-08-28
+     *
+     *
+     * @param
+     *            procAct                                    Process Activity                  The Process Activity
+     *
+     *********************************************************************************************************************************/
+
+     var NAME_SPACE            = "omMessaging";
+     var SCRIPT_NAME      = "saveMsg";
+     var proc                  = null;
+     var msg                   = null;
+     var header             = null;
+     var status             = null;
+     var businessId            = null;
+     var npu                  = null;
+     var correlationNpu = null;
+     var eCode                  = null;
+     var eDescription      = null;
+     var receiveDate      = null;
+     var message            = null;
+     var doc                  = null;
+     var action                  = omMessaging.WAITING_ACTION();
+     var outDoc                  = null;
+     var payload            = null;
+     var dataType            = null;
+     var eActor            = null;
+          var typeMsg             = null;
+
+     try{
+
+           // The Process
+           proc = procAct.process;
+
+           // Get the Generic Replay Message
+           msg      = procAct.activityData;
+
+           // Get the Generic Replay Header
+           header = msg.HeaderReport;
+
+           // Get the Generic Replay Status
+           status = msg.Status;
+
+           // Transform the message into XML in order to save it as a BLOB
+           message = msg.toXML();
+
+           // Get the Generic Replay Header Information
+           npu      = header.npu;
+           correlationNpu = header.correlationNpu;
+           receiveDate = header.creationTime;
+
+           // Get the Generic Replay Status Information
+           eCode = status.eCode.eCode;
+           eDescription = status.eCode.eDescription;
+           eActor = status.eCode.eActor;
+
+
+                       // Get the Outbound Document
+             if(eActor == "-1")
+             {
+                 outDoc = omMessaging.out_getMsg(npu, true);
+                 typeMsg = 0;
+             }
+             else
+             {
+                 outDoc = omMessaging.out_getMsg(correlationNpu, true);
+                 typeMsg = 1;
+             }
+
+
+           // Load the Message
+           omMessaging.aux_loadMsgData(outDoc);
+
+           // Get the Sent Message
+           payload = outDoc.payload;
+
+           // Save the Data Type
+           dataType = outDoc.dataType;
+
+           // Get the Business Id
+           businessId = (!header.businessId)?outDoc.businessId:header.businessId;
+
+           // Create the Fire And Proceed Message Document
+           doc = new Document("omMessaging.fireAndProceedMsg");
+
+           // Save the Information into the Document
+           doc.businessId = businessId;
+           doc.npu = npu;
+           doc.correlationNpu = correlationNpu;
+           doc.receiveDate = receiveDate;
+           doc.eCode = eCode;
+           doc.eDescription = eDescription;
+           doc.action = action;
+           doc.dataType = dataType;
+           doc.message = message;
+           doc.payload = payload;
+           doc.typeMsg = typeMsg;
+
+           // Save the Document into the Database
+           doc.save();
+
+           // Save the Message into the Database
+           omMessaging.aux_saveMsg(doc);
+
+     }catch(e){
+           omCommon.writeLog(3, "Messaging: Error Saving the Message - " + e, NAME_SPACE + "." + SCRIPT_NAME);
+     }
+  ]]></script>
+</script>

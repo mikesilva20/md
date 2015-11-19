@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omMessaging.auditConfigurationFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.auditInterfacesConfSearch</input>
+  <label>Audit - Configuration</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.auditInterfacesConfDoc</output>
+  <sortList>
+    <sort type="stitem">
+      <path>doc_omMessaging.auditInterfacesConfDoc/leaf_prettyName</path>
+    </sort>
+  </sortList>
+  <type>document</type>
+  <vDetailForm>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface/frmui_Forms/vform_result</vDetailForm>
+  <searchList>
+    <search type="sitem">
+      <document>doc_omMessaging.auditInterfacesConfSearch</document>
+      <mappedDocument>doc_omMessaging.auditInterfacesConfDoc</mappedDocument>
+      <mappedPath>doc_omMessaging.auditInterfacesConfDoc/leaf_interfaceToInvoke</mappedPath>
+      <operation>like</operation>
+      <path>doc_omMessaging.auditInterfacesConfSearch/leaf_interfaceToInvoke</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omMessaging.auditInterfacesConfSearch</document>
+      <mappedDocument>doc_omMessaging.auditInterfacesConfDoc</mappedDocument>
+      <mappedPath>doc_omMessaging.auditInterfacesConfDoc/leaf_prettyName</mappedPath>
+      <operation>like</operation>
+      <path>doc_omMessaging.auditInterfacesConfSearch/leaf_prettyName</path>
+    </search>
+  </searchList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Audit - Interfaces Configuration</label>
+        <valueType>doc_omMessaging.auditInterfacesConfDoc</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.auditInterfacesConfSearch/ui_UserInterface</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="auditConfigurationFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="interfaceToInvoke" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_interfaceToInvoke</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="prettyName" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_prettyName</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>400px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="auditConfigurationFndView" type="findVView">
+      <inputOverlay>doc_omMessaging.auditInterfacesConfSearch/ui_UserInterface/frmui_Forms/vform_SearchDoc</inputOverlay>
+      <outputOverlay>findDoc_omMessaging.auditConfigurationFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findDoc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getSystemToStackInbound">
+  <label>cache_getSystemToStackInbound</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.configSystemToStack_Inbound");
+    fnd.searchDocument.isActive = true;
+    fnd.search();
+
+    omMessaging.log("Loading System to Stack Configuration - Inbound from DB", "cache_getSystemToStackInbound");
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+    cacheDS.setScriptObject(fnd.list);
+    return cacheDS;
+  ]]></script>
+</script>

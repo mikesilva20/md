@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.msgHeaderReport">
+  <container>true</container>
+  <label>msgHeaderReport</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="npu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>npu</label>
+    </child>
+    <child name="correlationNpu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>correlationNpu</label>
+    </child>
+    <child name="creationTime" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.Date</element>
+      <label>creationTime</label>
+    </child>
+    <child name="processId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.processId</element>
+      <label>processId</label>
+    </child>
+    <child name="businessId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.businessServiceId</element>
+      <label>businessId</label>
+    </child>
+    <child name="certificationNeeded" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.certificationNeeded</element>
+      <label>certificationNeeded</label>
+    </child>
+    <child name="priority" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.priority</element>
+      <label>priority</label>
+    </child>
+    <child name="statusCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.statusCode</element>
+      <label>statusCode</label>
+    </child>
+    <child name="statusText" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.text</element>
+      <label>statusText</label>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.msgHeaderReport</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.msgHeaderReport</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

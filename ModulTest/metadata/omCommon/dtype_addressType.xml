@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.addressType">
+  <enumeration type="enum">
+    <valueList>
+      <value name="Installation" type="enumItem" code="I"/>
+      <value name="Dismantling" type="enumItem" code="D"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Address Type</label>
+  <length>8</length>
+  <metaVersion>4</metaVersion>
+</dataType>

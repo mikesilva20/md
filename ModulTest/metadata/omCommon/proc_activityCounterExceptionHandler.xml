@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omCommon.activityCounterExceptionHandler">
+  <activity name="start" type="seqActivity">
+    <label>start</label>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <childList>
+      <child name="sendNotificationException" type="scriptActivity">
+        <label>Send Notification Exception</label>
+        <x>86.0</x>
+        <y>-19.0</y>
+        <methodList>
+          <method name="cwOnProcActBefore" type="action">
+            <category>before</category>
+            <system>true</system>
+            <script><![CDATA[
+              //NOTIFY GLOBAL PROCESS
+              var maxRepeatCount = omCommon.omEnvironmentGetConfigVariable("maxActivityCount", 500);
+              maxRepeatCount = Number(maxRepeatCount);
+              var processId = process.id;
+
+              var ds = new DataStructure("omCommon.processActivityInfo");
+              ds.processId = processId;
+              ds.maxRepeatCount = maxRepeatCount;
+              Process.suspendProcess(processId);
+
+              Process.sendMessageToQueue('omCommon.omActivityRepeatMonitor','monitorProcessActivities', ds);
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="receiveProceedMessage" type="opActivity">
+        <element>iface_omCommon.omProcessAcitivitiesInterface/oper_resumeProcess</element>
+        <label>receiveProceedMessage</label>
+        <participant>part_omCommon.omProcessActivitiesPart</participant>
+        <x>189.0</x>
+        <y>-4.0</y>
+      </child>
+      <child name="resume" type="resumeActivity">
+        <label>resume</label>
+        <x>370.0</x>
+        <y>-4.0</y>
+      </child>
+      <child name="omProcessActivitiesPart" type="participantActivity">
+        <label>omProcessActivitiesPart</label>
+        <participant>part_omCommon.omProcessActivitiesPart</participant>
+        <x>197.0</x>
+        <y>-136.0</y>
+      </child>
+    </childList>
+  </activity>
+  <curRevision>true</curRevision>
+  <label>activityCounterExceptionHandler</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <type>Sub-flow</type>
+</process>

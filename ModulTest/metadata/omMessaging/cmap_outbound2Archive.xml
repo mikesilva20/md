@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<conversionMap name="omMessaging.outbound2Archive">
+  <guid>{0fe652be-387b-ef8a-2e66-2f404157753f}</guid>
+  <isDefault>true</isDefault>
+  <itemMapList>
+    <itemMap name="0" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_npu</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_npu</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="1" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_system</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_system</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="2" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_correlationNpu</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_correlationNpu</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="3" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_status</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_status</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="4" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_processId</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_processId</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="5" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_businessId</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_businessId</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="6" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_creationDate</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_creationDate</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="7" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_deliveryDate</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_deliveryDate</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="8" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_retryDate</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_retryDate</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="9" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_interfaceToInvoke</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_interfaceToInvoke</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="10" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_operation</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_operation</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="11" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_statusCode</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_statusCode</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="12" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_statusText</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_statusText</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="13" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_retryCounter</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_retryCounter</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="14" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_certificationNeeded</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_certificationNeeded</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="15" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_dataType</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_dataType</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="16" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_receivedDataType</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_receivedDataType</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="17" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_payload</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_payload</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="18" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.outboundDoc</path>
+          <path>doc_omMessaging.outboundDoc/leaf_receivedData</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.archiveOutboundDoc</path>
+          <path>doc_omMessaging.archiveOutboundDoc/leaf_receivedData</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+  </itemMapList>
+  <label>Msg outboud 2 Archive</label>
+  <metaVersion>4</metaVersion>
+  <source>doc_omMessaging.outboundDoc</source>
+  <target>doc_omMessaging.archiveOutboundDoc</target>
+</conversionMap>

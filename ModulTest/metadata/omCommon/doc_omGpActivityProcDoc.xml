@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omGpActivityProcDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{6e67938a-6693-4a32-a0f7-9397c33af2b3}</guid>
+  <label>OM Gp Activity Process Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="processId" type="leaf">
+      <valueType>dtype_omCommon.processId</valueType>
+    </variable>
+    <variable name="maxRepeatCount" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omGpActivityProcDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

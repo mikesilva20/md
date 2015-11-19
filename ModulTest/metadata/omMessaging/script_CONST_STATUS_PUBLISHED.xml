@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_STATUS_PUBLISHED">
+  <guid>{0e573d95-2363-3fc1-c190-9a550c806cf0}</guid>
+  <label>#CONST# STATUS_PUBLISHED</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "1";]]></script>
+</script>

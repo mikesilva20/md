@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getDebugConfigCMD">
+  <highlight>18</highlight>
+  <label>Have Debug Config</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="severity" type="rifp">
+      <type>dtype_cwf.severity</type>
+    </parameter>
+    <parameter name="module" type="rifp">
+      <type>dtype_omCommon.omEventLogNameSpace</type>
+    </parameter>
+    <parameter name="mdFullName" type="rifp">
+      <type>dtype_omCommon.omEventLogMdFullName</type>
+    </parameter>
+    <parameter name="orderId" type="rifp">
+      <type>dtype_omCommon.omEventLogOrderId</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <type>dtype_omCommon.omEventLogProcId</type>
+    </parameter>
+    <parameter name="actIndex" type="rifp">
+      <type>dtype_cwf_pm.activity</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(severity == 0 && omCommon.getConfigVariable('debug'))
+    {
+        if(!module && !mdFullName && !orderId && !processId)
+            return "false;";
+        if(!module && mdFullName)
+            return "false;";
+
+        var fnd = new Finder('omCommon.omDebugConfigFnd');
+        fnd.searchDocument.namespace = module;
+        fnd.searchDocument.mdFullName = mdFullName;
+        fnd.searchDocument.orderId = orderId;
+        fnd.searchDocument.processId = processId;
+
+        var res =  fnd.search();
+
+        if(actIndex && processId){
+            for(var i = 0;i<res.length;i++){
+
+                //Invalid configuration. For an activity the revision param is mandatory
+                if(res[i].actIndex && !res[i].revision)
+                    continue;
+
+                if(res[i].actIndex == actIndex || !res[i].actIndex){
+                    if(!res[i].revision || res[i].revision ==  Document.readDoc("cwf_pm.CWPROCESS",processId).revision)
+                        return "var stackTraceDynamic = \"\";"+res[i].cmdDebug+" ;stackTraceDynamic;";
+                }
+            }
+            return "false;";
+        }
+
+
+        if (res.length > 0){
+            return "var stackTraceDynamic = \"\";"+res[0].cmd+" ;stackTraceDynamic;";
+        }
+
+    }
+    return  "false;";
+  ]]></script>
+</script>

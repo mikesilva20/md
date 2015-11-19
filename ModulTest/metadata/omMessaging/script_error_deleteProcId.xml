@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.error_deleteProcId">
+  <guid>{04822728-caf4-17d7-ba6e-7308d626064b}</guid>
+  <label>error_deleteProcId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(doc)
+          doc.deleteItem();
+  ]]></script>
+</script>

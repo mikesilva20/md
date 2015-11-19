@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEnvironmentConfigSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{b8ea39e2-8183-4a51-86e1-bd36605d342e}</guid>
+  <label>Order Environment Config Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="environment" type="leaf">
+      <valueType>dtype_omCommon.environment</valueType>
+    </variable>
+    <variable name="nodeID" type="leaf">
+      <valueType>dtype_cwf_pm.nodeID</valueType>
+    </variable>
+    <variable name="environmentType" type="leaf">
+      <valueType>dtype_omCommon.environmentType</valueType>
+    </variable>
+    <variable name="active" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="isOM" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEnvironmentConfigSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

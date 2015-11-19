@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getAuxGroupAttributeDoc">
+  <label>Get Aux Group Attribute Doc</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="groupId" type="rifp">
+      <type>dtype_cwf.docId</type>
+    </parameter>
+    <parameter name="cwOrderId" type="rifp">
+      <type>dtype_cwf.cwOrderId</type>
+    </parameter>
+    <parameter name="itemId" type="rifp">
+      <type>dtype_cwf.docId</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+    <parameter name="value" type="rifp">
+      <type>dtype_omCommon.value</type>
+    </parameter>
+    <parameter name="groupAttributes" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="status" type="rifp">
+      <type>dtype_omCommon.state</type>
+    </parameter>
+    <parameter name="type" type="rifp">
+      <type>dtype_cwt_common.string3</type>
+    </parameter>
+    <parameter name="coordinate" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="groupAttributeParent" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="groupName" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get a auxiliary group info filtered
+     * @param    {String}  groupId - Id of the group
+     * @param    {String}  cwOrderId - Order Id
+     * @param    {String}  itemId - Item Id
+     * @param    {String}  name - attribute name
+     * @param    {String}  value - attribute value
+     * @param    {String}  groupAttributes - Group attributes
+     * @param    {String}  status - Status
+     * @param    {String}  type - Type
+     * @param    {String}  coordinate - Coordinate
+     * @param    {String}  groupAttributeParent - Attribute parente
+     * @param    {String}  groupName - Group name
+     * @returns  {omAuxiliaryGroup} returns Document omAuxiliaryGroup
+     * @version  1.0
+     */
+
+    var fnd = new Finder("omCommon.auxGroupInfoFnd");
+    fnd.searchDocument.groupId                = groupId;
+    fnd.searchDocument.cwOrderId                   = cwOrderId;
+    fnd.searchDocument.itemId                       = itemId;
+    fnd.searchDocument.name                   = name;
+    fnd.searchDocument.value                       = value;
+    fnd.searchDocument.groupAttributes             = groupAttributes;
+    fnd.searchDocument.status                      = status;
+    fnd.searchDocument.type                   = type;
+    fnd.searchDocument.coordinate             = coordinate;
+    fnd.searchDocument.groupAttributeParent   = groupAttributeParent;
+    fnd.searchDocument.groupName              = groupName;
+
+    return fnd.search();
+  ]]></script>
+</script>

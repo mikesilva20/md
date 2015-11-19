@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.OM_MSG_WAIT_FOR_DELIVERY">
+  <guid>{0e4f4104-1894-da77-a83d-205b6c24c34c}</guid>
+  <label>OM_MSG_WAIT_FOR_DELIVERY</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "2";]]></script>
+</script>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.channelInformation">
+  <container>true</container>
+  <description>Channel Information</description>
+  <label>channelInformation</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="employeeId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.employeeId</element>
+      <label>employeeId</label>
+    </child>
+    <child name="wayOfRequest" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.wayOfRequest</element>
+      <label>wayOfRequest</label>
+    </child>
+    <child name="orderComercialChannel" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderCommercialChannel</element>
+      <label>orderComercialChannel</label>
+    </child>
+    <child name="createdBy" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.createdBy</element>
+      <label>createdBy</label>
+    </child>
+    <child name="observationDescription" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.observationDescription</element>
+      <label>observationDescription</label>
+    </child>
+    <child name="interactionId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.interactionId</element>
+      <label>interactionId</label>
+    </child>
+    <child name="partnerId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.partnerId</element>
+      <label>partnerId</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.channelInformation</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.channelInformation</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

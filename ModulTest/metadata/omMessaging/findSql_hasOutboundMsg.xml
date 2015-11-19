@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.hasOutboundMsg">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.searchDoc</input>
+  <label>hasOutboundMsg</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.outboundDoc</output>
+  <type>SQL</type>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select {+*+}
+        from OM_MSG_OUTBOUND
+        where rownum <= 1
+        and STATUS in ('1', '4')
+        and (retryDate IS NULL or retryDate <= SYSDATE )
+        {[3] and STACKID = ?}
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Msg - Inbound</label>
+        <valueType>doc_omMessaging.outboundDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.outboundDoc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.searchDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.hasOutboundMsg/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.hasOutboundMsg/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="defaultView" type="findVView">
+      <label>defaultView</label>
+    </view>
+  </viewList>
+</findSql>

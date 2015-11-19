@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.validateOrderFinalStatus">
+  <label>validateOrderFinalStatus</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ord" type="rifp">
+      <type>order_com.conceptwave.system.Order</type>
+    </parameter>
+    <parameter name="itemId" type="rifp">
+      <type>dtype_cwf.docId</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Validates if the Order has reached a Final Status
+     * @param    {Order}  ord - Order
+     * @param    {String}  itemId - Item Id
+     * @returns  {Boolean} True if a Final Status is Reached
+     * @version  1.0
+     */
+
+      var SCRIPT_NAME = 'validateOrderFinalStatus';
+      var NAME_SPACE = 'omCommon';
+      var allStatus = null;
+      var REJ = omOrder.$CONSTANTS().$ordState("REJECTED");
+      var CAN = omOrder.$CONSTANTS().$ordState("CANCELED");
+      var END = omOrder.$CONSTANTS().$ordState("COMPLETE");
+
+      // Get All the Order Status for the given Offer
+      allStatus = ord.getStatus(itemId);
+
+      // Validate If there is a final Status present
+      return ((allStatus.indexOf(REJ) != -1) || (allStatus.indexOf(CAN) != -1) || (allStatus.indexOf(END) != -1));
+  ]]></script>
+</script>

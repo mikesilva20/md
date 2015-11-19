@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEventLogDebugConfig">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{af04a6e2-ee75-4457-a76c-76be5240764f}</guid>
+  <label>OM Event Log Debug Config</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="cwDocId" type="leaf">
+      <column>CWDOCID</column>
+      <key>1</key>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="namespace" type="leaf">
+      <column>NAMESPACE</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogNameSpace</valueType>
+    </variable>
+    <variable name="mdFullName" type="leaf">
+      <column>MDFULLNAME</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogMdFullName</valueType>
+    </variable>
+    <variable name="orderId" type="leaf">
+      <column>ORDERID</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_cwf.orderId</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <column>PROCESSID</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogProcId</valueType>
+    </variable>
+    <variable name="actIndex" type="leaf">
+      <column>ACTINDEX</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_cwf_pm.actIndex</valueType>
+    </variable>
+    <variable name="revision" type="leaf">
+      <column>REVISION</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_cwf_pm.revision</valueType>
+    </variable>
+    <variable name="cmdDebug" type="leaf">
+      <column>CMDDEBUG</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogCmdDebug</valueType>
+    </variable>
+    <variable name="configWeight" type="leaf">
+      <column>CONFIGWEIGHT</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogDebugConfigWeight</valueType>
+    </variable>
+    <variable name="active" type="leaf">
+      <column>ACTIVE</column>
+      <table>OM_EVENTLOG_DEBUG_CONFIG</table>
+      <valueType>dtype_omCommon.omEventLogActive</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEventLogDebugConfig</valueType>
+      </variable>
+      <variable name="editFQN" type="leaf">
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+      <variable name="editNS" type="leaf">
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Add" type="vform">
+            <label>Add</label>
+            <root name="HorizontalLayout" type="elhlt">
+              <elementList>
+                <element name="GridLayout" type="elgrd">
+                  <colWidths>150px</colWidths>
+                  <numOfCols>2</numOfCols>
+                  <elementList>
+                    <element name="namespace" type="elslct">
+                      <columnSpan>2</columnSpan>
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/permMethod_editNamespace</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <multiselect>false</multiselect>
+                      <rowSpan>0</rowSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="mdFullName" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/permMethod_editMdFQN</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <onChangeMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uimthd_namespace</variablePath>
+                        </variablePathList>
+                      </onChangeMethod>
+                      <rowSpan>0</rowSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="orderId" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>150px</width>
+                    </element>
+                    <element name="processId" type="elfld">
+                      <onChangeMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uimthd_mdFQN</variablePath>
+                        </variablePathList>
+                      </onChangeMethod>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_processId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="revision" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_revision</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="actIndex" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>150px</width>
+                    </element>
+                    <element name="Separator" type="elsep"/>
+                    <element name="active" type="elchk">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_active</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="LayoutSpacer" type="ellsp">
+                  <width>20px</width>
+                </element>
+                <element name="GridLayout1" type="elgrd">
+                  <elementList>
+                    <element name="cmdDebug" type="eltxtArea">
+                      <height>250px</height>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_cmdDebug</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>400px</width>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="searchForm" type="vform">
+            <label>searchForm</label>
+            <root name="HorizontalLayout" type="elhlt">
+              <elementList>
+                <element name="GridLayout" type="elgrd">
+                  <colWidths>150px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <elementList>
+                    <element name="namespace" type="elslct">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="mdFullName" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="processId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_processId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="revision" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_revision</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="actIndex" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="orderId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="HorizontalLayout" type="elhlt">
+                <elementList>
+                  <element name="GridLayout" type="elgrd">
+                    <colWidths>150px</colWidths>
+                    <numOfCols>2</numOfCols>
+                    <elementList>
+                      <element name="namespace" type="elslct">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/permMethod_editNamespace</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <multiselect>false</multiselect>
+                        <rowSpan>0</rowSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="mdFullName" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/permMethod_editMdFQN</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <onChangeMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uimthd_namespace</variablePath>
+                          </variablePathList>
+                        </onChangeMethod>
+                        <rowSpan>0</rowSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="orderId" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="processId" type="elfld">
+                        <onChangeMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uimthd_mdFQN</variablePath>
+                          </variablePathList>
+                        </onChangeMethod>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_processId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="revision" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_revision</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="actIndex" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="Separator" type="elsep"/>
+                      <element name="active" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_active</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="configWeight" type="elfld">
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_configWeight</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                  <element name="LayoutSpacer" type="ellsp">
+                    <width>20px</width>
+                  </element>
+                  <element name="GridLayout1" type="elgrd">
+                    <elementList>
+                      <element name="cmdDebug" type="eltxtArea">
+                        <height>250px</height>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_cmdDebug</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>400px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var fnd = this.parent.owner;
+          var isValid = true;
+          var configWeight = 0;
+          this.mdFQN();
+          this.namespace();
+
+          if(this.model.actIndex)
+          {
+              if(this.model.revision)
+                  if(!this.model.processId || !this.model.mdFullName)
+                      isValid = false;
+              else
+                  isValid = false;
+          }
+
+          if(this.model.revision && !(this.model.processId || this.model.mdFullName))
+              isValid = false;
+
+          if(this.model.processId && !this.model.mdFullName)
+              isValid = false;
+
+          if(isValid)
+          {
+              if(this.model.namespace)
+                  configWeight += 1;
+              if(this.model.mdFullName)
+                  configWeight += 10;
+              if(this.model.orderId)
+                  configWeight += 100;
+              if(this.model.processId)
+                  configWeight += 200;
+              if(this.model.actIndex)
+                  configWeight += 1000;
+
+              this.model.configWeight = configWeight;
+
+              if(!this.model.active)
+                  this.model.active = false;
+
+              this.model.save();
+          }
+          else
+              Global.throwException("UE0116", this);
+
+          if(fnd)
+              fnd.searchAction();
+
+          return Global.STOP_UI;
+        ]]></script>
+      </method>
+      <method name="editNamespace" type="permMethod">
+        <script>return this.editNS;</script>
+      </method>
+      <method name="editMdFQN" type="permMethod">
+        <script>return this.editFQN;</script>
+      </method>
+      <method name="mdFQN" type="uimthd">
+        <script><![CDATA[
+          this.editFQN = true;
+          if(this.model.processId)
+          {
+              var proc = Process.getProcessInfo(this.model.processId);
+              if(proc)
+              {
+                  var md = MetadataElement.getElement(proc.metadata.toString());
+                  if(md)
+                  {
+                      this.model.mdFullName = md.fullName;
+                      this.namespace();
+                      this.editFQN = false;
+                  }
+              }
+          }
+        ]]></script>
+      </method>
+      <method name="namespace" type="uimthd">
+        <script><![CDATA[
+          this.editNS = true;
+          if(this.model.mdFullName && this.model.mdFullName.trim() != '')
+          {
+              this.model.mdFullName = this.model.mdFullName.trim();
+              var md = MetadataElement.getElement(this.model.mdFullName);
+              if(md)
+              {
+                  if(md.type == 7)
+                  {
+                      this.model.namespace = md.fullName;
+                      this.model.mdFullName = '';
+                  }
+                  else
+                  {
+                      this.model.namespace = md.parent.fullName;
+                      this.editNS = false;
+                  }
+              }
+          }
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

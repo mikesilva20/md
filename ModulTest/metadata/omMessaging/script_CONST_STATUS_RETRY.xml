@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_STATUS_RETRY">
+  <guid>{0be00f2d-8fdd-200f-7564-ca539c729865}</guid>
+  <label>#CONST# STATUS_RETRY</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "4";]]></script>
+</script>

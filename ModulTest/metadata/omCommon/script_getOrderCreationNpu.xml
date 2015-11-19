@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getOrderCreationNpu">
+  <label>Get Order Creation NPU</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="orderId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.orderId</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var fnd = new Finder("omCommon.omDependentsOrderFnd");
+    fnd.searchDocument.destinationOrderId = orderId;
+    var result = fnd.search();
+    return result.length > 0 ? result[0].orderCreationNpu : null;
+  ]]></script>
+</script>

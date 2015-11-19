@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_CREATE_SOM">
+  <guid>{02124d0a-e268-f4b7-5349-cb6fe70b74e0}</guid>
+  <label>#CONST# CREATE SOM</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "NCREATESOM";]]></script>
+</script>

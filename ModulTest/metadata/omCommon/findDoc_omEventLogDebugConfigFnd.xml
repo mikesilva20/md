@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omCommon.omEventLogDebugConfigFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omCommon.omEventLogDebugConfig</input>
+  <label>OM Event Log Debug Config</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omCommon.omEventLogDebugConfig</output>
+  <type>document</type>
+  <volatility>0</volatility>
+  <searchList>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_namespace</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_orderId</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_processId</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_processId</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omEventLogDebugConfig</document>
+      <mappedDocument>doc_omCommon.omEventLogDebugConfig</mappedDocument>
+      <mappedPath>doc_omCommon.omEventLogDebugConfig/leaf_revision</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omEventLogDebugConfig/leaf_revision</path>
+    </search>
+  </searchList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <valueType>doc_omCommon.omEventLogDebugConfig</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omCommon.omEventLogDebugConfig/ui_UserInterface</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omCommon.omEventLogDebugConfig/ui_UserInterface</valueType>
+      </variable>
+      <variable name="icon" type="leaf">
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+      </variable>
+      <variable name="actDeact" type="leaf">
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="omEventLogDebugConfigFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="active" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_active</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="namespace" type="elref">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="mdFullName" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="orderId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="processId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_processId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="actIndex" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_actIndex</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="revision" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_revision</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="cmdDebug" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_cmdDebug</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="configWeight" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_configWeight</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfAdd" type="elmnu">
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/usrActionMethod_add</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <icon>/cwf/MenuIconAdd.gif</icon>
+                <tooltip>Add</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.UserInterface/uivar_model</variablePath>
+                    <variablePath>mdl_com.conceptwave.system.Model/permMethod_addPerm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfDetail" type="eldel"/>
+              <override name="cwfSelect" type="eldel"/>
+              <override name="cwfUpdate" type="elmnu">
+                <menuAccel type="mAccelP"/>
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/usrActionMethod_edit</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <icon>/cwf/MenuIconEdit.gif</icon>
+                <tooltip>Edit</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.UserInterface/uivar_model</variablePath>
+                    <variablePath>mdl_com.conceptwave.system.Model/permMethod_editablePerm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="finderMenuLayout" type="elext">
+                <elementList>
+                  <element name="configActive" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/usrActionMethod_activeConfig</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <iconHeight>16px</iconHeight>
+                    <iconSpacing>10</iconSpacing>
+                    <iconVariable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/leaf_icon</variablePath>
+                      </variablePathList>
+                    </iconVariable>
+                    <iconWidth>16px</iconWidth>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/leaf_actDeact</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/permMethod_visibleActive</variablePath>
+                      </variablePathList>
+                    </visible>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="add" type="usrActionMethod">
+        <form>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/frmui_Forms/vform_Add</form>
+        <showInPopup>true</showInPopup>
+        <userInterface>doc_omCommon.omEventLogDebugConfig</userInterface>
+        <valueType>doc_omCommon.omEventLogDebugConfig</valueType>
+      </method>
+      <method name="edit" type="usrActionMethod">
+        <parameterList>
+          <parameter name="dialog" type="rifp">
+            <type>ui_com.conceptwave.system.Dialog</type>
+          </parameter>
+        </parameterList>
+        <showInPopup>true</showInPopup>
+        <script><![CDATA[
+          if(this.result.selected && this.result.selected.length == 1)
+              return new this.result.selected[0].UserInterface(this.result.selected[0],this);
+        ]]></script>
+      </method>
+      <method name="visibleActive" type="permMethod">
+        <script><![CDATA[
+          var label = 'Deactivate';
+          var active = false;
+          var deactive = false;
+          if(this.result.selected && this.result.selected.length > 0)
+          {
+              for(var i = 0; i < this.result.selected.length; i++)
+              {
+                  if(this.result.selected[i].active)
+                      active = true;
+                  else
+                      deactive = true;
+                  if(active && deactive)
+                      break;
+              }
+              if(active && deactive)
+                  label = 'De/Activate';
+              else if(deactive)
+                  label = 'Activate';
+
+              this.actDeact = label;
+              this.activeIcon();
+
+              return true;
+          }
+
+          return false;
+        ]]></script>
+      </method>
+      <method name="activeConfig" type="usrActionMethod">
+        <script><![CDATA[
+          if(this.result.selected && this.result.selected.length > 0)
+          {
+              for(var i = 0; i < this.result.selected.length; i++)
+              {
+                  this.result.selected[i].active = !this.result.selected[i].active;
+                  this.result.selected[i].save();
+              }
+              this.searchAction();
+          }
+        ]]></script>
+      </method>
+      <method name="activeIcon" type="usrActionMethod">
+        <script><![CDATA[
+          var icon = '/cwf/check.gif';
+          if(this.result.selected && this.result.selected.length > 0)
+          {
+              for(var i = 0; i < this.result.selected.length; i++)
+              {
+                  if(this.result.selected[i].active)
+                  {
+                      icon = '/cwf/uncheck.gif';
+                      break;
+                  }
+              }
+          }
+
+          this.icon = icon;
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="omEventLogDebugConfigFndView" type="findVView">
+      <inputOverlay>doc_omCommon.omEventLogDebugConfig/ui_UserInterface/frmui_Forms/vform_searchForm</inputOverlay>
+      <label>Event Log Debug Config</label>
+      <outputOverlay>findDoc_omCommon.omEventLogDebugConfigFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findDoc>

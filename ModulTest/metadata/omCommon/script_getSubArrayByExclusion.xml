@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getSubArrayByExclusion">
+  <label>getSubArrayByExclusion</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Remove from array the objects found
+     * @param    {Array}   sourceArray  - Array to subtracted
+     * @param    {Array}   excludeArray - Array to exclude
+     * @returns  {Array}   return       - Array subtracted
+     * @version  1.0
+     */
+
+    var retArray = new Array();
+
+    for (var i=0; i < sourceArray.length; i++) {
+
+        if (!(omCommon.getObjectFromArray(excludeArray, sourceArray[i]))){
+            retArray.unshift(sourceArray[i]);
+        }
+    }
+
+    return retArray;
+  ]]></script>
+</script>

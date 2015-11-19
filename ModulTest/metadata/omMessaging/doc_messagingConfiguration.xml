@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.messagingConfiguration">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{25cfe016-4860-4380-b267-733d67a23324}</guid>
+  <label>Config - Messaging Configuration</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>System document ID</label>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="automaticRegistration" type="leaf">
+      <column>AUTOMATICREGISTRATION</column>
+      <label>Automatic Registration</label>
+      <propertyElement type="elrgrp">
+        <label>Automatic Registration</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="automaticSuspension" type="leaf">
+      <column>AUTOMATICSUSPENSION</column>
+      <label>Automatic Suspenstion on Fail</label>
+      <propertyElement type="elchk">
+        <label>Automatic Suspenstion on Fail</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="transformationPrefix" type="leaf">
+      <column>TRANSFORMATIONPREFIX</column>
+      <label>Transformation Out - NS Prefix</label>
+      <propertyElement type="elfld">
+        <label>Transformation Out - NS Prefix</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwf_oe.string128</valueType>
+    </variable>
+    <variable name="inboundArchiveEnable" type="leaf">
+      <column>INBOUNDARCHIVEENABLE</column>
+      <label>Inbound Archive Enable</label>
+      <propertyElement type="elchk">
+        <label>Inbound Archive Enable</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="outboundArchiveEnable" type="leaf">
+      <column>OUTBOUNDARCHIVEENABLE</column>
+      <label>Outbound Archive Enable</label>
+      <propertyElement type="elchk">
+        <label>Outbound Archive Enable</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="fireAndProceedGP" type="leaf">
+      <column>FIREANDPROCEEDGP</column>
+      <label>Fire and Proceed GP</label>
+      <propertyElement type="elfld">
+        <label>Fire and Proceed GP</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="fireAndProceedOperation" type="leaf">
+      <column>FIREANDPROCEEDOPERATION</column>
+      <label>Fire and Proceed Operation</label>
+      <propertyElement type="elfld">
+        <label>Fire and Proceed Operation</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_omMessaging.string128</valueType>
+    </variable>
+    <variable name="validSystems" type="leaf">
+      <column>VALIDSYSTEMS</column>
+      <label>Valid Systems (CSV)</label>
+      <propertyElement type="eltxtArea">
+        <label>Valid Systems (CSV)</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwt_common.string1024</valueType>
+    </variable>
+    <variable name="inboundMaxTimeWaiting" type="leaf">
+      <column>INBOUNDMAXTIMEWAITING</column>
+      <label>Inbound - Max waiting time (min)</label>
+      <propertyElement type="elfld">
+        <label>Inbound - Max waiting time (min)</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="outboundMaxTimeWaiting" type="leaf">
+      <column>OUTBOUNDMAXTIMEWAITING</column>
+      <label>Outbound - Max waiting time (min)</label>
+      <propertyElement type="elfld">
+        <label>Outbound - Max waiting time (min)</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="maxInactivityGP" type="leaf">
+      <column>MAXINACTIVITYGP</column>
+      <label>Max inactivity time GP (s)</label>
+      <propertyElement type="elfld">
+        <label>Max inactivity time GP (s)</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="maxInactivityGPMonitor" type="leaf">
+      <column>MAXINACTIVITYGPMONITOR</column>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="logLevel" type="leaf">
+      <column>LOGLEVEL</column>
+      <label>Log Level</label>
+      <propertyElement type="elfld">
+        <label>Log Level</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="BOUsers" type="leaf">
+      <column>BOUSERS</column>
+      <label>BO Users</label>
+      <propertyElement type="eltxtArea">
+        <label>BO Users</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwt_common.string1024</valueType>
+    </variable>
+    <variable name="GR_DeliveredCode" type="leaf">
+      <column>GR_DELIVEREDCODE</column>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwf.String64</valueType>
+    </variable>
+    <variable name="GR_ProcessedCode" type="leaf">
+      <column>GR_PROCESSEDCODE</column>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwf.String64</valueType>
+    </variable>
+    <variable name="userId" type="leaf">
+      <column>USERID</column>
+      <label>User Id</label>
+      <propertyElement type="elfld">
+        <label>User Id</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_cwf.userId</valueType>
+    </variable>
+    <variable name="lastUpdateDate" type="leaf">
+      <column>LASTUPDATEDATE</column>
+      <label>Last Update Date</label>
+      <propertyElement type="eldatetime">
+        <label>Last Update Date</label>
+      </propertyElement>
+      <table>OM_MSG_CONFIGS</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwOnDocStore" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        this.lastUpdateDate = new Date();
+        this.userId = UserProfile.userId();
+
+        var dbObj = Document.readDoc("omMessaging.messagingConfiguration", "activeConfig");
+
+        var oldXML = "n/a";
+
+        if(dbObj){
+            oldXML = dbObj.toXML();
+        }
+
+
+        this.cw$super_cwOnDocStore();
+
+
+        omMessaging.cache_Loader(this.getCacheType());
+
+
+        Global.showUserMessage("A configuracao foi alterada com sucesso!");
+      ]]></script>
+    </method>
+    <method name="getCacheId" type="uimthd">
+      <script><![CDATA[return "MESSAGING_CONFIG_CACHE_ID";]]></script>
+    </method>
+    <method name="getCacheType" type="uimthd">
+      <script><![CDATA[return "MESSAGING_CONFIG_CACHE_TYPE";]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.messagingConfiguration</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="MyDefaultGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="messagingConfigurationGrid" type="elgrd">
+                    <colWidths>160,160,160,160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>640px</width>
+                    <elementList>
+                      <element name="messagingConfigurationHeader" type="elhdr">
+                        <label>Config - Messaging Configuration</label>
+                      </element>
+                      <element name="id" type="elfld">
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_id</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="userId" type="elfld">
+                        <dataLength>30</dataLength>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_userId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="lastUpdateDate" type="eldatetime">
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_lastUpdateDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="Separator" type="elsep"/>
+                      <element name="automaticRegistration" type="elrgrp">
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_automaticRegistration</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="automaticSuspension" type="elrgrp">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_automaticSuspension</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="inboundArchiveEnable" type="elrgrp">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_inboundArchiveEnable</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="outboundArchiveEnable" type="elrgrp">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_outboundArchiveEnable</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="logLevel" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_logLevel</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="transformationPrefix" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_transformationPrefix</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="fireAndProceedGP" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_fireAndProceedGP</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="fireAndProceedOperation" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_fireAndProceedOperation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="inboundMaxTimeWaiting" type="elfld">
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_inboundMaxTimeWaiting</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="outboundMaxTimeWaiting" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_outboundMaxTimeWaiting</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="maxInactivityGP" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_maxInactivityGP</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="validSystems" type="eltxtArea">
+                        <columnSpan>4</columnSpan>
+                        <height>50px</height>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.messagingConfiguration/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.messagingConfiguration/leaf_validSystems</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          this.cw$super_save();
+
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

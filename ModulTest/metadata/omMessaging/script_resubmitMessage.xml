@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.resubmitMessage">
+  <label>Resubmit Message</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="docArr" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="date" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.DateTime</type>
+    </parameter>
+    <parameter name="action" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omMessaging.fireProceedAction</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**********************************************************************************************************************************
+     *
+     *  Resubmit the Selected Items
+     *
+     * @author                  Fabio Afonso
+     * @created date      2011-08-30
+     *
+     *
+     * @param
+     *            docArr                  Array                  The Array of Documents to Resubmit
+     *            date                  Date/Time            The Fire And Proceed Action Date
+     *            action                  Action                  The Fire And Proceed Action
+     *
+     *********************************************************************************************************************************/
+
+     var NAME_SPACE            = "omMessaging";
+     var SCRIPT_NAME      = "resubmitMessage";
+     var doc                  = null;
+     var npu                  = null;
+
+     try{
+           // Resubmit the Selected Items
+           for(var i=0; i<docArr.length; i++){
+                 doc = docArr[i];
+                 if(doc.action == omMessaging.WAITING_ACTION()){
+
+                       // Resubmit the Message
+                       npu = omMessaging.aux_resubmitMessage(doc, date);
+
+                       // Move the Message to Fire And Proceed Archive
+                       omMessaging.moveMsg2Arc(doc, date, action, false, npu);
+                 }
+           }
+     }catch(e){
+           //omCommon.writeLog(3, "Messaging: Error Resubmitting the Message " + e, NAME_SPACE + "." + SCRIPT_NAME);
+           publishEvent("OM_COMMON",FIRST_ONE,null);
+     }
+  ]]></script>
+</script>

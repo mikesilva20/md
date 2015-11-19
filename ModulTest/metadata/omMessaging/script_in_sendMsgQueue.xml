@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_sendMsgQueue">
+  <guid>{01ec3d66-ea3b-4c0d-b0f5-f1a6209a998a}</guid>
+  <label>in_sendMsgQueue</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var oper                   = null;
+    var globalProc             = null;
+    var globalProcOper         = null;
+    var npu                    = null;
+    var omType                 = null;
+
+    try{
+
+          npu                  = doc.npu;
+          oper                 = omMessaging.npu_getOper(npu);
+
+          var gp = omMessaging.aux_OperToQueue(oper, doc.interfaceToInvoke, doc.operation);
+
+          globalProc           = gp[0];
+          globalProcOper       = gp[1];
+
+          if(globalProc){
+                Process.sendMessageToQueue(globalProc, globalProcOper, ds);
+                //omMessaging.debug("Message was sent to Global Process queue. " + globalProc);
+
+               //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_PROCESSED(),"SENT","Message was sent to Global Process queue. "+globalProc,doc.processId,doc.retryDate,doc.retryCounter);
+
+                doc.deliveryDate = new Date();
+                doc.status = omMessaging.CONST_STATUS_PROCESSED();
+                doc.statusCode = "SENT";
+                doc.statusText = "Message was sent to Global Process queue. " + globalProc;
+                doc.save();
+
+                omMessaging.audit_saveInfo("Success", doc);
+          }
+
+    }catch(ex){
+          omMessaging.log(ex.message, "in_sendMsgCreateOrder");
+
+          //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"EXCEPTION",ex.message,doc.processId,doc.retryDate,doc.retryCounter);
+          doc.deliveryDate = new Date();
+          doc.status = omMessaging.CONST_STATUS_ERROR();
+          doc.statusCode = "EXCEPTION";
+          doc.statusText = ex.message;
+          doc.save();
+
+          omMessaging.audit_saveInfo("Error", doc);
+    }
+  ]]></script>
+</script>

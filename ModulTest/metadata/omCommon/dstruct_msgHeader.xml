@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.msgHeader">
+  <container>true</container>
+  <label>msgHeader</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="npu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>npu</label>
+    </child>
+    <child name="correlationNpu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.correlationNpu</element>
+      <label>correlationNpu</label>
+    </child>
+    <child name="processId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.processId</element>
+      <label>processId</label>
+    </child>
+    <child name="correlationProcessId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.correlationProcessId</element>
+      <label>correlationProcessId</label>
+    </child>
+    <child name="creationTime" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.msgCreationDate</element>
+      <label>creationTime</label>
+    </child>
+    <child name="priority" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.priority</element>
+      <label>priority</label>
+    </child>
+    <child name="externalSystem" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.externalSystem</element>
+      <label>externalSystem</label>
+    </child>
+    <child name="system" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.system</element>
+      <label>system</label>
+    </child>
+    <child name="orderId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderId</element>
+      <label>orderId</label>
+    </child>
+    <child name="requestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestNumber</element>
+      <label>requestNumber</label>
+    </child>
+    <child name="sequenceNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.sequenceNumber</element>
+      <label>sequenceNumber</label>
+    </child>
+    <child name="certificationNeeded" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.certificationNeeded</element>
+      <label>certificationNeeded</label>
+    </child>
+    <child name="isOm" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.isOm</element>
+      <label>isOm</label>
+    </child>
+    <child name="serviceId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.serviceId</element>
+      <label>serviceId</label>
+    </child>
+    <child name="environment" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.environment</element>
+      <label>environment</label>
+    </child>
+    <child name="processName" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.processName</element>
+      <label>processName</label>
+    </child>
+    <child name="typeOfOM" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.typeOfOm</element>
+      <label>typeOfOM</label>
+    </child>
+    <child name="Credentials" type="dstruct">
+      <element>dstruct_omCommon.credentials</element>
+      <label>Credentials</label>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.msgHeader</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.msgHeader</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

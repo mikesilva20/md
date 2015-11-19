@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.activity">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{cc5d9750-15eb-4338-820a-9ebbf2b2f88b}</guid>
+  <label>activity</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="PROCESS_ID" type="leaf">
+      <key>2</key>
+      <label>Process ID</label>
+      <propertyElement type="elref">
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <valueType>dtype_cwf.processId</valueType>
+    </variable>
+    <variable name="ACTIVITY_INDEX" type="leaf">
+      <key>1</key>
+      <label>Activity Index</label>
+      <propertyElement type="elfld">
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <valueType>dtype_cwf_pm.actIndex</valueType>
+    </variable>
+    <variable name="MESSAGE_TYPE" type="leaf">
+      <label>MESSAGE_TYPE</label>
+      <valueType>dtype_cwf.metadataIntId</valueType>
+    </variable>
+    <variable name="START_TIME" type="leaf">
+      <label>Started</label>
+      <propertyElement type="eldate">
+        <displayFormat>MM/dd/yyyy HH:mm:ss</displayFormat>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="COMPLETION_TIME" type="leaf">
+      <label>Ended</label>
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="CWPACTIVITY_STATUS" type="leaf">
+      <label>Status</label>
+      <propertyElement type="elfld">
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <valueType>dtype_cwf_pm.CWPACTIVITY_STATUS</valueType>
+    </variable>
+    <variable name="REPEAT_COUNT" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.DocumentUserInterface</extends>
+    <label>Activity</label>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.activity</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Generated" type="vform">
+            <label>Generated</label>
+            <root name="ActivityGrid" type="elgrd">
+              <colWidths>160,160,160,160</colWidths>
+              <numOfCols>4</numOfCols>
+              <width>590px</width>
+              <elementList>
+                <element name="ActivityHeader" type="elhdr">
+                  <label>Activity</label>
+                </element>
+                <element name="PROCESS_ID" type="elref">
+                  <dataLength>9</dataLength>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_PROCESS_ID</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="ACTIVITY_INDEX" type="elfld">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_ACTIVITY_INDEX</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="MESSAGE_TYPE" type="elslct">
+                  <label>MESSAGE_TYPE</label>
+                  <sorted>true</sorted>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_MESSAGE_TYPE</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="START_TIME" type="eldate">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_START_TIME</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="COMPLETION_TIME" type="eldate">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_COMPLETION_TIME</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="CWPACTIVITY_STATUS" type="elfld">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_CWPACTIVITY_STATUS</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Result" type="vform">
+            <label>Result</label>
+            <root name="ResultGrid" type="elgrd">
+              <colWidths>150,150</colWidths>
+              <numOfCols>2</numOfCols>
+              <elementList>
+                <element name="Result_Header" type="elhdr">
+                  <label>Result</label>
+                </element>
+                <element name="START_TIME" type="eldate">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_START_TIME</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="COMPLETION_TIME" type="eldate">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.activity/leaf_COMPLETION_TIME</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="String" type="elfld">
+                  <dataLength>60</dataLength>
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <label>Activity</label>
+                  <textBoxStyle>cwfComputedField</textBoxStyle>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.activity/ui_UserInterface/action_cwLeafCalculateAction</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="cwLeafCalculateAction" type="action">
+        <system>true</system>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+        <script><![CDATA[
+          var p = this.model.owner.controllerOwner.selected[0];
+          return ProcessActivity.getActivityPathInternal(p.PROCESS_METADATYPE,
+                p.revision, this.model.ACTIVITY_INDEX)
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

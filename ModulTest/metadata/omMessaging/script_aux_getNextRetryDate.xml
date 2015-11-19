@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getNextRetryDate">
+  <guid>{0d808a44-f808-bf4b-88ef-5348e54b9643}</guid>
+  <label>aux_getNextRetryDate</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="retryNumber" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var MAX_DELAY = 600; // In minutes
+    var RETRY_DELAYS = [5, 10, 30,  60, 240, MAX_DELAY]; // In minutes
+    //var RETRY_DELAYS = [0.05, 0.05, 0.05, 0.05, MAX_DELAY]; // FOR TESTING ONLY
+
+    // VARIABLES
+
+    var ms                        = null;
+    var delay           = null;
+
+    // START
+
+
+    if (retryNumber >= RETRY_DELAYS.length)
+         delay = MAX_DELAY;
+    else
+         delay = RETRY_DELAYS[retryNumber];
+
+    delay = delay*60*1000; // convert to milliseconds
+
+    var now = new Date();
+    ms = now.getTime(); // convert to milliseconds
+
+    var newDate = new Date(ms + delay);
+
+
+    return newDate;
+  ]]></script>
+</script>

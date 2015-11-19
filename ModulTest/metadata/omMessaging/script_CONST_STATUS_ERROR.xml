@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_STATUS_ERROR">
+  <guid>{00dac8bd-a951-da71-2688-7725282243a8}</guid>
+  <label>#CONST# STATUS_ERROR</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "3";]]></script>
+</script>

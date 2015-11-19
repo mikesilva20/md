@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.inboundDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{04bb55ff-2bdd-c89d-5fb0-a866cb2d311a}</guid>
+  <label>Msg - Inbound</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="npu" type="leaf">
+      <column>NPU</column>
+      <key>1</key>
+      <label>Npu</label>
+      <propertyElement type="elfld">
+        <label>Npu</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <column>SYSTEM</column>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="correlationNpu" type="leaf">
+      <column>CORRELATIONNPU</column>
+      <label>correlationNpu</label>
+      <propertyElement type="elfld">
+        <label>correlationNpu</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="status" type="leaf">
+      <column>STATUS</column>
+      <label>Status</label>
+      <propertyElement type="elslct">
+        <label>Status</label>
+        <sorted>false</sorted>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.status</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <column>PROCESSID</column>
+      <label>Process Id</label>
+      <propertyElement type="elfld">
+        <label>Process Id</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.processId</valueType>
+    </variable>
+    <variable name="businessId" type="leaf">
+      <column>BUSINESSID</column>
+      <label>Business Id</label>
+      <propertyElement type="elfld">
+        <label>Business Id</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.businessId</valueType>
+    </variable>
+    <variable name="creationDate" type="leaf">
+      <column>CREATIONDATE</column>
+      <label>creationDate</label>
+      <propertyElement type="eldatetime">
+        <label>creationDate</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="deliveryDate" type="leaf">
+      <column>DELIVERYDATE</column>
+      <label>deliveryDate</label>
+      <propertyElement type="eldatetime">
+        <label>deliveryDate</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="retryDate" type="leaf">
+      <column>RETRYDATE</column>
+      <label>retryDate</label>
+      <propertyElement type="eldatetime">
+        <label>retryDate</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="interfaceToInvoke" type="leaf">
+      <column>INTERFACETOINVOKE</column>
+      <label>interfaceToInvoke</label>
+      <propertyElement type="elfld">
+        <label>interfaceToInvoke</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.interfaceToInvoke</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="statusCode" type="leaf">
+      <column>STATUSCODE</column>
+      <label>Status Code</label>
+      <propertyElement type="elfld">
+        <label>Status Code</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.statusCode</valueType>
+    </variable>
+    <variable name="statusText" type="leaf">
+      <column>STATUSTEXT</column>
+      <label>Status Text</label>
+      <propertyElement type="elfld">
+        <label>Status Text</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.statusText</valueType>
+    </variable>
+    <variable name="retryCounter" type="leaf">
+      <column>RETRYCOUNTER</column>
+      <label>retryCounter</label>
+      <propertyElement type="elfld">
+        <label>retryCounter</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+    <variable name="queuePosition" type="leaf">
+      <column>QUEUEPOSITION</column>
+      <label>Queue Position</label>
+      <propertyElement type="elfld">
+        <label>Queue Position</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+    <variable name="dataType" type="leaf">
+      <column>DATATYPE</column>
+      <label>dataType</label>
+      <propertyElement type="elfld">
+        <label>dataType</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_cwf.metadataId</valueType>
+    </variable>
+    <variable name="receivedDataType" type="leaf">
+      <column>RECEIVEDDATATYPE</column>
+      <label>receivedDataType</label>
+      <propertyElement type="elfld">
+        <label>receivedDataType</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_cwf.metadataId</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <column>STACKID</column>
+      <label>Stack Id</label>
+      <propertyElement type="elfld">
+        <label>Stack Id</label>
+      </propertyElement>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+    <variable name="processDate" type="leaf">
+      <column>PROCESSDATE</column>
+      <label>DateTime</label>
+      <table>OM_MSG_INBOUND</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="payload" type="leaf">
+      <dontMap>true</dontMap>
+      <label>payload</label>
+      <propertyElement type="elfld">
+        <label>payload</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="receivedData" type="leaf">
+      <dontMap>true</dontMap>
+      <label>receivedData</label>
+      <propertyElement type="elfld">
+        <label>receivedData</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafInitAction$retryCounter" type="laction">
+      <path>doc_omMessaging.inboundDoc/leaf_retryCounter</path>
+      <type>initializer</type>
+      <script>this.retryCounter = 0;</script>
+    </method>
+    <method name="cwOnDocStore" type="action">
+      <system>true</system>
+      <script>omMessaging.aux_updateQueuePosition(this);</script>
+    </method>
+    <method name="cwfSaveView" type="permMethod">
+      <script><![CDATA[
+        //this.cw$super_cwfSaveView($psCondition);
+        return false;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.inboundDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="DetailsGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="inboundDocHeader" type="elhdr">
+                    <cellAlignment></cellAlignment>
+                    <label>Details</label>
+                    <showValidation>true</showValidation>
+                    <style>CwFOT</style>
+                  </element>
+                  <element name="DetailsGrid" type="elgrd">
+                    <colWidths>195px,195px,195px,195px</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>780px</width>
+                    <elementList>
+                      <element name="npu" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <optional type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </optional>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_npu</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="correlationNpu" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_correlationNpu</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="businessId" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_businessId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="processId" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_processId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="creationDate" type="eldate">
+                        <columnSpan>1</columnSpan>
+                        <displayFormat>dd MMM yyyy HH:mm:ss</displayFormat>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <hint>dd MMM yyyy HH:mm:ss</hint>
+                        <showPickerIcon>false</showPickerIcon>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_creationDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="deliveryDate" type="eldate">
+                        <columnSpan>1</columnSpan>
+                        <displayFormat>dd MMM yyyy HH:mm:ss</displayFormat>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <hint>dd MMM yyyy HH:mm:ss</hint>
+                        <showPickerIcon>false</showPickerIcon>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_deliveryDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="interfaceToInvoke" type="eltxtArea">
+                        <columnSpan>4</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <height>30px</height>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_interfaceToInvoke</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="status" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_status</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="statusCode" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_statusCode</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="statusText" type="eltxtArea">
+                        <columnSpan>4</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <height>50px</height>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_statusText</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                      </element>
+                      <element name="system" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <optional type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </optional>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_system</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="queuePosition" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_queuePosition</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="retryCounter" type="elfld">
+                        <cellAlignment>right</cellAlignment>
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <textAlign>right</textAlign>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_retryCounter</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="retryDate" type="eldate">
+                        <columnSpan>1</columnSpan>
+                        <displayFormat>dd MMM yyyy HH:mm:ss</displayFormat>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <hint>dd MMM yyyy HH:mm:ss</hint>
+                        <showPickerIcon>false</showPickerIcon>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.inboundDoc/leaf_retryDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="Received_Data" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/usrActionMethod_cwOnFormFieldAfter_DetailsReceived_Data</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <columnSpan>1</columnSpan>
+                        <label>Received Data</label>
+                        <startRow>true</startRow>
+                        <width>130px</width>
+                      </element>
+                      <element name="Send_Data" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.inboundDoc/ui_UserInterface/usrActionMethod_cwOnFormFieldAfter_DetailsSend_Data</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <columnSpan>1</columnSpan>
+                        <label>Send Data</label>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</base>
+            <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="cwOnFormFieldAfter_DetailsReceived_Data" type="usrActionMethod">
+        <parameterList>
+          <parameter name="selectList" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+          <parameter name="selectData" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+        </parameterList>
+        <script><![CDATA[
+          if(!this.model.payload){
+                omMessaging.aux_loadMsgData(this.model);
+          }
+
+          if(this.model.payload)
+                Global.showModelessDialog(this.model.payload,700,560,'text/xml');
+        ]]></script>
+      </method>
+      <method name="cwOnFormFieldAfter_DetailsSend_Data" type="usrActionMethod">
+        <parameterList>
+          <parameter name="selectList" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+          <parameter name="selectData" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+        </parameterList>
+        <script><![CDATA[
+          if(!this.model.receivedData){
+                omMessaging.aux_loadMsgData(this.model);
+          }
+
+
+          if(this.model.receivedData)
+                Global.showModelessDialog(this.model.receivedData,700,560,'text/xml');
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findScript name="omCommon.getNamespaces">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omCommon.namespace</input>
+  <label>Get Namespaces</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omCommon.namespace</output>
+  <type>script</type>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        var namespaces = MetadataElement.getMetadataItems(7);
+        var res = new Array();
+
+        for(var i = 0; i < namespaces.length; i++)
+        {
+            var doc = new Document('omCommon.namespace');
+            doc.namespace = namespaces[i].fullName;
+            doc.label = namespaces[i].label;
+            res.push(doc);
+        }
+
+        return res;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <valueType>doc_omCommon.namespace</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omCommon.namespace/ui_UserInterface</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omCommon.namespace/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="getNamespacesResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omCommon.getNamespaces/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="namespace" type="elslct">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.getNamespaces/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.namespace/leaf_namespace</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="label" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.getNamespaces/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.namespace/leaf_label</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omCommon.getNamespaces/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omCommon.getNamespaces/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="getNamespacesView" type="findVView">
+      <outputOverlay>findScript_omCommon.getNamespaces/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+    </view>
+  </viewList>
+</findScript>

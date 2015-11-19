@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEnvironmentSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{e0b5e312-fe64-4ab2-98ae-2c3ae652f55e}</guid>
+  <label>Order Environment Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="itemCode" type="leaf">
+      <valueType>dtype_omCommon.itemCode</valueType>
+    </variable>
+    <variable name="active" type="leaf">
+      <valueType>dtype_omCommon.active</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEnvironmentSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

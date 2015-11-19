@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_saveMsg">
+  <guid>{0f57cf06-fcdd-6330-ca1b-7b92231eafcc}</guid>
+  <label>out_saveMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="header" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="system" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="endPoint" type="rifp">
+      <type>dtype_cwt_common.URL</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = new Document("omMessaging:outboundDoc");
+
+    var oper                         = omMessaging.npu_getOper(header.npu);
+    var confSystem                   = omMessaging.aux_getSystemConfig(oper);
+
+    if(confSystem)
+          system = confSystem;
+
+
+    doc.npu                        = header.npu;
+    doc.system                     = omMessaging.aux_isSystemValid(system);
+    doc.correlationNpu             = header.correlationNpu;
+    doc.processId                  = header.processId;
+    doc.endpoint                   = endPoint;
+
+    if(doc.processId != null){
+        omMessaging.route_addProcId(doc.npu, doc.processId);
+    }
+
+    var reqNumber = null;
+
+    // Try get businessId from message
+    if(msg.has("body") && !omMessaging.aux_isCancelation(msg)){
+        //#-> alteraçao devido a que a mensagem pode conter body mas este nao vir no formato anterior pretendido
+        reqNumber = msg.header.requestNumber;
+        doc.businessId = reqNumber;
+    }
+
+    else if(header.has("businessId") && doc.businessId ==null)
+          doc.businessId                   = header.businessId;
+    else if(header.has("processName") && doc.businessId== null)
+          doc.businessId                   = header.processName;
+
+
+    // Try get businessId from process
+    if(doc.businessId ==null && doc.processId!=null){
+        var procInfo = Process.getProcessInfo(doc.processId);
+
+          if(procInfo){
+                var ord = procInfo.processOrder;
+                if(ord && ord.isChild('orderHeader') && ord.orderHeader.isChild('requestNumber'))
+                      doc.businessId = ord.orderHeader.requestNumber;
+          }
+    }
+
+
+    doc.certificationNeeded = header.certificationNeeded;
+    doc.status                   = omMessaging.CONST_STATUS_PUBLISHED();
+    doc.retryCounter             = 0;
+    doc.interfaceToInvoke        = interfaceToInvoke;
+    doc.operation                = operation;
+    doc.creationDate             = new Date();
+
+    doc.stackId                  = omMessaging.out_getStackId(interfaceToInvoke, operation, doc.system);
+
+    doc.payload                  = msg.toXML();
+    doc.dataType                 = msg.metadataType;
+
+    doc.save();
+    omMessaging.aux_saveMsgData(doc);
+  ]]></script>
+</script>

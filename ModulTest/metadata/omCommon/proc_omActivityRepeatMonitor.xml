@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omCommon.omActivityRepeatMonitor">
+  <activity name="start" type="seqActivity">
+    <label>start</label>
+    <x>7.0</x>
+    <y>86.0</y>
+    <childList>
+      <child name="monitorProcessActivities" type="opActivity">
+        <element>iface_omCommon.omGpActivitiesInterface/oper_monitorProcessActivities</element>
+        <label>monitorProcessActivities</label>
+        <x>96.0</x>
+        <y>86.0</y>
+        <methodList>
+          <method name="cwOnProcActAfter" type="action">
+            <category>script</category>
+            <system>true</system>
+            <script><![CDATA[
+              process.processDocument.processId = document.processId;
+              process.processDocument.maxRepeatCount = document.maxRepeatCount;
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="restartProcessActivities" type="scriptActivity">
+        <label>restartProcessActivities</label>
+        <x>280.0</x>
+        <y>86.0</y>
+        <methodList>
+          <method name="cwOnProcActBefore" type="action">
+            <category>before</category>
+            <system>true</system>
+            <script><![CDATA[
+              var processId = process.processDocument.processId;
+              var maxRepeatCount = process.processDocument.maxRepeatCount;
+
+              omCommon.restartCwProcessActivitiesCounter(processId,maxRepeatCount);
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="resumeProcess" type="scriptActivity">
+        <label>Resume Process</label>
+        <schedule type="sched">
+          <duration type="dur">
+            <methodList>
+              <method name="cwOnDuration" type="action">
+                <system>true</system>
+                <script>return 5;</script>
+              </method>
+            </methodList>
+          </duration>
+        </schedule>
+        <x>320.0</x>
+        <y>179.0</y>
+        <methodList>
+          <method name="cwOnProcActBefore" type="action">
+            <category>before</category>
+            <system>true</system>
+            <script><![CDATA[
+              var processId = process.processDocument.processId;
+              Process.resumeAllProcesses(processId);
+              Process.sendMessageToProcess(processId, null, "omCommon.omProcessAcitivitiesInterface/resumeProcess");
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="loop" type="repeatActivity">
+        <element>proc_omCommon.omActivityRepeatMonitor/seqActivity_start</element>
+        <label>loop</label>
+        <x>13.0</x>
+        <y>188.0</y>
+      </child>
+    </childList>
+  </activity>
+  <curRevision>true</curRevision>
+  <document>doc_omCommon.omGpActivityProcDoc</document>
+  <interface>iface_omCommon.omGpActivitiesInterface</interface>
+  <label>omActivityRepeatMonitor</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <revision>9</revision>
+  <type>Global</type>
+</process>

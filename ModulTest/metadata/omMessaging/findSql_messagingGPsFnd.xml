@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.messagingGPsFnd">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>GPs Messaging</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.GenericDBDoc</output>
+  <type>SQL</type>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select g.process_id, g.status, g.pe_id, t.typename, g.starttime, g.changedstatustime
+        from cwglobalprocess g, cwmdtypes t
+        where g.process_metadatype = t.typeid
+        and t.typename like 'omMessaging%'
+        order by t.typename
+      ]]></script>
+    </method>
+    <method name="cwOnFinderCompleteSearch" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        var list = this.list;
+
+
+        for(var i=0; i<list.length; i++){
+
+            var row = list[i];
+
+            row.value1 = Global.getCodeDescription("cwf_pm.STATUS", row.value1);
+            row.value3 = Global.getMDLabel(row.value3);
+
+
+            var pd = Process.getProcessDocument(row.id);
+
+            if(pd != null && pd.isChild("stackId")){
+
+                row.value6 = pd.stackId;
+            }else{
+              row.value6 = "n.a";
+            }
+
+
+            if(pd != null && pd.isChild("inBackupMode")){
+                row.value7 = pd.inBackupMode;
+            }else{
+             row.value7 = "n.a";
+            }
+
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="messagingGPsFndResultTable1" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <showDetailColumn>false</showDetailColumn>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="id" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_id</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>120px</width>
+                      </element>
+                      <element name="status" type="elfld">
+                        <cellAlignment>center,center</cellAlignment>
+                        <label>Status</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="peId" type="elfld">
+                        <label>PE Id</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>50px</width>
+                      </element>
+                      <element name="metadatype" type="elfld">
+                        <label>Metadatype</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                      <element name="startTime" type="elfld">
+                        <label>Start Time</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="updateDate" type="elfld">
+                        <label>Update Date</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value5</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <label>Stack Id</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value6</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="InBackupMode" type="elfld">
+                        <label>In Backup mode?</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value7</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="OnSelChanged" type="action">
+        <script><![CDATA[
+          if(this.parent != null){
+
+              if(this.model.selected){
+                  var rows = this.model.selected;
+                  this.parent.onGPChange(rows);
+              }else{
+                  this.parent.onGPChange(null);
+              }
+
+          }
+
+
+
+          this.cw$super_OnSelChanged();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="messagingGPsFndView" type="findVView">
+      <outputOverlay>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findSql>

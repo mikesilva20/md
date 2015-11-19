@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.OM_MSG_SEND_GENERIC_REPLY_TO_PROC">
+  <label>OM_MSG_SEND_GENERIC_REPLY_TO_PROC</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "7";]]></script>
+</script>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_saveMsg">
+  <guid>{041101f1-ebe7-2055-6783-ccdd993c1100}</guid>
+  <label>in_saveMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="header" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="ack" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="businessId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="status" type="rifp">
+      <type>dtype_omMessaging.status</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = new Document("omMessaging:inboundDoc");
+
+
+    doc.npu         = header.npu;
+    var operation   = omMessaging.npu_getOper(header.npu);
+    var system      = omMessaging.npu_getSystem(header.npu);
+
+    var confSystem = omMessaging.aux_getSystemConfig(operation);
+
+    if (confSystem) system = confSystem;
+
+    doc.system               = omMessaging.aux_isSystemValid(system);
+    doc.correlationNpu       = header.correlationNpu;
+    doc.processId            = processId;
+    doc.businessId           = businessId;
+    doc.status               = status? status : omMessaging.CONST_STATUS_PUBLISHED();
+    doc.creationDate         = new Date();
+    doc.interfaceToInvoke    = interfaceToInvoke;
+    doc.operation            = operationToInvoke;
+
+
+    doc.stackId              = omMessaging.in_getStackId(doc.interfaceToInvoke, doc.operation, doc.system);
+
+
+    doc.payload = msg.toXML();
+    doc.dataType = msg.metadataType;
+
+    if (ack) {
+        doc.receivedData     = ack.toXML();
+        doc.receivedDataType = ack.metadataType;
+    }
+    doc.save();
+
+    omMessaging.aux_saveMsgData(doc);
+
+    return doc;
+  ]]></script>
+</script>

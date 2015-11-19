@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_sendMsgProcess">
+  <label>in_sendMsgProcess</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var npu                   = null;
+    var correlationNpu      = null;
+    var processId            = null;
+    var corrProcessId      = null;
+    var oper                  = null;
+
+    try{
+
+          npu                  = doc.npu;
+          correlationNpu       = doc.correlationNpu;
+          processId            = doc.processId;
+          oper                 = doc.interfaceToInvoke + '/' + doc.operation;
+
+          if(ds.has("headerRequest") && ds.headerRequest.has("correlationProcessId")){
+                corrProcessId = ds.headerRequest.correlationProcessId;
+          }
+
+    if(publishEvent("OM_COMMON",FIRST_ONE,null)){//omCommon.isEmpty(processId)){
+                processId = omMessaging.route_getProcId(correlationNpu);
+          }
+
+          if(processId || corrProcessId){
+
+                if(corrProcessId)
+                      processId = corrProcessId;
+
+                var confPart = omMessaging.in_getPartOperation(npu, correlationNpu);
+                var operation = oper;
+
+                if(confPart)
+                      operation = confPart.operation;
+
+                Process.sendMessageToProcess(processId, null, operation, ds);
+                //omMessaging.debug("Message was sent to Process, procID: " + processId);
+
+                //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_PROCESSED(),"SENT","Message was sent to Process, procID: " + processId,processId,doc.retryDate,doc.retryCounter);
+                doc.deliveryDate       = new Date();
+                doc.status                  = omMessaging.CONST_STATUS_PROCESSED();
+                doc.statusCode            = "SENT";
+                doc.statusText            = "Message was sent to Process, procID: " + processId;
+                doc.processId            = processId;
+                doc.save();
+
+                omMessaging.audit_saveInfo("Success", doc);
+
+          }else{
+
+                if(doc.retryCounter >= 1){
+                      //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"FAILED","Process Id not found for Correlation NPU:" + correlationNpu,processId,doc.retryDate,doc.retryCounter);
+
+                      doc.status                  = omMessaging.CONST_STATUS_ERROR();
+                      doc.statusCode            = "FAILED";
+                      doc.statusText            = "Process Id not found for Correlation NPU:" + correlationNpu ;
+                      doc.deliveryDate      = new Date();
+                      doc.save();
+
+                      omMessaging.audit_saveInfo("Error", doc);
+
+                }else{
+
+                      omMessaging.audit_saveInfo("Retry", doc);
+
+                      //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"RETRY","TRY AGAIN - Process Id not found for Correlation NPU:" + correlationNpu,doc.processId,new Date(new Date().getTime() + (1*60*1000)),doc.retryCounter++);
+                      doc.statusCode            = "RETRY";
+                      doc.statusText            = "TRY AGAIN - Process Id not found for Correlation NPU:" + correlationNpu ;
+                      doc.status                  = omMessaging.CONST_STATUS_RETRY();
+                      var now                   = new Date();
+                      doc.retryDate             = new Date(new Date().getTime() + (1*60*1000)); // + 1 Minuto
+                      doc.retryCounter          += 1;
+                      doc.save();
+                }
+          }
+
+    }catch(ex){
+
+          omMessaging.log("ERROR sending msg to Process: "  +  processId + "\n" + ex.message, "in_sendMsgFunctional");
+
+          //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"EXCEPTION",ex.message,processId,doc.retryDate,doc.retryCounter);
+          doc.status                  = omMessaging.CONST_STATUS_ERROR();
+          doc.statusCode            = "EXCEPTION";
+          doc.statusText            = ex.message;
+          doc.deliveryDate      = new Date();
+          doc.processId            = processId;
+
+          doc.save();
+
+          omMessaging.audit_saveInfo("Error", doc);
+    }
+  ]]></script>
+</script>

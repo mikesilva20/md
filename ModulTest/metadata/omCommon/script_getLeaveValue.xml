@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getLeaveValue">
+  <label>getLeaveValue</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="obj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="leaveName" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get value from object given a leave name
+     * @param    {Object}   obj       - Object that contains the leaves
+     * @param    {Object}   leaveName - Leave name
+     * @returns  {Object}   return    - Leave value if is found
+     * @version  1.0
+     */
+
+    if (obj instanceof Document) {
+        if (obj.isChild(leaveName))
+            return obj[leaveName];
+    }
+    else if (obj instanceof DataStructure) {
+        if (obj.has(leaveName))
+            return obj[leaveName];
+    }
+    else if (obj instanceof Array) {
+        return omCommon.getObjectFrom2dArray(obj, 0, leaveName, 1);
+    }
+
+    return null;
+  ]]></script>
+</script>

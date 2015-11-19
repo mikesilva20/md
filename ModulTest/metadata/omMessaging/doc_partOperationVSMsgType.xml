@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.partOperationVSMsgType">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{6c5dba9e-1be9-4e86-ad80-07696c0b6ff5}</guid>
+  <label>Config - Participant Operation VS Msg Type</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>System document ID</label>
+      <table>OM_MSG_PART_OPER_VS_MSG_TYPE</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="operationIn" type="leaf">
+      <column>NPUOPERATIONIN</column>
+      <label>Operation In</label>
+      <propertyElement type="elfld">
+        <label>Operation In</label>
+      </propertyElement>
+      <table>OM_MSG_PART_OPER_VS_MSG_TYPE</table>
+      <valueType>dtype_omMessaging.string10</valueType>
+    </variable>
+    <variable name="operationOut" type="leaf">
+      <column>NPUOPERATIONOUT</column>
+      <label>Operation Out</label>
+      <propertyElement type="elfld">
+        <label>Operation Out</label>
+      </propertyElement>
+      <table>OM_MSG_PART_OPER_VS_MSG_TYPE</table>
+      <valueType>dtype_omMessaging.string10</valueType>
+    </variable>
+    <variable name="participant" type="leaf">
+      <column>PARTICIPANT</column>
+      <label>Reference - Inbound Participant</label>
+      <table>OM_MSG_PART_OPER_VS_MSG_TYPE</table>
+      <valueType>dtype_omMessaging.inboundPartREF</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <label>String 128</label>
+      <table>OM_MSG_PART_OPER_VS_MSG_TYPE</table>
+      <valueType>dtype_omMessaging.string128</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.partOperationVSMsgType</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="MyDefault" type="vform">
+            <label>MyDefault</label>
+            <root name="MyDefaultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="partOperationVSMsgTypeGrid" type="elgrd">
+                  <colWidths>160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>160px</width>
+                  <elementList>
+                    <element name="partOperationVSMsgTypeHeader" type="elhdr">
+                      <label>Config - Participant Operation VS Msg Type</label>
+                    </element>
+                    <element name="operationIn" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operationIn</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="operationOut" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operationOut</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="participant" type="elslct">
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_participant</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>300px</width>
+                    </element>
+                    <element name="operation" type="elfld">
+                      <label>Participant Operation</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operation</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>200px</width>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          this.cw$super_save();
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

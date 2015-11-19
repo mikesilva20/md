@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.removeDuplicates">
+  <label>Remove Duplicates</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="array" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Remove duplicate values
+     * @param    {[Array]}  array - Array
+     * @returns  {[Array]} Returns an array with out the duplicated values
+     * @version  1.0
+     */
+
+
+    var newArray = [];
+    var i,j;
+
+    if (array)
+    {
+        j=0;
+        for (i=0; i < array.length; i++)
+        {
+            if (!omCommon.isInArray(array[i], newArray))
+                newArray[j++] = array[i];
+        }
+    }
+
+    return newArray;
+  ]]></script>
+</script>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_updateMsgOutStatus">
+  <label>aux_updateMsgOutStatus</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="status" type="rifp">
+      <type>dstruct_omCommon.msgStatus</type>
+    </parameter>
+    <parameter name="statusCode" type="rifp">
+      <type>dtype_omCommon.msgStatusCode</type>
+    </parameter>
+    <parameter name="statusText" type="rifp">
+      <type>dtype_omCommon.msgStatusDescription</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <type>dtype_omCommon.processId</type>
+    </parameter>
+    <parameter name="retryDate" type="rifp"/>
+    <parameter name="retryCount" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    if (processId)
+        processId = Number(processId);
+    if (retryCount)
+        retryCount = Number(retryCount);
+
+    var params =  new Array(npu,status,statusCode,statusText,processId,retryDate,retryCount);
+
+    Global.runDBStoredProcedure('OM_MSG','call OMMSG_UPDATE_MSGOUT_STATUS(?,?,?,?,?,?,?)',params,null,true,null,null,'I-I-I-I-I-I-I');
+  ]]></script>
+</script>

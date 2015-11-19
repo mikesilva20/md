@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.msgAck">
+  <container>true</container>
+  <label>msgAck</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="header" type="dstruct">
+      <element>dstruct_omCommon.msgAckHeader</element>
+      <label>header</label>
+    </child>
+    <child name="status" type="dstruct">
+      <element>dstruct_omCommon.msgStatus</element>
+      <label>status</label>
+    </child>
+    <child name="body" type="dstruct">
+      <container>true</container>
+      <label>body</label>
+      <childList>
+        <child name="message" type="dstruct">
+          <element>dstruct_omCommon.genericBody</element>
+          <label>message</label>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.msgAck</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.msgAck</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_msgGet_ReqNumber">
+  <label>aux_msgGet_ReqNumber</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="input" type="rifp">
+      <type>dstruct_com.conceptwave.system.DataStructure</type>
+    </parameter>
+    <parameter name="header" type="rifp">
+      <type>dstruct_com.conceptwave.system.DataStructure</type>
+    </parameter>
+    <parameter name="procId" type="rifp">
+      <type>dtype_omMessaging.processId</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(input.has("body") && input.body.has("message") && input.body.message.has("order")){
+       var reqNumber = input.body.message.order[0].orderInfo.orderHeader.requestNumber;
+
+        if(reqNumber)
+            return reqNumber;
+    }
+
+    if (procId != null) {
+        var procInfo = Process.getProcessInfo(procId);
+
+        if (procInfo &&  procInfo.processOrder && procInfo.processOrder.isChild("requestNumber") && procInfo.processOrder.requestNumber)
+                return procInfo.processOrder.requestNumber;
+    }
+
+
+    if (header.has("requestNumber")) {
+        return header.requestNumber;
+    }
+
+    if (header.has("businessId")) {
+        return header.businessId;
+    }
+
+    if(header.has("processName")){
+        return header.processName;
+    }
+
+    return null;
+  ]]></script>
+</script>

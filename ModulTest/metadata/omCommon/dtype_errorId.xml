@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.errorId">
+  <extends>dtype_cwf.cwDocId</extends>
+  <label>Error Id</label>
+  <metaVersion>4</metaVersion>
+</dataType>

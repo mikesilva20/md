@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_changeByNpu">
+  <guid>{09624988-9917-40e9-8f64-53d4931cc208}</guid>
+  <label>route_changeByNpu</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="sourceProcId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="targetProcId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="saveNpu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(npu == null || sourceProcId == null)
+        putProcessInErrorOnPurpose();
+
+    var routeFnd = new Finder("omMessaging:routesFinder");
+    routeFnd.searchDocument.npu = npu;
+    routeFnd.searchDocument.processId = sourceProcId;
+
+    var routes = routeFnd.search();
+
+    if(routes.length == 0)
+        return false;
+
+    for(var i = 0; i < routes.length; i++)
+    {
+        routes[i].processId = targetProcId;
+        routes[i].save();
+
+        if(saveNpu)
+        {
+            var procDoc = Process.getProcessDocument(targetProcId);
+            if(procDoc.isChild('cadredeCreateOrderNPU'))
+                procDoc.cadredeCreateOrderNPU = routes[i].npu;
+        }
+    }
+    return true;
+  ]]></script>
+</script>

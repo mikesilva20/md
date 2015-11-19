@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.attribute">
+  <container>true</container>
+  <description>Attribute</description>
+  <label>attribute</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="name" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.name</element>
+      <label>name</label>
+      <mandatory>true</mandatory>
+    </child>
+    <child name="value" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.value</element>
+      <label>value</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="value" type="rifp">
+          <type>dtype_omCommon.value</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if (!name && !value) return this;
+
+        var retObj = null;
+        if (name) retObj = this.checkName(name);
+        if (retObj && value) retObj = this.checkValue(value);
+
+        return retObj;
+      ]]></script>
+    </method>
+    <method name="checkName" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if (this.name == name)
+              return this;
+        else
+              return null;
+      ]]></script>
+    </method>
+    <method name="checkValue" type="action">
+      <parameterList>
+        <parameter name="value" type="rifp">
+          <type>dtype_omCommon.value</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if (this.value == value)
+              return this;
+        else
+              return null;
+      ]]></script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+    <method name="setValue" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="value" type="rifp">
+          <type>dtype_omCommon.value</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetAttributeValue(this, name, value );</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.attribute</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.attribute</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

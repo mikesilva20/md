@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getArrayObjectFromList">
+  <label>getArrayObjectFromList</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="dol" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="fieldName" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="fieldValue" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Create an array from a DataObjectList
+     * @param    {DataObjectList}  dol - Data Object List
+     * @param    {String}  fieldName - Field Name
+     * @param    {String}  fieldValue - Field Value
+     * @returns  {[Array]} Returns an array
+     * @version  1.0
+     */
+
+    var retArray = [];
+    var auxFieldValue;
+
+    // Test all condicions to procceed
+    if (!dol || !fieldName || !fieldValue)
+        return retArray;
+
+    for (var i = 0; d < dol[i].length; i++)
+    {
+        auxFieldValue = dol[i][fieldName];
+        if (auxFieldValue == fieldValue)
+            retArray.push(dol[i]);
+    }
+
+    return retArray;
+  ]]></script>
+</script>

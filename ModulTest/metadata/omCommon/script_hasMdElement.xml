@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.hasMdElement">
+  <label>Has Element</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="metadataElement" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Check if exists Metadata Element
+     * @param    {String}  metadataElement - Metadata Element
+     * @returns  {Boolean} returns a boolean
+     * @version  1.0
+     */
+
+    if(metadataElement)
+        return (MetadataElement.getElement(metadataElement))? true : false;
+
+    return false;
+  ]]></script>
+</script>

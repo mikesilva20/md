@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_sendException">
+  <label>aux_sendException</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msgDoc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="errorCode" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="errorDesc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="errorCodeNative" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="systemCode" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    // :: CONSTANTS
+    //#-> Colocar parametrizavel
+    //var EXCEPTION_NAME      = "omExceptionHandler:errorMsgException";
+    var EXCEPTION_NAME = publishEvent("OM_ERROR_HANDLER",FIRST_ONE,null);
+    var SCRIPT_NAME            = "aux_sendException";
+
+    // :: VARIABLES
+
+    var npu                        = msgDoc.npu;
+    var corrNpu         = msgDoc.correlationNpu;
+    var procId                  = msgDoc.processId;
+
+    var system = systemCode;
+
+    // :: START PROCESSING
+
+    if (procId) {
+        try {
+            if (omMessaging.error_addProcId(procId, npu, corrNpu, system, errorCode, errorDesc, errorCodeNative)) {
+                Process.sendExceptionToProcess(procId, EXCEPTION_NAME);
+                omMessaging.debug("Sent exception to process: " + procId);
+            }
+        } catch(e) {
+            omMessaging.log("EXCEPTION - Error sending exception to process [procId:"+procId+", NPU:" + npu  +"] - " + e.message, SCRIPT_NAME);
+        }
+    }else{
+        omMessaging.log("Can't send exception to process, processID is null. NPU:" + npu, SCRIPT_NAME);
+    }
+  ]]></script>
+</script>

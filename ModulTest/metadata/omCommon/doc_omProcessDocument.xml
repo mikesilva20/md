@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omProcessDocument">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{532a3fbd-7c21-4308-96e1-b6510d8c9c6c}</guid>
+  <label>OM Process Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="notificationType" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="catalogItemCode" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="catalogItemId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="accountId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="phaseId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="rejectionId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="errorId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="statusId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="pendencyId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="noteId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="sentToOe" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="sentToOeNotifType" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="autoResubmit" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="retryCounter" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="lastCompPoint" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="compPoint" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="retryDelay" type="leaf">
+      <valueType>dtype_cwf.String64</valueType>
+    </variable>
+    <variable name="errorEventRuleAction" type="leaf">
+      <valueType>dtype_omCommon.errorEventRuleAction</valueType>
+    </variable>
+    <variable name="addressId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="milestoneId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="contactId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="contractId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="customerId" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <valueType>dtype_omCommon.system</valueType>
+    </variable>
+    <variable name="cancelProcAction" type="leaf">
+      <valueType>dtype_omCommon.omCancelProcAction</valueType>
+    </variable>
+    <variable name="requestType" type="leaf">
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omProcessDocument</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

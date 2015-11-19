@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.getCorrelationNPU">
+  <label>getCorrelationNPU</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="NPU" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omMessaging.operation</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!NPU || !operation)
+        return;
+
+    var oldOp = NPU.substr(4,10);
+
+    var newNpu = NPU.replace(oldOp,operation);
+    return newNpu;
+  ]]></script>
+</script>

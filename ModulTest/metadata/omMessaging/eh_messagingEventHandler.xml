@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event__handler name="omMessaging.messagingEventHandler">
+  <flags enum-type="metadataFlag">FINAL</flags>
+  <event>evt_omMessaging.messagingEvent</event>
+  <eventID>1</eventID>
+  <eventType>OM_MESSAGING</eventType>
+  <label>Messaging Event Handler</label>
+  <metaVersion>25</metaVersion>
+  <script>return true;</script>
+</event__handler>

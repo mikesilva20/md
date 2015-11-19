@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_Archive_getMsg">
+  <guid>{09e54c56-6756-9c40-cd9d-f42c2ef4a536}</guid>
+  <label>out_Archive_getMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!npu)
+          return null;
+
+    var msg = Document.readDoc("omMessaging:archiveOutboundDoc", npu);
+
+
+    return msg;
+  ]]></script>
+</script>

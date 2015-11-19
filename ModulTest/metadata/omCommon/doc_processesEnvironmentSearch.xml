@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.processesEnvironmentSearch">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{26051778-98eb-45af-92ec-8fd5739ebb91}</guid>
+  <label>Processes Environment Search</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="PROCESS_ID" type="leaf">
+      <key>1</key>
+      <valueType>dtype_cwf_pm.PROCESS_ID</valueType>
+    </variable>
+    <variable name="PARENT_ID" type="leaf">
+      <valueType>dtype_cwf.processId</valueType>
+    </variable>
+    <variable name="ROOT_ID" type="leaf">
+      <valueType>dtype_cwf.processId</valueType>
+    </variable>
+    <variable name="STATUS" type="leaf">
+      <valueType>dtype_cwf_pm.STATUS</valueType>
+    </variable>
+    <variable name="PROCESS_METADATYPE" type="leaf">
+      <valueType>dtype_cwf.procMetaId</valueType>
+    </variable>
+    <variable name="METADATATYPE_VER" type="leaf">
+      <valueType>dtype_cwf.metadataVer</valueType>
+    </variable>
+    <variable name="ORDER_ID" type="leaf">
+      <valueType>dtype_cwf.orderId</valueType>
+    </variable>
+    <variable name="STARTTIME" type="leaf">
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="CHANGEDSTATUSTIME" type="leaf">
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="Priority" type="leaf">
+      <valueType>dtype_cwf.allPriorities</valueType>
+    </variable>
+    <variable name="ORDER_TYPE" type="leaf">
+      <valueType>dtype_cwf.orderMetaId</valueType>
+    </variable>
+    <variable name="orderItemId" type="leaf">
+      <valueType>dtype_cwf.docId</valueType>
+    </variable>
+    <variable name="revision" type="leaf">
+      <valueType>dtype_cwf_pm.revision</valueType>
+    </variable>
+    <variable name="BUCKET_NO" type="leaf">
+      <valueType>dtype_cwf_pm.BUCKET_NO</valueType>
+    </variable>
+    <variable name="RESTART_DATE" type="leaf">
+      <valueType>dtype_cwf.dateTimeSec</valueType>
+    </variable>
+    <variable name="environment" type="leaf">
+      <valueType>dtype_omCommon.environmentRef</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.processesEnvironmentSearch</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="searchForm" type="vform">
+            <label>searchForm</label>
+            <root name="searchFormGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="processesEnvironmentGrid" type="elgrd">
+                  <colWidths>160,160,160,160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="environment" type="elslct">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/leaf_environment</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="STATUS" type="elslct">
+                      <sorted>false</sorted>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/leaf_STATUS</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="STARTTIME" type="eldate">
+                      <label>Start Time</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.processesEnvironmentSearch/leaf_STARTTIME</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

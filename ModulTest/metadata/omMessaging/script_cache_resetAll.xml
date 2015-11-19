@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_resetAll">
+  <label>cache_resetAll</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var operationCache = theAVM.getCache("InterfaceData");
+
+    operationCache.removeType("INTERFACE_TO_STACK_IN_CACHE_TYPE");
+    operationCache.removeType("INTERFACE_TO_STACK_OUT_CACHE_TYPE");
+    operationCache.removeType("STACK_CONF_CACHE_TYPE");
+    operationCache.removeType("MESSAGING_CONFIG_CACHE_TYPE");
+    operationCache.removeType("SYSTEM_TO_STACK_IN_CACHE_TYPE");
+    operationCache.removeType("SYSTEM_TO_STACK_OUT_CACHE_TYPE");
+    operationCache.removeType("OPERATION_TO_QUEUE_CACHE_TYPE");
+    operationCache.removeType("INTERFACE_SYNC_CACHE_TYPE");
+    operationCache.removeType("PARTICIPANT_VS_OPERATIONS_CACHE_TYPE");
+  ]]></script>
+</script>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.OM_COMMON_ISEMPTY">
+  <eventType>OM_COMMON_ISEMPTY</eventType>
+  <label>OM_COMMON_ISEMPTY</label>
+  <metaVersion>25</metaVersion>
+  <parametersList>
+    <parameters name="str" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameters>
+  </parametersList>
+</event>

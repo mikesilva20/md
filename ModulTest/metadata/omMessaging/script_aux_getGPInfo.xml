@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getGPInfo">
+  <label>aux_getGPInfo</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="gpId" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    if(gpId == null){
+     return null;
+    }
+
+    var fnd = new Finder("omMessaging.getGPInfoFnd");
+    fnd.searchDocument.id = gpId;
+
+    var list = fnd.search();
+
+    return (list.length > 0)? list[0] : null;
+  ]]></script>
+</script>

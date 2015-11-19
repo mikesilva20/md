@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface name="omMessaging.GPConf">
+  <guid>{16ed42b2-7724-4bb2-8b1d-293ddd9509aa}</guid>
+  <label>GP Messaging - Configuration</label>
+  <metaVersion>4</metaVersion>
+  <operationList>
+    <operation name="receiveConfiguration" type="oper">
+      <input>dstruct_omMessaging.ConfMsg</input>
+      <label>receiveConfiguration</label>
+      <type>Notification</type>
+    </operation>
+    <operation name="GPRegistration" type="oper">
+      <input>dstruct_omMessaging.ConfMsg</input>
+      <label>GPRegistration</label>
+      <output>dstruct_omMessaging.ConfMsg</output>
+      <type>One-Way</type>
+    </operation>
+  </operationList>
+  <revision>5</revision>
+</interface>

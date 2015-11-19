@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getCachedConfigurationStacks">
+  <label>cache_getCachedConfigurationStacks</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var operationCache = theAVM.getCache("InterfaceData");
+    var operationRuleDS = operationCache.getObject("STACK_CONF_CACHE_ID", "STACK_CONF_CACHE_TYPE");
+
+    if(operationRuleDS == null)
+        operationRuleDS = omMessaging.cache_getStacksConfiguration();
+
+    return operationRuleDS.getScriptObject();
+  ]]></script>
+</script>

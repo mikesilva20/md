@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getObjectFromArray">
+  <label>getObjectFromArray</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="object" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Search an object in array
+     * @param    {Array}   sourceArray - Array to search
+     * @param    {Object}  object      - Object to search
+     * @returns  {Object}  return      - Object if found, otherwise null
+     * @version  1.0
+     */
+
+    for (var i=0; i < sourceArray.length; i++) {
+
+          if (sourceArray[i] == object) return sourceArray[i];
+    }
+
+    return null;
+  ]]></script>
+</script>

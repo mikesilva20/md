@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omMessaging.operationToQueueFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>Internal - Operation to Queue</label>
+  <maxRowsLimit>1000</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.operationsToQueue</output>
+  <type>document</type>
+  <vDetailForm>doc_omMessaging.operationsToQueue/ui_UserInterface/frmui_Forms/vform_MyDefault</vDetailForm>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Operations to Queue</label>
+        <valueType>doc_omMessaging.operationsToQueue</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.operationsToQueue/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="operationToQueueFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.operationsToQueue/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="queueGP" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.operationsToQueue/leaf_queueGP</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="queueOperation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.operationsToQueue/leaf_queueOperation</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                      <element name="interfaceToInvoke" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.operationsToQueue/leaf_interfaceInvoked</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="operationToInvoke" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.operationsToQueue/leaf_operationInvoked</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfUpdate" type="eldel"/>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="deleteAction" type="usrActionMethod">
+        <confirmation>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_onDeleteConfirm</confirmation>
+        <script><![CDATA[
+          this.cw$super_deleteAction();
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="operationToQueueFndView" type="findVView">
+      <label>Operation to Queue</label>
+      <outputOverlay>findDoc_omMessaging.operationToQueueFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findDoc>

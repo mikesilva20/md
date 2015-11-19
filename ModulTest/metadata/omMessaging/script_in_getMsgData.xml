@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_getMsgData">
+  <guid>{0adb80c6-264a-0bf5-020d-ad6abf6d19f4}</guid>
+  <label>in_getMsgData</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!npu)
+          return null;
+
+
+    var data = null;
+
+    var msg = omMessaging.in_getMsg(npu, true);
+
+    if(msg){
+          omMessaging.aux_loadMsgPayload(msg);
+          data = Global.getItemsFromXML(msg.payload, msg.dataType);
+
+          if(data)
+                data = data[0];
+    }
+
+    return data;
+  ]]></script>
+</script>

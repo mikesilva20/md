@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_STATUS_INVALID">
+  <label>#CONST# STATUS_INVALID</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "5";]]></script>
+</script>

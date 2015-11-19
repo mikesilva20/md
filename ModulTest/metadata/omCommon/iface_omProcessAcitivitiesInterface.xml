@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface name="omCommon.omProcessAcitivitiesInterface">
+  <guid>{3548dc2c-389f-4b1c-ae47-f361d8a3eb58}</guid>
+  <label>OM Process Activities Interface</label>
+  <metaVersion>4</metaVersion>
+  <operationList>
+    <operation name="resumeProcess" type="oper">
+      <label>Resume Process</label>
+      <type>Notification</type>
+    </operation>
+  </operationList>
+  <revision>1</revision>
+</interface>

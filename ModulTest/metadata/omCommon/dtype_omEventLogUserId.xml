@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.omEventLogUserId">
+  <extends>dtype_cwf.userId</extends>
+  <label>User Id</label>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elfld"/>
+</dataType>

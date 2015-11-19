@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.ui.displayConfirmationDialog">
+  <label>displayConfirmationDialog</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var m = this.result.selected;
+    if (m != null) {
+
+          return new Confirm("UU0167:YN",null);
+    }
+    else
+          Global.throwException("UU0115");
+  ]]></script>
+</script>

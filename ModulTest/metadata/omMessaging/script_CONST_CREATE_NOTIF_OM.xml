@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_CREATE_NOTIF_OM">
+  <label>#CONST #CREATE NOTIF OM</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="type" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(type == 'COM')
+        return "NOTIFYOMC0";
+    else if(type == 'SOM')
+        return "NOTIFYOMS0";
+    else
+        return "NOTIFYOM00";
+  ]]></script>
+</script>

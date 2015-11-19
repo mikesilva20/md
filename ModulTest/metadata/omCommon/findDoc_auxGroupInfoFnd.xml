@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omCommon.auxGroupInfoFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omCommon.omAuxiliaryGroupSearchDoc</input>
+  <label>Aux Group Info Finder</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omCommon.omAuxiliaryGroup</output>
+  <type>document</type>
+  <volatility>0</volatility>
+  <searchList>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_coordinate</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_coordinate</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_cwOrderId</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_cwOrderId</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_groupAttributeParent</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_groupAttributeParent</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_groupAttributes</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_groupAttributes</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_groupId</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_groupId</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_groupName</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_groupName</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_itemId</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_itemId</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_name</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_name</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_status</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_status</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_type</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_type</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omCommon.omAuxiliaryGroupSearchDoc</document>
+      <mappedDocument>doc_omCommon.omAuxiliaryGroup</mappedDocument>
+      <mappedPath>doc_omCommon.omAuxiliaryGroup/leaf_value</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omCommon.omAuxiliaryGroupSearchDoc/leaf_value</path>
+    </search>
+  </searchList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <valueType>doc_omCommon.omAuxiliaryGroup</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omCommon.omAuxiliaryGroup/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omCommon.omAuxiliaryGroupSearchDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="auxGroupInfoFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="groupId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_groupId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="cwOrderId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_cwOrderId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="itemId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_itemId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="name" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_name</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_value</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="groupAttributes" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_groupAttributes</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="status" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_status</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="type" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_type</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="coordinate" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_coordinate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="groupAttributeParent" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_groupAttributeParent</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="groupName" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omAuxiliaryGroup/leaf_groupName</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="auxGroupInfoFndView" type="findVView">
+      <outputOverlay>findDoc_omCommon.auxGroupInfoFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findDoc>

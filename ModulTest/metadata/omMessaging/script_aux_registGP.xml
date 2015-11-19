@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_registGP">
+  <label>aux_registGP</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var GPId = null;
+    var type = null;
+    var stackId = null;
+
+
+    try{
+
+        var msgConfig = omMessaging.aux_getConfig();
+
+        if(msg && msg.attribute){
+            var attrs = msg.attribute;
+
+            for(var i=0;i< attrs.length; i++){
+                var a = attrs[i];
+                var name = a.name;
+                var value = a.value;
+
+                if(name == "GPId"){
+                    GPId = value;
+                }else if(name == "TYPE"){
+                    type = value;
+                }
+            }
+        }
+
+        var currentConfiguration = new Finder("omMessaging.stacksConfigurationFnd");
+        var list = currentConfiguration.search();
+
+        var conf = null;
+        var reusedStack = false;
+
+
+        for(var i=0; i<list.length; i++){
+
+            if(list[i].GPId == GPId ){
+                // GP restart, use same stack
+                stackId = list[i].stackId;
+                conf = list[i];
+                reusedStack = true;
+                break;
+            }
+        }
+
+        if(reusedStack == false){
+
+            for(var i=0; i<list.length; i++){
+
+                var gp = Process.getProcessInfo(list[i].GPId);
+
+                if(gp == null && list[i].GPType == type){
+                    // This GP is missing, re-use StackId
+                    stackId = list[i].stackId;
+                    conf = list[i];
+                    reusedStack = true;
+                    break;
+                }
+            }
+        }
+
+
+        if(conf == null){
+            // New Stack;
+            conf = new Document("omMessaging.stacksConfiguration");
+            var lastId = omMessaging.aux_getLastStackId(list);
+
+            stackId = lastId + 1 + "";
+            conf.userId = "GP Automatic";
+            conf.isDefault = true;
+        }
+
+        conf.configurationDate = new Date();
+        conf.GPType   = type;
+        conf.stackId  = stackId;
+        conf.GPId     = GPId;
+        conf.isActive = false;
+
+        if(msgConfig.automaticRegistration == true){
+            conf.isActive = true;
+        }
+
+
+        conf.save();
+
+        omMessaging.cache_resetAll();
+
+
+        omMessaging.log("[Regist GP] New GP id: " + GPId + " was been registed with stackId: " + stackId + " (Reused:" + reusedStack + ")", "aux_registGP");
+
+
+        var reply = new DataStructure("omMessaging.ConfMsg");
+
+        reply.attribute[0].name = "stackId";
+        reply.attribute[0].value = stackId;
+
+
+        Process.sendMessageToProcess(GPId, null, "omMessaging.GPConf/receiveConfiguration", reply );
+
+    }catch(ex){
+
+        omMessaging.log("Exception registing GP " + GPId + ": " + ex.message , "aux_registGP", "ERR");
+
+    }
+  ]]></script>
+</script>

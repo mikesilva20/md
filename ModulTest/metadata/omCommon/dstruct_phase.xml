@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.phase">
+  <container>true</container>
+  <description>Phase</description>
+  <label>phase</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="phaseCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.phaseCode</element>
+      <label>phaseCode</label>
+    </child>
+    <child name="openDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.openDate</element>
+      <label>openDate</label>
+    </child>
+    <child name="closeDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.closeDate</element>
+      <label>closeDate</label>
+    </child>
+    <child name="requestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestNumber</element>
+      <label>requestNumber</label>
+    </child>
+    <child name="itemId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.itemId</element>
+      <label>itemId</label>
+    </child>
+    <child name="phaseId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.phaseId</element>
+      <label>phaseId</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.phase</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.phase</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

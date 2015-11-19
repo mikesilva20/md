@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramAlignChilds">
+  <label>Diagram Align Childs</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="connections" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /* formata as childs de um elemento, parent resources ao centro, associated resources nas pontas
+     * NOTE: recursos sao recebidos em separado (por parent ou associated), mas sequencialmente,
+     *       para manter o diagrama organizado, optou-se por colocar os parent resources ao centro e os associated resources distribuidos, alternadamente, para cada um dos lados
+     * Created by Tiago Barreiros
+     */
+
+    function formatNode(node){
+        var ordered = new Array;                               // node formatado
+        var childsInOrder = new Array;                         // array ordenado das childs
+        var childRes, associatedRes;                           // childs do node
+
+        ordered[0] = node[0];                                  // id do node
+        ordered[1] = node[1];                                  // object do node
+        childRes = node[2];                                    // parentResources do node
+        associatedRes = node[3];                               // associatedResources do node
+
+        //ordena as childs
+        if(childRes != null){
+            childsInOrder = childRes;                                       // os parent resources sao colocados no array ordenado
+        }
+        if (associatedRes != null){                                         // ordena associated resources
+            for (var i=0; i < associatedRes.length; i++){                   // alternadamente
+                if (i%2 == 0) {childsInOrder.push(associatedRes[i]);}       // adiciona no fim do array
+                if (i%2 == 1) {childsInOrder.unshift(associatedRes[i]);}    // adiciona no inicio do array
+            }
+        }
+        ordered[2] = childsInOrder;
+
+        // retorna node com childs ordenadas
+        return ordered;
+    }
+
+    /*
+     * Codigo desta funcao
+     */
+
+    var nodesOrdered = new Array;                              // nodes com childs ordenadas
+
+    // formata nodes com as childs pela ordem certa
+    for (var i=0; i < connections.length; i++){
+        nodesOrdered[i] = formatNode(connections[i]);
+    }
+
+    // retorna array de elementos com as childs ordenadas
+    return nodesOrdered;
+  ]]></script>
+</script>

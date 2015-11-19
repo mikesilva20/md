@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.OM_COMMON_OMDEPENDENTSORDERFND">
+  <eventType>OM_COMMON_OMDEPENDENTSORDERFND</eventType>
+  <label>OM_COMMON_OMDEPENDENTSORDERFND</label>
+  <metaVersion>25</metaVersion>
+  <parametersList>
+    <parameters name="sourceOrderId" type="rifp">
+      <type>dtype_omCommon.orderId</type>
+    </parameters>
+    <parameters name="provisioningItemId" type="rifp">
+      <type>dtype_omCommon.itemId</type>
+    </parameters>
+    <parameters name="destinationOrderId" type="rifp">
+      <type>dtype_omCommon.orderId</type>
+    </parameters>
+    <parameters name="environment" type="rifp">
+      <type>dtype_omCommon.environment</type>
+    </parameters>
+    <parameters name="orderCreationNpu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameters>
+  </parametersList>
+</event>

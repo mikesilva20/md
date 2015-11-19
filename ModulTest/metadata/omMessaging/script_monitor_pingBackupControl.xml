@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.monitor_pingBackupControl">
+  <label>monitor_pingBackupControl</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="gpId" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var key = "MESSAGING_MONITOR";
+
+
+    var doc = Document.readDoc("omMessaging.backupModeControl", key);
+
+    if(doc && doc.GPId == gpId){
+
+        doc.lastPing = new Date();
+        doc.save();
+    }else{
+
+
+    }
+  ]]></script>
+</script>

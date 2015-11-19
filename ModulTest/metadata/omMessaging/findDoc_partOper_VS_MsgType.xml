@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omMessaging.partOper_VS_MsgType">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.partOperationVSMsgType</input>
+  <label>Config - Participant Oper VS Msg Type</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.partOperationVSMsgType</output>
+  <type>document</type>
+  <vDetailForm>doc_omMessaging.partOperationVSMsgType/ui_UserInterface/frmui_Forms/vform_MyDefault</vDetailForm>
+  <searchList>
+    <search type="sitem">
+      <document>doc_omMessaging.partOperationVSMsgType</document>
+      <mappedDocument>doc_omMessaging.partOperationVSMsgType</mappedDocument>
+      <mappedPath>doc_omMessaging.partOperationVSMsgType/leaf_operationIn</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omMessaging.partOperationVSMsgType/leaf_operationIn</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omMessaging.partOperationVSMsgType</document>
+      <mappedDocument>doc_omMessaging.partOperationVSMsgType</mappedDocument>
+      <mappedPath>doc_omMessaging.partOperationVSMsgType/leaf_operationOut</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omMessaging.partOperationVSMsgType/leaf_operationOut</path>
+    </search>
+  </searchList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.partOperationVSMsgType</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.partOperationVSMsgType/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.partOperationVSMsgType/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="partOper_VS_MsgTypeResultTable1" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="operationIn" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operationIn</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="operationOut" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operationOut</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="participant" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_participant</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.partOperationVSMsgType/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfUpdate" type="eldel"/>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="deleteAction" type="usrActionMethod">
+        <confirmation>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_onDeleteConfirm</confirmation>
+        <script><![CDATA[
+          this.cw$super_deleteAction();
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="partOper_VS_MsgTypeView" type="findVView">
+      <label>Participant Operation VS Msg Type</label>
+      <outputOverlay>findDoc_omMessaging.partOper_VS_MsgType/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findDoc>

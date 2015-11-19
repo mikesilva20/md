@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.isSyncInterface">
+  <label>isSyncInterface</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="system" type="rifp">
+      <type>dtype_cwt_common.string32</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omMessaging.operation</type>
+    </parameter>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <type>dtype_omMessaging.interfaceToInvoke</type>
+    </parameter>
+  </parameterList>
+  <valueType>nmeta_com.conceptwave.system.Object</valueType>
+  <script><![CDATA[
+    var dataList = getCachedScriptableObject();
+
+    var value1 = interfaceToInvoke + '/' + operation;
+
+    for(var n=0; n < dataList.length; n++){
+
+        if(dataList[n].value1 == value1){
+
+            return dataList[n];
+        }
+    }
+
+
+    return null;
+
+
+
+    function getCachedScriptableObject() {
+        var operationCache = theAVM.getCache("InterfaceData");
+        var operationRuleDS = operationCache.getObject("INTERFACE_SYNC_CACHE_ID", "INTERFACE_SYNC_CACHE_TYPE");
+
+        if(operationRuleDS == null)
+           operationRuleDS = omMessaging.cache_getSyncInterfaces();
+
+        return operationRuleDS.getScriptObject();
+
+    }
+  ]]></script>
+</script>

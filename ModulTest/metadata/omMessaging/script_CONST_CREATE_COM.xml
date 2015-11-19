@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_CREATE_COM">
+  <guid>{098a14a1-4f5a-22ee-8bea-0fe1026c31eb}</guid>
+  <label>#CONST# CREATE COM</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "COCREATE00";]]></script>
+</script>

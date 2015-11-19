@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.generateMSGs">
+  <label>generateMSGs</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="numMesgs" type="rifp">
+      <type>dtype_com.conceptwave.system.Integer</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    for (var i=0;i<numMesgs;i++){
+
+    //var msg = new DataStructure('omCommon.msg');
+    var msg = publishEvent("OM_COMMON",FIRST_ONE,null);
+
+    omMessaging.aux_genHeader(msg.header);
+
+    omMessaging.in_publishMsg(msg, 'omMessaging.testInterface', 'pubMessage',null,true);
+    }
+  ]]></script>
+</script>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.msgReport">
+  <container>true</container>
+  <label>msgReport</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="headerReport" type="dstruct">
+      <element>dstruct_omCommon.msgHeaderReport</element>
+      <label>headerReport</label>
+    </child>
+    <child name="status" type="dstruct">
+      <container>true</container>
+      <label>status</label>
+      <mandatory>true</mandatory>
+      <childList>
+        <child name="eCode" type="dstruct">
+          <element>dstruct_omCommon.eCodeMsg</element>
+          <label>eCode</label>
+          <mandatory>true</mandatory>
+        </child>
+        <child name="destinationStatus" type="dstruct">
+          <container>true</container>
+          <label>destinationStatus</label>
+          <childList>
+            <child name="eCode" type="dstruct">
+              <element>dstruct_omCommon.eCodeMsg</element>
+              <label>eCode</label>
+            </child>
+            <child name="eNative" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.eCodeMsg</element>
+              <label>eNative</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.msgReport</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.msgReport</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

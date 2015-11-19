@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.configGPs">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{a384b881-924e-47b2-a331-3274c8dfc446}</guid>
+  <label>Config GPs</label>
+  <metaVersion>21</metaVersion>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="showEditButton" type="leaf">
+        <label>Boolean</label>
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+      <variable name="selectedGP" type="leaf">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.configGPs</valueType>
+      </variable>
+      <variable name="GPsFinder" type="leaf">
+        <valueType>findSql_omMessaging.messagingGPsFnd/ui_UserInterface</valueType>
+      </variable>
+      <variable name="docUI" type="leaf">
+        <valueType>doc_com.conceptwave.system.Document/ui_UserInterface</valueType>
+      </variable>
+      <variable name="inEditMode" type="leaf">
+        <label>Boolean</label>
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="VerticalLayout" type="elvlt">
+                <alignment>center,top</alignment>
+                <width>100%</width>
+                <elementList>
+                  <element name="Header" type="elhdr">
+                    <label>Messaging Global Processes</label>
+                  </element>
+                  <element name="FormFrame" type="elovf">
+                    <formReference type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/leaf_GPsFinder</variablePath>
+                        <variablePath>findSql_omMessaging.messagingGPsFnd/ui_UserInterface/frmui_Forms/exov_Result</variablePath>
+                      </variablePathList>
+                    </formReference>
+                    <height>400px</height>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/leaf_GPsFinder</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>100%</width>
+                  </element>
+                  <element name="HL_Actions" type="elhlt">
+                    <alignment>center,center</alignment>
+                    <elementList>
+                      <element name="btnRefresh" type="elbtn">
+                        <autofit>true</autofit>
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_refreshGPs</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/refresh.gif</icon>
+                        <label>Refresh</label>
+                      </element>
+                      <element name="btnLog" type="elbtn">
+                        <autofit>true</autofit>
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_showEventLogGP</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/eventr.gif</icon>
+                        <label>Event Log</label>
+                      </element>
+                      <element name="btnActivities" type="elbtn">
+                        <autofit>true</autofit>
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_showActivitiesGP</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/MenuIconGblProcessMgr.gif</icon>
+                        <label>Activities</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="MenuItem" type="elmnu">
+                        <icon>/cwf/action.gif</icon>
+                        <label>Actions</label>
+                        <elementList>
+                          <element name="miSuspend" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_suspendGP</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <icon>/cwf/stop.gif</icon>
+                            <label>Suspend</label>
+                          </element>
+                          <element name="miResume" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_resumeGP</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <icon>/cwf/resume.gif</icon>
+                            <label>Resume</label>
+                          </element>
+                          <element name="miRestart" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_restartGP</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <icon>/cwf/rollback.gif</icon>
+                            <label>Restart</label>
+                          </element>
+                        </elementList>
+                      </element>
+                    </elementList>
+                  </element>
+                  <element name="Separator" type="elsep"/>
+                  <element name="Header1" type="elhdr">
+                    <label>Details GP</label>
+                  </element>
+                  <element name="FormFrame1" type="elovf">
+                    <formReference type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/leaf_docUI</variablePath>
+                        <variablePath>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</variablePath>
+                      </variablePathList>
+                    </formReference>
+                    <height>300px</height>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/leaf_docUI</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>100%</width>
+                  </element>
+                  <element name="HL_EditDoc" type="elhlt">
+                    <elementList>
+                      <element name="btnEnableEdit" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_enableEdit</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/edit.gif</icon>
+                        <label>Edit</label>
+                        <visible type="varPath">
+                          <independant>true</independant>
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/permMethod_NotInEditMode</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="btnSave" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_saveGP</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/save.gif</icon>
+                        <label>Save</label>
+                        <visible type="varPath">
+                          <independant>true</independant>
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/permMethod_InEditMode</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="btnClose" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/usrActionMethod_closeEdit</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/BasicCloseIcon.gif</icon>
+                        <label>Close</label>
+                        <visible type="varPath">
+                          <independant>true</independant>
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.ui.configGPs/ui_UserInterface/permMethod_InEditMode</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="InEditMode" type="permMethod">
+        <script>return this.inEditMode;</script>
+      </method>
+      <method name="NotInEditMode" type="permMethod">
+        <script>return this.showEditButton;</script>
+      </method>
+      <method name="closeEdit" type="usrActionMethod">
+        <script><![CDATA[
+          this.inEditMode = false;
+          this.docUI.model.readonly = true;
+          this.showEditButton = true;
+        ]]></script>
+      </method>
+      <method name="enableEdit" type="usrActionMethod">
+        <script><![CDATA[
+          this.inEditMode = true;
+          this.docUI.model.readonly = false;
+          this.showEditButton = false;
+        ]]></script>
+      </method>
+      <method name="onGPChange" type="usrActionMethod">
+        <parameterList>
+          <parameter name="row" type="rifp"/>
+        </parameterList>
+        <script><![CDATA[
+          this.selectedGP = row;
+           this.inEditMode = false;
+           this.showEditButton = false;
+
+          if(row == null){
+              this.docUI = new com.conceptwave.system.Document.UserInterface(null, this);
+
+
+          }else{
+
+              if(row.length == 1){
+
+                  var pd = Process.getProcessDocument(row[0].id);
+
+                  if(pd != null){
+
+                      var newPD = new Document(pd.metadataType);
+                      pd.copyToDocument(newPD, true, false);
+
+                      newPD.readonly = true;
+                      this.showEditButton = true;
+
+                      if(newPD.metadataType == "omMessaging:procDocMonitor"){
+
+                          this.docUI = new omMessaging.procDocMonitor.UserInterface(newPD, this);
+
+                      }else{
+                          this.docUI = new omMessaging.globalProcDoc.UserInterface(newPD, this);
+                      }
+                      return;
+                  }
+
+              }
+
+
+              this.docUI = new com.conceptwave.system.Document.UserInterface(null, this);
+
+          }
+        ]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.GPsFinder = new omMessaging.messagingGPsFnd.UserInterface(null, this);
+          this.docUI     = null;
+          this.inEditMode = false;
+          this.showEditButton = false;
+
+          this.refreshGPs();
+
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+      <method name="refreshGPs" type="usrActionMethod">
+        <script><![CDATA[
+          if(this.GPsFinder)
+              this.GPsFinder.model.search();
+
+          this.selectedGP = null;
+        ]]></script>
+      </method>
+      <method name="resumeGP" type="usrActionMethod">
+        <confirmation>doc_omMessaging.ui.configGPs/ui_UserInterface/uimthd_displayConfirmationDialog</confirmation>
+        <script><![CDATA[
+          if(this.selectedGP != null){
+
+              for(var i=0; i< this.selectedGP.length; i++){
+               Process.resumeProcess(this.selectedGP[i].id);
+              }
+          }
+        ]]></script>
+      </method>
+      <method name="saveGP" type="usrActionMethod">
+        <script><![CDATA[
+          var validsLeafs = ["inBackupMode",
+                              "forceStart",
+                              "intervalBetweenChecks",
+                              "intervalCheckBackup",
+                              "activityTimeout",
+                              "inactivityDelay",
+                              "msgPerCycle",
+                              "stackId",
+                              "inactivityDelayGrowingRate",
+                              "inactivityDelayGrowingRateMax"
+          ];
+
+          var reply = new DataStructure("omMessaging.ConfMsg");
+
+
+          var doc = this.docUI.model;
+
+          var leafs = doc.getLeafNames(false, false);
+
+          for(var i=0; i<leafs.length; i++){
+
+              if(validsLeafs.indexOf(leafs[i]) == -1){
+                   continue;
+              }
+
+              var attr = reply.attribute[reply.attribute.length];
+              attr.name = leafs[i];
+              attr.value = doc[attr.name];
+          }
+
+
+          Process.sendMessageToProcess(this.selectedGP[0].id, null, "omMessaging.GPConf/receiveConfiguration", reply );
+
+
+          this.closeEdit();
+        ]]></script>
+      </method>
+      <method name="showActivitiesGP" type="usrActionMethod">
+        <dialogHeight>600</dialogHeight>
+        <dialogWidth>800</dialogWidth>
+        <showInPopup>true</showInPopup>
+        <script><![CDATA[
+          if(this.selectedGP != null && this.selectedGP.length == 1){
+
+              var ui = new cwf_pm.ActivityFinder.UserInterface(null, this);
+              ui.search.model.PROCESS_ID = this.selectedGP[0].id;
+              ui.searchAction();
+              return ui
+          }
+        ]]></script>
+      </method>
+      <method name="showEventLogGP" type="usrActionMethod">
+        <dialogHeight>600</dialogHeight>
+        <dialogWidth>800</dialogWidth>
+        <showInPopup>true</showInPopup>
+        <script><![CDATA[
+          if(this.selectedGP != null && this.selectedGP.length == 1){
+
+              var fnd = new Finder("cwf_oe.EventLogFinder");
+              fnd.searchDocument.OBJECT_ID = this.selectedGP[0].id;
+              fnd.search();
+
+              return fnd;
+          }
+        ]]></script>
+      </method>
+      <method name="suspendGP" type="usrActionMethod">
+        <confirmation>doc_omMessaging.ui.configGPs/ui_UserInterface/uimthd_displayConfirmationDialog</confirmation>
+        <script><![CDATA[
+          if(this.selectedGP != null){
+              for(var i=0; i< this.selectedGP.length; i++){
+               Process.suspendProcess(this.selectedGP[i].id);
+              }
+          }
+        ]]></script>
+      </method>
+      <method name="restartGP" type="usrActionMethod">
+        <confirmation>doc_omMessaging.ui.configGPs/ui_UserInterface/uimthd_displayConfirmationDialog</confirmation>
+        <script><![CDATA[
+          if(this.selectedGP != null){
+              for(var i=0; i< this.selectedGP.length; i++){
+                  Process.sendExceptionToProcess(this.selectedGP[0].id, "omMessaging.restartGP");
+              }
+
+          }
+        ]]></script>
+      </method>
+      <method name="displayConfirmationDialog" type="uimthd">
+        <script><![CDATA[
+          var m = this.selectedGP;
+          if (m != null) {
+
+                return new Confirm("UU0167:YN",null);
+          }
+          else
+                Global.throwException("UU0115");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

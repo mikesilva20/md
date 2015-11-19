@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.configOpertationToSystem">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{07e4c1e7-d38c-aeed-0ba9-88d3c8ed4658}</guid>
+  <label>Config - Operation To System</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <key>1</key>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <table>OM_MSG_OPER_TO_SYSTEM</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <column>SYSTEM</column>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <table>OM_MSG_OPER_TO_SYSTEM</table>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.configOpertationToSystem</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="configOpertationToSystemGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="configOpertationToSystemGrid" type="elgrd">
+                    <colWidths>160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>160px</width>
+                    <elementList>
+                      <element name="configOpertationToSystemHeader" type="elhdr">
+                        <label>Config - Operation To System</label>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOpertationToSystem/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOpertationToSystem/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="system" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOpertationToSystem/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOpertationToSystem/leaf_system</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.fireAndProceedFnd">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.fireAndProceedSrc</input>
+  <label>Fire And Proceed Finder</label>
+  <maxRowsLimit>2000</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.fireAndProceedRes</output>
+  <rtConfigurable>true</rtConfigurable>
+  <type>SQL</type>
+  <uiQueryTimeout>0</uiQueryTimeout>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, actionDate, resubmissionNPU, metadataType, typeMsg
+        FROM
+        (
+              (
+                    SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, null actionDate, null resubmissionNpu, 'omMessaging.fireAndProceedMsg' metadataType, typeMsg
+                    FROM OM_FIREANDPROCEED_MESSAGE
+                    WHERE 1=1
+                    {[0] AND businessId = ?}
+                    {[1] AND npu = ?}
+                    {[2] AND action = ?}
+                    {[3] AND correlationNpu = ?}
+              )
+              UNION ALL
+              (
+                    SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, actionDate, ressubmissionNpu, 'omMessaging.fireAndProceedArchive' metadataType, typeMsg
+                    FROM OM_FIREANDPROCEED_ARCHIVE
+                    WHERE 1=1
+                    {[0] AND businessId = ?}
+                    {[1] AND npu = ?}
+                    {[2] AND action = ?}
+                    {[3] AND correlationNpu = ?}
+              )
+        )
+        ORDER BY RECEIVEDATE DESC, NPU DESC
+      ]]></script>
+    </method>
+    <method name="editablePerm" type="permMethod">
+      <script>return this.enabled;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="finder" type="uivar">
+        <label>Finder User Interface</label>
+        <valueType>ui_com.conceptwave.system.FinderUserInterface</valueType>
+      </variable>
+      <variable name="model" type="uivar">
+        <label>Fire And Proceed Finder</label>
+        <valueType>findSql_omMessaging.fireAndProceedFnd</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.fireAndProceedSrc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Fire And Proceed - Result Document</label>
+        <valueType>doc_omMessaging.fireAndProceedRes</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.fireAndProceedRes/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="finderHeader" type="elsecth">
+                <label>Finder</label>
+                <style>CwFIT</style>
+                <elementList>
+                  <element name="back" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_hideDetailAction</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwfv/nav_left_blue.png</icon>
+                    <tooltip>Back to results</tooltip>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_backVisible</variablePath>
+                      </variablePathList>
+                    </visible>
+                  </element>
+                  <element name="pref" type="elmnu">
+                    <icon>/cwt/images/16/preferences.png</icon>
+                    <showMenuDropDown>true</showMenuDropDown>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_resultVisible</variablePath>
+                      </variablePathList>
+                    </visible>
+                    <elementList>
+                      <element name="toggleMenu" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_toggleSearchAction</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/funnel.png</icon>
+                        <label>Show/hide search</label>
+                        <tooltip>Show/hide search</tooltip>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_toggleVisible</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="openView" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_findCustomView</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/user_view.gif</icon>
+                        <label>Open Custom View</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_isCustomViewAllowed</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="addView" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_addCustomView</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/table_add.gif</icon>
+                        <label>Add Custom View</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_isCustomViewAllowed</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="chart" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/uimthd_showChart</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/Chart.gif</icon>
+                        <label>Chart</label>
+                        <visible type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_hasChart</variablePath>
+                          </variablePathList>
+                        </visible>
+                      </element>
+                      <element name="Separator" type="elsep"/>
+                      <element name="cwfXLS" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadXls</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/excel.gif</icon>
+                        <label>Download as XLS</label>
+                      </element>
+                      <element name="cwfCSV" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadCsv</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/text_marked.png</icon>
+                        <label>Download as CSV</label>
+                      </element>
+                      <element name="cwfXML" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_downloadXml</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwfv/code.png</icon>
+                        <label>Download as XML</label>
+                      </element>
+                      <element name="Separator1" type="elsep"/>
+                      <element name="Iterator" type="eliter">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <elementList>
+                          <element name="viewItem" type="elmnu">
+                            <clickMethod type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/leaf_views</variablePath>
+                                <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/uimthd_changeView</variablePath>
+                              </variablePathList>
+                            </clickMethod>
+                            <label>a</label>
+                            <variable type="varPath">
+                              <variablePathList>
+                                <variablePath>ui_com.conceptwave.system.FinderViewIteratedItem/leaf_view</variablePath>
+                              </variablePathList>
+                            </variable>
+                          </element>
+                        </elementList>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Result" type="vform">
+            <label>Result</label>
+            <root name="result" type="eltabl">
+              <doubleClickMethod type="varPath">
+                <variablePathList>
+                  <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/usrActionMethod_doubleClick</variablePath>
+                </variablePathList>
+              </doubleClickMethod>
+              <headerHeight>30</headerHeight>
+              <onSelectChange type="varPath">
+                <variablePathList>
+                  <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                </variablePathList>
+              </onSelectChange>
+              <showDetailColumn>false</showDetailColumn>
+              <variable type="varPath">
+                <variablePathList>
+                  <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                </variablePathList>
+              </variable>
+              <wrapCell>true</wrapCell>
+              <wrapHeaderLabel>true</wrapHeaderLabel>
+              <elementList>
+                <element name="Business_Id" type="elfld">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_businessId</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>75px</width>
+                </element>
+                <element name="Error_Code" type="elfld">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_eCode</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>90px</width>
+                </element>
+                <element name="NPU" type="ellab">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_npu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>300px</width>
+                </element>
+                <element name="Correlation_NPU" type="ellab">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_correlationNpu</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>300px</width>
+                </element>
+                <element name="Receive_Date" type="eldatetime">
+                  <displayFormat>dd/MM/yyyy HH:mm</displayFormat>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_receiveDate</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>120px</width>
+                </element>
+                <element name="Action" type="elslct">
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_result</variablePath>
+                      <variablePath>doc_omMessaging.fireAndProceedRes/leaf_action</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>105px</width>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfAdd" type="elmnu">
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_addAction</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <icon>/cwf/MenuIconAdd.gif</icon>
+                <tooltip>Add</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_cwfAddView</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="cwfCopy" type="elmnu">
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_copyAction</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <enable type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_cwfCopyEnabled</variablePath>
+                  </variablePathList>
+                </enable>
+                <icon>/cwf/MenuIconCopy.gif</icon>
+                <tooltip>Copy</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_cwfCopyView</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="cwfDelete" type="eldel"/>
+              <override name="cwfUpdate" type="elmnu">
+                <menuAccel type="mAccelP"/>
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/action_updateAction</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <icon>/cwf/MenuIconEdit.gif</icon>
+                <tooltip>Edit</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/permMethod_cwfUpdateView</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="detailMenu" type="eldel"/>
+              <override name="finderMenuLayout" type="elext">
+                <elementList>
+                  <element name="fpResubmit" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/usrActionMethod_fpResubmit_menu</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/produce.gif</icon>
+                    <label>Resubmit</label>
+                    <menuType>5</menuType>
+                    <showDown>true</showDown>
+                    <showRollOver>true</showRollOver>
+                  </element>
+                  <element name="fpDelete" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/usrActionMethod_fpDelete_menu</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/MenuIconDelete.gif</icon>
+                    <label>Delete</label>
+                    <menuType>5</menuType>
+                    <showDown>true</showDown>
+                    <showRollOver>true</showRollOver>
+                  </element>
+                  <element name="detailMenuEx" type="elovf">
+                    <formReference type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_detail</variablePath>
+                        <variablePath>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</variablePath>
+                      </variablePathList>
+                    </formReference>
+                    <overflow>visible</overflow>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/uivar_detail</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>1px</width>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="doubleClick" type="usrActionMethod">
+        <dialogHeight>600</dialogHeight>
+        <dialogWidth>800</dialogWidth>
+        <parameterList>
+          <parameter name="document" type="rifp">
+            <mandatory>true</mandatory>
+            <type>doc_omMessaging.fireAndProceedRes</type>
+          </parameter>
+        </parameterList>
+        <showInPopup>true</showInPopup>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+        <script><![CDATA[
+          if(this.model.selected){
+                var msg = this.model.selected[0];
+                return Document.readDoc(msg.metadataType, msg.npu);
+          }
+        ]]></script>
+      </method>
+      <method name="fpResubmit" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var selectList = this.result.selected;
+          var finder = this.model;
+                // Set the Action and Action Date
+                 var date = new Date();
+                 var action = omMessaging.RESUBMITED();
+                 // Delete the Message
+                omMessaging.resubmitMessage(selectList, date, action);
+                // Refresh the Finder
+                this.searchAction();
+                finder.updateUI();
+        ]]></script>
+      </method>
+      <method name="fpResubmit_menu" type="usrActionMethod">
+        <script><![CDATA[
+          var result = this.fpResubmit();
+          Global.runContentDisplayScript(this, "displayScript");
+          return result;
+        ]]></script>
+      </method>
+      <method name="fpDelete" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var selectList = this.result.selected;
+          var finder = this.model;
+                 // Set the Action and Action Date
+                 var date = new Date();
+                 var action = omMessaging.DELETED();
+                 // Delete the Message
+                omMessaging.deleteMessage(selectList, date, action);
+                // Refresh the Finder
+                this.searchAction();
+                finder.updateUI();
+        ]]></script>
+      </method>
+      <method name="fpDelete_menu" type="usrActionMethod">
+        <script><![CDATA[
+          var result = this.fpDelete();
+          Global.runContentDisplayScript(this, "displayScript");
+          return result;
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="Result" type="findVView">
+      <inputOverlay>doc_omMessaging.fireAndProceedSrc/ui_UserInterface/frmui_Forms/vform_Search</inputOverlay>
+      <label>Fire And Proceed Finder</label>
+      <outputOverlay>findSql_omMessaging.fireAndProceedFnd/ui_UserInterface/frmui_Forms/vform_Result</outputOverlay>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findSql>

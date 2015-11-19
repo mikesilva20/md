@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_saveMsg">
+  <guid>{0c531d99-65fc-dbfc-e62b-6502d455b3b0}</guid>
+  <label>AUX - Save Message</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    doc.writeLOB("message", doc.message);
+    doc.writeLOB("payload", doc.payload);
+  ]]></script>
+</script>

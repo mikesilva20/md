@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsIsCompatibleByLeaveAndValueWithObj">
+  <label>dsIsCompatibleByLeaveAndValueWithObj</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="obj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Check if all or include leaves from object are present in the ds
+     * @param    {DataStructure}  ds      - DataStructure
+     * @param    {Object}  obj     - Object. Can be Document, DataStructure or Array.
+     * @param    {[Array]}  include - Array with include leaves
+     * @param    {[Array]}  include - Array with exclude leaves
+     * @returns  {[Array]} If value are the same, return it as an array
+     * @version  1.0
+     */
+
+    var ok        = true;
+    var objLeaves = null;
+    var dsLeaves  = null;
+    var msgError  = null;
+
+    if (obj instanceof Document){
+        objLeaves = omCommon.getAllLeavesFromItem(obj, true);
+    }else if (obj instanceof DataStructure){
+        objLeaves = obj.getNodeNames();
+    }
+    else if (obj instanceof Array){
+        objLeaves = omCommon.getArrayFrom2dArray(obj, 0);
+    }
+
+
+    if (!objLeaves){
+        return null;
+    }
+
+    dsLeaves = ds.getNodeNames();
+
+    if (includeLeaves) {
+
+        ok = omCommon.hasArraySubArray(objLeaves, includeLeaves);
+        objLeaves = includeLeaves;
+
+    } else if (excludeLeaves) {
+
+        objLeaves = omCommon.getSubArrayByExclusion(objLeaves, excludeLeaves);
+    }
+
+    // Check if all object leaves are present in the DataStructure leaves
+    ok = omCommon.hasArraySubArray(dsLeaves, objLeaves);
+
+    if (!ok) {
+
+        Global.throwException("Incompatible leaves at object " + obj + "\n Destination Leaves: " + dsLeaves + "\n Source Leaves : " + objLeaves);
+        msgError = "incompatible leaves at object" + obj + "\n Destination Leaves : " + dsLeaves + "\n Source Leaves : " + objLeaves;
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.dsIsCompatibleByLeaveAndValueWithObj");
+
+        /*var desc = Global.translateText('OMCM0002',UserProfile.getLanguage(),[obj, dsLeaves, objLeaves]);
+        omCommon.writeLog(/\* Severidade do erro             : *\/ '3',
+                          /\* Decrição                       : *\/ desc,
+                          /\* Fully qualified name do objeto : *\/ this.metadata,
+                          /\* Nome do modulo do OM           : *\/ "OM_COMMON",
+                          /\* Código do erro do modulo       : *\/ 'OMCM0002',
+                          /\* Stack trace                    : *\/ null,
+                          /\* Order ID                       : *\/ null
+                          );*/
+        return null;
+    }
+
+    ok = true;
+
+    for (var i = 0; i < objLeaves.length; i++) {
+        if (ds[objLeaves[i]] != omCommon.getLeaveValue(obj, objLeaves[i])) {
+            ok = false;
+            break;
+        }
+    }
+
+    if (ok){
+        return ds;
+    }else{
+        return null;
+    }
+  ]]></script>
+</script>

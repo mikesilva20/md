@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omMessaging.configInterfaceToStack_Outbound">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.configOutbound_InterfaceOper_Stack</input>
+  <label>Config Outbound - Interface To Stack</label>
+  <maxRowsLimit>2000</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.configOutbound_InterfaceOper_Stack</output>
+  <type>document</type>
+  <vDetailForm>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/frmui_Forms/vform_AddEdit_Form</vDetailForm>
+  <searchList>
+    <search type="sitem">
+      <document>doc_omMessaging.configOutbound_InterfaceOper_Stack</document>
+      <mappedDocument>doc_omMessaging.configOutbound_InterfaceOper_Stack</mappedDocument>
+      <mappedPath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_interfaceToInvoke</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_interfaceToInvoke</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omMessaging.configOutbound_InterfaceOper_Stack</document>
+      <mappedDocument>doc_omMessaging.configOutbound_InterfaceOper_Stack</mappedDocument>
+      <mappedPath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_operation</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_operation</path>
+    </search>
+    <search type="sitem">
+      <document>doc_omMessaging.configOutbound_InterfaceOper_Stack</document>
+      <mappedDocument>doc_omMessaging.configOutbound_InterfaceOper_Stack</mappedDocument>
+      <mappedPath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_isActive</mappedPath>
+      <operation>equal</operation>
+      <path>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_isActive</path>
+    </search>
+  </searchList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Config  Inbound - Interface/Operation to Stack </label>
+        <valueType>doc_omMessaging.configOutbound_InterfaceOper_Stack</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="configInterfaceToStack_OutboundResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="isActive" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_isActive</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100px</width>
+                      </element>
+                      <element name="interfaceToInvoke" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_interfaceToInvoke</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>400px</width>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfDetail" type="eldel"/>
+              <override name="cwfUpdate" type="eldel"/>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="deleteAction" type="usrActionMethod">
+        <confirmation>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_onDeleteConfirm</confirmation>
+        <script><![CDATA[
+          this.cw$super_deleteAction();
+
+          omMessaging.cache_resetAll();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="configInterfaceToStack_InboundView" type="findVView">
+      <label>Config Outbound - Interface to Stack</label>
+      <outputOverlay>findDoc_omMessaging.configInterfaceToStack_Outbound/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+    </view>
+  </viewList>
+</findDoc>

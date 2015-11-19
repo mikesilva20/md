@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.mapDocuments">
+  <label>Map Documents</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="from" type="rifp">
+      <mandatory>true</mandatory>
+      <type>doc_com.conceptwave.system.Document</type>
+    </parameter>
+    <parameter name="to" type="rifp">
+      <mandatory>true</mandatory>
+      <type>doc_com.conceptwave.system.Document</type>
+    </parameter>
+    <parameter name="conversionMap" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(from && to)
+    {
+          if(conversionMap)
+                 from.mapTo(to,conversionMap);//Use Specific Conversion MAP
+          else
+                 from.mapTo(to);// USE Default Converion MAP
+           return true;
+    }
+    else
+    {
+          return false;
+    }
+  ]]></script>
+</script>

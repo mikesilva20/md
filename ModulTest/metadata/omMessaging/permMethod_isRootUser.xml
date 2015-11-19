@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<permMethod name="omMessaging.isRootUser">
+  <flags enum-type="metadataFlag">PRIVATE</flags>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var configs = omMessaging.aux_getConfig();
+
+
+    if(configs && configs.BOUsers){
+
+        var userId = UserProfile.userId();
+
+
+        if(userId){
+
+            var userIdLowerCase = userId.toLowerCase();
+
+            if(configs.BOUsers.search(userIdLowerCase) != -1){
+                return true;
+            }
+        }
+
+
+    }
+    return false;
+  ]]></script>
+</permMethod>

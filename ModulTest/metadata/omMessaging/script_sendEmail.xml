@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.sendEmail">
+  <label>Send Email</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    /**********************************************************************************************************************************
+     *
+     *  Send Email
+     *
+     * @author                  Fabio Afonso
+     * @created date      2011-08-31
+     *
+     *********************************************************************************************************************************/
+
+     var NAME_SPACE            = "omMessaging";
+     var SCRIPT_NAME      = "sendEmail";
+     var emailDoc            = null;
+     var emailTo            = null;
+     var emailFrom            = null;
+     var counter            = null;
+     var finder                  = null;
+
+     try{
+
+           // Create the Email Data Structure
+           emailDoc = new DataStructure("pt_email:sendEMailRequest");
+
+           // Get the From
+           emailFrom = Global.getConfigVariable("email.from");
+
+           // Get the To
+           emailTo = Global.getConfigVariable("email.toST");
+
+           // Raise error if the To is Empty
+           if(emailTo){
+                 //omCommon.writeLog(3, "Messaging: Error While Sending the Email - To field is empty",  NAME_SPACE + "." + SCRIPT_NAME);
+                 publishEvent("OM_COMMON",FIRST_ONE,null);
+                 return;
+           }
+
+           // Get the Fire And Proceed Messages
+           finder = new Finder("omMessaging.messageFnd");
+           finder.search();
+           counter = finder.list.size;
+
+           // Set the Email fields and body
+           emailDoc.from = emailFrom;
+        emailDoc.to = emailTo;
+        emailDoc.subject = "OM: Fire And Proceed Error Messages Received";
+        emailDoc.body = "Encontram-se "+counter+" entradas para serem analisadas.";
+
+           // Send Email
+           //omEmail.saveEmailToSend(emailDoc);
+           publishEvent("OM_EMAIL",FIRST_ONE,null);
+
+     }catch(e){
+           //omCommon.writeLog(3, "Messaging: Error While Sending the Email - " + e,  NAME_SPACE + "." + SCRIPT_NAME);
+           publishEvent("OM_COMMON",FIRST_ONE,null);
+     }
+  ]]></script>
+</script>

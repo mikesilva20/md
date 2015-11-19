@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.auditInterfacesConfDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{0cffe861-2efb-fb45-5ad3-bdc1cc6cdebb}</guid>
+  <label>Audit - Interfaces Configuration</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>ID</label>
+      <propertyElement type="elfld">
+        <label>ID</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT_CONF</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="interfaceToInvoke" type="leaf">
+      <column>INTERFACETOINVOKE</column>
+      <label>Interface</label>
+      <propertyElement type="elfld">
+        <label>Interface</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT_CONF</table>
+      <valueType>dtype_cwf.metadataId</valueType>
+    </variable>
+    <variable name="prettyName" type="leaf">
+      <column>PRETTYNAME</column>
+      <label>Pretty Name</label>
+      <propertyElement type="elfld">
+        <label>Pretty Name</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT_CONF</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafTriggerAction$interfaceToInvoke" type="laction">
+      <path>doc_omMessaging.auditInterfacesConfDoc/leaf_interfaceToInvoke</path>
+      <type>trigger</type>
+      <script><![CDATA[
+        if(this.interfaceToInvoke && this.prettyName == null){
+              var tmp = this.interfaceToInvoke.split('/');
+              this.prettyName = Global.getMDLabel(tmp[0]) + ' / '+ tmp[1];
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.auditInterfacesConfDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="DefaultGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="DefaultGrid" type="elgrd">
+                    <colWidths>195px,195px,195px,195px</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>780px</width>
+                    <elementList>
+                      <element name="interfaceToInvoke" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_interfaceToInvoke</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                      <element name="prettyName" type="elfld">
+                        <columnSpan>4</columnSpan>
+                        <removeLabelLine>true</removeLabelLine>
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_prettyName</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>300px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="result" type="vform">
+            <label>result</label>
+            <root name="resultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="auditInterfacesConfDocGrid" type="elgrd">
+                  <colWidths>300px,300px</colWidths>
+                  <numOfCols>2</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>320px</width>
+                  <elementList>
+                    <element name="auditInterfacesConfDocHeader" type="elhdr">
+                      <label>Audit - Interfaces Configuration</label>
+                    </element>
+                    <element name="interfaceToInvoke" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_interfaceToInvoke</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="prettyName" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.auditInterfacesConfDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.auditInterfacesConfDoc/leaf_prettyName</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

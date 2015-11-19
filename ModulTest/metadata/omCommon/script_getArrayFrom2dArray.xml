@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getArrayFrom2dArray">
+  <label>getArrayFrom2dArray</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="position" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get and array from an array of a given position
+     * @param    {Array}  sourceArray - Array to search
+     * @param    {Int}    position    - Position requested
+     * @returns  {Array}  return      - Array with the elements requested
+     * @version  1.0
+     */
+
+    var retArray = new Array();
+
+    for (var i=0; i < sourceArray.length; i++)
+        if ((sourceArray[i].length-1) >= position)
+            retArray.unshift(sourceArray[i][position]);
+
+    if (retArray.length)
+        return retArray;
+    else {
+        var desc = Global.translateText('OMCM0003',UserProfile.getLanguage(),[sourceArray, position]);
+        omCommon.writeLog(/* Severidade do erro             : */ '3',
+                          /* Decrição                       : */ desc,
+                          /* Fully qualified name do objeto : */ this.metadata,
+                          /* Código do erro do modulo       : */ 'OMCM0003'
+                          );
+        return retArray;
+    }
+  ]]></script>
+</script>

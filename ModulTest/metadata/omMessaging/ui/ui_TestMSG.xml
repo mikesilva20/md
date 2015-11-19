@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<userInterface name="omMessaging.ui.TestMSG">
+  <extends>ui_cwf_pm.WorkflowAdministration</extends>
+  <label>TestMSG</label>
+  <metaVersion>21</metaVersion>
+  <overrides>ui_cwf_pm.WorkflowAdministration</overrides>
+  <url>/TestMSG</url>
+  <variableList>
+    <variable name="MessagingMenu" type="leaf">
+      <valueType>ui_omMessaging.ui.MessagingMenu</valueType>
+    </variable>
+  </variableList>
+  <vformList>
+    <vform name="Forms" type="frmui">
+      <extends>ui_cwf_pm.WorkflowAdministration/frmui_Forms</extends>
+      <overlayList>
+        <overlay name="Menu" type="exov">
+          <base>ui_cwf_pm.WorkflowAdministration/frmui_Forms/exov_Menu</base>
+          <extends>ui_cwf_pm.WorkflowAdministration/frmui_Forms/exov_Menu</extends>
+          <label>Menu</label>
+          <overrideList>
+            <override name="HorizontalLayout" type="elhlt">
+              <width>100%</width>
+              <elementList>
+                <element name="HorizontalLayoutForMenuItems" type="elhlt">
+                  <alignment>left,center</alignment>
+                  <width>100%</width>
+                  <elementList>
+                    <element name="PEs_Avms" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_pesAvms</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <icon>/cwfv/gear_find.png</icon>
+                      <label>PEs/AVMs</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showRollOver>true</showRollOver>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_pesAvmsView</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="Processes" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/gears.png</icon>
+                      <label>Processes</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_ProcessesView</variablePath>
+                        </variablePathList>
+                      </visible>
+                      <elementList>
+                        <element name="Information" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_Information</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/gear_information.png</icon>
+                          <label>Information</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="ProcessManager" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_ProcessManager</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/gear_view.png</icon>
+                          <label>Process Manager</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="Global" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_mn_Global</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/gears_view.png</icon>
+                          <label>Global Processes</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="Milestones" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_Milestones</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/notebook_preferences.png</icon>
+                          <label>Milestones</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="ParticipantQueue" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_ParticipantQueue</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/messages.png</icon>
+                          <label>Message Queue</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="processesToBeStale" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_StaleProcesses</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/gear_view.png</icon>
+                          <label>Stale jeopardy report</label>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="interface" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/server_client_exchange.png</icon>
+                      <label>Interfaces</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <elementList>
+                        <element name="msgLOg" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_msgLOg</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/note_view.png</icon>
+                          <label>Message Log</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="InterfaceStatistics" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_InterfaceStatistics</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/note_pinned.png</icon>
+                          <label>Interface Statistics</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="InterfaceStatus" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_InterfaceStatus</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/note_ok.png</icon>
+                          <label>Interface Status</label>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="Worklist" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/note_ok.png</icon>
+                      <label>Worklist</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_WorklistView</variablePath>
+                        </variablePathList>
+                      </visible>
+                      <elementList>
+                        <element name="WorklistManager" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_WorklistManager</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/notebook_edit.png</icon>
+                          <label>Worklist Manager</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="Users" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_Users</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/users2.png</icon>
+                          <label>Users</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="ParticipantSummary" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_ParticipantSummary</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/users.png</icon>
+                          <label>Participants</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="UserProfile" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_userManager</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <icon>/cwfv/user.png</icon>
+                      <label>User Profile Manager</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showRollOver>true</showRollOver>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_UserProfileView</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="NetworkInfo" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_NetworkInfo</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <icon>/cwfv/server_client2.png</icon>
+                      <label>Network Info</label>
+                      <showDown>true</showDown>
+                      <showRollOver>true</showRollOver>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_showNetWorkInfo</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="tools" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/wrench.png</icon>
+                      <label>Tools</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <elementList>
+                        <element name="EventLog" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_EventLog</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/data_scroll.png</icon>
+                          <label>Event Log</label>
+                          <menuType>5</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="FrameworkInformation" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_FrameworkInformation</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/information2.png</icon>
+                          <label>Information</label>
+                          <menuType>5</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="orderStatics" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_OrderStaticsAction</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/data_table.png</icon>
+                          <label>Order Statistics</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                          <visible type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/permMethod_orderStaticPerm</variablePath>
+                            </variablePathList>
+                          </visible>
+                        </element>
+                        <element name="CodeTables" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_codeTableCommand</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwt/images/24/table_view.png</icon>
+                          <label>Code Tables</label>
+                        </element>
+                        <element name="ExternalScript" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_extScript</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwt/images/24/text_code_javascript.png</icon>
+                          <label>External Script</label>
+                        </element>
+                        <element name="divider" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <label>Divider</label>
+                          <menuType>6</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="SelectApplication" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_SelectApplication</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/window_next.png</icon>
+                          <label>Select Application</label>
+                          <menuType>5</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="ChangePassword" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_ChangePassword</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/key.png</icon>
+                          <label>Change Password</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="userLogInfo" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_userLogInfo</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/user_monitor.png</icon>
+                          <label>Logged Users Info</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="UserActions" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_userActions</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwt/images/24/data_find.png</icon>
+                          <label>User Actions</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="License" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_License</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwt/images/24/note.png</icon>
+                          <label>License</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="Logout" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_Logout</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/exit.png</icon>
+                          <label>Logout</label>
+                          <menuType>5</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="favorites" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/star_yellow.png</icon>
+                      <label>Favorites</label>
+                      <menuType>2</menuType>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <elementList>
+                        <element name="findFavouriteMenu" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_findFavouriteMenu</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/table2_view.png</icon>
+                          <label>Open Favorite</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="AddFavorite" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_AddFavorite</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/table2_add.png</icon>
+                          <label>Add Favorite</label>
+                          <menuType>5</menuType>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="providers" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <icon>/cwfv/brickwall_information.png</icon>
+                      <label>Providers</label>
+                      <showDown>true</showDown>
+                      <showMenuDropDown>true</showMenuDropDown>
+                      <showRollOver>true</showRollOver>
+                      <elementList>
+                        <element name="setProviders" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_setProviders</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/brickwall_ok.png</icon>
+                          <label>Provider</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="importgroups" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_importGroups</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/users3_preferences.png</icon>
+                          <label>Import Groups</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                        <element name="importusers" type="elmnu">
+                          <menuAccel type="mAccelP"/>
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_cwf_pm.WorkflowAdministration/usrActionMethod_importUsers</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <icon>/cwfv/user_preferences.png</icon>
+                          <label>Import Users</label>
+                          <showDown>true</showDown>
+                          <showRollOver>true</showRollOver>
+                        </element>
+                      </elementList>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="FormFrame" type="elovf">
+                  <fillSpace>false</fillSpace>
+                  <formReference type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.TestMSG/leaf_MessagingMenu</variablePath>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/frmui_Forms/exov_Default</variablePath>
+                    </variablePathList>
+                  </formReference>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.TestMSG/leaf_MessagingMenu</variablePath>
+                    </variablePathList>
+                  </variable>
+                </element>
+                <element name="HorizontalLayoutForUserWorklist" type="elhlt">
+                  <alignment>right,center</alignment>
+                  <elementList>
+                    <element name="WrkList" type="elmnu">
+                      <menuAccel type="mAccelP"/>
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.Application/uimthd_openWorklist</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <iconHeight>18px</iconHeight>
+                      <iconVariable type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.Application/uimthd_workListImage</variablePath>
+                        </variablePathList>
+                      </iconVariable>
+                      <iconWidth>18px</iconWidth>
+                      <imageOnRight>true</imageOnRight>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.Application/uivar_workListFinder</variablePath>
+                          <variablePath>findDoc_cwf_pm.BaseWorklistFinder/ui_UserInterface/leaf_taskCount</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.Application/permMethod_permWorklist</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </override>
+          </overrideList>
+        </overlay>
+      </overlayList>
+    </vform>
+  </vformList>
+  <methodList>
+    <method name="onInit" type="action">
+      <script><![CDATA[
+        this.cw$super_onInit();
+
+        this.MessagingMenu = new omMessaging.ui.MessagingMenu(null,this);
+      ]]></script>
+    </method>
+  </methodList>
+</userInterface>

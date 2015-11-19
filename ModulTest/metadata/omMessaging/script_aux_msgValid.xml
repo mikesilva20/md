@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_msgValid">
+  <label>aux_msgValid</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var eCodes = new Array();
+    var codeDesc = null;
+
+    if(msg){
+
+          var err = msg.validate(100, false, true);
+
+          if(err){
+                for(var i=0; i< err.length; i++){
+                      //codeDesc = omConfig.getErrorCodeDescription("5E0007");
+                      codeDesc = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+                      omMessaging.aux_addError(eCodes, codeDesc[0], codeDesc[1]);
+                }
+          }
+
+    }else{
+          //codeDesc = omConfig.getErrorCodeDescription("5E0000");
+          codeDesc = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+          omMessaging.aux_addError(eCodes, codeDesc[0], codeDesc[1]);
+    }
+
+    return eCodes;
+  ]]></script>
+</script>

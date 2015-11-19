@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.auditProcessingTime">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{950c79d8-de10-4de5-a9ae-06d5b89dcc00}</guid>
+  <label>Audit - Processing Time Result</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="auditType" type="leaf">
+      <label>Audit Type</label>
+      <propertyElement type="elslct">
+        <label>Audit Type</label>
+        <sorted>false</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.auditType</valueType>
+    </variable>
+    <variable name="interfaceToInvoke" type="leaf">
+      <key>3</key>
+      <label>Interface To invoke</label>
+      <propertyElement type="elfld">
+        <label>Interface To invoke</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.interfaceToInvoke</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <key>4</key>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="time" type="leaf">
+      <key>2</key>
+      <label>Time</label>
+      <propertyElement type="elfld">
+        <label>Time</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.decimal_10_1</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <key>1</key>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="avgProcessing" type="leaf">
+      <label>Avg Time (s)</label>
+      <propertyElement type="elfld">
+        <label>Avg Time (s)</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.decimal_10_1</valueType>
+    </variable>
+    <variable name="maxProcessing" type="leaf">
+      <label>Max Time (s)</label>
+      <propertyElement type="elfld">
+        <label>Max Time (s)</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.decimal_10_1</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.auditProcessingTime</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEventLog">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{615ecf84-f574-438c-8e93-e657f6d4e681}</guid>
+  <label>OM Event Log</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogId</valueType>
+    </variable>
+    <variable name="nodeId" type="leaf">
+      <column>NODEID</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogNodeId</valueType>
+    </variable>
+    <variable name="userId" type="leaf">
+      <column>USERID</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogUserId</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <column>PROCESSID</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogProcId</valueType>
+    </variable>
+    <variable name="severity" type="leaf">
+      <column>SEVERITY</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogSeverity</valueType>
+    </variable>
+    <variable name="description" type="leaf">
+      <column>DESCRIPTION</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogDescription</valueType>
+    </variable>
+    <variable name="namespace" type="leaf">
+      <column>NAMESPACE</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogNameSpace</valueType>
+    </variable>
+    <variable name="errorCode" type="leaf">
+      <column>ERRORCODE</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogErrorCode</valueType>
+    </variable>
+    <variable name="eventDate" type="leaf">
+      <column>EVENTDATE</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_com.conceptwave.system.Timestamp</valueType>
+    </variable>
+    <variable name="mdFullName" type="leaf">
+      <column>MDFULLNAME</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogMdFullName</valueType>
+    </variable>
+    <variable name="mdType" type="leaf">
+      <column>MDTYPE</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogMdType</valueType>
+    </variable>
+    <variable name="orderId" type="leaf">
+      <column>ORDERID</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogOrderId</valueType>
+    </variable>
+    <variable name="stackTrace" type="leaf">
+      <column>STACKTRACE</column>
+      <table>OM_EVENTLOG</table>
+      <valueType>dtype_omCommon.omEventLogStackTrace</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEventLog</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Detail" type="vform">
+            <label>Detail</label>
+            <root name="VerticalLayout" type="elvlt">
+              <elementList>
+                <element name="VerticalLayout1" type="elvlt">
+                  <elementList>
+                    <element name="GridLayout" type="elgrd">
+                      <colWidths>170px</colWidths>
+                      <numOfCols>4</numOfCols>
+                      <elementList>
+                        <element name="id" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_id</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="module" type="elslct">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_namespace</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="errorCode" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_errorCode</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="severity" type="elslct">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_severity</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="nodeId" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_nodeId</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="userId" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_userId</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="processId" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_processId</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="orderId" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_orderId</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="eventDate" type="eldatetime">
+                          <displayFormat>dd/MM/yyyy HH:mm:ss</displayFormat>
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_eventDate</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="mdFullName" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_mdFullName</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                        <element name="mdType" type="elfld">
+                          <editable type="varPath">
+                            <variablePathList>
+                              <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                            </variablePathList>
+                          </editable>
+                          <variable type="varPath">
+                            <variablePathList>
+                              <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                              <variablePath>doc_omCommon.omEventLog/leaf_mdType</variablePath>
+                            </variablePathList>
+                          </variable>
+                        </element>
+                      </elementList>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="description" type="eltxtArea">
+                  <dataLength>1024</dataLength>
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.omEventLog/leaf_description</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>1000px</width>
+                </element>
+                <element name="stackTrace" type="eltxtArea">
+                  <dataLength>4000</dataLength>
+                  <editable type="varPath">
+                    <variablePathList>
+                      <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                    </variablePathList>
+                  </editable>
+                  <height>600px</height>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>doc_omCommon.omEventLog/ui_UserInterface/uivar_model</variablePath>
+                      <variablePath>doc_omCommon.omEventLog/leaf_stackTrace</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>1000px</width>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</base>
+            <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfSave" type="eldel"/>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

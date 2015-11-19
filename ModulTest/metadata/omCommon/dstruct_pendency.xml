@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.pendency">
+  <container>true</container>
+  <description>Pendency</description>
+  <label>pendency</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="openDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.openDate</element>
+      <label>openDate</label>
+    </child>
+    <child name="pendencyRelevance" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.pendencyRelevance</element>
+      <label>pendencyRelevance</label>
+    </child>
+    <child name="systemOfOrigin" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.systemOfOrigin</element>
+      <label>systemOfOrigin</label>
+    </child>
+    <child name="requestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestNumber</element>
+      <label>requestNumber</label>
+    </child>
+    <child name="openBy" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.openBy</element>
+      <label>openBy</label>
+    </child>
+    <child name="closeBy" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.closeBy</element>
+      <label>closeBy</label>
+    </child>
+    <child name="itemId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.itemId</element>
+      <label>itemId</label>
+    </child>
+    <child name="closeDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.closeDate</element>
+      <label>closeDate</label>
+    </child>
+    <child name="pendencyCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.pendencyCode</element>
+      <label>pendencyCode</label>
+    </child>
+    <child name="pendencyId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.pendencyId</element>
+      <label>pendencyId</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.pendency</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.pendency</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

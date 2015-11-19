@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getParticipantVSOperations">
+  <label>cache_getParticipantVSOperations</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.partOper_VS_MsgType");
+    fnd.search();
+
+    omMessaging.log("Loading 'Participant VS Operations' from DB", "cache_getParticipantVSOperations");
+
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+    cacheDS.setScriptObject(fnd.list);
+
+    return cacheDS;
+  ]]></script>
+</script>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getMsg">
+  <guid>{017a5175-75b0-d83f-4544-cab87f5d8a0d}</guid>
+  <label>AUX - Get Message</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /*********************************************************************************************
+     *
+     *      Auxiliar Function to get the Message as a LOB from the table
+     *
+     * @author            Fabio Afonso
+     * @created date       2011-08-27
+     *
+     *
+     * @params
+     *            doc                  Document            The Fire and Proceed Message or Archive Document
+     *
+     *********************************************************************************************/
+
+
+    doc.message = doc.readLOB("message");
+    doc.payload = doc.readLOB("payload");
+  ]]></script>
+</script>

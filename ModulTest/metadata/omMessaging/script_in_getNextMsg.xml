@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_getNextMsg">
+  <guid>{048d9c9e-7c39-d0bd-739e-5137bef64e88}</guid>
+  <label>in_getNextMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="stackId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="msgPerCycle" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(stackId == null){
+     return new DataObjectList();
+    }
+
+    var fnd  = new Finder("omMessaging:getInboundMsgFnd");
+    fnd.searchDocument.stackId = stackId;
+    fnd.searchDocument.rowNumber = msgPerCycle;
+
+    var dol = fnd.search();
+
+    return dol;
+  ]]></script>
+</script>

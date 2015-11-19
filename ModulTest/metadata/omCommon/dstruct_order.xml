@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.order">
+  <container>true</container>
+  <description>Order</description>
+  <label>order</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="orderInfo" type="dstruct">
+      <container>true</container>
+      <description>OrderInfo</description>
+      <label>orderInfo</label>
+      <childList>
+        <child name="orderHeader" type="dstruct">
+          <element>dstruct_omCommon.orderHeader</element>
+          <label>orderHeader</label>
+          <mandatory>true</mandatory>
+        </child>
+        <child name="channelInformation" type="dstruct">
+          <element>dstruct_omCommon.channelInformation</element>
+          <label>channelInformation</label>
+        </child>
+      </childList>
+    </child>
+    <child name="customers" type="dstruct">
+      <container>true</container>
+      <description>Customers</description>
+      <label>customers</label>
+      <childList>
+        <child name="customer" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.customer</element>
+          <label>customer</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="addresses" type="dstruct">
+      <container>true</container>
+      <description>Addresses</description>
+      <label>addresses</label>
+      <childList>
+        <child name="address" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.address</element>
+          <label>address</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="accounts" type="dstruct">
+      <container>true</container>
+      <label>accounts</label>
+      <childList>
+        <child name="account" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.account</element>
+          <label>account</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="contactMediums" type="dstruct">
+      <container>true</container>
+      <label>contactMediums</label>
+      <childList>
+        <child name="contactMedium" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.contactMedium</element>
+          <label>contactMedium</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="catalog" type="dstruct">
+      <element>dstruct_omCommon.catalog</element>
+      <label>catalog</label>
+    </child>
+    <child name="notes" type="dstruct">
+      <container>true</container>
+      <description>Notes</description>
+      <label>notes</label>
+      <childList>
+        <child name="note" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.note</element>
+          <label>note</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="control" type="dstruct">
+      <container>true</container>
+      <description>Control</description>
+      <label>control</label>
+      <childList>
+        <child name="statuses" type="dstruct">
+          <container>true</container>
+          <description>Statuses</description>
+          <label>statuses</label>
+          <childList>
+            <child name="status" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.status</element>
+              <label>status</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+        <child name="phases" type="dstruct">
+          <container>true</container>
+          <description>Phases</description>
+          <label>phases</label>
+          <childList>
+            <child name="phase" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.phase</element>
+              <label>phase</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+        <child name="pendencies" type="dstruct">
+          <container>true</container>
+          <description>Pendencies</description>
+          <label>pendencies</label>
+          <childList>
+            <child name="pendency" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.pendency</element>
+              <label>pendency</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+        <child name="rejections" type="dstruct">
+          <container>true</container>
+          <description>Rejections</description>
+          <label>rejections</label>
+          <childList>
+            <child name="rejection" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.rejection</element>
+              <label>rejection</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+        <child name="errors" type="dstruct">
+          <container>true</container>
+          <description>Errors</description>
+          <label>errors</label>
+          <childList>
+            <child name="error" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.error</element>
+              <label>error</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+        <child name="milestones" type="dstruct">
+          <container>true</container>
+          <description>Milestones</description>
+          <label>milestones</label>
+          <childList>
+            <child name="milestone" type="dstruct">
+              <array>true</array>
+              <element>dstruct_omCommon.milestone</element>
+              <label>milestone</label>
+              <maxInstance>-1</maxInstance>
+            </child>
+          </childList>
+        </child>
+      </childList>
+    </child>
+    <child name="attachments" type="dstruct">
+      <container>true</container>
+      <description>Attachments</description>
+      <label>attachments</label>
+      <childList>
+        <child name="attachment" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.attachment</element>
+          <label>attachment</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="contracts" type="dstruct">
+      <container>true</container>
+      <label>contracts</label>
+      <childList>
+        <child name="contract" type="dstruct">
+          <element>dstruct_omCommon.contract</element>
+          <label>contract</label>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <methodList>
+    <method name="setAddress" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:address");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.addresses.address.length;
+              this.addresses.address[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setChannelInformation" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:channelInformation");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+              this.orderInfo.channelInformation = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setCustomer" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:customer");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.customers.customer.length;
+              this.customers.customer[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setError" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:error");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.errors.error.length;
+              this.control.errors.error[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setJeopardy" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:jeopardy");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.jeopardies.jeopardy.length;
+              this.control.jeopardies.jeopardy[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setMilestone" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:milestone");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.milestones.milestone.length;
+              this.control.milestones.milestone[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setNote" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:note");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.notes.note.length;
+              this.notes.note[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setOrderHeader" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:orderHeader");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              this.orderInfo.orderHeader = auxDS
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setPendency" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:pendency");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.pendencies.pendency.length;
+              this.control.pendencies.pendency[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setPhase" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:phase");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.phases.phase.length;
+              this.control.phases.phase[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setRejection" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:rejection");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.rejections.rejection.length;
+              this.control.rejections.rejection[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setStatus" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:status");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.control.statuses.status.length;
+              this.control.statuses.status[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setAccount" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:account");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.accounts.account.length;
+              this.accounts.account[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+    <method name="setContactMediums" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidation" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var auxDS = new DataStructure("omCommon:contactMedium");
+        if(noValidation)
+              auxDS = omCommon.dsSetDsAttributesByObjNoValidation(auxDS, sourceObj);
+        else
+              auxDS = omCommon.dsSetDsAttributesByObj(auxDS, sourceObj, includeLeaves, excludeLeaves);
+
+        if (auxDS != null) {
+
+              var nElems = this.contactMediums.contactMedium.length;
+              this.contactMediums.contactMedium[nElems] = auxDS;
+        }
+
+        return auxDS;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.order</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.order</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

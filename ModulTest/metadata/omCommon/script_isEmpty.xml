@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.isEmpty">
+  <label>Is Empty</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="str" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Check if parameter is null or empty
+     * @param    {String}  str - string to check
+     * @returns  {Boolean} returns a boolean
+     * @version  1.0
+     */
+
+
+    return str==null || str.length==0;
+  ]]></script>
+</script>

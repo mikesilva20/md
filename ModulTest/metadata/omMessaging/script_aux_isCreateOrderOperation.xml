@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_isCreateOrderOperation">
+  <label>aux_isCreateOrderOperation</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="oper" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if( oper == omMessaging.CONST_CREATE_COM())
+        return true;
+
+    if(oper == omMessaging.CONST_CREATE_SOM())
+        return true;
+
+    return false;
+  ]]></script>
+</script>

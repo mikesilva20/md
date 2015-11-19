@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.configOutbound_InterfaceOper_Stack">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{73936342-2dab-49a7-92c7-027c78dae13e}</guid>
+  <label>Config  Outbound - Interface/Operation to Stack </label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="interfaceToInvoke" type="leaf">
+      <column>INTERFACETOINVOKE</column>
+      <key>1</key>
+      <label>Interface to infoke</label>
+      <propertyElement type="elfld">
+        <label>Interface to infoke</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_INTERFACE_TO_STACK_OUT</table>
+      <valueType>dtype_omMessaging.interfaceToInvoke</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <key>2</key>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_INTERFACE_TO_STACK_OUT</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <column>STACKID</column>
+      <key>3</key>
+      <label>Stack Id</label>
+      <propertyElement type="elfld"/>
+      <table>OM_MSG_INTERFACE_TO_STACK_OUT</table>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+    <variable name="isActive" type="leaf">
+      <column>ISACTIVE</column>
+      <label>Is Active</label>
+      <propertyElement type="elrgrp">
+        <label>Is Active</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_INTERFACE_TO_STACK_OUT</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.configOutbound_InterfaceOper_Stack</valueType>
+      </variable>
+      <variable name="allRefs" type="leaf">
+        <label>Internal - All Refs</label>
+        <valueType>doc_omMessaging.ui.allRefs</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="VerticalLayout" type="elvlt">
+                <elementList>
+                  <element name="GridLayout" type="elgrd">
+                    <colWidths>100px,100px,200px,300px</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <elementList>
+                      <element name="Header" type="elhdr">
+                        <label>Config Outbound - Interface/Operation to stack</label>
+                      </element>
+                      <element name="isActive" type="elrgrp">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_isActive</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="interfaceToInvoke" type="elfld">
+                        <dataLength>25</dataLength>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_interfaceToInvoke</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="AddEdit_Form" type="vform">
+            <label>AddEdit_Form</label>
+            <root name="AddEdit_FormGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="configOutbound_InterfaceOper_StackGrid" type="elgrd">
+                  <colWidths>160,160,160,160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="configOutbound_InterfaceOper_StackHeader" type="elhdr">
+                      <label>Config  Outbound - Interface/Operation to Stack </label>
+                    </element>
+                    <element name="isActive" type="elrgrp">
+                      <defaultEnum>yes/no</defaultEnum>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_isActive</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="refOutboundStacks" type="elslct">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/permMethod_canEdit</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/leaf_allRefs</variablePath>
+                          <variablePath>doc_omMessaging.ui.allRefs/leaf_refOutboundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="interfaceToInvoke" type="elfld">
+                      <columnSpan>3</columnSpan>
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/permMethod_canEdit</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_interfaceToInvoke</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="operation" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/permMethod_canEdit</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.configOutbound_InterfaceOper_Stack/leaf_operation</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          if(this.allRefs.refOutboundStacks){
+              this.model.stackId = this.allRefs.refOutboundStacks;
+          }
+          this.cw$super_save();
+
+          omMessaging.cache_resetAll();
+
+          this.parent.hideDetailAction();
+        ]]></script>
+      </method>
+      <method name="canEdit" type="permMethod">
+        <script>return this.model.stackId == null || this.model.interfaceToInvoke == null || this.model.operation == null;</script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.allRefs = new Document("omMessaging.ui.allRefs");
+
+          this.allRefs.refOutboundStacks = this.model.stackId;
+
+
+
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omCommon.omCommon">
+  <eventType>OM_COMMON</eventType>
+  <label>Om Common</label>
+  <metaVersion>25</metaVersion>
+  <returnType>dtype_com.conceptwave.system.Boolean</returnType>
+</event>

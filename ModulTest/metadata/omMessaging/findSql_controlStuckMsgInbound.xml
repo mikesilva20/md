@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.controlStuckMsgInbound">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.GenericDBDoc</input>
+  <label>Control - Stuck messages inbound</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.GenericDBDoc</output>
+  <type>SQL</type>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select stackId, count(1) value1
+        from om_msg_inbound
+        where status = 1
+        {[1,I] and creationdate < sysdate - interval ? minute }
+        group by stackId
+      ]]></script>
+    </method>
+    <method name="cwOnInitSearch" type="uimthd">
+      <script><![CDATA[
+        if(this.searchDocument.value1 == null){
+            this.searchDocument.value1 = "10";
+        }
+        this.cw$super_cwOnInitSearch();
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="controlStuckMsgInboundResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="id" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_id</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value1" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value2" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value3" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value4" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value5" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value5</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value6" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value6</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value7" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value7</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value8" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value8</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value9" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value9</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="controlStuckMsgInboundView" type="findVView">
+      <inputOverlay>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</inputOverlay>
+      <outputOverlay>findSql_omMessaging.controlStuckMsgInbound/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findSql>

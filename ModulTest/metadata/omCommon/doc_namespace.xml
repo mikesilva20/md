@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.namespace">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{001a0ebd-cf99-4283-b5e6-216a235a0994}</guid>
+  <label>Namespace</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="namespace" type="leaf">
+      <key>1</key>
+      <valueType>dtype_cwf_oe.string128</valueType>
+    </variable>
+    <variable name="label" type="leaf">
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwOnDocVisualKey" type="action">
+      <system>true</system>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+      <script>return this.label;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.namespace</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

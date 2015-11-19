@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.OM_MSG_WAIT_FOR_PROCESS">
+  <guid>{08dce2ee-9f4a-04c4-4267-ec9a9f296025}</guid>
+  <label>OM_MSG_WAIT_FOR_PROCESS</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "1";]]></script>
+</script>

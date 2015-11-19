@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.msgAuditDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{0b73ec2f-c7fd-6418-f794-7135e7b3b208}</guid>
+  <label>Audit</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>ID</label>
+      <propertyElement type="elfld">
+        <label>ID</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="eventTime" type="leaf">
+      <column>EVENTTIME</column>
+      <label>Event Time</label>
+      <propertyElement type="eldatetime">
+        <label>Event Time</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <column>SYSTEM</column>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="interfaceToInvoke" type="leaf">
+      <column>INTERFACETOINVOKE</column>
+      <label>interfaceToInvoke</label>
+      <propertyElement type="elfld">
+        <label>interfaceToInvoke</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.interfaceToInvoke</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="auditType" type="leaf">
+      <column>AUDITTYPE</column>
+      <label>Audit Type</label>
+      <propertyElement type="elslct">
+        <label>Audit Type</label>
+      </propertyElement>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.auditType</valueType>
+    </variable>
+    <variable name="processingTime" type="leaf">
+      <column>PROCESSINGTIME</column>
+      <label>Integer</label>
+      <propertyElement type="elfld"/>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.omProcessingTime</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <column>STACKID</column>
+      <label>Stack Id</label>
+      <table>OM_MSG_AUDIT</table>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.msgAuditDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_resubmitMessage">
+  <label>AUX - Resubmit Message</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="date" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.DateTime</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var NAME_SPACE                        = "omMessaging";
+        var SCRIPT_NAME                  = "aux_resubmitMessage";
+        var newnpu = null;
+        var system = null;
+        var msg = null;
+        var ds = null;
+        var outDocCorrelationNPU      = null;
+        var npu = null;
+        var correlationNpu = null;
+        var msgDoc =null;
+        var oper = null;
+        var interfaceToInvoke = null;
+        var operationToInvoke = "pubMessage";
+    try
+    {
+        npu = doc.npu;
+        correlationNpu = doc.correlationNpu
+
+        if(doc.typeMsg == 0){
+            oper = omMessaging.npu_getOper(npu);
+            system = omMessaging.npu_getSystem(npu);
+        }
+        else{
+            oper = omMessaging.npu_getOper(correlationNpu);
+            outDocCorrelationNPU = ds.HeaderRequest.correlationNpu;
+
+            system = omMessaging.npu_getSystem(outDocCorrelationNPU);
+        }
+
+        msgDoc = omMessaging.out_getMsg(npu);
+        interfaceToInvoke = msgDoc.interfaceToInvoke;
+        operationToInvoke = msgDoc.operation;
+
+        omMessaging.aux_loadMsgData(msgDoc);
+        msg = msgDoc.payload;
+        ds = Global.getItemsFromXML(msg, msgDoc.dataType);
+        ds = ds[0];
+
+        newnpu = omMessaging.npu_genNew(oper, npu);
+
+        ds.HeaderRequest.npu = newnpu;
+
+        omMessaging.out_publishMsg(ds, null, system, true, interfaceToInvoke, operationToInvoke );
+
+        return newnpu;
+    }
+    catch(e)
+    {
+        //omCommon.writeLog(3, "ptSysMgmt: Error Resubmitting the Message " + e, NAME_SPACE + "." + SCRIPT_NAME);
+        publishEvent("OM_COMMON",FIRST_ONE,null);
+    }
+  ]]></script>
+</script>

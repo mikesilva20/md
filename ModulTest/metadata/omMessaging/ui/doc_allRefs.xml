@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.allRefs">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{93796725-3800-48c9-a03e-149840c42ac1}</guid>
+  <label>Internal - All Refs</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="refInboundStacks" type="leaf">
+      <label>Stack Id</label>
+      <propertyElement type="elslct">
+        <sorted>false</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.refInboundStacks</valueType>
+    </variable>
+    <variable name="refOutboundStacks" type="leaf">
+      <label>Stack Id</label>
+      <propertyElement type="elslct">
+        <sorted>false</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.refOutboundStacks</valueType>
+    </variable>
+    <variable name="refValidSystems" type="leaf">
+      <label>System</label>
+      <propertyElement type="elslct">
+        <sorted>true</sorted>
+      </propertyElement>
+      <valueType>dtype_omMessaging.refValidSystems</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.allRefs</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

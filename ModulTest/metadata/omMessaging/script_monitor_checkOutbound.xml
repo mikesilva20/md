@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.monitor_checkOutbound">
+  <label>monitor_checkOutbound</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    try{
+
+        var SCRIPT_NAME = "monitor_checkOutbound";
+
+        var configs = omMessaging.aux_getConfig();
+        var stacks = omMessaging.aux_getOutboundStacks();
+        var maxInactivityGP = 600;
+
+        if(configs.maxInactivityGP){
+         maxInactivityGP = configs.maxInactivityGP;
+        }
+
+
+        var fnd = new Finder("omMessaging.controlStuckMsgOutbound");
+
+        if(configs.outboundMaxTimeWaiting){
+            fnd.searchDocument.value1 = configs.outboundMaxTimeWaiting;
+        }
+
+        var results = fnd.search();
+
+
+        var now = new Date();
+
+        for(var i=0; i<results.length ; i++){
+
+            var stackId = results[i].id;
+
+            var stackInfo = getGPIdFromConfig(stacks, stackId);
+
+            var gpInfo = null;
+
+            if(stackInfo != null){
+                gpInfo = omMessaging.aux_getGPInfo(stackInfo.GPId);
+
+                if(gpInfo == null){
+                    // não exite este GP
+                    deactivateStack(stackInfo, "Invalid or missing GP ");
+
+
+                }else if(gpInfo.value2 == '5'){
+                    // GP no estado erro
+                    deactivateStack(stackInfo, "GP in error ");
+
+                }else if(["2", "3", "4"].indexOf(gpInfo.value2) != -1){
+                    // GP está parado (suspenso)
+                    omMessaging.log("## SUSPENDED / STOPPED STACK: " + stackInfo.stackId + " | GPId: " + stackInfo.GPId + " ## GP is suspended" , SCRIPT_NAME, "WARN");
+
+                }else {
+
+                    var lastActivity = Calendar.parseDate(gpInfo.value3, "yyyy-MM-dd HH:mm:ss");
+
+                    if(lastActivity &&(now.getTime() - lastActivity.getTime() > (maxInactivityGP * 1000))){
+                        // GP sem atividade a X tempo;
+                        deactivateStack(stackInfo, "GP is 'stuck' " );
+                    }
+
+                }
+            }else{
+                omMessaging.log("## INVALID MESSAGES - StackID: " + stackId + " ## I found " + results[i].value1 + " messagens with invalid stackId, please DR" ,SCRIPT_NAME, "ERR");
+            }
+        }
+
+    }catch(ex){
+        omMessaging.log("Exception: " + ex.message + " \r\nStacktrace: " + ex.stack , SCRIPT_NAME, null);
+    }
+
+
+
+    /*
+    * ############ AUXILIAR METHODS #############
+    */
+
+
+    function deactivateStack(stackInfo, reason){
+
+        if(stackInfo != null){
+
+            if(configs.automaticSuspension == true){
+
+                stackInfo.isActive = false;
+                stackInfo.save();
+                omMessaging.cache_resetAll();
+
+                omMessaging.log("## DEACTIVATE STACK: " + stackInfo.stackId + " | GPId: " + stackInfo.GPId + " ## Reason: " + reason, SCRIPT_NAME, "ERR");
+
+            }else{
+                omMessaging.log("## ATTENTION - STACK: " + stackInfo.stackId + " | GPId: " + stackInfo.GPId + " ## Reason: " + reason, SCRIPT_NAME, "ERR");
+            }
+        }
+    }
+
+
+
+    function getGPIdFromConfig(listConfigs, stackId){
+
+        for(var i=0; i<listConfigs.length ; i++){
+
+            if(listConfigs[i].stackId == stackId){
+                return listConfigs[i];
+            }
+
+        }
+
+        return null;
+    }
+  ]]></script>
+</script>

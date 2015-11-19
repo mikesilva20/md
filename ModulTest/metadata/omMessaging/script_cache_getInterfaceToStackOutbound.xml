@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getInterfaceToStackOutbound">
+  <label>cache_getInterfaceToStackOutbound</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.configInterfaceToStack_Outbound");
+    fnd.searchDocument.isActive = true;
+    fnd.search();
+
+    omMessaging.log("Loading Interface to Stack Configuration - Outbound from DB", "cache_getInterfaceToStackOutbound");
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+
+    cacheDS.setScriptObject(fnd.list);
+
+    return cacheDS;
+  ]]></script>
+</script>

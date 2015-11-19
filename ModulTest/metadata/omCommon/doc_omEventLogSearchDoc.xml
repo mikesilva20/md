@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEventLogSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{d14a43da-8bf9-4140-a466-b48c2278f954}</guid>
+  <label>OM EventLog Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <valueType>dtype_omCommon.omEventLogId</valueType>
+    </variable>
+    <variable name="nodeId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogNodeId</valueType>
+    </variable>
+    <variable name="userId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogUserId</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogProcId</valueType>
+    </variable>
+    <variable name="severity" type="leaf">
+      <valueType>dtype_omCommon.omEventLogSeverity</valueType>
+    </variable>
+    <variable name="namespace" type="leaf">
+      <valueType>dtype_omCommon.omEventLogNameSpace</valueType>
+    </variable>
+    <variable name="errorCode" type="leaf">
+      <valueType>dtype_omCommon.omEventLogErrorCode</valueType>
+    </variable>
+    <variable name="eventInitDate" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Timestamp</valueType>
+    </variable>
+    <variable name="eventEndDate" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Timestamp</valueType>
+    </variable>
+    <variable name="mdFullName" type="leaf">
+      <valueType>dtype_omCommon.omEventLogMdFullName</valueType>
+    </variable>
+    <variable name="mdType" type="leaf">
+      <valueType>dtype_omCommon.omEventLogMdType</valueType>
+    </variable>
+    <variable name="orderId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogOrderId</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEventLogSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Search" type="vform">
+            <label>Search</label>
+            <root name="VerticalLayout" type="elvlt">
+              <elementList>
+                <element name="GridLayout" type="elgrd">
+                  <colWidths>170px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <elementList>
+                    <element name="id" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_id</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="nodeId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_nodeId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="userId" type="elfld">
+                      <dataLength>30</dataLength>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_userId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="processId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_processId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="severity" type="elslct">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_severity</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="namespace" type="elslct">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_namespace</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="errorCode" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_errorCode</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="orderId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_orderId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="eventInitDate" type="eldatetime">
+                      <displayFormat>dd/MM/yyyy HH:mm:ss</displayFormat>
+                      <label>Start Date &gt;=</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_eventInitDate</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="eventEndDate" type="eldatetime">
+                      <displayFormat>dd/MM/yyyy HH:mm:ss</displayFormat>
+                      <label>End Date &lt;=</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_eventEndDate</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="mdFullName" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_mdFullName</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="mdType" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omCommon.omEventLogSearchDoc/leaf_mdType</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_getNextMsg">
+  <guid>{07601099-d0f5-4af9-5b2e-a20bc905a92b}</guid>
+  <label>out_getNextMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="stackId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="maxMsg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(stackId == null){
+     return new DataObjectList();
+    }
+
+    var fnd  = new Finder("omMessaging:getOutboundMsgFnd");
+    fnd.searchDocument.stackId = stackId;
+    fnd.searchDocument.rowNumber = maxMsg;
+
+    var dol = fnd.search();
+
+    return dol;
+  ]]></script>
+</script>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_addProcId">
+  <guid>{05a08f12-2dd8-9342-f4ab-62f9f76048b8}</guid>
+  <label>route_addProcId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="requestNumber" type="rifp">
+      <type>dtype_omMessaging.requestNumber</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omMessaging.operation</type>
+    </parameter>
+    <parameter name="correlationKey" type="rifp">
+      <type>dtype_omMessaging.correlationKey</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var a = new Array();
+
+    if(npu != null){
+        a[0] = npu;
+        a[1] = 'NA';
+        a[2] = 'NA';
+        a[3] = 'NA';
+
+        var doc = Document.readDoc("omMessaging:msgRouteDoc", a);
+
+        if(doc == null){
+              doc = new Document("omMessaging:msgRouteDoc");
+              doc.npu = npu;
+              doc.requestNumber = 'NA';
+              doc.operation = 'NA';
+              doc.correlationKey = 'NA';
+              doc.processId = processId;
+              doc.creationDate = new Date();
+
+              doc.save();
+        }
+    }else if(correlationKey){
+             a[0] = 'NA';
+             a[1] = 'NA';
+             a[2] = 'NA';
+             a[3] = correlationKey;
+            var doc = Document.readDoc("omMessaging:msgRouteDoc", a);
+
+
+            if(doc == null){
+              doc = new Document("omMessaging:msgRouteDoc");
+              doc.npu = 'NA';
+              doc.requestNumber = 'NA';
+              doc.operation = 'NA';
+              doc.processId = processId;
+              doc.creationDate = new Date();
+              doc.correlationKey = correlationKey;
+
+              doc.save();
+        }
+
+         }else{ //vai usar OrderEntryId, requestNumber, operation
+                 a[0] = 'NA';
+                 a[1] = requestNumber;
+                 a[2] = operation;
+                 a[3] = 'NA';
+                 var doc = Document.readDoc("omMessaging:msgRouteDoc", a);
+
+                 if(doc == null){
+                    doc = new Document("omMessaging:msgRouteDoc");
+                    doc.npu = 'NA';
+                    doc.requestNumber = requestNumber;
+                    doc.operation = operation;
+                    doc.processId = processId;
+                    doc.creationDate = new Date();
+                    doc.correlationKey  = 'NA';
+                    doc.save();
+        }
+    }
+  ]]></script>
+</script>

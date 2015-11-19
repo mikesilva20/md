@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.GPType">
+  <enumeration type="enum">
+    <valueList>
+      <value name="IN" type="enumItem" code="IN"/>
+      <value name="OUT" type="enumItem" code="OUT"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>GPType</label>
+  <length>32</length>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elslct">
+    <sorted>false</sorted>
+  </propertyElement>
+  <textLength>32</textLength>
+</dataType>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_getProcId">
+  <guid>{0a862faa-6d51-e9fb-64a3-2f5f1e512282}</guid>
+  <label>route_getProcId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="requestNumber" type="rifp">
+      <type>dtype_omMessaging.requestNumber</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>dtype_omMessaging.operation</type>
+    </parameter>
+    <parameter name="correlationKey" type="rifp">
+      <type>dtype_omMessaging.correlationKey</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var a = new Array();
+
+    if(npu != null){
+        a[0] = npu;
+        a[1] = 'NA';
+        a[2] = 'NA';
+        a[3] = 'NA';
+    }
+    else if(correlationKey != null){
+        a[0] = 'NA';
+        a[1] = 'NA';
+        a[2] = 'NA';
+        a[3] = correlationKey;
+    }else{
+
+        a[0] = 'NA';
+        a[1] = requestNumber;
+        a[2] = operation;
+        a[3] = 'NA';
+    }
+
+    var doc = Document.readDoc("omMessaging:msgRouteDoc", a);
+
+    if(doc != null)
+          return doc.processId;
+
+
+    return null;
+  ]]></script>
+</script>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.GenericDBDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{0fe62ca8-f879-43c9-8859-2e897786799a}</guid>
+  <label>GenericDBDoc</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <key>1</key>
+      <label>Document ID</label>
+      <valueType>dtype_cwf.docId</valueType>
+    </variable>
+    <variable name="value1" type="leaf">
+      <label>Value 1</label>
+      <propertyElement type="elfld">
+        <label>Value 1</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value2" type="leaf">
+      <label>Value 2</label>
+      <propertyElement type="elfld">
+        <label>Value 2</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value3" type="leaf">
+      <label>Value 3</label>
+      <propertyElement type="elfld">
+        <label>Value 3</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value4" type="leaf">
+      <label>Value 4</label>
+      <propertyElement type="elfld">
+        <label>Value 4</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value5" type="leaf">
+      <label>Value 5</label>
+      <propertyElement type="elfld">
+        <label>Value 5</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value6" type="leaf">
+      <label>Value 6</label>
+      <propertyElement type="elfld">
+        <label>Value 6</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value7" type="leaf">
+      <label>Value 7</label>
+      <propertyElement type="elfld">
+        <label>Value 7</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value8" type="leaf">
+      <label>Value 8</label>
+      <propertyElement type="elfld">
+        <label>Value 8</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value9" type="leaf">
+      <label>Value 9</label>
+      <propertyElement type="elfld">
+        <label>Value 9</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwOnDocVisualKey" type="action">
+      <system>true</system>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+      <script>return this.id;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

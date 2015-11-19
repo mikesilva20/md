@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.OM_MSG_FIRE_AND_PROCEED">
+  <guid>{0fab7d24-edf0-ed48-992d-f21e8832b899}</guid>
+  <label>OM_MSG_FIRE_AND_PROCEED</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "3";]]></script>
+</script>

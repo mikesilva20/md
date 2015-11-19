@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event__handler name="omCommon.OM_COMMON_GETENVIRONMENTINTERFACE_HANDLER">
+  <flags enum-type="metadataFlag">FINAL</flags>
+  <event>evt_omCommon.OM_COMMON_GETENVIRONMENTINTERFACE</event>
+  <eventID>OM_COMMON_GETENVIRONMENTINTERFACE</eventID>
+  <eventType>OM_COMMON_GETENVIRONMENTINTERFACE</eventType>
+  <label>OM_COMMON_GETENVIRONMENTINTERFACE_HANDLER</label>
+  <metaVersion>25</metaVersion>
+  <script>return omCommon.getEnvironmentInterface(environment, environmentType, isOM, nodeId);</script>
+</event__handler>

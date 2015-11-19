@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.error_addProcId">
+  <label>error_addProcId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="procId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="correlationNpu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="system" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="error" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="desc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="errorNative" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var regDoc = omMessaging.error_getProcId(procId);
+    if (regDoc!=null)
+        return false;
+
+    //regDoc = new Document("omExceptionHandler.procIdErrorDoc");
+    redDoc = publishEvent("OM_ERROR_HANDLER",FIRST_ONE,null);
+    regDoc.processId        = procId;
+    regDoc.npu              = npu;
+    regDoc.correlationNpu   = correlationNpu;
+    regDoc.system           = system;
+    regDoc.error            = error;
+    regDoc.errorNative      = errorNative;
+    regDoc.errorDescription = desc;
+    regDoc.creationDate            = new Date();
+    regDoc.save();
+
+    return true;
+  ]]></script>
+</script>

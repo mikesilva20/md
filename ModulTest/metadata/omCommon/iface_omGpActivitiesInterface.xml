@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface name="omCommon.omGpActivitiesInterface">
+  <guid>{e8bd3efd-23b5-4e81-a336-de4888262384}</guid>
+  <label>om GP Activities Interface</label>
+  <metaVersion>4</metaVersion>
+  <operationList>
+    <operation name="monitorProcessActivities" type="oper">
+      <label>Monitor Process Activities</label>
+      <type>One-Way</type>
+    </operation>
+  </operationList>
+  <revision>3</revision>
+</interface>

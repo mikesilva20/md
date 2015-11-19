@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getObjectFrom2dArray">
+  <label>getObjectFrom2dArray</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="keyIndex" type="rifp">
+      <type>dtype_com.conceptwave.system.Integer</type>
+    </parameter>
+    <parameter name="keyValue" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="valueIndex" type="rifp">
+      <type>dtype_com.conceptwave.system.Integer</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get from a 2D array an object found in position "valueIndex" but dependent of the value = "keyValue" at position "keyIndex".
+     * @param    {Array}    sourceArray - Array to search
+     * @param    {Int}      keyIndex    - Index of a reference key
+     * @param    {String}   keyValue    - Value to test as key
+     * @param    {Int}      valueIndex  - Index of the object to return
+     * @returns  {Object}   return      - Object if found
+     * @version  1.0
+     */
+
+    for (var i=0; i < sourceArray.length; i++) {
+
+        if ( ((sourceArray[i].length-1) >= keyIndex) &&
+            ((sourceArray[i].length-1) >= valueIndex) &&
+        (sourceArray[i][keyIndex] == keyValue) ) return sourceArray[i][valueIndex];
+    }
+
+    return null;
+  ]]></script>
+</script>

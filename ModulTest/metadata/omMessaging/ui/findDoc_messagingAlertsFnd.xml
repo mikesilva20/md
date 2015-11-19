@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findDoc name="omMessaging.ui.messagingAlertsFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>Control - Messaging Alerts</label>
+  <maxRowsLimit>100</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.ui.messagingAlerts</output>
+  <sortList>
+    <sort type="stitem">
+      <descending>true</descending>
+      <path>doc_omMessaging.ui.messagingAlerts/leaf_alertDate</path>
+    </sort>
+  </sortList>
+  <type>document</type>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Messaging Alerts</label>
+        <valueType>doc_omMessaging.ui.messagingAlerts</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.ui.messagingAlerts/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="messagingAlertsFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="calculateType" type="elimg">
+                        <disabled type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </disabled>
+                        <imageUrl>/cwfv/error.png</imageUrl>
+                        <variable type="varPath">
+                          <independant>true</independant>
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/uimthd_calculateType</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="date" type="eldatetime">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.ui.messagingAlerts/leaf_alertDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>130px</width>
+                      </element>
+                      <element name="description" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.ui.messagingAlerts/leaf_description</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>600px</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="calculateType" type="uimthd">
+        <parameterList>
+          <parameter name="row" type="rifp"/>
+        </parameterList>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+        <script><![CDATA[
+          if(row){
+
+              if(row.type == "WARN"){
+                   return "/cwf/warn.gif";
+              }
+
+          }
+
+
+          return "/cwfv/error.png";
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="messagingAlertsFndView" type="findVView">
+      <outputOverlay>findDoc_omMessaging.ui.messagingAlertsFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findDoc>

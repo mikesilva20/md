@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getTransformation">
+  <label>aux_getTransformation</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="oper" type="rifp"/>
+    <parameter name="type" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    //var conf = omConfig.configData("processMessageScript", ["operation",oper, "type", type], false, true);
+    var conf = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+
+    var fqn = null;
+    if(conf && conf.length > 0){
+        fqn = conf[0].value2;
+    }
+
+    return fqn;
+  ]]></script>
+</script>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.findSubStrings">
+  <label>findSubStrings</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="sourceString" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="subStringArray" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="all" type="rifp">
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+    * Function description: Find in a source string the sub strings passed in an array.
+    *
+    * @param {String} sourceString                  String where to search substrings
+    * @param {Array} subStringArray             Array of substrings used for the search
+    * @param {Boolean} all                              true to find all substring or false to at least find one
+    * @returns {Boolean}                               true if found, false otherwise
+    */
+
+    var ret = all? true : false;      // value to return
+    var      test = true;                        // intermediate test value
+
+    if(!sourceString)
+        return false;
+
+    for (var i=0; i < subStringArray.length; i++)
+    {
+        test = (sourceString.search(subStringArray[i]) != -1)? true : false;
+        ret  = all? (ret && test) : (ret || test);
+    }
+
+    return ret;
+  ]]></script>
+</script>

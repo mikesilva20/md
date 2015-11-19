@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event name="omMessaging.messagingEvent">
+  <eventType>OM_MESSAGING</eventType>
+  <label>Messaging Event</label>
+  <metaVersion>25</metaVersion>
+  <returnType>dtype_com.conceptwave.system.Boolean</returnType>
+</event>

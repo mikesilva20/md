@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.fireAndProceedArchive">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{0c83b619-686d-2808-811a-05d46f8c45f1}</guid>
+  <label>Fire And Proceed - Archive</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="businessId" type="leaf">
+      <column>BUSINESSID</column>
+      <label>Business Id</label>
+      <propertyElement type="elfld">
+        <label>Business Id</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omMessaging.businessId</valueType>
+    </variable>
+    <variable name="npu" type="leaf">
+      <column>NPU</column>
+      <key>1</key>
+      <label>NPU</label>
+      <propertyElement type="elfld">
+        <label>NPU</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+    <variable name="eCode" type="leaf">
+      <column>ECODE</column>
+      <label>Error Code</label>
+      <propertyElement type="elfld">
+        <label>Error Code</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omCommon.eCode</valueType>
+    </variable>
+    <variable name="eDescription" type="leaf">
+      <column>EDESCRIPTION</column>
+      <label>Error Description</label>
+      <propertyElement type="elfld">
+        <label>Error Description</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omCommon.eDescription</valueType>
+    </variable>
+    <variable name="correlationNpu" type="leaf">
+      <column>CORRELATIONNPU</column>
+      <label>Correlation NPU</label>
+      <propertyElement type="elfld">
+        <label>Correlation NPU</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="receiveDate" type="leaf">
+      <column>RECEIVEDATE</column>
+      <label>Receive Date</label>
+      <propertyElement type="eldatetime">
+        <label>Receive Date</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="action" type="leaf">
+      <column>ACTION</column>
+      <label>Action</label>
+      <propertyElement type="elslct">
+        <label>Action</label>
+        <sorted>false</sorted>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omMessaging.fireProceedAction</valueType>
+    </variable>
+    <variable name="actionDate" type="leaf">
+      <column>ACTIONDATE</column>
+      <label>Action Date</label>
+      <propertyElement type="eldatetime">
+        <displayFormat>yyyy-MM-dd HH:mm:ss </displayFormat>
+        <label>Action Date</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="resubmissionNpu" type="leaf">
+      <column>RESSUBMISSIONNPU</column>
+      <label>Resubmission NPU</label>
+      <propertyElement type="elfld">
+        <label>Resubmission NPU</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+    <variable name="dataType" type="leaf">
+      <column>DATATYPE</column>
+      <label>dataType</label>
+      <propertyElement type="elfld">
+        <label>dataType</label>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="message" type="leaf">
+      <dontMap>true</dontMap>
+      <label>message</label>
+      <propertyElement type="elfld">
+        <label>message</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="payload" type="leaf">
+      <dontMap>true</dontMap>
+      <label>payload</label>
+      <propertyElement type="elfld">
+        <label>payload</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+    </variable>
+    <variable name="typeMsg" type="leaf">
+      <column>TYPEMSG</column>
+      <label>type Msg</label>
+      <propertyElement type="elslct">
+        <sorted>false</sorted>
+      </propertyElement>
+      <table>OM_FIREANDPROCEED_ARCHIVE</table>
+      <valueType>dtype_omMessaging.fireProceedTypeMsg</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="addPerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+    <method name="deletePerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+    <method name="editablePerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+      <script><![CDATA[
+        // SCRIPT MIGRATION: if null, return false
+        function functionToReturnFalseWhenNull(scriptToReturnFalseWhenNullThis) {
+        return scriptToReturnFalseWhenNullThis.cwIsEditable(true) && $psCondition;
+        }
+
+        var functionToReturnFalseWhenNullRes = functionToReturnFalseWhenNull(this);
+        if(functionToReturnFalseWhenNullRes == null)
+          return false;
+        else
+          return functionToReturnFalseWhenNullRes;
+      ]]></script>
+    </method>
+    <method name="attachPerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.fireAndProceedArchive</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="DetailsGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="fireAndProceedArchiveHeader" type="elhdr">
+                    <label>Details</label>
+                    <showValidation>true</showValidation>
+                    <style>CwFOT</style>
+                  </element>
+                  <element name="DetailsGrid" type="elgrd">
+                    <colWidths>195,195</colWidths>
+                    <numOfCols>2</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>390px</width>
+                    <elementList>
+                      <element name="businessId" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_businessId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="npu" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_npu</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="eCode" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_eCode</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="eDescription" type="eltxtArea">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <height>20px</height>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_eDescription</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                      </element>
+                      <element name="correlationNpu" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_correlationNpu</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="action" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_action</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="actionDate" type="eldatetime">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <hint>yyyy-MM-dd HH:mm:ss </hint>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_actionDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="receiveDate" type="eldatetime">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <hint>yyyy-MM-dd HH:mm:ss </hint>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_receiveDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="resubmissionNpu" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/leaf_resubmissionNpu</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="Response1" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/usrActionMethod_cwOnFormFieldBefore_DetailsResponse1</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <columnSpan>1</columnSpan>
+                        <label>Response</label>
+                        <startRow>true</startRow>
+                      </element>
+                      <element name="Message1" type="elbtn">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedArchive/ui_UserInterface/usrActionMethod_cwOnFormFieldBefore_DetailsMessage1</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <columnSpan>1</columnSpan>
+                        <label>Message</label>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+      <method name="cwOnFormFieldAfter_DetailsResponse1" type="usrActionMethod">
+        <parameterList>
+          <parameter name="selectList" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+          <parameter name="selectData" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+        </parameterList>
+        <script><![CDATA[
+          // Load the Message
+          if(!this.model.message)
+                omMessaging.aux_getMsg(this.model);
+
+          // Show the Message
+          Global.showModelessDialog(this.model.message,600,720,'text/xml');
+        ]]></script>
+      </method>
+      <method name="cwOnFormFieldBefore_DetailsResponse1" type="usrActionMethod">
+        <script><![CDATA[
+          function funcReturnsValCallDisplayScript(scriptReturnsValToCallDisplayScriptThis) {
+
+          scriptReturnsValToCallDisplayScriptThis.cwOnFormFieldAfter_DetailsResponse1();
+
+          }
+
+          var funcReturnsValCallDisplayScriptRes = funcReturnsValCallDisplayScript(this);
+          if(funcReturnsValCallDisplayScriptRes != null && funcReturnsValCallDisplayScriptRes instanceof Document &&
+              funcReturnsValCallDisplayScriptRes.hasMethod("displayScript"))
+            funcReturnsValCallDisplayScriptRes.displayScript();
+          return funcReturnsValCallDisplayScriptRes;
+        ]]></script>
+      </method>
+      <method name="cwOnFormFieldAfter_DetailsMessage1" type="usrActionMethod">
+        <parameterList>
+          <parameter name="selectList" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+          <parameter name="selectData" type="rifp">
+            <mandatory>true</mandatory>
+            <type>nmeta_com.conceptwave.system.Object</type>
+          </parameter>
+        </parameterList>
+        <script><![CDATA[
+          // Load the Message
+          if(!this.model.payload)
+                omMessaging.aux_getMsg(this.model);
+
+          // Show the Message
+          Global.showModelessDialog(this.model.payload,600,720,'text/xml');
+        ]]></script>
+      </method>
+      <method name="cwOnFormFieldBefore_DetailsMessage1" type="usrActionMethod">
+        <script><![CDATA[
+          function funcReturnsValCallDisplayScript(scriptReturnsValToCallDisplayScriptThis) {
+
+          scriptReturnsValToCallDisplayScriptThis.cwOnFormFieldAfter_DetailsMessage1();
+
+          }
+
+          var funcReturnsValCallDisplayScriptRes = funcReturnsValCallDisplayScript(this);
+          if(funcReturnsValCallDisplayScriptRes != null && funcReturnsValCallDisplayScriptRes instanceof Document &&
+              funcReturnsValCallDisplayScriptRes.hasMethod("displayScript"))
+            funcReturnsValCallDisplayScriptRes.displayScript();
+          return funcReturnsValCallDisplayScriptRes;
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_updateQueuePosition">
+  <guid>{00097cfc-74ce-5fd3-3e56-7a9ffcb6afac}</guid>
+  <label>aux_updateQueuePosition</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(msg.status == omMessaging.CONST_STATUS_PUBLISHED() || msg.status == omMessaging.CONST_STATUS_RETRY()){
+          msg.queuePosition = Global.nextInSequence("OM_MSG_QUEUE_POS");
+    }
+  ]]></script>
+</script>

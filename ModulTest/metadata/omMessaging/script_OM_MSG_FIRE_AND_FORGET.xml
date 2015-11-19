@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.OM_MSG_FIRE_AND_FORGET">
+  <guid>{0d465cf6-1827-18c4-9f82-62767e83f0dc}</guid>
+  <label>OM_MSG_FIRE_AND_FORGET</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "0";]]></script>
+</script>

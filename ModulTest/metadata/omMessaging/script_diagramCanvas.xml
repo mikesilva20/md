@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramCanvas">
+  <label>Diagram Canvas</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="canvasId" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="lineUp" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="lineDown" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /* desenha as ligacoes entre os elementos
+     * Created by: Tiago Barreiros
+     */
+
+    var canvasDoc;
+    var numChilds;
+    var childId;
+    var x_init = new Array;
+    var x_final = new Array;
+
+    canvasDoc = "";
+    for (var i=0; i < lineUp.length; i++){                                                // para cada um dos elementos da linha
+        x_init[i] = 0;
+
+        //verifica quantas childs tem o elemento
+        if (lineUp[i][0] == "space"){                                                     // caso seja um bloco de espaco
+            numChilds = 0;                                                                // nao tem childs
+        }
+        else {                                                                            // para nodes
+            numChilds = lineUp[i][2].length;                                              // recolhe quantas childs tem (quantos connectores)
+        }
+
+        for (var j=0; j < lineUp.length; j++){                                            // recolhe ponto inicial
+            if (lineUp[i][0] == lineUp[j][0]){                                            // se o elemento da linha for ele proprio
+                x_init[i] = x_init[i] + ((lineUp[j][3]*150)/2);                           // coloca o conector no seu centro
+                break;
+            }
+            else{                                                                         // caso contrario
+                x_init[i] = x_init[i] + (lineUp[j][3]*150);                               // aumenta tamanho horizontalmente com a largura dos elementos anteriores
+            }
+        }
+        x_init[i] = Math.round(x_init[i]);                                                // o seu ponto inicial (centrado)
+
+        if (numChilds > 0){                                                               // se tiver childs
+            for (var j=0; j < numChilds; j++){                                            // por cada child
+                x_final[j] = 0;                                                           // reset horizontal
+                childId = lineUp[i][2][j];                                                // recolhe o id da child
+                for (var k=0; k < lineDown.length; k++){
+                    if (childId == lineDown[k][0]){                                       // se o elemento da linha seguinte for a child
+                        x_final[j] = x_final[j] + ((lineDown[k][3]*150)/2);               // coloca o conector no seu centro
+                        break;
+                    }
+                    else{                                                                 // caso contrario
+                        x_final[j] = x_final[j] + (lineDown[k][3]*150);                   // aumenta tamanho horizontalmente com a largura dos elementos anteriores
+                    }
+                }
+                x_final[j] = Math.round(x_final[j]);                                      // o seu ponto final (centrado)
+
+                canvasDoc = canvasDoc + "draw('"+ canvasId +"','"+ x_init[i] +"','"+ x_final[j] +"');";
+            }
+        }
+    }
+
+    return canvasDoc;
+  ]]></script>
+</script>

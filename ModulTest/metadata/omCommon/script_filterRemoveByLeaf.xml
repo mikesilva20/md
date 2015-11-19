@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.filterRemoveByLeaf">
+  <label>filterRemoveByLeaf</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="dol" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="leaf_value" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="privilegeLeaf" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Return an DOL with out duplicated values
+     * @param    {Order}  ord - Order
+     * @param    {[Array]}  leaf_value - array bidimencional with leaf name & value [["offerCode", "NADSL"],["type", "xpto"]]
+     * @param    {String}  privilegeLeaf - match the privilege found in leaf "privilegeLeaf" with the user priveleges
+     * @returns  {DataObjectList} Returns a DataObjectList filtered
+     * @version  1.0
+     */
+
+    // leaf_value             - array bidimencional with leaf name & value [["offerCode", "NADSL"],["type", "xpto"]]
+    // privilegeLeaf      - match the privilege found in leaf "privilegeLeaf" with the user priveleges
+
+    var newList = new DataObjectList();
+
+    // Test all condicions to procceed
+    if (!dol)
+        return null;
+
+    // Test leaf_value array
+    if (!leaf_value || (leaf_value && !(leaf_value.length)))
+        return dol;
+
+    var toDelete = false;
+    var leafValue = null;
+    for (var i = 0; i < dol.length; i++)
+    {
+        // find if the list element needs to be deleted
+        for (var j = 0; j < leaf_value.length; j++)
+        {
+            leafValue = dol[i][leaf_value[j][0]];
+            if (leafValue == leaf_value[j][1])
+            {
+                toDelete = true;
+                break;
+            }
+        }
+
+        // check privilege & delete if user doesn't have it
+        if (!toDelete && privilegeLeaf)
+        {
+            leafValue = dol[i][privilegeLeaf];
+            if (leafValue && !UserProfile.hasPrivilege(leafValue))
+                toDelete = true;
+        }
+        // copy value to new list if toDelete == false
+        if (!toDelete)
+            newList.addLast(dol[i].copyDocument(true, true));
+
+        toDelete = false;
+    }
+
+    return newList;
+  ]]></script>
+</script>

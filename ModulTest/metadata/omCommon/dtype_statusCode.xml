@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.statusCode">
+  <enumeration type="enum">
+    <valueList>
+      <value name="New" type="enumItem" code="NEW"/>
+      <value name="In Error" type="enumItem" code="ERR"/>
+      <value name="With Pendency" type="enumItem" code="PND"/>
+      <value name="In Progress" type="enumItem" code="INP"/>
+      <value name="In Cancelation" type="enumItem" code="INC"/>
+      <value name="In Rejection" type="enumItem" code="INR"/>
+      <value name="Complete" type="enumItem" code="END"/>
+      <value name="Canceled" type="enumItem" code="CAN"/>
+      <value name="Rejected" type="enumItem" code="REJ"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Status Code</label>
+  <length>32</length>
+  <metaVersion>4</metaVersion>
+</dataType>

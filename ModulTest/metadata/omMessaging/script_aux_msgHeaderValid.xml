@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_msgHeaderValid">
+  <label>aux_msgHeaderValid</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="header" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="corrNpuOrProcIdNotRequired" type="rifp">
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+    <parameter name="interfaceInvoked" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operationInvoked" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var eCodes = new Array();
+    var codeDescription = null;
+
+    if(!header){
+        //codeDescription = omConfig.getErrorCodeDescription("5E0001");
+        codeDescription = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+        omMessaging.aux_addError(eCodes, codeDescription[0], codeDescription[1]);
+        return eCodes;
+    }
+
+    if(!header.has("npu") || header.npu == null){
+       // codeDescription = omConfig.getErrorCodeDescription("5E0002");
+            codeDescription = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+        omMessaging.aux_addError(eCodes, codeDescription[0], codeDescription[1]);
+        return eCodes;
+
+    }
+
+    if(!omMessaging.npu_isValid(header.npu)){
+        //codeDescription = omConfig.getErrorCodeDescription("5E0003");
+            codeDescription = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+        omMessaging.aux_addError(eCodes, codeDescription[0], codeDescription[1]);
+        return eCodes;
+
+    }
+
+    if(omMessaging.npu_isDuplicate(header.npu)){
+        //codeDescription = omConfig.getErrorCodeDescription("5E0004", "OM_MESSAGING");
+        //omMessaging.aux_addError(eCodes, codeDescription[0], codeDescription[1]);
+
+        var msg = omMessaging.in_getMsg(header.npu, true);
+
+        if(msg){
+            omMessaging.aux_loadMsgData(msg);
+
+            //var ack = Global.getItemsFromXML(msg.receivedData, "omCommon:msgAck")[0];
+            var ack = publishEvent("OM_COMMON",FIRST_ONE,null);
+            var codes = ack.header.status.eCodes.eCode;
+            for(var i = 0; i < codes.length; i++){
+                eCodes.push(codes[i]);
+            }
+            return eCodes;
+        }else{
+            //Ocorreu um erro ao processar a mensagem da 1º vez.
+            var doc = Document.readDoc("omMessaging:npuValidationDoc", header.npu);
+            if(doc){
+                doc.deleteItem();
+            }
+        }
+    }
+
+    // Salva o NPU para validaçoes de NPU duplicado;
+    omMessaging.aux_npu_save(header.npu);
+
+    if(!header.has("correlationNpu") && !header.has("processId") && !corrNpuOrProcIdNotRequired){
+
+        var oper = omMessaging.npu_getOper(header.npu);
+        var r = omMessaging.aux_OperToQueue(oper, interfaceInvoked, operationInvoked);
+
+        if(r == null){
+            //codeDescription = omConfig.getErrorCodeDescription("5E0005");
+             codeDescription = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+            omMessaging.aux_addError(eCodes, codeDescription[0], codeDescription[1]);
+        }
+    }
+
+
+    return eCodes;
+  ]]></script>
+</script>

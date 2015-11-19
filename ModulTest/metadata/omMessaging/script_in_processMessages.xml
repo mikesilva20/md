@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_processMessages">
+  <guid>{08ed1417-be0f-f524-d30b-6c56df36a363}</guid>
+  <highlight>34</highlight>
+  <label>in_processMessages</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="proc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var now           = new Date().getTime();
+    var pd            = null;
+    var due           = null;
+    var msgDOL        = null;
+    var doc           = null;
+    var msg           = null;
+    var ds            = null;
+
+    var init =  new Date();
+    try
+    {
+        pd = proc.processDocument;
+        due = now + (1000 * pd.activityTimeout);
+        msgDOL = omMessaging.in_getNextMsg(pd.stackId, pd.msgPerCycle);
+
+        for(var i = 0; i < msgDOL.length; i++)
+        {
+            doc = msgDOL[i];
+
+            doc.processDate = new Date();
+            omMessaging.aux_loadMsgPayload(doc);
+            msg = doc.payload;
+            ds = Global.getItemsFromXML(msg, doc.dataType);
+
+            if(ds && ds[0])
+            {
+                ds = ds[0];
+                var oper = omMessaging.npu_getOper(doc.npu);
+
+
+                var fqn = omMessaging.aux_getTransformation(oper, "IN");
+
+               var msgIn;
+                if(fqn)
+                    msgIn = Global.runGlobalScript(fqn, false, ds);
+                else
+                    msgIn = ds;
+
+                if(omMessaging.aux_OperToQueue(oper, doc.interfaceToInvoke, doc.operation) != null)
+                {
+                    omMessaging.in_sendMsgQueue(msgIn, doc);
+                }else{
+                    if(oper == omMessaging.CONST_OPER_GR())
+                    {
+                        omMessaging.in_sendGenericReply(msgIn, doc);
+                    }else{
+                        omMessaging.in_sendMsgProcess(msgIn, doc);
+                    }
+                }
+            }
+
+            now = new Date().getTime();
+
+            if(now > due)
+                break;
+        }
+        var end = new Date() - init;
+        end;
+    }catch(ex)
+    {
+        if(doc)
+        {
+            //omMessaging.aux_updateMsgInStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"EXCEPTION",ex.message,doc.processId,doc.retryDate,doc.retryCounter);
+            doc.status                  = omMessaging.CONST_STATUS_ERROR();
+            doc.statusCode            = "EXCEPTION";
+            doc.statusText            = ex.message;
+            doc.deliveryDate      = new Date();
+            doc.save();
+
+            omMessaging.audit_saveInfo("Error", doc);
+        }
+
+        var npu = doc == null ? "N/A." : doc.npu;
+        omMessaging.log("# EXCEPTION #\n\tError:" + ex.message +" \nNPU: " +  npu  , "in_processMessages");
+    }
+  ]]></script>
+</script>

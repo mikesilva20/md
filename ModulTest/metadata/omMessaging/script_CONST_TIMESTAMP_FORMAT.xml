@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_TIMESTAMP_FORMAT">
+  <guid>{0c972e55-6659-b7d8-1c7e-dd35f51fea29}</guid>
+  <label>#CONST# TIMESTAMP_FORMAT</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return Global.getConfigVariable("NPU_TIMESTAMP_FORMAT", 'yyyyMMddHHmmssSSS');]]></script>
+</script>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.correlationProcessId">
+  <extends>dtype_omCommon.processId</extends>
+  <label>Correlation Process Id</label>
+  <metaVersion>4</metaVersion>
+</dataType>

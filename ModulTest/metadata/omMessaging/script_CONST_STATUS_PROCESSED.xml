@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_STATUS_PROCESSED">
+  <guid>{04a7f260-77f1-700c-b732-31987edbf999}</guid>
+  <label>#CONST# STATUS_PROCESSED</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "2";]]></script>
+</script>

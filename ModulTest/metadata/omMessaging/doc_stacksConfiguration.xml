@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.stacksConfiguration">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{08eb67c5-6fbe-4836-9d97-9d81140944ce}</guid>
+  <label>Config - Stacks Configuration</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="stackId" type="leaf">
+      <column>STACKID</column>
+      <key>1</key>
+      <label>Stack Id</label>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+    <variable name="GPId" type="leaf">
+      <column>GPID</column>
+      <label>GP Id</label>
+      <propertyElement type="elfld">
+        <label>GP Id</label>
+      </propertyElement>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_cwf_pm.PROCESS_ID</valueType>
+    </variable>
+    <variable name="userId" type="leaf">
+      <column>USERID</column>
+      <label>User ID</label>
+      <propertyElement type="elfld">
+        <label>User ID</label>
+      </propertyElement>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_cwf.userId</valueType>
+    </variable>
+    <variable name="configurationDate" type="leaf">
+      <column>CONFIGURATIONDATE</column>
+      <label>Configuration Date</label>
+      <propertyElement type="eldatetime">
+        <label>Configuration Date</label>
+      </propertyElement>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="GPType" type="leaf">
+      <column>GPTYPE</column>
+      <label>GPType</label>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_omMessaging.GPType</valueType>
+    </variable>
+    <variable name="isActive" type="leaf">
+      <column>ISACTIVE</column>
+      <label>Is Active?</label>
+      <propertyElement type="elchk">
+        <label>Is Active?</label>
+      </propertyElement>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="isDefault" type="leaf">
+      <column>ISDEFAULT</column>
+      <label>Is Default?</label>
+      <propertyElement type="elchk">
+        <label>Is Default?</label>
+      </propertyElement>
+      <table>OM_MSG_STACKS_CONF</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwOnDocVisualKey" type="action">
+      <system>true</system>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+      <script><![CDATA[
+        var status = "Active";
+        if(!this.isActive)
+            status = "Inactive";
+
+
+        return this.stackId + " (" + status + ")";
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.stacksConfiguration</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="SaveForm" type="vform">
+            <label>SaveForm</label>
+            <root name="SaveFormGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="stacksConfigurationGrid" type="elgrd">
+                  <colWidths>200px,200px,200px,200px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="stacksConfigurationHeader" type="elhdr">
+                      <label>Config - Stacks Configuration</label>
+                    </element>
+                    <element name="userId" type="elfld">
+                      <dataLength>30</dataLength>
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_userId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="configurationDate" type="eldatetime">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_configurationDate</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="Separator" type="elsep"/>
+                    <element name="isActive" type="elchk">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_isActive</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="isDefault" type="elchk">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_isDefault</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="GPType" type="elslct">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_GPType</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stackId" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_stackId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="GPId" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_GPId</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="SearchForm" type="vform">
+            <label>SearchForm</label>
+            <root name="SearchFormGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="stacksConfigurationGrid" type="elgrd">
+                  <colWidths>160,160,160,160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="isActive" type="elrgrp">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_isActive</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="isDefault" type="elrgrp">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_isDefault</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="GPType" type="elslct">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.stacksConfiguration/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.stacksConfiguration/leaf_GPType</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          this.model.userId = UserProfile.userId();
+          this.model.configurationDate = new Date();
+
+          this.cw$super_save();
+
+          omMessaging.cache_resetAll();
+
+          this.parent.hideDetailAction();
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

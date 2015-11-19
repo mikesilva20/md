@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.operationDescriptionDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{09d9db4b-ef1d-e5dc-6e72-e9b6bf675f71}</guid>
+  <label>Operation Description</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <key>1</key>
+      <label>Operation</label>
+      <propertyElement type="elfld">
+        <label>Operation</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATION_DESC</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="description" type="leaf">
+      <column>DESCRIPTION</column>
+      <label>Description</label>
+      <propertyElement type="elfld">
+        <label>Description</label>
+      </propertyElement>
+      <table>OM_MSG_OPERATION_DESC</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.operationDescriptionDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="operationDescriptionDocGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="operationDescriptionDocGrid" type="elgrd">
+                    <colWidths>160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>160px</width>
+                    <elementList>
+                      <element name="operationDescriptionDocHeader" type="elhdr">
+                        <label>Operation Description</label>
+                      </element>
+                      <element name="operation" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.operationDescriptionDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.operationDescriptionDoc/leaf_operation</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="description" type="eltxtArea">
+                        <height>80px</height>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.operationDescriptionDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.operationDescriptionDoc/leaf_description</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Result" type="vform">
+            <label>Result</label>
+            <root name="ResultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="ResultGrid" type="elgrd">
+                  <colWidths>195,195,195,195,195,195</colWidths>
+                  <numOfCols>6</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>1170px</width>
+                  <elementList>
+                    <element name="operation2" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationDescriptionDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationDescriptionDoc/leaf_operation</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="description2" type="elfld">
+                      <columnSpan>4</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.operationDescriptionDoc/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.operationDescriptionDoc/leaf_description</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

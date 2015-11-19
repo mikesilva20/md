@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process name="omMessaging.msgAuditClean">
+  <activity name="Start" type="seqActivity">
+    <label>Start</label>
+    <x>128.0</x>
+    <y>192.0</y>
+    <childList>
+      <child name="Run" type="scriptActivity">
+        <label>Run</label>
+        <x>244.0</x>
+        <y>194.0</y>
+        <methodList>
+          <method name="cwOnProcActBefore" type="action">
+            <category>before</category>
+            <system>true</system>
+            <script><![CDATA[
+              try{
+                  omMessaging.debug("Start [GLOBAL PROC: Msg Audit Clean]");
+
+                  var fnd = new Finder("omMessaging:auditCleanFnd");
+                  var list = fnd.search();
+                  var i = 0;
+
+                  for(i = 0; i < list.length; i++)
+                  {
+                      list[i].deleteFromDB();
+                  }
+
+                  omMessaging.debug("Ended [GLOBAL PROC: Msg Audit Clean] | " + i - 1 + " items deleted.");
+
+              }catch(ex){
+                  omMessaging.log("Exception: " + ex.message,  "GLOBAL PROC: Msg Audit Clean");
+              }
+            ]]></script>
+          </method>
+        </methodList>
+      </child>
+      <child name="repeat" type="repeatActivity">
+        <element>proc_omMessaging.msgAuditClean/seqActivity_Start</element>
+        <label>Repeat</label>
+        <schedule type="sched">
+          <duration type="dur">
+            <length>P0Y0M0DT0H4M0S</length>
+          </duration>
+        </schedule>
+        <x>193.0</x>
+        <y>314.0</y>
+      </child>
+    </childList>
+  </activity>
+  <curRevision>true</curRevision>
+  <document>doc_omMessaging.globalProcDoc</document>
+  <label>Messaging - Clean</label>
+  <metaVersion>22</metaVersion>
+  <priority>8</priority>
+  <type>Global</type>
+</process>

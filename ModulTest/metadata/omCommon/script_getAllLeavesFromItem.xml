@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getAllLeavesFromItem">
+  <label>getAllLeavesFromItem</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="item" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="systemFields" type="rifp">
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get all leaves from item
+     * @param    {Object}   item         - item
+     * @param    {Boolean}  systemFields - Specifies if to return document leafs that are system fields (boolean)
+     * @returns  {Array}    return       - return an leaves array
+     * @version  1.0
+     */
+
+    var leaves = new Array();
+    if(!item) {
+        var desc = Global.translateText('OMCM0001',UserProfile.getLanguage(),[this.metadata, 'item']);
+        omCommon.writeLog(/* Severidade do erro             : */ 3,
+                          /* Decrição                       : */ desc,
+                          /* Fully qualified name do objeto : */ this.metadata,
+                          /* Código do erro do modulo       : */ 'OMCM0001'
+                          );
+        return leaves;
+    }
+
+    leaves = item.getLeafNames(systemFields);
+
+    if(item.metadataType != "cwt_pcoe:basketItem")
+        return leaves;
+
+    var ci = item.catalogItem;
+    var dynamic = ci.getItemAttributes();
+
+    for(var i=0; dynamic && i< dynamic.length; i++){
+        var dLeaf = dynamic[i].getName();
+        leaves[leaves.length] = dLeaf;
+    }
+
+    return leaves;
+  ]]></script>
+</script>

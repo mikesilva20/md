@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.changeLeaf">
+  <label>changeLeaf</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="dol" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="leaf_value" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Change the value of the correpondent leaf
+     * @param    {DataObjectList}  dol - List
+     * @param    {[Array]}  leaf_value - array bidimencional with leaf name & value [["offerCode", "NADSL"],["type", "xpto"]]
+     * @returns  {DataObjectList} Returns the list updated
+     * @version  1.0
+     */
+
+    // leaf_value             - array bidimencional with leaf name & value [["offerCode", "NADSL"],["type", "xpto"]]
+
+    var newList = new DataObjectList();
+
+    // Test all condicions to procceed
+    if (!dol)
+        return null;
+
+    // Test leaf_value array
+    if (!leaf_value || (leaf_value && !(leaf_value.length)))
+        return dol;
+
+    var toDelete = false;
+    var leafValue = null;
+    for (var i = 0; i < dol.length; i++)
+    {
+        // find if the list element needs to be deleted
+        for (var j = 0; j < leaf_value.length; j++)
+            dol[i].putValueByName(leaf_value[j][0], leaf_value[j][1], true);
+
+        newList.addLast(dol[i].copyDocument(true, true))
+    }
+
+    return newList;
+  ]]></script>
+</script>

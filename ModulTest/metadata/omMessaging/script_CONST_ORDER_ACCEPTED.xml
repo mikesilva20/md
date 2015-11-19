@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_ORDER_ACCEPTED">
+  <label>#CONST# CREATE COM</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "SOMACCEPT0";]]></script>
+</script>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.sessionLock">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{dbfa5afb-645c-4685-bb5b-dbf07761d54f}</guid>
+  <label>Session Lock</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="sessionId" type="leaf">
+      <column>SESSIONID</column>
+      <key>1</key>
+      <table>OM_SESSION_LOCK</table>
+      <valueType>dtype_cwf_oe.string128</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.sessionLock</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omMessaging.message">
+  <flags enum-type="metadataFlag">PRIVATE</flags>
+  <container>true</container>
+  <label>message</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="HeaderRequest" type="dstruct">
+      <container>true</container>
+      <label>HeaderRequest</label>
+      <childList>
+        <child name="npu" type="dstruct">
+          <datatype>true</datatype>
+          <element>dtype_omMessaging.npu</element>
+          <label>npu</label>
+        </child>
+        <child name="correlationNpu" type="dstruct">
+          <datatype>true</datatype>
+          <element>dtype_omMessaging.npu</element>
+          <label>correlationNpu</label>
+        </child>
+        <child name="processId" type="dstruct">
+          <datatype>true</datatype>
+          <element>dtype_omMessaging.processId</element>
+          <label>processId</label>
+        </child>
+        <child name="businessId" type="dstruct">
+          <datatype>true</datatype>
+          <element>dtype_omMessaging.businessId</element>
+          <label>businessId</label>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omMessaging.message</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omMessaging.message</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

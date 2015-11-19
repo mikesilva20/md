@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_Resubmit">
+  <guid>{03be50e7-b9bc-ec71-ca93-6892997da1d0}</guid>
+  <label>in_Resubmit</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var msgDS      = Global.getItemsFromXML(doc.message, doc.payloadType)[0];
+
+    var msgNPU     = doc.active? doc.gen_npu : doc.msg_npu;
+    var msgCorrNPU = doc.corr_npu;
+
+    if(msgDS.has("headerRequest")){
+                msgDS.HeaderRequest.npu                     = msgNPU;
+                msgDS.HeaderRequest.correlationNpu       = msgCorrNPU;
+    }else if(msgDS.has("headerReport")){
+                msgDS.HeaderReport.npu                            = msgNPU;
+                msgDS.HeaderReport.correlationNpu       = msgCorrNPU;
+    }
+
+    var ack =      Global.invokeInterface(doc.interfaceName, doc.operationName, msgDS);
+
+    if(ack){
+          ack = ack[0];
+          doc.result = omMessaging.aux_prettyPrint(ack);
+    }else{
+          doc.result = "Empty ACK";
+    }
+    omMessaging.aux_saveMessageLog(msgNPU, msgCorrNPU,  doc.processId, doc.correlationId, doc.interfaceOperation, doc.interfaceType, msgDS, ack);
+  ]]></script>
+</script>

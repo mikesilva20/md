@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_changeConfigGP">
+  <label>aux_changeConfigGP</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="act" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var pd = act.process.processDocument;
+    var msg = act.activityData;
+
+    var userId = UserProfile.userId();
+
+
+    omMessaging.debug("Alteracao config, GP : " + act.process.id + " \r\nConf:" + msg.toXML() + " by userId: " + userId);
+
+
+    if(msg && msg.attribute){
+        var attrs = msg.attribute;
+
+        for(var i=0;i< attrs.length; i++){
+            var a = attrs[i];
+            var name = a.name;
+            var value = a.value;
+
+            if(pd.isChild(name)){
+
+             pd[name] = value;
+            }
+
+        }
+
+    }
+  ]]></script>
+</script>

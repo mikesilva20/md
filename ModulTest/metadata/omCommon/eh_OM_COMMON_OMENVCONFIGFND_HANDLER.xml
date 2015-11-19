@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event__handler name="omCommon.OM_COMMON_OMENVCONFIGFND_HANDLER">
+  <flags enum-type="metadataFlag">FINAL</flags>
+  <event>evt_omCommon.OM_COMMON_OMENVCONFIGFND</event>
+  <eventID>OM_COMMON_OMENVCONFIGFND_HANDLER</eventID>
+  <eventType>OM_COMMON_OMENVCONFIGFND</eventType>
+  <label>OM_COMMON_OMENVCONFIGFND_HANDLER</label>
+  <metaVersion>25</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder ("omCommon.omEnvironmentConfigFnd");
+    fnd.searchDocument.environment     = environment;
+    fnd.searchDocument.nodeID          = nodeID;
+    fnd.searchDocument.environmentType = environmentType;
+    fnd.searchDocument.active          = active;
+    fnd.searchDocument.isOM            = isOM;
+
+    var result = fnd.search();
+    return result;
+  ]]></script>
+</event__handler>

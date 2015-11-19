@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.getMsgDoc">
+  <label>AUX - Get Message Doc</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /*********************************************************************************************
+     *
+     *      Auxiliar Function to get the Fire And Proceed Message Document
+     *
+     * @author            Fabio Afonso
+     * @created date       2011-08-31
+     *
+     *
+     * @params
+     *            npu                  Npu            The Fire and Proceed Message Document Key
+     *
+     *********************************************************************************************/
+
+    var NAME_SPACE      = "omMessaging";
+    var SCRIPT_NAME      = "getMsgDoc";
+    var msgDoc            = null;
+
+    try{
+
+          // Validate the Existance of NPU
+          if(!npu)
+                return null;
+
+          // Get the Fire And Proceed Message Doc
+          msgDoc =  Document.readDoc("omMessaging.fireAndProceedMsg", npu);
+
+          return msgDoc;
+
+    }catch(e){
+          //omCommon.writeLog(3, "Messaging: Error While Getting the Fire And Proceed Message Document - " + e, NAME_SPACE + "." + SCRIPT_NAME);
+          publishEvent("OM_COMMON",FIRST_ONE,null);
+    }
+  ]]></script>
+</script>

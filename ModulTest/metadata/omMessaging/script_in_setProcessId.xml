@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_setProcessId">
+  <guid>{08f291db-578e-583e-e3fa-e30040bfa0e6}</guid>
+  <label>in_setProcessId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var SUCCESS = 0;
+    var ERROR = 1;
+
+    var msg = omMessaging.in_getMsg(npu, true);
+
+    if(!msg)
+          return ERROR;
+
+    msg.processId = processId;
+    msg.save();
+
+    return SUCCESS;
+  ]]></script>
+</script>

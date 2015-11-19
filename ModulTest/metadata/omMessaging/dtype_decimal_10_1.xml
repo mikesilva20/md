@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.decimal_10_1">
+  <doAutoComma>false</doAutoComma>
+  <extends>dtype_com.conceptwave.system.Decimal</extends>
+  <fractionDigits>1</fractionDigits>
+  <label>decimal 10 (3)</label>
+  <length>13</length>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elfld"/>
+</dataType>

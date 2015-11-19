@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.genericBody">
+  <container>true</container>
+  <label>genericBody</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+    <isElement>true</isElement>
+  </xmlMap>
+  <childList>
+    <child name="rootId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.id</element>
+      <label>rootId</label>
+    </child>
+    <child name="destinationSystem" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.destinationSystem</element>
+      <label>destinationSystem</label>
+    </child>
+    <child name="operation" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.operation</element>
+      <label>operation</label>
+    </child>
+    <child name="sequence" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.sequence</element>
+      <label>sequence</label>
+    </child>
+    <child name="order" type="dstruct">
+      <array>true</array>
+      <element>dstruct_omCommon.order</element>
+      <label>order</label>
+      <mandatory>true</mandatory>
+      <maxInstance>-1</maxInstance>
+      <minInstance>1</minInstance>
+    </child>
+    <child name="auxiliaryGroupInfo" type="dstruct">
+      <element>dstruct_omCommon.auxiliaryGroupInfo</element>
+      <label>auxiliaryGroupInfo</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="rootId" type="rifp">
+          <type>dtype_omCommon.id</type>
+        </parameter>
+        <parameter name="destinationSystem" type="rifp">
+          <type>dtype_omCommon.destinationSystem</type>
+        </parameter>
+        <parameter name="operation" type="rifp">
+          <type>dtype_omCommon.operation</type>
+        </parameter>
+        <parameter name="sequence" type="rifp">
+          <type>dtype_omCommon.sequence</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        this.rootId = rootId;
+        this.destinationSystem = destinationSystem;
+        this.operation = operation;
+        this.sequence = sequence;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.genericBody</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.genericBody</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

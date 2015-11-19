@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramAlignVertical">
+  <label>Diagram Align Vertical</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="rootId" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="connections" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /* retorna um array de elementos por nivel da estrutura (length do array é o numero de levels -> cada level é um array de nodes -> cada node é um elemento do diagrama)
+     * dimensionamento vertical
+     * Created by Tiago Barreiros
+     */
+
+    // retorna um array de levels a partir de um node root
+    function getLevel(node,elements,ylvl,levels){
+        var childId;                                           // id de uma child
+        var nodeChild;                                         // node de uma child
+        var repeated;                                          // booleano para verificar repeticoes (nodes com as mesmas childs)
+
+        if (levels[ylvl] == null){                             // se ainda nao existe o level da estrutura
+            levels[ylvl] = new Array;                          // cria o level
+        }
+
+        if (node[2] != null && node[2].length > 0){            // se o node tem childs
+            for (var i=0; i < node[2].length; i++){            // por cada child do node
+                childId = node[2][i];                          // ve qual é o id da child atual
+                for (var j=0; j < elements.length; j++){       // recolhe o elemento correspondente à id
+                    if (childId == elements[j][0]){
+                        nodeChild = elements[j];
+                        break;                                 // encontrado o node correto, nao procura mais no array de elementos
+                    }
+                }
+
+                ylvl++;                                            // incrementa o level
+                levels = getLevel(nodeChild,elements,ylvl,levels); // cria o sublevel
+                ylvl--;                                            // regressa ao level atual
+            }
+
+            // verifica se o elemento ja foi definido no level (multiplos parents)
+            repeated = false;
+            for (var i=0; i < levels[ylvl].length; i++){
+                if (node[0] == levels[ylvl][i][0]){                // se o id ja existe no level
+                    levels[ylvl][i][3]++;                          // o node so é definido uma vez, mas ocupa o espaco dos multiplos (repeticao)
+                    repeated = true;                               // indica a repeticao
+                    break;                                         // encontrado o node repetido, nao continua a procurar
+                }
+            }
+            // caso ainda nao exista
+            if (repeated == false){
+                levels[ylvl].push(node);                           // coloca o node no array do level
+            }
+        }
+
+        if (node[2] == null || node[2].length == 0){               // se o node nao tem childs
+            nodeChild = new Array;                                 // coloca um "filler" vazio no espaco abaixo
+            nodeChild[0] = "space";                                // id do espaco
+            nodeChild[1] = null;                                   // sem objeto
+            nodeChild[2] = null;                                   // sem childs
+            nodeChild[3] = node[3];                                // com o mesmo tamanho que o node atual
+
+            if (levels[ylvl+1] != null){                           // so coloca o espaco se ja existe pelo menos um elemento na linha
+                ylvl++;                                            // incrementa o level
+                levels = getLevel(nodeChild,elements,ylvl,levels); // cria o sublevel
+                ylvl--;                                            // regressa ao level atual
+            }
+
+            if (node[0] != "space"){                               // para elementos que nao sejam um espaco
+                repeated = false;
+                for (var i=0; i < levels[ylvl].length; i++){       // verifica se o elemento ja foi definido no level (multiplos parents)
+                    if (node[0] == levels[ylvl][i][0]){            // se o id ja existe no level
+                        levels[ylvl][i][3]++;                      // o node so é definido uma vez, mas ocupa o espaco de dois (repeticao)
+                        repeated = true;                           // indica a repeticao
+                        break;                                     // encontrado o node repetido, nao continua a procurar
+                    }
+                }
+                if (repeated == true){                             // caso exista
+                    return levels;
+                }
+            }
+
+            levels[ylvl].push(node);                               // coloca o node no array do level
+        }
+
+        // retorna array com o level atual e inferiores
+        return levels;
+    }
+
+    // verifica o espacamento da estrutura (espacos necessarios antes do primeiro node aparecer)
+    function verifySpacing(elements,sizeMax){
+        var sum;
+        var space;
+        var numSpaces;
+
+        // elemento espaco
+        space = new Array;                                 // "filler" vazio (espaco)
+        space[0] = "space";                                // id do espaco
+        space[1] = null;                                   // sem objeto
+        space[2] = null;                                   // sem childs
+        space[3] = '1';                                    // com tamanho 1
+
+        // verificacao do espacamento
+        for (var i=0; i < elements.length; i++){                   // por cada nivel
+            sum = 0;                                               // reset a soma
+
+            for (var j=0; j < elements[i].length; j++){            // verifica os elementos do nivel
+                sum = sum + elements[i][j][3];                     // soma os sizes de todos os elementos
+            }
+            if (sum < sizeMax){                                    // caso existam elementos a menos do que é suposto
+                numSpaces = sizeMax - sum;                         // verifica quantos espacos sao necessarios
+                for (var k=0; k < numSpaces; k++){
+                    elements[i].unshift(space);                    // insere os espacos
+                }
+            }
+        }
+
+        return elements;
+    }
+
+    /*
+     * Codigo desta funcao
+     */
+
+    var nodesByLevels = new Array;                                 // cada index do array é um nivel da estrutura da arvore
+    var nodeRoot;
+    var y = 0;
+
+    // recolhe o node root a partir do seu uniqueCode
+    for (var i=0; i < connections.length; i++){
+        if (rootId == connections[i][0]){
+            nodeRoot = connections[i];                             // recolhe o node
+            break;                                                 // assim que encontra o id correto, deixa de procura no array de connections
+        }
+    }
+
+    // verifica os levels da estrutura
+    nodesByLevels = getLevel(nodeRoot,connections,y,nodesByLevels);    // retorna os niveis da estrutura
+
+    // verifica o espacamento correto
+    nodesByLevels = verifySpacing(nodesByLevels,nodesByLevels[0][0][3]);
+
+    // retorna array de nodes por level
+    return nodesByLevels;
+  ]]></script>
+</script>

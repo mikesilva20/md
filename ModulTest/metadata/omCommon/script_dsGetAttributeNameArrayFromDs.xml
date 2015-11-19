@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsGetAttributeNameArrayFromDs">
+  <label>dsGetAttributeNameArrayFromDs</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Gets an array pf attribute names found in ds with elements of type "attribute"
+     * @param    {Object}  sourceDs       - Source ds
+     * @returns  {Array}   return         - Array of string attribute name
+     * @version  1.0
+     */
+
+
+    var arrayAttrNames = new Array();
+    var nAttributes = ds.has("attributes")? ds.attributes.attribute.length : 0;
+
+    for (var i=0; i<nAttributes; i++) {
+
+        arrayAttrNames.unshift(ds.attribute[i].name);
+    }
+
+    return arrayAttrNames;
+  ]]></script>
+</script>

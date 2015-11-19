@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetAttribute">
+  <label>DataStructure: Set Attribute</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+    <parameter name="value" type="rifp">
+      <type>dtype_omCommon.value</type>
+    </parameter>
+    <parameter name="setOnlyIfExist" type="rifp">
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Create or Update an attribute
+     * @param    {DataStructure}  ds        - DataStructure of type "omCommon:attribute"
+     * @param    {String}         name           - name of attribute
+     * @param    {String}         value          - value of attribute
+     * @param    {Boolean}        setOnlyIfExist - update attribute (true)
+     * @returns  {DataStructure} Returns DataStructure attribute
+     * @version  1.0
+     */
+
+    var attrObj;
+    // Validate parameters
+    if (!name || !ds) {
+          var msgError = "attribute name (" + name + ") not found";
+          omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setAttribute");
+          return null;
+    }
+
+    // Try to find the attribute
+    var indexFound = null;
+    for(var i=0; i < ds.attributes.attribute.length; i++) {
+          if (ds.attributes.attribute[i].name == name) {
+                indexFound = i;
+                break;
+          }
+    }
+
+    // Found attribute with the name.
+    if (indexFound != null) {
+          attrObj = ds.attributes.attribute[indexFound].setValue(null, value);
+          return attrObj;
+    } else { // If didn't found and is an update instruction, return null.
+          if (setOnlyIfExist) {
+                var msgError = "attribute name (" + name + ") not found";
+                omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setAttribute");
+                return null;
+          } else {
+                attrObj = ds.attributes.attribute[ds.attributes.attribute.length].setValue(name, value);
+                return attrObj;
+          }
+    }
+  ]]></script>
+</script>

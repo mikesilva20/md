@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEnvironmentConfig">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{83b2ee44-bb27-4a4f-b0f2-99d3a02f5a17}</guid>
+  <label>Order Environment Config</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="environment" type="leaf">
+      <column>ENVIRONMENT</column>
+      <key>1</key>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.environment</valueType>
+    </variable>
+    <variable name="nodeID" type="leaf">
+      <column>NODEID</column>
+      <key>2</key>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_cwf_pm.nodeID</valueType>
+    </variable>
+    <variable name="environmentInterface" type="leaf">
+      <column>ENVIRONMENTINTERFACE</column>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.environmentInterface</valueType>
+    </variable>
+    <variable name="environmentOperation" type="leaf">
+      <column>ENVIRONMENTOPERATION</column>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.environmentOperation</valueType>
+    </variable>
+    <variable name="endpoint" type="leaf">
+      <column>ENDPOINT</column>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_cwt_common.URL</valueType>
+    </variable>
+    <variable name="environmentType" type="leaf">
+      <column>ENVIRONMENTTYPE</column>
+      <key>3</key>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.environmentType</valueType>
+    </variable>
+    <variable name="active" type="leaf">
+      <column>ACTIVE</column>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.active</valueType>
+    </variable>
+    <variable name="isOM" type="leaf">
+      <column>ISOM</column>
+      <table>OM_ENVIRONMENT_CONFIG</table>
+      <valueType>dtype_omCommon.active</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafInitAction$isOM" type="laction">
+      <path>doc_omCommon.omEnvironmentConfig/leaf_isOM</path>
+      <type>initializer</type>
+      <script>return (this.isOM == null || this.isOM)? true: false;</script>
+    </method>
+    <method name="cwOnDocVisualKey" type="action">
+      <system>true</system>
+      <valueType>dtype_com.conceptwave.system.String</valueType>
+      <script>return this.environment;</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="omSelected" type="leaf">
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEnvironmentConfig</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="HorizontalLayout" type="elhlt">
+                <height>300px</height>
+                <redrawOnResize>true</redrawOnResize>
+                <width>300px</width>
+                <elementList>
+                  <element name="GridLayout" type="elgrd">
+                    <numOfCols>2</numOfCols>
+                    <redrawOnResize>true</redrawOnResize>
+                    <elementList>
+                      <element name="environment" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_environment</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>250px</width>
+                      </element>
+                      <element name="nodeID" type="elfld">
+                        <columnSpan>1</columnSpan>
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/permMethod_isOM</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_nodeID</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>225px</width>
+                      </element>
+                      <element name="isOM" type="elchk">
+                        <columnSpan>1</columnSpan>
+                        <label>OM</label>
+                        <onChangeMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uimthd_changeNodeName</variablePath>
+                          </variablePathList>
+                        </onChangeMethod>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_isOM</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="environmentInterface" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_environmentInterface</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>250px</width>
+                      </element>
+                      <element name="environmentOperation" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_environmentOperation</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>250px</width>
+                      </element>
+                      <element name="environmentType" type="elfld">
+                        <columnSpan>2</columnSpan>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_environmentType</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>250px</width>
+                      </element>
+                      <element name="active" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omCommon.omEnvironmentConfig/leaf_active</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var doc = this.model;
+          var fnd = this.parent.owner;
+
+          if(this.isValid)
+              doc.save();
+          else
+              Global.throwException("UE0116", this);
+
+          if(fnd)
+              fnd.searchAction();
+
+          return Global.STOP_UI;
+        ]]></script>
+      </method>
+      <method name="isOM" type="permMethod">
+        <script>return this.omSelected;</script>
+      </method>
+      <method name="changeNodeName" type="uimthd">
+        <script><![CDATA[
+          if(this.model.isOM){
+              this.model.nodeID = '';
+              this.omSelected = true;
+          }else{
+              this.model.nodeID = 'EXTERNAL_SYSTEM';
+              this.omSelected = false;
+          }
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

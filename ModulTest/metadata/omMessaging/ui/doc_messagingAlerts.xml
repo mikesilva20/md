@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.messagingAlerts">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{885d3ddc-ad13-4f9a-99b9-eb04d3467b49}</guid>
+  <label>Messaging Alerts</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>System document ID</label>
+      <table>OM_MSG_ALERTS</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="type" type="leaf">
+      <column>TYPE</column>
+      <label>Type</label>
+      <propertyElement type="elfld">
+        <label>Type</label>
+      </propertyElement>
+      <table>OM_MSG_ALERTS</table>
+      <valueType>dtype_omMessaging.string128</valueType>
+    </variable>
+    <variable name="description" type="leaf">
+      <column>DESCRIPTION</column>
+      <label>Description</label>
+      <propertyElement type="elfld">
+        <label>Description</label>
+      </propertyElement>
+      <table>OM_MSG_ALERTS</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="alertDate" type="leaf">
+      <column>ALERTDATE</column>
+      <label>Date</label>
+      <propertyElement type="eldatetime">
+        <label>Date</label>
+      </propertyElement>
+      <table>OM_MSG_ALERTS</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.messagingAlerts</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="MyDefault" type="vform">
+            <label>MyDefault</label>
+            <root name="MyDefaultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="messagingAlertsGrid" type="elgrd">
+                  <colWidths>160px,160px,200px,200px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="messagingAlertsHeader" type="elhdr">
+                      <label>Messaging Alerts</label>
+                    </element>
+                    <element name="date" type="eldatetime">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/leaf_alertDate</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="type" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/leaf_type</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="description" type="elfld">
+                      <columnSpan>2</columnSpan>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.ui.messagingAlerts/leaf_description</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

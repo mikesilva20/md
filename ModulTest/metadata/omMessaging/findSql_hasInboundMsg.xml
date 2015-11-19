@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.hasInboundMsg">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.searchDoc</input>
+  <label>hasInboundMsg</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.inboundDoc</output>
+  <type>SQL</type>
+  <volatility>0</volatility>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select {+*+}
+        from OM_MSG_INBOUND
+        where rownum <= 1
+        and STATUS in ('1', '4')
+        and (retryDate IS NULL or retryDate <= SYSDATE )
+        {[3] and STACKID = ?}
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Msg - Inbound</label>
+        <valueType>doc_omMessaging.inboundDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.inboundDoc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.searchDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="defaultView" type="findVView">
+      <label>defaultView</label>
+    </view>
+  </viewList>
+</findSql>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.WAITING_ACTION">
+  <guid>{0b466be1-53d8-a069-b503-9d7462b59b21}</guid>
+  <label>CON - WAITING ACTION</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    /*********************************************************************************************
+     *
+     *      Constant WAITING ACTION to be define accordig the Data Type Action (ptSysMgmt)
+     *
+     * @author            Fabio Afonso
+     * @created date       2011-08-28
+     *
+     *********************************************************************************************/
+
+     return "0";
+  ]]></script>
+</script>

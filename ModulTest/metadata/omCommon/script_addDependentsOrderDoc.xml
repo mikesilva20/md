@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.addDependentsOrderDoc">
+  <label>Add Dependents Order Doc</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceOrderId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.orderId</type>
+    </parameter>
+    <parameter name="destinationOrderId" type="rifp">
+      <type>dtype_omCommon.orderId</type>
+    </parameter>
+    <parameter name="environment" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.environment</type>
+    </parameter>
+    <parameter name="orderCreationNpu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+    <parameter name="provisioningItemId" type="rifp">
+      <type>dtype_omCommon.itemId</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = new Document('omCommon.omDependentsOrder');
+    doc.sourceOrderId      = sourceOrderId;
+    doc.destinationOrderId = destinationOrderId;
+    doc.environment        = environment;
+    doc.orderCreationNpu   = orderCreationNpu;
+    doc.provisioningItemId = provisioningItemId;
+    doc.save();
+  ]]></script>
+</script>

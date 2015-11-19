@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<userInterface name="omMessaging.ui.MessagingMenu">
+  <extends>ui_com.conceptwave.system.UserInterface</extends>
+  <label>Messaging Menu</label>
+  <metaVersion>21</metaVersion>
+  <vformList>
+    <vform name="Forms" type="frmui">
+      <extends>ui_com.conceptwave.system.UserInterface/frmui_Forms</extends>
+      <overlayList>
+        <overlay name="Default" type="exov">
+          <base>ui_com.conceptwave.system.UserInterface/frmui_Forms/vform_Default</base>
+          <extends>ui_com.conceptwave.system.UserInterface/frmui_Forms/vform_Default</extends>
+          <label>Default</label>
+          <overrideList>
+            <override name="MessagingMenu" type="elmnu">
+              <icon>/cwfv/messages.png</icon>
+              <label>Messaging</label>
+              <elementList>
+                <element name="miMsgTracker" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showMsgTracker</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <icon>/cwf/MenuIconSearch.gif</icon>
+                  <label>Order Message Tracker</label>
+                </element>
+                <element name="miSearchMsg" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showSearchMsg</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <label>Search Msg</label>
+                </element>
+                <element name="menuConfig" type="elmnu">
+                  <icon>/cwf/config.gif</icon>
+                  <label>Configurations</label>
+                  <elementList>
+                    <element name="baseConfig" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showMessagingConfig</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Base configurations</label>
+                    </element>
+                    <element name="miGPConfig" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showMonitorConfig</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Global Processes</label>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/permMethod_isRootUser</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="Separator4" type="elsep"/>
+                    <element name="menuStacksGps" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConfigStacks</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Stacks </label>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/permMethod_isRootUser</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="miStacks" type="elmnu">
+                      <label>Stacks Configs</label>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/permMethod_isRootUser</variablePath>
+                        </variablePathList>
+                      </visible>
+                      <elementList>
+                        <element name="Inbound___System_to_Stack" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_SystemToStackIn</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <label>Inbound - System to Stack</label>
+                        </element>
+                        <element name="Inbound___Interface_Oper_to_Stack" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_InterToStackIn</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <label>Inbound - Interface/Oper to Stack</label>
+                        </element>
+                        <element name="Outbound___System_to_Stack" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_SystemToStackOut</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <label>Outbound - System to Stack</label>
+                        </element>
+                        <element name="Outbound___Interface_Oper_to_Stack" type="elmnu">
+                          <clickMethod type="varPath">
+                            <variablePathList>
+                              <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_InterToStackOut</variablePath>
+                            </variablePathList>
+                          </clickMethod>
+                          <label>Outbound - Interface/Oper to Stack</label>
+                        </element>
+                      </elementList>
+                    </element>
+                    <element name="Separator3" type="elsep"/>
+                    <element name="miAuditConfig" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showAuditConfig</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Audit Configuration</label>
+                    </element>
+                    <element name="miSyncConfig" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showCfsSyncRules</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Sync Response Configuration</label>
+                    </element>
+                    <element name="miOperationSystem" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showCfgOperationToSystem</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Operation to System</label>
+                    </element>
+                    <element name="miOperationDesciption" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showCfgOperationDescription</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Operation Description</label>
+                    </element>
+                    <element name="miOperationToQueue" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_OperationToQueue</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Operation to Queue</label>
+                    </element>
+                    <element name="miParticipantVSOperation" type="elmnu">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showConf_ParticipantVSOperation</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <label>Participant Operation VS Msg Type</label>
+                    </element>
+                  </elementList>
+                </element>
+                <element name="Separator2" type="elsep"/>
+                <element name="miAudit" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showAudit</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <icon>/cwf/TaskWatch.gif</icon>
+                  <label>Audit</label>
+                </element>
+                <element name="miAuditMonitor" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showAuditMonitor</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <icon>/cwfv/user_monitor.png</icon>
+                  <label>Audit - Monitor</label>
+                </element>
+                <element name="miThroughputCharts" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showStacksThroughput</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <icon>/cwf/Chart.gif</icon>
+                  <label>Stacks Throughput</label>
+                </element>
+                <element name="Separator" type="elsep"/>
+                <element name="menuLog" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/usrActionMethod_showLog</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <label>Log</label>
+                </element>
+                <element name="MenuItem" type="elmnu">
+                  <clickMethod type="varPath">
+                    <variablePathList>
+                      <variablePath>ui_omMessaging.ui.MessagingMenu/uimthd_saveMSG</variablePath>
+                    </variablePathList>
+                  </clickMethod>
+                  <label>Save MSG</label>
+                </element>
+              </elementList>
+            </override>
+          </overrideList>
+        </overlay>
+      </overlayList>
+    </vform>
+  </vformList>
+  <methodList>
+    <method name="showLog" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.debugFnd</userInterface>
+      <valueType>findDoc_omMessaging.debugFnd</valueType>
+    </method>
+    <method name="showConfigStacks" type="usrActionMethod">
+      <userInterface>findSql_omMessaging.stacksConfigurationFnd</userInterface>
+      <valueType>findSql_omMessaging.stacksConfigurationFnd</valueType>
+    </method>
+    <method name="showConf_SystemToStackIn" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.configSystemToStack_Inbound</userInterface>
+      <valueType>findDoc_omMessaging.configSystemToStack_Inbound</valueType>
+    </method>
+    <method name="showConf_SystemToStackOut" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.configSystemToStack_Outbound</userInterface>
+      <valueType>findDoc_omMessaging.configSystemToStack_Outbound</valueType>
+    </method>
+    <method name="showConf_InterToStackIn" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.configInterfaceToStack_Inbound</userInterface>
+      <valueType>findDoc_omMessaging.configInterfaceToStack_Inbound</valueType>
+    </method>
+    <method name="showConf_InterToStackOut" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.configInterfaceToStack_Outbound</userInterface>
+      <valueType>findDoc_omMessaging.configInterfaceToStack_Outbound</valueType>
+    </method>
+    <method name="showMessagingConfig" type="usrActionMethod">
+      <script>return omMessaging.aux_getConfig();</script>
+    </method>
+    <method name="startTestProcess" type="usrActionMethod">
+      <script><![CDATA[
+        for(var i=0; i< 1; i++){
+            Process.startProcess("omMessaging.TestOnly");
+        }
+      ]]></script>
+    </method>
+    <method name="showSearchMsg" type="usrActionMethod">
+      <userInterface>findSql_omMessaging.msgFinder</userInterface>
+      <valueType>findSql_omMessaging.msgFinder</valueType>
+    </method>
+    <method name="showAudit" type="usrActionMethod">
+      <userInterface>doc_omMessaging.ui.msgAuditResultDoc</userInterface>
+      <valueType>doc_omMessaging.ui.msgAuditResultDoc</valueType>
+    </method>
+    <method name="showAuditMonitor" type="usrActionMethod">
+      <form>doc_omMessaging.ui.messagingMonitorDoc/ui_UserInterface/frmui_Forms/vform_Monitor</form>
+      <userInterface>doc_omMessaging.ui.messagingMonitorDoc</userInterface>
+      <valueType>doc_omMessaging.ui.messagingMonitorDoc</valueType>
+    </method>
+    <method name="showMonitorConfig" type="usrActionMethod">
+      <form>doc_omMessaging.ui.configGPs/ui_UserInterface/frmui_Forms/exov_Default</form>
+      <userInterface>doc_omMessaging.ui.configGPs</userInterface>
+      <valueType>doc_omMessaging.ui.configGPs</valueType>
+    </method>
+    <method name="showStacksThroughput" type="usrActionMethod">
+      <form>findSql_omMessaging.stacksThroughput/ui_UserInterface/frmui_Forms/vform_ResultGroupByStack</form>
+      <userInterface>findSql_omMessaging.stacksThroughput</userInterface>
+      <valueType>findSql_omMessaging.stacksThroughput</valueType>
+    </method>
+    <method name="isRootUser" type="permMethod">
+      <reference>permMethod_omMessaging.isRootUser</reference>
+    </method>
+    <method name="showAuditConfig" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.auditConfigurationFnd</userInterface>
+      <valueType>findDoc_omMessaging.auditConfigurationFnd</valueType>
+    </method>
+    <method name="showCfgOperationToSystem" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.cfgOperationToSystemFnd</userInterface>
+      <valueType>findDoc_omMessaging.cfgOperationToSystemFnd</valueType>
+    </method>
+    <method name="showCfgOperationDescription" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.operationDescritionFnd</userInterface>
+      <valueType>findDoc_omMessaging.operationDescritionFnd</valueType>
+    </method>
+    <method name="showCfsSyncRules" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.msgSyncRulesFnd</userInterface>
+      <valueType>findDoc_omMessaging.msgSyncRulesFnd</valueType>
+    </method>
+    <method name="test" type="usrActionMethod">
+      <form>findScript_omMessaging.Monitor_Chart/ui_UserInterface/frmui_Forms/exov_Default</form>
+      <userInterface>findScript_omMessaging.Monitor_Chart</userInterface>
+      <valueType>findScript_omMessaging.Monitor_Chart</valueType>
+    </method>
+    <method name="showMsgTracker" type="usrActionMethod">
+      <form>findSql_omMessaging.msgFinder/ui_UserInterface/frmui_Forms/exov_Default</form>
+      <parameterList>
+        <parameter name="menuObject" type="rifp"/>
+      </parameterList>
+      <userInterface>findSql_omMessaging.msgFinder</userInterface>
+      <valueType>findSql_omMessaging.msgFinder</valueType>
+      <script><![CDATA[menuObject.setViewByName("msgTracker", true);]]></script>
+    </method>
+    <method name="showConf_OperationToQueue" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.operationToQueueFnd</userInterface>
+      <valueType>findDoc_omMessaging.operationToQueueFnd</valueType>
+    </method>
+    <method name="showConf_ParticipantVSOperation" type="usrActionMethod">
+      <userInterface>findDoc_omMessaging.partOper_VS_MsgType</userInterface>
+      <valueType>findDoc_omMessaging.partOper_VS_MsgType</valueType>
+    </method>
+    <method name="saveMSG" type="uimthd">
+      <script><![CDATA[
+        var size = 1000;
+        for (var i=0;i<size;i++){
+
+        //var msg = new DataStructure('omCommon.msg');
+        var msg = publishEvent("OM_COMMON",FIRST_ONE,null);
+
+        var  b = omMessaging.aux_genHeader(msg.header,null,null,null,null,omMessaging.CONST_CREATE_COM());
+
+        var a = omMessaging.in_publishMsg(msg, 'omMessaging.testInterface', 'publishpubMessage',null,true);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+</userInterface>

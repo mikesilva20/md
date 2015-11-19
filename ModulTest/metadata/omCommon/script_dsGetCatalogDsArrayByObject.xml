@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsGetCatalogDsArrayByObject">
+  <label>dsGetCatalogDsArrayByObject</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="id" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - For a given DataStructure array "ds"  find if name, id and attributes match with "name", "id" and  a source Object "sourceObj".
+     * All Object leaves must have a correspondente data type and name in the destination DataStruture.
+     * @param    {DataStructure}  ds            - Data structure to check
+     * @param    {String}         name          - Name to check
+     * @param    {String}         id            - Id to check
+     * @param    {Object}         sourceObj     - Object that contains the leaves to check
+     * @param    {Array}          includeLeaves - Leaves to include
+     * @param    {Array}          excludeLeaves - Leaves to exclude
+     * @returns  {Array}  Returns DataStruture Array
+     * @version  1.0
+     */
+
+    var nCatElems = null;
+    var catArray = new Array();
+    var catElem = null;
+
+    nCatElems = ds.length;
+
+    for (var i=0; i<nCatElems; i++) {
+
+        catElem = ds[i].check(name, id, sourceObj, includeLeaves, excludeLeaves);
+        if (catElem) catArray.unshift(catElem);
+    }
+
+    return catArray;
+  ]]></script>
+</script>

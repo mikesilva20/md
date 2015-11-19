@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.showMsgHierarchy">
+  <guid>{0da57d35-7f98-4234-8aff-e35634d462fb}</guid>
+  <label>showMsgHierarchy</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="finder" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!finder.searchDocument.hierarchy){
+        finder.setResultForm("result");
+        return;
+    }
+
+    finder.setResultForm("resultHierarchy");
+
+    var list = new Array();
+    var hash = new Array();
+    var hashChild = new Array();
+
+    finder.sort("creationDate");
+
+    var res = finder.list;
+
+    for(var i = 0; i < res.length; i++)
+    {
+        var o = CreateInfo(res[i]);
+        if(o.parentId)
+        {
+            var parent = hash[o.parentId];
+            if(parent){
+                parent.children.push(o);
+            }else{
+                // caso o pai ainda nao tenha sido processado
+                var c = hashChild[o.parentId];
+                if(c == null)
+                    hashChild[o.parentId] = new Array();
+
+                hashChild[o.parentId].push(o);
+            }
+        }else{
+            list.push(o);
+        }
+
+        hash[res[i].npu] = o;
+    }
+
+
+    for(var k in hashChild){
+
+        var parent = hash[k];
+        var child = hashChild[k];
+
+        if(parent){
+
+            for(var i=0;i<child.length; i++){
+                parent.children.push(child[i]);
+            }
+        }else{
+            for(var i=0;i<child.length; i++){
+                list.push(child[i]);
+            }
+        }
+    }
+
+    var position = 0;
+
+    for(var i=0; i< list.length; i++){
+
+        var o = list[i];
+        o.item.level    = 1;
+        o.item.position = position++;
+
+        for(var j=0;j<o.children.length; j++){
+            var child = o.children[j];
+            child.item.level  = 2;
+            child.item.position = position++;
+
+            for(var z=0; z<child.children.length; z++){
+                var zChild = child.children[z];
+                zChild.item.level = 3;
+                zChild.item.position = position++;
+            }
+        }
+    }
+
+    finder.sort("position");
+    /*
+    Functions ##########  Helpers #########
+    */
+
+    function SearchInfo(lst, npu){
+
+        for(var i=0; i< lst.length; i++){
+
+            if(lst[i].npu == npu)
+                return lst[i];
+        }
+        return null;
+    }
+
+
+
+
+
+    function CreateInfo (tmp){
+        var obj = new Object();
+        obj.npu = tmp.npu;
+        obj.parentId = tmp.correlationNpu;
+        obj.children = new Array();
+        obj.item = tmp;
+        return obj;
+    }
+  ]]></script>
+</script>

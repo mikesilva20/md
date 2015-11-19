@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getConfiguration">
+  <label>cache_getConfiguration</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var doc = Document.readDoc("omMessaging.messagingConfiguration", "activeConfig");
+
+    if(doc == null){
+
+        doc = new Document("omMessaging.messagingConfiguration");
+        doc.id = "activeConfig";
+        doc.automaticRegistration = true;
+        doc.automaticSuspension = false;
+        doc.inboundArchiveEnable = false;
+        doc.outboundArchiveEnable = false;
+        doc.fireAndProceedGP = "omMessaging.omFireAndProceedProcess";
+        doc.fireAndProceedOperation = "fireAndProceedErrorMessage";
+        doc.validSystems = "0022,0205";
+        doc.logLevel = "ON";
+        doc.maxInactivityGP = 600;
+        doc.BOUsers = "upadmin";
+        //doc.save();
+    }
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+
+    cacheDS.setScriptObject(doc);
+
+    return cacheDS;
+  ]]></script>
+</script>

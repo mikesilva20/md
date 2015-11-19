@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omAuxiliaryGroupSearchDoc">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{6e8d0b61-1603-45af-a99e-9fcaa89d8b20}</guid>
+  <label>OM Auxiliary Group</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="groupId" type="leaf">
+      <key>1</key>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="cwOrderId" type="leaf">
+      <valueType>dtype_cwf.cwOrderId</valueType>
+    </variable>
+    <variable name="itemId" type="leaf">
+      <valueType>dtype_cwf.docId</valueType>
+    </variable>
+    <variable name="name" type="leaf">
+      <valueType>dtype_omCommon.name</valueType>
+    </variable>
+    <variable name="value" type="leaf">
+      <valueType>dtype_omCommon.value</valueType>
+    </variable>
+    <variable name="groupAttributes" type="leaf">
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="status" type="leaf">
+      <valueType>dtype_omCommon.state</valueType>
+    </variable>
+    <variable name="type" type="leaf">
+      <valueType>dtype_cwt_common.string3</valueType>
+    </variable>
+    <variable name="coordinate" type="leaf">
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="groupAttributeParent" type="leaf">
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="groupName" type="leaf">
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omAuxiliaryGroupSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

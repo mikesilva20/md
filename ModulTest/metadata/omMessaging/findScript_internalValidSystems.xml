@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findScript name="omMessaging.internalValidSystems">
+  <flags enum-type="metadataFlag">PRIVATE,RESTRICTED</flags>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>Internal - Valid Systems</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.GenericDBDoc</output>
+  <sortList>
+    <sort type="stitem">
+      <path>doc_omMessaging.GenericDBDoc/leaf_id</path>
+    </sort>
+  </sortList>
+  <type>script</type>
+  <methodList>
+    <method name="cwOnFinderSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        var conf = omMessaging.aux_getConfig();
+
+        var list = new Array();
+        var validSystems = conf.validSystems;
+
+        if(validSystems){
+            var tmp = validSystems.split(',');
+
+            for(var i=0; i<tmp.length; i++){
+
+                var doc = new Document("omMessaging.GenericDBDoc");
+                doc.id = tmp[i];
+                list.push(doc);
+            }
+        }
+
+
+
+
+        return list;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="internalValidSystemsResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="id" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_id</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value1" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value2" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value3" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value4" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value5" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value5</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value6" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value6</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value7" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value7</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value8" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value8</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value9" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value9</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omMessaging.internalValidSystems/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="internalValidSystemsView" type="findVView">
+      <outputOverlay>findScript_omMessaging.internalValidSystems/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findScript>

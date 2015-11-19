@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<conversionMap name="omMessaging.fireAndProceedDelResMessage2Archive">
+  <guid>{05e3c1e8-c92a-be46-19e1-861582ce551d}</guid>
+  <isDefault>true</isDefault>
+  <itemMapList>
+    <itemMap name="0" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_businessId</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_businessId</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="1" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_correlationNpu</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_correlationNpu</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="2" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_eCode</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_eCode</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="3" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_eDescription</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_eDescription</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="4" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_receiveDate</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_receiveDate</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="5" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_ressubmissionNpu</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_resubmissionNpu</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="6" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_npu</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_npu</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+    <itemMap name="7" type="mapItem">
+      <sourcePath name="source" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedRes</path>
+          <path>doc_omMessaging.fireAndProceedRes/leaf_typeMsg</path>
+        </pathList>
+      </sourcePath>
+      <targetPath name="target" type="mapPath">
+        <pathList>
+          <path>doc_omMessaging.fireAndProceedArchive</path>
+          <path>doc_omMessaging.fireAndProceedArchive/leaf_typeMsg</path>
+        </pathList>
+      </targetPath>
+    </itemMap>
+  </itemMapList>
+  <label>Resubmited/Deleted Message 2 Archive </label>
+  <metaVersion>4</metaVersion>
+  <source>doc_omMessaging.fireAndProceedRes</source>
+  <target>doc_omMessaging.fireAndProceedArchive</target>
+</conversionMap>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.status">
+  <enumeration type="enum">
+    <valueList>
+      <value name="Published" type="enumItem" code="1"/>
+      <value name="Processed" type="enumItem" code="2"/>
+      <value name="Error" type="enumItem" code="3"/>
+      <value name="Retry" type="enumItem" code="4"/>
+      <value name="Invalid" type="enumItem" code="5"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Status</label>
+  <length>1</length>
+  <metaVersion>3</metaVersion>
+</dataType>

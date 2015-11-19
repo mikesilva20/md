@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.stacksConfigurationFnd">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omMessaging.stacksConfiguration</input>
+  <label>Config - Stacks</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.stacksConfiguration</output>
+  <type>SQL</type>
+  <vDetailForm>doc_omMessaging.stacksConfiguration/ui_UserInterface/frmui_Forms/vform_SaveForm</vDetailForm>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select {+*+}
+        from OM_MSG_STACKS_CONF
+        where 1=1
+        {[4] and GPType = ?}
+        {[5] and isActive = ?}
+        {[6] and isDefault = ?}
+        order by GPType, stackId
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>Stacks Configuration</label>
+        <valueType>doc_omMessaging.stacksConfiguration</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.stacksConfiguration/ui_UserInterface</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omMessaging.stacksConfiguration/ui_UserInterface</valueType>
+      </variable>
+      <variable name="isShowAction" type="leaf">
+        <label>Boolean</label>
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="stacksConfigurationFndResultTable" type="eltabl">
+                    <groupStartOpen>none</groupStartOpen>
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <showAlternateStyle>true</showAlternateStyle>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="isActive" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_isActive</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>80px</width>
+                      </element>
+                      <element name="isDefault" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_isDefault</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>80px</width>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>80px</width>
+                      </element>
+                      <element name="GPId" type="elfld">
+                        <dataLength>9</dataLength>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_GPId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="configurationDate" type="eldatetime">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_configurationDate</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>150px</width>
+                      </element>
+                      <element name="userId" type="elfld">
+                        <dataLength>30</dataLength>
+                        <label>User Id</label>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_userId</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>200px</width>
+                      </element>
+                      <element name="GPType" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.stacksConfiguration/leaf_GPType</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfAdd" type="eldel"/>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfDelete" type="elext"/>
+              <override name="cwfDetail" type="eldel"/>
+              <override name="cwfSelect" type="eldel"/>
+              <override name="cwfUpdate" type="eldel"/>
+              <override name="finderMenuLayout" type="elext">
+                <elementList>
+                  <element name="miActions" type="elmnu">
+                    <icon>/cwf/application.png</icon>
+                    <label>Actions</label>
+                    <visible type="varPath">
+                      <independant>true</independant>
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/permMethod_showActions</variablePath>
+                      </variablePathList>
+                    </visible>
+                    <elementList>
+                      <element name="miActivate" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/usrActionMethod_toggleActive</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/action.gif</icon>
+                        <label>Activate / Deactivate</label>
+                        <tooltip>Activate / Deactivate</tooltip>
+                      </element>
+                      <element name="miChangesMsgStack" type="elmnu">
+                        <clickMethod type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/usrActionMethod_showDialogUpdateStack</variablePath>
+                          </variablePathList>
+                        </clickMethod>
+                        <icon>/cwf/update.gif</icon>
+                        <label>Replace stackId in messages</label>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="deleteAction" type="usrActionMethod">
+        <confirmation>ui_com.conceptwave.system.BaseFinderUserInterface/uimthd_onDeleteConfirm</confirmation>
+        <validate>true</validate>
+        <script><![CDATA[
+          this.cw$super_deleteAction();
+
+          var selected = this.model.selected;
+          var ids = "";
+          for(var i=0; i<selected.length; i++){
+
+
+           ids += selected[i].GPId + "; ";
+
+           var gp = Process.getProcessInfo(selected[i].GPId);
+
+           if(gp != null){
+
+               Process.sendExceptionToProcess(selected[i].GPId, "omMessaging.restartGP");
+           }
+          }
+
+          omMessaging.cache_resetAll();
+
+
+          omMessaging.log("The follow stacks was been deleted by user: " + UserProfile.userId() + " - " + ids, "Config - Stacks: Delete Stacks", null);
+        ]]></script>
+      </method>
+      <method name="toggleActive" type="usrActionMethod">
+        <confirmation>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/uimthd_displayConfirmationDialog</confirmation>
+        <script><![CDATA[
+          var list = this.model.selected;
+
+          if(list != null){
+
+              for(var i=0; i<list.length; i++){
+
+                  list[i].isActive = !(list[i].isActive);
+                  list[i].userId = UserProfile.userId();
+                  list[i].configurationDate = new Date();
+                  list[i].save();
+              }
+
+              omMessaging.cache_resetAll();
+              this.model.search();
+          }
+        ]]></script>
+      </method>
+      <method name="showDialogUpdateStack" type="usrActionMethod">
+        <dialogHeight>220</dialogHeight>
+        <dialogWidth>520</dialogWidth>
+        <form>doc_omMessaging.ui.genericDialog/ui_UserInterface/frmui_Forms/vform_UpdateStackId</form>
+        <parameterList>
+          <parameter name="dialog" type="rifp"/>
+        </parameterList>
+        <showInPopup>true</showInPopup>
+        <userInterface>doc_omMessaging.ui.genericDialog</userInterface>
+        <valueType>doc_omMessaging.ui.genericDialog</valueType>
+        <script><![CDATA[
+          var row = this.model.selected;
+
+          if(row != null){
+
+               dialog.id = row[0].stackId;
+              dialog.value1 = row[0].GPType;
+          }
+        ]]></script>
+      </method>
+      <method name="OnSelChanged" type="action">
+        <script><![CDATA[
+          this.isShowAction = this.model.selected != null;
+
+          this.cw$super_OnSelChanged();
+        ]]></script>
+      </method>
+      <method name="showActions" type="permMethod">
+        <script>return this.model.selected != null;</script>
+      </method>
+      <method name="displayConfirmationDialog" type="uimthd">
+        <script><![CDATA[
+          var m = this.result.selected;
+          if (m != null) {
+
+                return new Confirm("UU0167:YN",null);
+          }
+          else
+                Global.throwException("UU0115");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="stacksConfigurationFndView" type="findVView">
+      <inputOverlay>doc_omMessaging.stacksConfiguration/ui_UserInterface/frmui_Forms/vform_SearchForm</inputOverlay>
+      <label>Stacks Configuration</label>
+      <outputOverlay>findSql_omMessaging.stacksConfigurationFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+      <showSearchForm>true</showSearchForm>
+    </view>
+  </viewList>
+</findSql>

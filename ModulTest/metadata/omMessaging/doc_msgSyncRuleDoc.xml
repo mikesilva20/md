@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.msgSyncRuleDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{014c6245-6a1d-902f-0630-423bc74bd8d2}</guid>
+  <label>Msg - I0 Rules </label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="eCode" type="leaf">
+      <column>ECODE</column>
+      <key>1</key>
+      <label>eCode</label>
+      <propertyElement type="elfld">
+        <label>eCode</label>
+      </propertyElement>
+      <table>OM_MSG_SYNC_RULE</table>
+      <valueType>dtype_omMessaging.eCode</valueType>
+    </variable>
+    <variable name="action" type="leaf">
+      <column>ACTION</column>
+      <label>Action</label>
+      <propertyElement type="elfld">
+        <label>Action</label>
+      </propertyElement>
+      <table>OM_MSG_SYNC_RULE</table>
+      <valueType>dtype_omMessaging.action</valueType>
+    </variable>
+    <variable name="maxRetries" type="leaf">
+      <column>MAXRETRIES</column>
+      <label>Max Retries</label>
+      <propertyElement type="elfld">
+        <label>Max Retries</label>
+      </propertyElement>
+      <table>OM_MSG_SYNC_RULE</table>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.msgSyncRuleDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="msgSyncRuleDocGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="msgSyncRuleDocGrid" type="elgrd">
+                    <colWidths>160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>160px</width>
+                    <elementList>
+                      <element name="msgSyncRuleDocHeader" type="elhdr">
+                        <label>Msg - I0 Rules </label>
+                      </element>
+                      <element name="eCode" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/leaf_eCode</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="action" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/leaf_action</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="maxRetries" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.msgSyncRuleDoc/leaf_maxRetries</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

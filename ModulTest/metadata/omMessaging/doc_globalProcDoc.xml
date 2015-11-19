@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.globalProcDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{0b34c151-3638-9434-f9a2-84b54f076766}</guid>
+  <label>Process Doc - GPs</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="activityTimeout" type="leaf">
+      <label>Activity Timeout</label>
+      <propertyElement type="elfld">
+        <label>Activity Timeout</label>
+      </propertyElement>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+    <variable name="inactivityDelay" type="leaf">
+      <label>Inactivity Delay</label>
+      <propertyElement type="elfld">
+        <label>Inactivity Delay</label>
+      </propertyElement>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+    <variable name="msgPerCycle" type="leaf">
+      <label>Msg per cycle</label>
+      <propertyElement type="elfld">
+        <label>Msg per cycle</label>
+      </propertyElement>
+      <valueType>dtype_cwf_up.Integer9</valueType>
+    </variable>
+    <variable name="system" type="leaf">
+      <label>System</label>
+      <propertyElement type="elfld">
+        <label>System</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="simulator" type="leaf">
+      <label>SOAP Simulator</label>
+      <propertyElement type="elrgrp">
+        <label>SOAP Simulator</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="retryNumber" type="leaf">
+      <label>retryNumber</label>
+      <propertyElement type="elfld">
+        <label>retryNumber</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="inactivityDelayGrowingRate" type="leaf">
+      <label>Inactivity Delay Growing Rate</label>
+      <propertyElement type="elfld">
+        <label>Inactivity Delay Growing Rate</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="inactivityDelayGrowingRateMax" type="leaf">
+      <label>Inactivity Delay Growing Rate Max</label>
+      <propertyElement type="elfld">
+        <label>Inactivity Delay Growing Rate Max</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <label>Stack Id</label>
+      <propertyElement type="elfld">
+        <label>Stack Id</label>
+      </propertyElement>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.globalProcDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="aaaaGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="globalProcDocGrid" type="elgrd">
+                    <colWidths>160,160,160,160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>640px</width>
+                    <elementList>
+                      <element name="globalProcDocHeader" type="elhdr">
+                        <label>Process Doc - GPs</label>
+                      </element>
+                      <element name="activityTimeout" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_activityTimeout</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="inactivityDelay" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_inactivityDelay</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="msgPerCycle" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_msgPerCycle</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="inactivityDelayGrowingRate" type="elfld">
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_inactivityDelayGrowingRate</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="inactivityDelayGrowingRateMax" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_inactivityDelayGrowingRateMax</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="Separator" type="elsep"/>
+                      <element name="stackId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.globalProcDoc/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.globalProcDoc/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

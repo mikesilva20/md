@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramCSS">
+  <label>Diagram CSS</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    /*
+     * Created by: Tiago Barreiros
+     */
+
+    var cssStyle;
+
+    cssStyle = "html,body{height: 100%;}";               /* tamanho do fundo da página */
+
+    /* Tabela do Diagrama */
+
+    cssStyle = cssStyle + "#diagramTable{";              /* tabela do diagrama */
+    cssStyle = cssStyle + "margin: auto;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "border-collapse:collapse;";          /* alinhamento do conteudo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr{";           /* linhas */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td{";        /* colunas */
+    cssStyle = cssStyle + "position: relative;";                /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    //cssStyle = cssStyle + "width: 150px;";                      /* largura da div */
+    cssStyle = cssStyle + "height: 40px;";                      /* altura da div */
+    cssStyle = cssStyle + "text-align: center;";                /* alinhamento do texto */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr .connector{";    /* td do canvas */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "height: 25px;";                      /* altura da div */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr .connector canvas{";    /* td do canvas */
+    cssStyle = cssStyle + "vertical-align: middle;";            /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "height: 25px;";                      /* altura da div */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td .element{";   /* div elemento */
+    cssStyle = cssStyle + "position: absolute;";                /* alinhamento do conteudo */
+    cssStyle = cssStyle + "top: 0px;";                          /* alinhamento do conteudo */
+    cssStyle = cssStyle + "bottom: 0px;";                       /* alinhamento do conteudo */
+    cssStyle = cssStyle + "left: 0px;";                         /* alinhamento do conteudo */
+    cssStyle = cssStyle + "right: 0px;";                        /* alinhamento do conteudo */
+    cssStyle = cssStyle + "margin-left: auto;";                 /* alinhamento do conteudo */
+    cssStyle = cssStyle + "margin-right: auto;";                /* alinhamento do conteudo */
+    cssStyle = cssStyle + "width: 148px;";                      /* largura da div */
+    cssStyle = cssStyle + "height: 38px;";                      /* altura da div */
+    cssStyle = cssStyle + "border-width: 1px;";                 /* limites da coluna */
+    cssStyle = cssStyle + "border-color: #FFFFFF;";             /* cor do limite */
+    cssStyle = cssStyle + "border-style: solid;";               /* estilo do limite */
+    cssStyle = cssStyle + "background-color: #606060;";         /* cor do fundo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td .element p{"; /* texto do elemento */
+    cssStyle = cssStyle + "margin: 0px;";                       /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 3px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "color: #FFFFFF;";                    /* cor do texto */
+    cssStyle = cssStyle + "font-size: 13px;";                   /* tamanho do texto */
+    cssStyle = cssStyle + "text-align: center;";                /* alinhamento do texto */
+    cssStyle = cssStyle + "overflow: hidden;";                  /* alinhamento do texto */
+    cssStyle = cssStyle + "word-wrap: break-word;";             /* alinhamento do texto */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td .element:hover{";    /* elemento com cursor em cima */
+    cssStyle = cssStyle + "cursor: pointer;";                   /* cursor */
+    cssStyle = cssStyle + "background-color: #909090;";         /* cor do fundo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td .element:focus{";    /* div elemento selected */
+    cssStyle = cssStyle + "background-color: #E8E8E8;";         /* cor do fundo */
+    cssStyle = cssStyle + "width: 148px;";                      /* largura da div */
+    cssStyle = cssStyle + "height: 38px;";                      /* altura da div */
+    cssStyle = cssStyle + "border-width: 1px;";                 /* limites da coluna */
+    cssStyle = cssStyle + "border-color: #909090;";             /* cor do limite */
+    cssStyle = cssStyle + "border-style: solid;";               /* estilo do limite */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#diagramTable tr td .element:focus p{";  /* texto do elemento */
+    cssStyle = cssStyle + "margin: 0px;";                       /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 3px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "color: #606060;";                    /* cor do texto */
+    cssStyle = cssStyle + "font-size: 13px;";                   /* tamanho do texto */
+    cssStyle = cssStyle + "text-align: center;";                /* alinhamento do texto */
+    cssStyle = cssStyle + "overflow: hidden;";                  /* alinhamento do texto */
+    cssStyle = cssStyle + "word-wrap: break-word;";             /* alinhamento do texto */
+    cssStyle = cssStyle + "}";
+
+    /* Tabela de Dados */
+
+    cssStyle = cssStyle + "#dataTable{";                 /* tabela de dados */
+    cssStyle = cssStyle + "margin: auto;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "padding: 0px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#dataTable tr{";              /* linhas */
+    cssStyle = cssStyle + "border-width: 1px;";                 /* limites da linha */
+    cssStyle = cssStyle + "border-color: #606060;";             /* cor do limite */
+    cssStyle = cssStyle + "border-style: solid;";               /* estilo do limite */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#dataTable tr td{";           /* colunas */
+    cssStyle = cssStyle + "padding: 5px;";                      /* alinhamento do conteudo */
+    cssStyle = cssStyle + "border-width: 1px;";                 /* limites da coluna */
+    cssStyle = cssStyle + "border-color: #606060;";             /* cor do limite */
+    cssStyle = cssStyle + "border-style: solid;";               /* estilo do limite */
+    cssStyle = cssStyle + "font-size: 14px;";                   /* tamanho do texto */
+    cssStyle = cssStyle + "color: #303030;";                    /* cor do texto */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#dataTable tr .dataTitle{";   /* titulo da dataTable */
+    cssStyle = cssStyle + "text-align: center;";                /* alinhamento do texto */
+    cssStyle = cssStyle + "font-weight: bold;";                 /* formato do texto */
+    cssStyle = cssStyle + "font-size: 16px;";                   /* tamanho do texto */
+    cssStyle = cssStyle + "background-color: #E8E8E8;";         /* cor do fundo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#dataTable tr .attributeName{";   /* nome do atributo da dataTable */
+    cssStyle = cssStyle + "font-style: italic;";                /* formato do texto */
+    cssStyle = cssStyle + "text-align: right;";                 /* alinhamento do texto */
+    cssStyle = cssStyle + "background-color: #F8F8F8;";         /* cor do fundo */
+    cssStyle = cssStyle + "}";
+
+    cssStyle = cssStyle + "#dataTable tr .attributeValue{";  /* valor do atributo da dataTable */
+    cssStyle = cssStyle + "text-align: left;";                  /* alinhamento do texto */
+    cssStyle = cssStyle + "}";
+
+    return cssStyle;
+  ]]></script>
+</script>

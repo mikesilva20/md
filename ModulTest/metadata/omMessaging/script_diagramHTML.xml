@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.diagramHTML">
+  <label>Diagram HTML</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="nodes" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /* desenha o diagrama de elementos a partir do array de connections formatado (retorna um documento html)
+     * Created by: Tiago Barreiros e Carlos Correia
+     */
+
+    var htmlDoc;                            // documento HTML a retornar para apresentacao
+    var cssStyle;                           // estilo CSS a usar no documento
+    var numRows;                            // numero de linhas da tabela
+    var columns = new Array;                // numero de colunas por linha
+    var size = new Array;                   // tamanho de cada coluna
+    var canvasId;                           // id da area de conectores
+    var canvasDoc;                          // script com o desenho dos connectores
+
+    // inicia documento html
+    htmlDoc = "<!DOCTYPE html><html><head>";
+
+    // coloca o style CSS
+    cssStyle = omMessaging.diagramCSS();
+    htmlDoc = htmlDoc + "<style>" + cssStyle + "</style>";
+
+    // coloca o script do canvas de conectores
+    htmlDoc = htmlDoc + "<script type='text/javascript'>";
+    htmlDoc = htmlDoc + "function draw(canvasId,xIni,xFin){";
+    htmlDoc = htmlDoc + "var canvas = document.getElementById(canvasId);";
+    htmlDoc = htmlDoc + "var ctx = canvas.getContext('2d');";
+    htmlDoc = htmlDoc + "ctx.beginPath();";
+    htmlDoc = htmlDoc + "ctx.moveTo(xIni,0);";
+    htmlDoc = htmlDoc + "ctx.lineTo(xFin,25);";
+    htmlDoc = htmlDoc + "ctx.stroke();";
+    htmlDoc = htmlDoc + "}";
+    htmlDoc = htmlDoc + "</script>";
+
+    // coloca o script onClick
+    htmlDoc = htmlDoc + "<script type='text/javascript'>";
+    htmlDoc = htmlDoc + "function selectElement(uc, divId){";
+    htmlDoc = htmlDoc + "var table, row, cell1, cell2, attributes;";
+    htmlDoc = htmlDoc + "deselectElement();";
+    htmlDoc = htmlDoc + "table = document.getElementById('dataTable');";
+    htmlDoc = htmlDoc + "row = table.insertRow(table.rows.length);";
+    htmlDoc = htmlDoc + "cell1 = row.insertCell(0);";
+    htmlDoc = htmlDoc + "cell1.colSpan = 2;";
+    htmlDoc = htmlDoc + "cell1.className = 'dataTitle';";
+    htmlDoc = htmlDoc + "cell1.innerHTML = uc;";
+    htmlDoc = htmlDoc + "attributes = divId.split(',');";
+    htmlDoc = htmlDoc + "for(i=0; i < attributes.length; i=i+2){";
+    htmlDoc = htmlDoc + "row = table.insertRow(table.rows.length);";
+    htmlDoc = htmlDoc + "cell1 = row.insertCell(0);";
+    htmlDoc = htmlDoc + "cell2 = row.insertCell(1);";
+    htmlDoc = htmlDoc + "cell1.className = 'attributeName';";
+    htmlDoc = htmlDoc + "cell2.className = 'attributeValue';";
+    htmlDoc = htmlDoc + "cell1.innerHTML = attributes[i];";
+    htmlDoc = htmlDoc + "cell2.innerHTML = attributes[i+1];";
+    htmlDoc = htmlDoc + "if (cell2.innerHTML == 'null'){cell2.style.fontSize = '10px'; cell2.style.fontStyle = 'italic'; cell2.style.textTransform = 'uppercase';}";
+    htmlDoc = htmlDoc + "}}";
+    htmlDoc = htmlDoc + "</script>";
+
+    // coloca o script onBlur
+    htmlDoc = htmlDoc + "<script type='text/javascript'>";
+    htmlDoc = htmlDoc + "function deselectElement(){";
+    htmlDoc = htmlDoc + "var table;";
+    htmlDoc = htmlDoc + "table = document.getElementById('dataTable');";
+    htmlDoc = htmlDoc + "while(table.rows.length>0) table.deleteRow(0);";
+    htmlDoc = htmlDoc + "}";
+    htmlDoc = htmlDoc + "</script>";
+
+    // inicia o body do documento
+    htmlDoc = htmlDoc + "</head><body>";
+
+    // desenha a tabela do diagrama
+    htmlDoc = htmlDoc + "<table id='diagramTable'>";
+
+    // numero de linhas da tabela é o numero de levels (tamanho do array de nodes)
+    numRows = nodes.length;
+    for (var i=0; i < numRows; i++){
+        htmlDoc = htmlDoc + "<tr>";                                    // abre linha
+
+        // numero de colunas da tabela é o tamanho de cada level (tamanho de nodes[i])
+        columns = nodes[i];
+        for (var j=0; j < columns.length; j++){
+            // cada coluna é um elemento, o seu tamanho esta na posicao 3
+            size[j] = columns[j][3];                                   // tamanho da coluna é o definido no node
+            htmlDoc = htmlDoc + "<td colspan='"+size[j]+"'>";          // abre coluna
+
+            if(columns[j][0] != "space"){                              // caso o node seja um elemento e nao um "filler"
+                htmlDoc = htmlDoc + "<div class='element' ";                                                             // abre div do elemento
+                htmlDoc = htmlDoc + "onClick='selectElement(\"" + columns[j][0] + "\",\"" + columns[j][1] + "\");'>";    // metodo onClick
+                htmlDoc = htmlDoc + "<p>"+ columns[j][0] +"</p>";                                                        // insere dados do elemento
+                htmlDoc = htmlDoc + "</div>";                                                                            // fecha div do elemento
+            }
+
+            htmlDoc = htmlDoc + "</td>";                               // fecha coluna
+        }
+        htmlDoc = htmlDoc + "</tr>";                                   // fecha linha
+
+        // desenha conectores entre elementos
+        if (i != (numRows-1)){                                         // excepto no ultimo level (nao liga a mais nenhum elemento)
+            htmlDoc = htmlDoc + "<tr>";                                // abre linha
+            htmlDoc = htmlDoc + "<td colspan='"+nodes[0][0][3]+"' class='connector'>";   // abre coluna
+
+            canvasId = "canvas"+i;
+            htmlDoc = htmlDoc + "<canvas id='"+canvasId+"' width='"+(nodes[0][0][3])*150+"' height='25'></canvas>"; // coloca canvas (width/heigth é da area de desenho do canvas e nao css)
+            canvasDoc = omMessaging.diagramCanvas(canvasId, columns, nodes[i+1]);         // recolhe canvas de desenho
+            htmlDoc = htmlDoc + "<script>";                            // inicia script
+            htmlDoc = htmlDoc + canvasDoc;                             // corre script
+            htmlDoc = htmlDoc + "</script>";                           // termina script
+
+            htmlDoc = htmlDoc + "</td>";                               // fecha coluna
+            htmlDoc = htmlDoc + "</tr>";                               // fecha linha
+        }
+    }
+
+    // fecha a tabela do diagrama
+    htmlDoc = htmlDoc + "</table>";
+
+    // insere tabela de dados do elemento selecionado
+    htmlDoc = htmlDoc + "<br/>";                                       // insere separador
+    htmlDoc = htmlDoc + "<table id='dataTable'></table>";              // coloca tabela
+
+    // finaliza documento html
+    htmlDoc = htmlDoc + "</body></html>";
+
+    // retorna o documento html
+    return htmlDoc;
+  ]]></script>
+</script>

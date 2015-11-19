@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getEnvironmentInterface">
+  <label>Get Environment Interface</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="environment" type="rifp">
+      <type>dtype_omCommon.environment</type>
+    </parameter>
+    <parameter name="environmentType" type="rifp">
+      <type>dtype_omCommon.environmentType</type>
+    </parameter>
+    <parameter name="isOM" type="rifp">
+      <type>dtype_omCommon.active</type>
+    </parameter>
+    <parameter name="nodeId" type="rifp">
+      <type>dtype_cwf_pm.nodeID</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Returns the correspondent Environment interface
+     * @param     {String}  environment - Environment description
+     * @param     {String}  environmentType - Environment Type
+     * @param    {Boolean}  isOM - Define if is a cluster or not
+     * @param     {String}  nodeId - Node name id
+     *
+     * @returns   {String} Returns the orderEnvironmentConfigDoc
+     * @version  1.0
+     */
+    var res = null;
+    if(environmentType && isOM != null)
+    {
+        var fnd = new Finder('omCommon.omEnvironmentConfigFnd');
+        if(environment)
+            fnd.searchDocument.environment = environment;
+        fnd.searchDocument.environmentType = environmentType;
+        fnd.searchDocument.active = true;
+        fnd.searchDocument.isOM = isOM;
+        if(nodeId)
+            fnd.searchDocument.nodeId = nodeId;
+        res = fnd.search();
+    }
+
+    return res;
+  ]]></script>
+</script>

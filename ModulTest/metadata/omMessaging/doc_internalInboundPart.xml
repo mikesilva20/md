@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.internalInboundPart">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{2d01059e-c4a9-473f-911e-206a5a5a1f07}</guid>
+  <label>Internal: Inbound Participant</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <column>ID</column>
+      <key>1</key>
+      <label>System document ID</label>
+      <table>OM_MSG_INTERNAL_INBOUND_PART</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="participant" type="leaf">
+      <column>PARTICIPANT</column>
+      <label>Participant</label>
+      <propertyElement type="elfld">
+        <label>Participant</label>
+      </propertyElement>
+      <table>OM_MSG_INTERNAL_INBOUND_PART</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="participantDesc" type="leaf">
+      <column>PARTICIPANTDESC</column>
+      <label>Participant Description</label>
+      <propertyElement type="elfld">
+        <label>Participant Description</label>
+      </propertyElement>
+      <table>OM_MSG_INTERNAL_INBOUND_PART</table>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.internalInboundPart</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

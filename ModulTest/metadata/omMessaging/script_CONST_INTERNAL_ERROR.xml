@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_INTERNAL_ERROR">
+  <guid>{063f8acb-1854-87ea-730c-9be203bb9e7b}</guid>
+  <label>#CONST# INTERNAL ERROR</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "8000";]]></script>
+</script>

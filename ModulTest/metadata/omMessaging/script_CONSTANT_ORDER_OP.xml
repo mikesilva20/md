@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONSTANT_ORDER_OP">
+  <label>CONSTANT_ORDER_OP</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="type" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(type == 'COM')
+        return "NCREATSOMC";
+    else
+        return "NCREATSOMS";
+  ]]></script>
+</script>

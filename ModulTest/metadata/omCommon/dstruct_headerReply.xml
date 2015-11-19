@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.headerReply">
+  <container>true</container>
+  <label>headerReply</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="npu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.npu</element>
+      <label>npu</label>
+    </child>
+    <child name="elapsedTime" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.Integer</element>
+      <label>elapsedTime</label>
+    </child>
+    <child name="status" type="dstruct">
+      <element>dstruct_omCommon.msgStatus</element>
+      <label>status</label>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.headerReply</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.headerReply</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

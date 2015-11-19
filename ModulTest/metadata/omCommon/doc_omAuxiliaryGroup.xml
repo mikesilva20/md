@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omAuxiliaryGroup">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{5557775e-650b-4a87-b070-95ce2d01f378}</guid>
+  <label>OM Auxiliary Group</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="groupId" type="leaf">
+      <column>GROUPID</column>
+      <key>1</key>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="cwOrderId" type="leaf">
+      <column>CWORDERID</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwf.cwOrderId</valueType>
+    </variable>
+    <variable name="itemId" type="leaf">
+      <column>ITEMID</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwf.docId</valueType>
+    </variable>
+    <variable name="name" type="leaf">
+      <column>NAME</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_omCommon.name</valueType>
+    </variable>
+    <variable name="value" type="leaf">
+      <column>VALUE</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_omCommon.value</valueType>
+    </variable>
+    <variable name="groupAttributes" type="leaf">
+      <column>GROUPATTRIBUTES</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="status" type="leaf">
+      <column>STATUS</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_omCommon.state</valueType>
+    </variable>
+    <variable name="type" type="leaf">
+      <column>TYPE</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwt_common.string3</valueType>
+    </variable>
+    <variable name="coordinate" type="leaf">
+      <column>COORDINATE</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="groupAttributeParent" type="leaf">
+      <column>GROUPATTRIBUTEPARENT</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="groupName" type="leaf">
+      <column>GROUPNAME</column>
+      <table>OM_COMMON_AUXILIARY_GROUP</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omAuxiliaryGroup</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

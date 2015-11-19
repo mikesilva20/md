@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processException name="omCommon.activitiesCounterException">
+  <guid>{38ba5e41-46a2-4e88-a83c-fa7b53af468a}</guid>
+  <label>Activities Counter Exception</label>
+  <metaVersion>4</metaVersion>
+</processException>

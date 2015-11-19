@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.processId">
+  <extends>dtype_cwf.processId</extends>
+  <label>Process Id</label>
+  <metaVersion>4</metaVersion>
+</dataType>

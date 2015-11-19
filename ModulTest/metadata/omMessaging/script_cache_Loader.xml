@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_Loader">
+  <label>cache_Loader</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="type" type="rifp"/>
+  </parameterList>
+  <script><![CDATA[
+    var cacheObject = null;
+
+    switch ( type ){
+
+        case "INTERFACE_SYNC_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getSyncInterfaces();
+        break;
+
+        case "INTERFACE_TO_STACK_IN_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getInterfaceToStackInbound();
+        break;
+
+        case  "INTERFACE_TO_STACK_OUT_CACHE_TYPE":
+             cacheObject = omMessaging.cache_getInterfaceToStackOutbound();
+        break;
+
+        case "STACK_CONF_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getStacksConfiguration();
+        break;
+
+         case "MESSAGING_CONFIG_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getConfiguration();
+        break;
+
+         case "SYSTEM_TO_STACK_IN_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getSystemToStackInbound();
+        break;
+
+         case "SYSTEM_TO_STACK_OUT_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getSystemToStackOutbound();
+        break;
+
+        case "OPERATION_TO_QUEUE_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getOperationToQueue();
+        break;
+
+       case "PARTICIPANT_VS_OPERATIONS_CACHE_TYPE":
+            cacheObject = omMessaging.cache_getParticipantVSOperations();
+        break;
+
+
+        default:
+        break;
+    }
+
+    return cacheObject;
+  ]]></script>
+</script>

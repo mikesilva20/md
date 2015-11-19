@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.item">
+  <container>true</container>
+  <label>item</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="itemId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.itemId</element>
+      <label>itemId</label>
+    </child>
+    <child name="parentItemId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.itemId</element>
+      <label>parentItemId</label>
+    </child>
+    <child name="itemCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.itemCode</element>
+      <label>itemCode</label>
+      <mandatory>true</mandatory>
+    </child>
+    <child name="requestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestNumber</element>
+      <label>requestNumber</label>
+    </child>
+    <child name="action" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.action</element>
+      <label>action</label>
+    </child>
+    <child name="specificAction" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.specificAction</element>
+      <label>specificAction</label>
+    </child>
+    <child name="customerId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.customerId</element>
+      <label>customerId</label>
+    </child>
+    <child name="pointOfNoRejection" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.pointOfNoRejection</element>
+      <label>pointOfNoRejection</label>
+    </child>
+    <child name="statusDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.statusDate</element>
+      <label>statusDate</label>
+    </child>
+    <child name="status" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.statusCode</element>
+      <label>status</label>
+    </child>
+    <child name="serviceId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.serviceId</element>
+      <label>serviceId</label>
+    </child>
+    <child name="scheduleDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.scheduleDate</element>
+      <label>scheduleDate</label>
+    </child>
+    <child name="contractId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.contractId</element>
+      <label>contractId</label>
+    </child>
+    <child name="contactId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.contactId</element>
+      <label>contactId</label>
+    </child>
+    <child name="addressId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.addressId</element>
+      <label>addressId</label>
+    </child>
+    <child name="accountId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.accountId</element>
+      <label>accountId</label>
+    </child>
+    <child name="centralArea" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.centralArea</element>
+      <label>centralArea</label>
+    </child>
+    <child name="phase" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.phaseCode</element>
+      <label>phase</label>
+    </child>
+    <child name="isProvisionItem" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.Boolean</element>
+      <label>isProvisionItem</label>
+    </child>
+    <child name="attributes" type="dstruct">
+      <container>true</container>
+      <label>attributes</label>
+      <childList>
+        <child name="attribute" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.attribute</element>
+          <label>attribute</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="item" type="dstruct">
+      <array>true</array>
+      <element>dstruct_omCommon.item</element>
+      <label>item</label>
+      <maxInstance>-1</maxInstance>
+    </child>
+    <child name="isProvisionFlag" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.Boolean</element>
+      <label>isProvisionFlag</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="getAttribute" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsGetAttribute(this, name);</script>
+    </method>
+    <method name="setAttribute" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="value" type="rifp">
+          <type>dtype_omCommon.value</type>
+        </parameter>
+        <parameter name="setOnlyIfExist" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetAttribute(this, name, value, setOnlyIfExist);</script>
+    </method>
+    <method name="setItem" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetCatalogDsArrayByObj(this.item, name, id, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="getItem" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsGetCatalogDsArrayByObject(this.item, name, id, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsCheckDsAttributesByObj(this, name, id, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetCatalogDsAttributesByObj(this, name, id, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapAttributesToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjByCatalogDsAttributes(this, destinationObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves);</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.item</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.item</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

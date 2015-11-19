@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findScript name="omMessaging.Monitor_Chart">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>Monitor - Chart</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.GenericDBDoc</output>
+  <type>script</type>
+  <methodList>
+    <method name="cwOnFinderSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        var row1 = new Document("omMessaging.GenericDBDoc");
+        row1.value1 = "Cat1";
+        row1.value2 = "1";
+        row1.value3 = "5";
+        row1.value4 = "15";
+
+        var row2 = new Document("omMessaging.GenericDBDoc");
+        row2.value1 = "Cat2";
+        row2.value2 = "10";
+        row2.value3 = "7";
+        row2.value4 = "12";
+
+        var row3 = new Document("omMessaging.GenericDBDoc");
+        row3.value1 = "Cat3";
+        row3.value2 = "7";
+        row3.value3 = "8";
+        row3.value4 = "25";
+
+
+        var dol = new DataObjectList();
+        dol.addLast(row1);
+        dol.addLast(row2);
+        dol.addLast(row3);
+
+
+        return dol;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="Monitor_ChartResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="value1" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value2" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value3" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value4" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Chart" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Chart</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Chart</extends>
+            <label>Chart</label>
+            <overrideList>
+              <override name="Chart" type="elchart">
+                <height>400px</height>
+                <showZeros>true</showZeros>
+                <type>Line</type>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>dtype_com.conceptwave.system.Boolean/leaf_TRUE</variablePath>
+                  </variablePathList>
+                </visible>
+                <width>700px</width>
+                <elementList>
+                  <element name="ChartField" type="elchartf">
+                    <label>ChartField</label>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                        <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                  <element name="ChartField1" type="elchartf">
+                    <label>ChartField1</label>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                        <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                  <element name="ChartField2" type="elchartf">
+                    <label>ChartField2</label>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                        <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                  <element name="ChartField3" type="elchartf">
+                    <label>ChartField3</label>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omMessaging.Monitor_Chart/ui_UserInterface/uivar_result</variablePath>
+                        <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="Monitor_ChartView" type="findVView">
+      <outputOverlay>findScript_omMessaging.Monitor_Chart/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+    </view>
+  </viewList>
+</findScript>

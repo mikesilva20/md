@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omDependentsOrder">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <generatedKey>true</generatedKey>
+  <guid>{71732572-f547-438c-96db-d209885d700a}</guid>
+  <label>OM Order Dependents</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="cwDocId" type="leaf">
+      <column>CWDOCID</column>
+      <key>1</key>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_cwf.cwDocId</valueType>
+    </variable>
+    <variable name="provisioningItemId" type="leaf">
+      <column>PROVISIONINGITEMID</column>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_omCommon.itemId</valueType>
+    </variable>
+    <variable name="sourceOrderId" type="leaf">
+      <column>SOURCEORDERID</column>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_omCommon.orderId</valueType>
+    </variable>
+    <variable name="destinationOrderId" type="leaf">
+      <column>DESTINATIONORDERID</column>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_omCommon.orderId</valueType>
+    </variable>
+    <variable name="environment" type="leaf">
+      <column>ENVIRONMENT</column>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_omCommon.environment</valueType>
+    </variable>
+    <variable name="orderCreationNpu" type="leaf">
+      <column>ORDERCREATIONNPU</column>
+      <table>OM_DEPENDENTS_ORDER</table>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omDependentsOrder</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

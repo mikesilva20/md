@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.sequenceExec">
+  <extends>dtype_cwf_up.Integer9</extends>
+  <label>Sequence Execution</label>
+  <length>9</length>
+  <metaVersion>4</metaVersion>
+</dataType>

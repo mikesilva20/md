@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.signedDate">
+  <extends>dtype_com.conceptwave.system.DateTime</extends>
+  <label>Signed Date</label>
+  <metaVersion>4</metaVersion>
+</dataType>

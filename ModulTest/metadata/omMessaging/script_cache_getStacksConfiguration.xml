@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getStacksConfiguration">
+  <label>cache_getStacksConfiguration</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.stacksConfigurationFnd");
+    fnd.search();
+
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+
+    cacheDS.setScriptObject(fnd.list);
+
+
+    omMessaging.log("Loading Stack Configuration from DB", "cache_getStacksConfiguration");
+
+
+    return cacheDS;
+  ]]></script>
+</script>

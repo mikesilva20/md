@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getEnvironment">
+  <label>Get Environment</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="itemCode" type="rifp">
+      <type>dtype_omCommon.itemCode</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Returns the correspondent Environment of the itemCode
+     * @param    {String}  itemCode - Item Code
+     * @returns  {orderEnvironmentDoc} Returns the environment
+     * @version  1.0
+     */
+
+    if(itemCode)
+    {
+        var fnd = new Finder('omCommon.omEnvironmentFnd');
+        fnd.searchDocument.itemCode = itemCode;
+        fnd.searchDocument.active = true;
+        var res = fnd.search();
+        if(res && res.length > 0)
+            return omCommon.calculateEnvironment(res);
+    }
+    return null;
+  ]]></script>
+</script>

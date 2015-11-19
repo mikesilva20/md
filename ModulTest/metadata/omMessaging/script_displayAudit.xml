@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.displayAudit">
+  <guid>{07585b7c-3281-ed3c-069e-b988524d2d31}</guid>
+  <label>displayAudit</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[
+    var array = new Array();
+    var fndConfig = new Finder("omMessaging.auditConfigurationFnd");
+    var fnd = new Finder("omMessaging:auditFnd");
+
+    var listConf = fndConfig.search();
+
+    for(var i = 0; i < listConf; i++)
+    {
+        var name = listConf[i].interfaceToInvoke;
+        var prettyName = listConf[i].prettyName;
+
+        var tmp = name.split('/');
+        if(tmp && tmp.length > 0 && prettyName == null)
+            prettyName = Global.getMDLabel(tmp[0]) + " / " + tmp[1];
+
+        add(name, prettyName);
+    }
+
+    var list = fnd.search();
+
+    for(var i = 0; i <list.length; i++)
+        process(list[i]);
+
+    var d = [];
+    var d15 = [];
+    var d30 = [];
+    var d60 = [];
+    var d720 = [];
+
+    //counter
+    var counter = 0;
+
+    var tableStart = '<table border="1" style="text-align:center"><tr style="background-color:#C0C0C0; text-align:center"><td rowspan="2" width="500px"><b>Interfaces</b></td><td colspan="3" width="150px"><b>15 Minutes</b></td><td colspan="3" width="150px"><b>30 Minutes</b></td><td colspan="3" width="150px"><b>1 Hour</b></td><td colspan="3" width="200px"><b>12 Hours</b></td></tr><tr style="background-color: #C0C0C0; text-align:center"><td>Ok</td><td>Retry</td><td>Error</td><td>Ok</td><td>Retry</td><td>Error</td><td>Ok</td><td>Retry</td><td>Error</td><td width="100px">Ok</td><td width="50px">Retry</td><td width="50px">Error</td></tr>';
+    var tableEnd = '</table>';
+    var rowTemplate = '<tr >'
+    + '<td style="text-align:left">{inter}</td>'
+    + '      <td {style1}>{v1}</td>'
+    + '      <td {style2}>{v2}</td>'
+    + '      <td {style3}>{v3}</td>'
+    + '      <td {style4}>{v4}</td>'
+    + '      <td {style5}>{v5}</td>'
+    + '      <td {style6}>{v6}</td>'
+    + '      <td {style7}>{v7}</td>'
+    + '      <td {style8}>{v8}</td>'
+    + '      <td {style9}>{v9}</td>'
+    + '      <td {style10}>{v10}</td>'
+    + '      <td {style11}>{v11}</td>'
+    + '      <td {style12}>{v12}</td>'
+    + '</tr>';
+
+    var rows = '';
+
+    array.sort(function (a, b){
+        if(a.name < b.name)
+            return -1;
+        if(a.name > b.name)
+            return 1;
+
+        return 0;
+    });
+
+    for (var i=0; i< array.length; i++) {
+        var item = array[i];
+        var name = item.name;
+        var arr  = item.array;
+
+        var row = rowTemplate.replace('{inter}', name);
+        row = row.replace('{v1}' , arr[0]).replace('{style1}', styleOK(arr[0]));
+        row = row.replace('{v2}' , arr[1]).replace('{style2}', styleRety(arr[1]));
+        row = row.replace('{v3}' , arr[2]).replace('{style3}', styleError(arr[2]));
+        row = row.replace('{v4}' , arr[3]).replace('{style4}', styleOK(arr[3]));
+        row = row.replace('{v5}' , arr[4]).replace('{style5}', styleRety(arr[4]));
+        row = row.replace('{v6}' , arr[5]).replace('{style6}', styleError(arr[5]));
+        row = row.replace('{v7}' , arr[6]).replace('{style7}', styleOK(arr[6]));
+        row = row.replace('{v8}' , arr[7]).replace('{style8}', styleRety(arr[7]));
+        row = row.replace('{v9}' , arr[8]).replace('{style9}', styleError(arr[8]));
+        row = row.replace('{v10}' , arr[9]).replace('{style10}', styleOK(arr[9]));
+        row = row.replace('{v11}' , arr[10]).replace('{style11}', styleRety(arr[10]));
+        row = row.replace('{v12}' , arr[11]).replace('{style12}', styleError(arr[11]));
+
+        rows += row;
+    }
+
+    var tab = tableStart +  rows + tableEnd;
+
+    return tab;
+
+    function styleOK( v){
+        var style = 'style="background-color:00FF00"';
+
+        if(v == 0)
+            return "";
+        return style;
+    }
+
+    function styleRety( v){
+        var style = 'style="background-color:FF9900"';
+
+        if(v == 0)
+            return "";
+        return style;
+    }
+
+    function styleError( v){
+        var style = 'style="background-color:red"';
+
+        if(v == 0)
+            return "";
+        return style;
+    }
+
+
+
+    function process(obj){
+        var name = obj.interfaceToInvoke + '/' + obj.operation;
+
+        var i = find(name);
+        update(obj, i);
+    }
+
+    function update(itemObj, tmp){
+
+        var index = 0;
+        var number = itemObj.time;
+        var indexType = 0;
+        var type = itemObj.auditType;
+
+        if(type == 'Success'){
+            indexType = 0;
+        }else if(type == 'Retry'){
+            indexType = 1;
+        }else if(type == 'Error'){
+            indexType = 2;
+        }
+
+        if(number == 15)
+            index = indexType;
+        else if(number == 30)
+            index = 3 + indexType;
+        else if(number == 60)
+            index = 6 + indexType;
+        else if(number == 720)
+            index = 9 + indexType;
+
+        tmp.array[index] = itemObj.count;
+    }
+
+
+    function find(obj){
+
+        for(var i=0; i < array.length; i++){
+
+            if(array[i].md == obj){
+                return array[i];
+            }
+        }
+
+        return add(obj, obj);
+    }
+
+    function add(obj, prettyName){
+
+        var o = new Object();
+        o.md = obj;
+        o.name = prettyName;
+        o.array = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+        array.push(o);
+
+        return o;
+    }
+  ]]></script>
+</script>

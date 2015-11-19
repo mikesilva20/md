@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_createSyncAck">
+  <label>in_createSyncAck</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="header" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="errorCodes" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="ackType" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    //#-> validar qual estrutura utilizar synchronousAck ou msgAck
+    //var DEFAULT_ACKTYPE = "omCommon:msgAck";7
+    var DEFAULT_ACKTYPE = publishEvent("OM_COMMON",FIRST_ONE,null);
+    if (publishEvent("OM_COMMON",FIRST_ONE,null)){//omCommon.isEmpty(ackType)) {
+        ackType = DEFAULT_ACKTYPE;
+    }
+
+    var ack = new DataStructure(ackType);
+    var ackH = ack.header;
+
+    var eCode = ackH.status.eCodes.eCode[0];
+
+    if(header)
+          ackH.npu = header.npu;
+
+    eCode.systemCode = omMessaging.CONST_SYS_CODE();
+
+    if (!errorCodes || errorCodes.length==0) {
+        eCode.code  = "22I0000";
+        eCode.description = "SUCCESS";
+    } else {
+        for (var i = 0; i < errorCodes.length; i++) {
+            eCode = ackH.status.eCodes.eCode[i];
+            eCode.code = errorCodes[i].code;
+            eCode.description = errorCodes[i].description;
+            eCode.systemCode = omMessaging.CONST_SYS_CODE();
+        }
+    }
+
+    return ack;
+  ]]></script>
+</script>

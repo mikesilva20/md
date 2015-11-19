@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.validateCwProcessActivityCounter">
+  <highlight>18</highlight>
+  <label>Validate CW Process Activity Counter</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="act" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Validate process activities counter
+     * @param    {String 1024}   act - Process Activity
+     * @version  1.0
+     */
+
+    var processId = act.process.id;
+
+    var maxRepeatCount = omCommon.omEnvironmentGetConfigVariable("maxActivityCount", 500);
+    maxRepeatCount = Number(maxRepeatCount);
+
+    var activityFnd = new Finder("omCommon.activityFnd");
+    activityFnd.searchDocument.PROCESS_ID = processId;
+    activityFnd.searchDocument.maxRepeatCount = maxRepeatCount;
+    var result = activityFnd.search();
+
+    if(result.length > 0){
+        act.raiseProcessException("omCommon.activitiesCounterException");
+    }
+  ]]></script>
+</script>

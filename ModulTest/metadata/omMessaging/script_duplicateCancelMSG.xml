@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.duplicateCancelMSG">
+  <label>duplicateCancelMSG</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omMessaging.npu</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    try{
+        if (npu == null || npu == '')
+            return false;
+        if (npu.search("#") != -1)
+            npu = npu.slice(1);
+
+        var data = null;
+
+        var msg = omMessaging.in_getMsg(npu);
+        var copyMsg = msg.copyDocument(false,true);
+        if(copyMsg){
+
+            var oper = omMessaging.npu_getOper(npu,null,null);
+            var newNPU = omMessaging.npu_genNew(oper,npu);
+
+            omMessaging.aux_loadMsgData(copyMsg);
+            omMessaging.aux_loadMsgData(msg);
+
+            copyMsg.payload = msg.payload;
+            copyMsg.dataType = msg.dataType;
+
+            data = Global.getItemsFromXML(copyMsg.payload, copyMsg.dataType);
+
+            if(data){
+                data = data[0];
+                //altera businessId para ficar associado a ordem que irá ser cancelada.
+                copyMsg.businessId = data.msgData.genericBody.order[0].orderInfo.orderHeader.requestNumberToCancel;
+                copyMsg.npu = npu + '_C';
+                copyMsg.save();
+                omMessaging.aux_saveMsgData(copyMsg);
+                return true;
+            }
+        }
+        return false;
+    } catch (ex) {
+
+        omMessaging.log("Erro ocorrido: " + ex.message + " \nNPU: " + npu + " \nMsgID: duplicateMessage error");
+        return false;
+    }
+  ]]></script>
+</script>

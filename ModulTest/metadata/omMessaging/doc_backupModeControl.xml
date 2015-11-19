@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.backupModeControl">
+  <dbSchema>OM_MSG</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{90e50162-8783-4249-999b-37614c5a1199}</guid>
+  <label>Monitor - Backup Mode</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="key" type="leaf">
+      <column>KEY</column>
+      <key>1</key>
+      <table>OM_MSG_BACKUPMODECONTROL</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="GPId" type="leaf">
+      <column>GPID</column>
+      <table>OM_MSG_BACKUPMODECONTROL</table>
+      <valueType>dtype_cwt_common.string32</valueType>
+    </variable>
+    <variable name="lastPing" type="leaf">
+      <column>LASTPING</column>
+      <table>OM_MSG_BACKUPMODECONTROL</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.backupModeControl</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

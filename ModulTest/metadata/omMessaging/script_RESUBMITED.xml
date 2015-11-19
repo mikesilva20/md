@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.RESUBMITED">
+  <guid>{07fbe0ac-1a24-a354-f9ff-a00881af27f2}</guid>
+  <label>CON - RESUBMITED</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    /*********************************************************************************************
+     *
+     *      Constant RESUBMITED to be define accordig the Data Type Action (ptSysMgmt)
+     *
+     * @author            Fabio Afonso
+     * @created date       2011-08-28
+     *
+     *********************************************************************************************/
+
+     return "1";
+  ]]></script>
+</script>

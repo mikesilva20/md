@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.typeOfOm">
+  <enumeration type="enum">
+    <valueList>
+      <value name="COM Order" type="enumItem" code="COM"/>
+      <value name="SOM Order" type="enumItem" code="SOM"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Type Of OM</label>
+  <length>16</length>
+  <metaVersion>4</metaVersion>
+</dataType>

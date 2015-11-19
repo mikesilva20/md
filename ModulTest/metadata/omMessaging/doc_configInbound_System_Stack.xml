@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.configInbound_System_Stack">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{4e81d9e7-27a6-4da0-8e1e-41daec3fb27e}</guid>
+  <label>Config  Inbound - System to Stack </label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="system" type="leaf">
+      <column>SYSTEM</column>
+      <key>1</key>
+      <label>System</label>
+      <propertyElement type="elfld">
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_SYSTEM_TO_STACK_IN</table>
+      <valueType>dtype_omMessaging.system</valueType>
+    </variable>
+    <variable name="stackId" type="leaf">
+      <column>STACKID</column>
+      <key>2</key>
+      <label>Stack Id</label>
+      <propertyElement type="elfld">
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_SYSTEM_TO_STACK_IN</table>
+      <valueType>dtype_omMessaging.stackId</valueType>
+    </variable>
+    <variable name="isActive" type="leaf">
+      <column>ISACTIVE</column>
+      <label>Is Active</label>
+      <propertyElement type="elrgrp">
+        <label>Is Active</label>
+        <optional type="varPath">
+          <variablePathList>
+            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+          </variablePathList>
+        </optional>
+      </propertyElement>
+      <table>OM_MSG_SYSTEM_TO_STACK_IN</table>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.configInbound_System_Stack</valueType>
+      </variable>
+      <variable name="allRefs" type="leaf">
+        <label>Internal - All Refs</label>
+        <valueType>doc_omMessaging.ui.allRefs</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="EditFormGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="configInbound_System_StackGrid" type="elgrd">
+                    <colWidths>160,160,160</colWidths>
+                    <numOfCols>3</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>480px</width>
+                    <elementList>
+                      <element name="configInbound_System_StackHeader" type="elhdr">
+                        <label>Config  Inbound - System to Stack </label>
+                      </element>
+                      <element name="isActive" type="elrgrp">
+                        <defaultEnum>yes/no</defaultEnum>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/leaf_isActive</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="stackId" type="elfld">
+                        <editable type="varPath">
+                          <variablePathList>
+                            <variablePath>dtype_com.conceptwave.system.Boolean/leaf_TRUE</variablePath>
+                          </variablePathList>
+                        </editable>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/leaf_stackId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="system" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.configInbound_System_Stack/leaf_system</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="AddEdit_Form" type="vform">
+            <label>AddEdit_Form</label>
+            <root name="AddEdit_FormGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="configInbound_System_StackGrid" type="elgrd">
+                  <colWidths>160,160,160,160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="configInbound_System_StackHeader" type="elhdr">
+                      <label>Config  Inbound - System to Stack </label>
+                    </element>
+                    <element name="isActive" type="elrgrp">
+                      <defaultEnum>yes/no</defaultEnum>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/leaf_isActive</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="refInboundStacks" type="elslct">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/permMethod_canEdit</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/leaf_allRefs</variablePath>
+                          <variablePath>doc_omMessaging.ui.allRefs/leaf_refInboundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="refValidSystems" type="elslct">
+                      <columnSpan>2</columnSpan>
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/permMethod_canEdit</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <startRow>true</startRow>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.configInbound_System_Stack/ui_UserInterface/leaf_allRefs</variablePath>
+                          <variablePath>doc_omMessaging.ui.allRefs/leaf_refValidSystems</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          if(this.allRefs.refInboundStacks){
+              this.model.stackId = this.allRefs.refInboundStacks;
+          }
+
+          if(this.allRefs.refValidSystems){
+              this.model.system = this.allRefs.refValidSystems;
+          }
+
+          this.cw$super_save();
+
+          omMessaging.cache_resetAll();
+
+          this.parent.hideDetailAction();
+        ]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.allRefs = new Document("omMessaging.ui.allRefs");
+
+          this.allRefs.refInboundStacks = this.model.stackId;
+          this.allRefs.refValidSystems = this.model.system;
+
+
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+      <method name="canEdit" type="permMethod">
+        <script>return this.model.stackId == null || this.model.system == null;</script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

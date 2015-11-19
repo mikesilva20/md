@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.processSearch">
+  <extends>doc_cwf_pm.ProcessSearch</extends>
+  <guid>{2db44841-edc8-4723-bcad-23ba50e6ec7a}</guid>
+  <label>processSearch</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="requestNumber" type="leaf">
+      <valueType>dtype_omCommon.requestNumber</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="cwLeafInitAction$CHANGEDSTATUSTIMEGT" type="laction">
+      <path>doc_cwf_pm.ProcessSearch/leaf_CHANGEDSTATUSTIMEGT</path>
+      <type>initializer</type>
+      <script>return new Date(Date.parse(new Date())-1000*60*60);</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_cwf_pm.ProcessSearch/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.processSearch</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_cwf_pm.ProcessSearch/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Search" type="exov">
+            <base>doc_cwf_pm.ProcessSearch/ui_UserInterface/frmui_Forms/vform_Search</base>
+            <extends>doc_cwf_pm.ProcessSearch/ui_UserInterface/frmui_Forms/vform_Search</extends>
+            <label>Search</label>
+            <overrideList>
+              <override name="ORDER_ID2" type="elfld">
+                <columnSpan>1</columnSpan>
+                <padding>0</padding>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>doc_omCommon.processSearch/ui_UserInterface/uivar_model</variablePath>
+                    <variablePath>doc_cwf_pm.ProcessSearch/leaf_ORDER_ID</variablePath>
+                  </variablePathList>
+                </variable>
+              </override>
+              <override name="PE_ID2" type="eldel"/>
+              <override name="SearchGrid" type="elext">
+                <elementList>
+                  <element name="requestNumber" type="elfld">
+                    <columnSpan>1</columnSpan>
+                    <padding>1</padding>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omCommon.processSearch/ui_UserInterface/uivar_model</variablePath>
+                        <variablePath>doc_omCommon.processSearch/leaf_requestNumber</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

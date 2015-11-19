@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.orderHeader">
+  <container>true</container>
+  <description>Order Header</description>
+  <label>orderHeader</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="comOrderId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.comOrderId</element>
+      <label>comOrderId</label>
+    </child>
+    <child name="relatedRequestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.relatedRequestNumber</element>
+      <label>relatedRequestNumber</label>
+    </child>
+    <child name="cwOrderId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderId</element>
+      <label>cwOrderId</label>
+    </child>
+    <child name="requestNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestNumber</element>
+      <label>requestNumber</label>
+    </child>
+    <child name="typeOfOm" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.typeOfOm</element>
+      <label>typeOfOm</label>
+    </child>
+    <child name="orderCreationNpu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderCreationNpu</element>
+      <label>orderCreationNpu</label>
+    </child>
+    <child name="phases" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.phases</element>
+      <label>phases</label>
+    </child>
+    <child name="pendencies" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.pendencies</element>
+      <label>pendencies</label>
+    </child>
+    <child name="externalOrderNumber" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.externalOrderNumber</element>
+      <label>externalOrderNumber</label>
+    </child>
+    <child name="ponrReached" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.ponrReached</element>
+      <label>ponrReached</label>
+      <xmlMap type="xmap">
+        <exclude>1</exclude>
+      </xmlMap>
+    </child>
+    <child name="inCancellation" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.inCancellation</element>
+      <label>inCancellation</label>
+    </child>
+    <child name="orderCreationDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderCreationDate</element>
+      <label>orderCreationDate</label>
+    </child>
+    <child name="orderCompletionDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderCompletionDate</element>
+      <label>orderCompletionDate</label>
+    </child>
+    <child name="orderEntryId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderEntryId</element>
+      <label>orderEntryId</label>
+    </child>
+    <child name="orderObjectiveDate" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderObjectiveDate</element>
+      <label>orderObjectiveDate</label>
+    </child>
+    <child name="requestPriority" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestPriority</element>
+      <label>requestPriority</label>
+    </child>
+    <child name="requestType" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.requestType</element>
+      <label>requestType</label>
+    </child>
+    <child name="orderCancellationNpu" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.orderCancellationNpu</element>
+      <label>orderCancellationNpu</label>
+    </child>
+    <child name="addressDescription" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.addressDescription</element>
+      <label>addressDescription</label>
+    </child>
+    <child name="customerName" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.customerName</element>
+      <label>customerName</label>
+    </child>
+    <child name="status" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.state</element>
+      <label>status</label>
+    </child>
+    <child name="orderCreateProcessId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_cwf.processId</element>
+      <label>orderCreateProcessId</label>
+    </child>
+    <child name="orderCreateSystem" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_cwt_common.string32</element>
+      <label>orderCreateSystem</label>
+    </child>
+    <child name="basketId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_cwf.cwDocId</element>
+      <label>basketId</label>
+    </child>
+    <child name="environment" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.environment</element>
+      <label>environment</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.orderHeader</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.orderHeader</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

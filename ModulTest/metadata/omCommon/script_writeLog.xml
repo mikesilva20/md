@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.writeLog">
+  <highlight>18</highlight>
+  <label>writeLog</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="severity" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_cwf.severity</type>
+    </parameter>
+    <parameter name="eventDescription" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.omEventLogDescription</type>
+    </parameter>
+    <parameter name="fullQualifiedName" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.omEventLogMdFullName</type>
+    </parameter>
+    <parameter name="omModuleErrorCode" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.omEventLogErrorCode</type>
+    </parameter>
+    <parameter name="stackTrace" type="rifp">
+      <type>dtype_omCommon.omEventLogStackTrace</type>
+    </parameter>
+    <parameter name="orderId" type="rifp">
+      <type>dtype_cwf.orderId</type>
+    </parameter>
+    <parameter name="stackTraceDynamic" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Save event log message
+     *
+     * @param    {Decimal}  severity - Log sevirity ( 0      - Debug
+     *                                                1      - Information
+     *                                                2      - Warning
+     *                                                3      - Error
+     *                                                4      - Fatal Error )
+     * @param    {String 1024}   eventDescription - Log description
+     * @param    {String  256}   fullQualifiedName - Fullqualified name of parent object
+     * @param    {String    8}   omModuleErrorCode - OM Module error code
+     * @param    {String 4000}   stackTrace - Stack trace
+     * @param    {String   16}   orderId - Order Id. Must be filled out if you are in the context of an order.
+     *
+     * @returns  {Decimal}       Returns the generated key of log message
+     * @version  1.0
+     */
+
+    if(!Global.checkForCode('cwf.severity',String(severity)))
+        Global.throwException('DE0031', ['severity','cwf.severity']);
+
+    var isDebug = omCommon.getConfigVariable('debug');
+
+    if(severity == 0 && !isDebug && !stackTraceDynamic)
+        return;
+
+    var user =  Global.getUserId();
+    var element = MetadataElement.getElement(fullQualifiedName);
+
+    if(!element)
+         Global.throwException('DE0312', [fullQualifiedName]);
+
+    var processId = (user.indexOf('Process: ') == 0)? user.split(': ')[1] : null;
+
+    if(processId && Number(processId) < 5000000000000000 && !orderId)
+    {
+        var proc = Process.getProcessInfo(Number(processId));
+        if(proc && proc.processOrderId != 0)
+        {
+            orderId = proc.processOrderId;
+            var desc = Global.translateText('OMCM0001',UserProfile.getLanguage(),[element.fullName, 'orderId']);
+            var elem =  MetadataElement.getElement('omCommon.writeLog');
+            var params1 = [Global.getNodeId(),user,processId,2,desc,elem.parent.fullName,'OMCM0001',elem.fullName,elem.type,orderId,null];
+            Global.runDBStoredProcedure('OM_COMMON','call OM_EVENTLOG_SP(?,?,?,?,?,?,?,?,?,?,?,?)',params1,null,true,null,'omCommon.omEventLogIdDoc','I-I-I-I-I-I-I-I-I-I-I-O');
+        }
+    }
+
+    var params = [Global.getNodeId(),user,Number(processId),severity,eventDescription,element.parent.fullName,omModuleErrorCode,element.fullName,element.type,orderId,stackTrace+" "+stackTraceDynamic];
+
+    var res = Global.runDBStoredProcedure('OM_COMMON','call OM_EVENTLOG_SP(?,?,?,?,?,?,?,?,?,?,?,?)',params,null,true,null,'omCommon.omEventLogIdDoc','I-I-I-I-I-I-I-I-I-I-I-O');
+
+    return (res && res.length > 0)? res[0].eventId : null;
+  ]]></script>
+</script>

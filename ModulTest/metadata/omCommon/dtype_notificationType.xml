@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.notificationType">
+  <extends>dtype_cwt_common.string32</extends>
+  <label>Notification Type</label>
+  <metaVersion>4</metaVersion>
+</dataType>

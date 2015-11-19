@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.moveMsg2Arc">
+  <label>AUX - Move Message 2 Archive</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="doc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="date" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.DateTime</type>
+    </parameter>
+    <parameter name="action" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omMessaging.fireProceedAction</type>
+    </parameter>
+    <parameter name="autoResubmit" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.Boolean</type>
+    </parameter>
+    <parameter name="npu" type="rifp">
+      <type>dtype_omCommon.npu</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**********************************************************************************************************************************
+     *
+     *  Moves the Message from Fire And Proceed Message Table to Fire And Proceed Archive
+     *
+     * @author                  Fabio Afonso
+     * @created date      2011-08-30
+     *
+     *
+     * @param
+     *            doc                              Document                  The Fire And Proceed - Result Document or
+     *                                                                        The Fire And Proceed - Message Document
+     *            date                        Date/Time                  The Fire And Proceed Action Date
+     *            action                        Action                        The Fire And Proceed Action
+     *            autoResubmit            Boolean                        True iff it is an autoresubmission
+     *
+     *********************************************************************************************************************************/
+
+     var NAME_SPACE                              = "omMessaging";
+     var SCRIPT_NAME                        = "moveMsg2Arc";
+     var CONV_MAP_MESSAGE2ARCHIVE       = "omMessaging.message2Archive";
+     var archiveDocument                  = new Document("omMessaging.fireAndProceedArchive");
+     var finder                                    = null;
+     var msgDoc                                    = null;
+
+     try{
+
+           if(autoResubmit){
+                 // Fire And Proceed - Message Document
+                 msgDoc = doc;
+           }else{
+                // Fire And Proceed - Message Document
+                msgDoc = omMessaging.getMsgDoc(doc.npu);
+           }
+
+           // Load the Message
+          omMessaging.aux_getMsg(msgDoc);
+
+           // Map the Document to the Archive Document
+           //omCommon.mapDocuments(msgDoc, archiveDocument, CONV_MAP_MESSAGE2ARCHIVE);
+           publishEvent("OM_COMMON",FIRST_ONE,null);
+
+           // Add the Date and Action
+           archiveDocument.actionDate = date;
+           archiveDocument.action = action;
+           if(npu)
+                 archiveDocument.resubmissionNpu = npu;
+
+           // Save the Archive Document
+           archiveDocument.save();
+
+           // Save the Message
+           omMessaging.aux_saveMsg(archiveDocument);
+
+           // Delete the Document
+          msgDoc.deleteItem();
+
+     }catch(e){
+          // omCommon.writeLog(3, "Messaging: Error While Moving the Message to Archive - " + e, NAME_SPACE + "." + SCRIPT_NAME);
+           publishEvent("OM_COMMON",FIRST_ONE,null);
+     }
+  ]]></script>
+</script>

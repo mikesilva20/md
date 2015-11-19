@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.orderCreationNpu">
+  <extends>dtype_omCommon.npu</extends>
+  <label>Order Creation Npu</label>
+  <metaVersion>4</metaVersion>
+</dataType>

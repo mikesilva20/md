@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.getLeaveNamesFromObject">
+  <label>getLeaveNamesFromObject</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="obj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Return an array with the leaves names of an object
+     * @param    {Object} obj            - That contains the leaves
+     * @param    {Array}  includeLeaves  - Array with include leaves
+     * @param    {Array}  excludeLeaves  - Array with exclude leaves
+     * @returns  {Array}  return         - Array with the leave names, otherwise null
+     * @version  1.0
+     */
+
+    var msgError  = "";
+    var ok        = true;
+    var objLeaves = null;
+
+    if (obj instanceof Document){
+        var metadataType = obj.metadataType;
+        objLeaves = omCommon.getAllLeavesFromItem(obj, true)
+    }else if (obj instanceof DataStructure)
+        objLeaves = obj.getNodeNames();
+    else if (obj instanceof Array)
+        objLeaves = omCommon.getArrayFrom2dArray(obj, 0);
+
+    if (!objLeaves){
+        return null;
+    }
+
+    if (includeLeaves) {
+        ok = omCommon.hasArraySubArray(objLeaves, includeLeaves);
+        objLeaves = includeLeaves;
+    } else if (excludeLeaves) {
+        objLeaves = omCommon.getSubArrayByExclusion(objLeaves, excludeLeaves);
+    }
+
+    if (!ok) {
+        msgError = "incompatible leaves at object" + obj + "\n Destination Leaves : " + objLeaves + "\n Source Leaves : " + includeLeaves;
+        omCommon.writeLog(3, "Message DataStructure (" + obj.metadataType + ") Error: " + msgError, "omCommon.getLeaveNamesFromObject");
+        return null;
+    }
+
+    return objLeaves;
+  ]]></script>
+</script>

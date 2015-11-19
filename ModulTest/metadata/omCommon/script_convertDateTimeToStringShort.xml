@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.convertDateTimeToStringShort">
+  <label>Convert DateTime To String Short</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="date" type="rifp">
+      <type>dtype_com.conceptwave.system.DateTime</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+    * @description - Convert an datetime to a string short
+    * @param    {dateTime}  date
+    * @returns  {date} returns a formatted date/time string
+    * @version  1.0
+    */
+
+    if( date == null) return null;
+    return Calendar.formatDate( date, "yyyy-MM-dd'T'HH:mm:ss");
+  ]]></script>
+</script>

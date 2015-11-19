@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.msgRouteDoc">
+  <dbSchema>ORDER</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{0aed8920-93bd-e951-a51b-6b065b0039ae}</guid>
+  <label>Msg - Route Inbound</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="npu" type="leaf">
+      <column>NPU</column>
+      <key>1</key>
+      <label>Npu</label>
+      <propertyElement type="elfld">
+        <label>Npu</label>
+      </propertyElement>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.npu</valueType>
+    </variable>
+    <variable name="processId" type="leaf">
+      <column>PROCESSID</column>
+      <label>Process Id</label>
+      <propertyElement type="elfld">
+        <label>Process Id</label>
+      </propertyElement>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.processId</valueType>
+    </variable>
+    <variable name="creationDate" type="leaf">
+      <column>CREATIONDATE</column>
+      <label>Creation Date</label>
+      <propertyElement type="eldatetime">
+        <label>Creation Date</label>
+      </propertyElement>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="dbSysdate" type="leaf">
+      <column>DBSYSDATE</column>
+      <label>dbSysdate</label>
+      <propertyElement type="eldatetime">
+        <label>dbSysdate</label>
+      </propertyElement>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_com.conceptwave.system.DateTime</valueType>
+    </variable>
+    <variable name="requestNumber" type="leaf">
+      <column>REQUESTNUMBER</column>
+      <key>2</key>
+      <label>requestNumber</label>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.requestNumber</valueType>
+    </variable>
+    <variable name="COMOrder" type="leaf">
+      <column>COMORDER</column>
+      <label>COMOrder</label>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.COMOrder</valueType>
+    </variable>
+    <variable name="SOMOrder" type="leaf">
+      <column>SOMORDER</column>
+      <label>SOMOrder</label>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.SOMOrder</valueType>
+    </variable>
+    <variable name="operation" type="leaf">
+      <column>OPERATION</column>
+      <key>3</key>
+      <label>TIBCOoperation</label>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.operation</valueType>
+    </variable>
+    <variable name="correlationKey" type="leaf">
+      <column>CORRELATIONKEY</column>
+      <key>4</key>
+      <label>Correlation Key</label>
+      <table>OM_MSG_ROUTE</table>
+      <valueType>dtype_omMessaging.correlationKey</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.msgRouteDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

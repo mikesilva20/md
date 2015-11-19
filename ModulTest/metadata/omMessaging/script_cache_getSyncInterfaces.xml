@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getSyncInterfaces">
+  <label>cache_getSyncInterfaces</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.isSyncInterfaceFnd");
+    fnd.search();
+
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+
+    cacheDS.setScriptObject(fnd.list);
+
+    return cacheDS;
+  ]]></script>
+</script>

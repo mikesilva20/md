@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.msgStatus">
+  <container>true</container>
+  <label>msgStatus</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="statusCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.msgStatusCode</element>
+      <label>statusCode</label>
+    </child>
+    <child name="statusDescription" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.msgStatusDescription</element>
+      <label>statusDescription</label>
+    </child>
+    <child name="eCodes" type="dstruct">
+      <container>true</container>
+      <label>eCodes</label>
+      <childList>
+        <child name="eCode" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.eCodeMsg</element>
+          <label>eCode</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.msgStatus</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.msgStatus</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

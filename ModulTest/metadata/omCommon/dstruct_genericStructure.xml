@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.genericStructure">
+  <container>true</container>
+  <label>genericStructure</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="documents" type="dstruct">
+      <container>true</container>
+      <label>documents</label>
+      <childList>
+        <child name="document" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.genericDocument</element>
+          <label>document</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <methodList>
+    <method name="addDocuments" type="action">
+      <parameterList>
+        <parameter name="docs" type="rifp">
+          <array>true</array>
+          <mandatory>true</mandatory>
+          <type>doc_com.conceptwave.system.Document</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(!docs || docs.length == 0)
+            return false;
+
+        for(var d = 0 ; d < docs.length ; d++){
+            var newDoc = new DataStructure('omCommon.genericDocument');
+            newDoc.type = docs[d].metadata;
+
+            var leafs = docs[d].getLeafNames(true);
+
+            for(var i = 0; i< leafs.length ; i++){
+
+                var leafValue = null;
+
+                if((leafValue=docs[d][leafs[i]]) != null){
+                    var att = new DataStructure('omCommon.attribute');
+
+                    att.name = leafs[i];
+                    att.value = leafValue.toString();
+
+                    newDoc.attributes.attribute[i] = att;
+                }
+            }
+
+            this.documents.document[this.documents.document.length] = newDoc;
+        }
+
+        return true;
+      ]]></script>
+    </method>
+    <method name="getDocuments" type="action">
+      <script><![CDATA[
+        var documents = new Array();
+
+        if(this != null) {
+
+            var size_docs = this.documents.document.length;
+
+            var docs = this.documents.document;
+
+            for (var i = 0 ; i < size_docs ; i++ ){
+
+                var doc = new Document(docs[i].type);
+
+                if(doc != null){
+
+                    var size_attributes = docs[i].attributes.attribute.length;
+
+                    var attributes =  docs[i].attributes.attribute;
+
+                    for(var j = 0 ; j < size_attributes ; j++){
+
+                        if(doc.isChild(attributes[j].name)){
+
+                         var data = null;
+
+                            if((data=new Date(attributes[j].value)) == 'Invalid Date' || attributes[j].value == null)
+                                doc[attributes[j].name] = attributes[j].value;
+                            else
+                                doc[attributes[j].name] = data;
+                        }
+                    }
+
+                }
+
+                documents.push(doc);
+            }
+
+        }
+
+        return documents != null && documents.length > 0 ? documents : null;
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.genericStructure</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.genericStructure</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_genHeader">
+  <label>Generate Header</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="header" type="rifp">
+      <type>dstruct_omCommon.msgHeader</type>
+    </parameter>
+    <parameter name="orderId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.orderId</type>
+    </parameter>
+    <parameter name="typeOfOM" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.typeOfOm</type>
+    </parameter>
+    <parameter name="processId" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.processId</type>
+    </parameter>
+    <parameter name="system" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.system</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.operation</type>
+    </parameter>
+    <parameter name="correlationNpu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_omCommon.correlationNpu</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var headerDs = null;
+    if(header){
+        headerDs = header;}
+        else{
+           // headerDs = new DataStructure("omCommon.msgHeader");}
+            headerDs = publishEvent("OM_COMMON",FIRST_ONE,null);
+        }
+    headerDs.orderId = orderId;
+    headerDs.typeOfOM = typeOfOM;
+    headerDs.processId = processId;
+    headerDs.environment = Global.getConfigVariable('environment');
+    var npu = omMessaging.npu_genNew(operation,null);
+    headerDs.npu = npu;
+    headerDs.correlationNpu = correlationNpu;
+
+    return headerDs;
+  ]]></script>
+</script>

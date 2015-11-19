@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.genericDocument">
+  <container>true</container>
+  <label>genericDocument</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="attributes" type="dstruct">
+      <container>true</container>
+      <label>attributes</label>
+      <childList>
+        <child name="attribute" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.attribute</element>
+          <label>attribute</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+    <child name="type" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.String</element>
+      <label>type</label>
+    </child>
+  </childList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.genericDocument</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.genericDocument</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

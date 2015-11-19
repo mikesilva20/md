@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEventLogIdDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{2f213dd0-3254-48d0-9482-f368418da779}</guid>
+  <label>OM Event Log Id Doc</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="eventId" type="leaf">
+      <valueType>dtype_omCommon.omEventLogId</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEventLogIdDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

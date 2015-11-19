@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_sendMsg">
+  <label>out_sendMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="msgDoc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="simulator" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var header       = null;
+    var eCode      = null;
+    var eDesc      = null;
+    var system      = null;
+    var message          = null;
+    try{
+          //omMessaging.debug("Invoking "  + msgDoc.interfaceToInvoke + "/" + msgDoc.operation );
+          if(msgDoc.endpoint)
+              UserProfile.setInterfaceLocation(msgDoc.endpoint);
+
+
+          //var conf = omConfig.configData('invokeMessageInterface', ["interface",msgDoc.interfaceToInvoke,"operation",msgDoc.operation], false, true);
+          var conf = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+
+          if(conf && conf.length > 0)
+              var ack = Global.runGlobalScript(conf[0].value3, false, [msg[0], msgDoc.interfaceToInvoke, msgDoc.operation]);
+          else
+              var ack = Global.invokeInterface(msgDoc.interfaceToInvoke, msgDoc.operation, msg);
+
+          if(simulator && simulator == 1){
+
+                eCode  = "I0";
+                eDesc  = "Mock Service response";
+                system = "SOAP";
+
+          }else{
+
+               // header = UserProfile.getSoapResponseHeader("omCommon.msgAckHeader");
+                header = publishEvent("OM_COMMON",FIRST_ONE,null);
+
+                 var fault = UserProfile.getFaultMsg();
+
+                //omMessaging.debug("HEADER:" + header + " ACK:" + ack);
+                var info = omMessaging.isSyncInterface(msgDoc.system, msgDoc.operation, msgDoc.interfaceToInvoke);
+
+                if(!info){
+                    if(fault != null){
+                        return [null, fault.toXML()];
+                    }
+                }
+
+                if(info){
+                     eCode  = "I0";
+                     eDesc  = "sync";
+                     system = "25";
+                     message  = new DataStructure(info.value3);
+                     message["header"] = header;
+                     if(fault){
+                         message[info.value4] = fault;
+                         if(message.isChild("msgFQN")){
+                             message.msgFQN = fault.metadataType;
+                         }
+                     }else{
+                         message[info.value4] = ack != null ? ack[0]: null;
+                         if(message.isChild("msgFQN") && ack != null){
+                             message.msgFQN = ack[0].metadataType;
+                         }
+                     }
+
+
+                 }else if(header != null){
+                      eCode  = header.status.eCodes[0].code;
+                      eDesc  = header.status.eCodes[0].description;
+                      system = header.status.eCodes[0].systemCode;
+
+                      msgDoc.receivedData = header.toXML();
+                      msgDoc.receivedDataType = header.metadataType;
+                      omMessaging.aux_saveMsgData(msgDoc);
+                      msgDoc.save();
+
+                }else if(ack != null && ack.length > 0 && ack[0] != null){
+                      ack = ack[0];
+
+                      if(ack.metadataType == null){
+                            eCode  = "E0";
+                            eDesc  = ack;
+                            system = "OM";
+
+                      }else if(ack.metadataType != publishEvent("OM_COMMON",FIRST_ONE,null) && ack.metadataType != publishEvent("OM_COMMON",FIRST_ONE,null)){ //ack.metadataType != 'omCommon.msgAckHeader' && ack.metadataType != 'omCommon:msgAckHeader'){
+                            //Sucesso
+                            eCode  = "I0";
+                            eDesc  = ack.toXML();
+                            system = "OM";
+                      }else{
+                            //SOAP Fault
+                            eCode  = "E0";
+                            eDesc  = ack.toXML();
+                            system = "OM";
+                      }
+
+                      msgDoc.receivedData = ack.toXML();
+                      msgDoc.receivedDataType = ack.metadataType;
+                      msgDoc.save();
+                      omMessaging.aux_saveMsgData(msgDoc);
+                }
+          }
+
+          return [system, eCode, eDesc, message];
+
+    }catch(e){
+          omMessaging.log("ERROR SENDING MSG: " + e.message, "out_sendMsg");
+          return [null, e.message];
+    }
+  ]]></script>
+</script>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_getMsg">
+  <guid>{02b1c9ad-fffd-bc07-50b5-cb09464b16d7}</guid>
+  <label>out_getMsg</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="useArchive" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!npu)
+          return null;
+
+
+    var msg =  Document.readDoc("omMessaging:outboundDoc", npu);
+
+    if(!msg && useArchive){
+          msg = omMessaging.out_Archive_getMsg(npu);
+    }
+
+    return msg;
+  ]]></script>
+</script>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon_override_cwf_up.newPrivileges">
+  <description><![CDATA[
+    <p style="margin-top: 0">
+      Adicionar novos privil&#233;gios na enumera&#231;&#227;o deste Data Type.
+    </p>
+  ]]></description>
+  <enumeration type="enum">
+    <valueList>
+      <value name="View Available Tasks Dashboard" type="enumItem" code="AvailableTasks"/>
+      <value name="View Jeopardies Dashboard" type="enumItem" code="JeopardiesDB"/>
+      <value name="View User Tasks Dashboard" type="enumItem" code="UserTasksDB"/>
+      <value name="Can Search Orders" type="enumItem" code="searchOrders"/>
+      <value name="View Select Application" type="enumItem" code="selectApp"/>
+      <value name="View Assigned Tasks DashBoard" type="enumItem" code="AssignedTasks"/>
+      <value name="View Search Tab" type="enumItem" code="searchTab"/>
+      <value name="View MyArea Tab" type="enumItem" code="myAreaTab"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_cwf.privilege</extends>
+  <label>New Privileges</label>
+  <metaVersion>4</metaVersion>
+  <overrides>dtype_cwf_up.privileges</overrides>
+</dataType>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getSystemConfig">
+  <guid>{002e4aef-ecae-972b-40ca-6e8055c0265e}</guid>
+  <label>aux_getSystemConfig</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="operation" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = Document.readDoc("omMessaging:configOpertationToSystem", operation);
+
+    if(doc)
+          return doc.system;
+
+    return null;
+  ]]></script>
+</script>

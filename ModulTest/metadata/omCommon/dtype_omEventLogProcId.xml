@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.omEventLogProcId">
+  <extends>dtype_cwf.processId</extends>
+  <label>Process Id</label>
+  <metaVersion>4</metaVersion>
+  <propertyElement type="elfld"/>
+</dataType>

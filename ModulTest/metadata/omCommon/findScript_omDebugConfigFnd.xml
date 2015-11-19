@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findScript name="omCommon.omDebugConfigFnd">
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <input>doc_omCommon.omEventLogDebugConfigSearchDoc</input>
+  <label>OM Event Log Debug Config Finder</label>
+  <metaVersion>21</metaVersion>
+  <output>doc_omCommon.omEventLogDebugConfig</output>
+  <type>script</type>
+  <volatility>1</volatility>
+  <methodList>
+    <method name="cwOnFinderSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        var namespace = searchData.namespace;
+        var mdFullName = searchData.mdFullName;
+        var orderId = searchData.orderId;
+        var processId = searchData.processId;
+
+        var query = 'SELECT CWDOCID, NAMESPACE, MDFULLNAME, ORDERID, PROCESSID, ACTINDEX, REVISION, CMDEBUG, CONFIGWEIGHT, ACTIVE FROM OM_EVENTLOG_DEBUG_CONFIG';
+        var params = new Array();
+
+        if(searchData.namespace || searchData.mdFullName || searchData.orderId || searchData.processId)
+        {
+            var condition = ' where active = 1 and (';
+
+            condition = condition.concat('(NAMESPACE is null and MDFULLNAME is null and ORDERID is null and PROCESSID = ?) ');
+            params.push(processId);
+
+            condition = condition.concat('OR (NAMESPACE is null and MDFULLNAME is null and ORDERID = ? and PROCESSID is null) ');
+            params.push(orderId);
+
+            condition = condition.concat('OR (NAMESPACE is null and MDFULLNAME is null and ORDERID = ? and PROCESSID = ?) ');
+            params.push(orderId);
+            params.push(processId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME is null and ORDERID is null and PROCESSID is null) ');
+            params.push(namespace);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME is null and ORDERID is null and PROCESSID = ?) ');
+            params.push(namespace);
+            params.push(processId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME is null and ORDERID = ? and PROCESSID is null) ');
+            params.push(namespace);
+            params.push(orderId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME is null and ORDERID = ? and PROCESSID = ?) ');
+            params.push(namespace);
+            params.push(orderId);
+            params.push(processId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME = ? and ORDERID is null and PROCESSID is null) ');
+            params.push(namespace);
+            params.push(mdFullName);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME = ? and ORDERID is null and PROCESSID = ?) ');
+            params.push(namespace);
+            params.push(mdFullName);
+            params.push(processId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME = ? and ORDERID = ? and PROCESSID is null) ');
+            params.push(namespace);
+            params.push(mdFullName);
+            params.push(orderId);
+
+            condition = condition.concat('OR (NAMESPACE = ? and MDFULLNAME = ? and ORDERID = ? and PROCESSID = ?)');
+            params.push(namespace);
+            params.push(mdFullName);
+            params.push(orderId);
+            params.push(processId);
+
+            query = query.concat(condition.concat(') ORDER BY CONFIGWEIGHT DESC'));
+
+            return Global.runSQLQuery('OM_COMMON','omCommon.omEventLogDebugConfig',9999,params,query);
+        }
+
+        return [];
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <valueType>doc_omCommon.omEventLogDebugConfig</valueType>
+      </variable>
+      <variable name="search" type="uivar">
+        <valueType>doc_omCommon.omEventLogDebugConfigSearchDoc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omCommon.omEventLogDebugConfig/ui_UserInterface</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="omEventLogDebugConfigFndResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="namespace" type="elslct">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_namespace</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="mdFullName" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_mdFullName</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="orderId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_orderId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="processId" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_processId</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="active" type="elchk">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omCommon.omEventLogDebugConfig/leaf_active</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="searchFormSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/uivar_searchForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/uivar_search</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.FinderUserInterface/permMethod_showSearchForm</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+  <viewList>
+    <view name="omEventLogDebugConfigFndView" type="findVView">
+      <outputOverlay>findScript_omCommon.omDebugConfigFnd/ui_UserInterface/frmui_Forms/exov_Result</outputOverlay>
+    </view>
+  </viewList>
+</findScript>

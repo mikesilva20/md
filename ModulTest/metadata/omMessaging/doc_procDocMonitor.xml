@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.procDocMonitor">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{39ae43b0-6999-4a5a-b518-a8f8665623cd}</guid>
+  <label>Process Doc - Monitor</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="inBackupMode" type="leaf">
+      <label>In Backup mode</label>
+      <propertyElement type="elrgrp">
+        <label>In Backup mode</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="forceStart" type="leaf">
+      <label>Force Start</label>
+      <propertyElement type="elrgrp">
+        <label>Force Start</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+    </variable>
+    <variable name="intervalBetweenChecks" type="leaf">
+      <label>Interval between checks</label>
+      <propertyElement type="elfld">
+        <label>Interval between checks</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+    <variable name="intervalCheckBackup" type="leaf">
+      <label>Interval check backup</label>
+      <propertyElement type="elfld">
+        <label>Interval check backup</label>
+      </propertyElement>
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.procDocMonitor</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="MyDefault" type="vform">
+            <label>MyDefault</label>
+            <root name="MyDefaultGrid_vCentering" type="elvltstck">
+              <height>100%</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="procDocMonitorGrid" type="elgrd">
+                  <colWidths>160,160,160,160</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>640px</width>
+                  <elementList>
+                    <element name="procDocMonitorHeader" type="elhdr">
+                      <label>Process Doc - Monitor</label>
+                    </element>
+                    <element name="inBackupMode" type="elrgrp">
+                      <defaultEnum>yes/no</defaultEnum>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.procDocMonitor/leaf_inBackupMode</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="forceStart" type="elrgrp">
+                      <defaultEnum>yes/no</defaultEnum>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.procDocMonitor/leaf_forceStart</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="intervalBetweenChecks" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.procDocMonitor/leaf_intervalBetweenChecks</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="intervalCheckBackup" type="elfld">
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.procDocMonitor/leaf_intervalCheckBackup</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="MyDefaultGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="procDocMonitorGrid" type="elgrd">
+                    <colWidths>160,160,160,160</colWidths>
+                    <numOfCols>4</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>640px</width>
+                    <elementList>
+                      <element name="procDocMonitorHeader" type="elhdr">
+                        <label>Process Doc - Monitor</label>
+                      </element>
+                      <element name="inBackupMode" type="elrgrp">
+                        <defaultEnum>yes/no</defaultEnum>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.procDocMonitor/leaf_inBackupMode</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="forceStart" type="elrgrp">
+                        <defaultEnum>yes/no</defaultEnum>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.procDocMonitor/leaf_forceStart</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="intervalBetweenChecks" type="elfld">
+                        <startRow>true</startRow>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.procDocMonitor/leaf_intervalBetweenChecks</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="intervalCheckBackup" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.procDocMonitor/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.procDocMonitor/leaf_intervalCheckBackup</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<findSql name="omMessaging.stacksThroughput">
+  <dbSchema>ORDER</dbSchema>
+  <extends>find_com.conceptwave.system.Finder</extends>
+  <label>Control - Stacks Throughput</label>
+  <maxRowsLimit>9999</maxRowsLimit>
+  <metaVersion>21</metaVersion>
+  <output>doc_omMessaging.GenericDBDoc</output>
+  <type>SQL</type>
+  <methodList>
+    <method name="cwOnFinderSQLSel" type="action">
+      <system>true</system>
+      <script><![CDATA[
+        select stackId, to_char(eventtime, 'hh24:mi'), count(1)
+        from om_msg_audit
+        where eventtime > sysdate - (interval '1' hour)
+        group by stackId, to_char(eventtime, 'hh24:mi')
+        order by stackId
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>ui_com.conceptwave.system.FinderUserInterface</extends>
+    <variableList>
+      <variable name="result" type="uivar">
+        <flags enum-type="metadataFlag">ARRAY</flags>
+        <label>GenericDBDoc</label>
+        <valueType>doc_omMessaging.GenericDBDoc</valueType>
+      </variable>
+      <variable name="detail" type="uivar">
+        <flags enum-type="metadataFlag">VALIDATE</flags>
+        <valueType>doc_omMessaging.GenericDBDoc/ui_UserInterface</valueType>
+      </variable>
+      <variable name="resultGroupByStack" type="leaf">
+        <label>Result Group by Stack</label>
+        <propertyElement type="elfld">
+          <label>Result Group by Stack</label>
+        </propertyElement>
+        <valueType>dtype_com.conceptwave.system.String</valueType>
+      </variable>
+      <variable name="isShowMenu" type="leaf">
+        <label>Boolean</label>
+        <valueType>dtype_com.conceptwave.system.Boolean</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Result" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/vform_Result</extends>
+            <label>Result</label>
+            <overrideList>
+              <override name="table" type="elvlt">
+                <height>100%</height>
+                <width>100%</width>
+                <elementList>
+                  <element name="stacksThroughputResultTable" type="eltabl">
+                    <onSelectChange type="varPath">
+                      <variablePathList>
+                        <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/action_OnSelChanged</variablePath>
+                      </variablePathList>
+                    </onSelectChange>
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <elementList>
+                      <element name="id" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_id</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value1" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value2" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value3" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value4" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value5" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value5</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value6" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value6</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value7" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value7</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value8" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value8</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                      <element name="value9" type="elfld">
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                            <variablePath>doc_omMessaging.GenericDBDoc/leaf_value9</variablePath>
+                          </variablePathList>
+                        </variable>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.FinderUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="detailSection" type="elsect">
+                <formReference type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/uivar_detailForm</variablePath>
+                  </variablePathList>
+                </formReference>
+                <variable type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_detail</variablePath>
+                  </variablePathList>
+                </variable>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.MasterDetailUserInterface/permMethod_detailVisible</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="finderHeader" type="eldel"/>
+              <override name="sStack" type="eldel"/>
+            </overrideList>
+          </overlay>
+          <overlay name="ResultGroupByStack" type="vform">
+            <label>ResultGroupByStack</label>
+            <root name="VerticalLayout" type="elvlt">
+              <alignment>center,center</alignment>
+              <width>100%</width>
+              <elementList>
+                <element name="GridLayout" type="elgrd">
+                  <colWidths>333px,333px,333px</colWidths>
+                  <numOfCols>3</numOfCols>
+                  <width>1000px</width>
+                  <elementList>
+                    <element name="resultGroupByStack" type="ellab">
+                      <columnSpan>3</columnSpan>
+                      <showLabel>false</showLabel>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/leaf_resultGroupByStack</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <width>100%</width>
+                    </element>
+                    <element name="RowSpacer" type="elrsp"/>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+          <overlay name="Menu" type="exov">
+            <base>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</base>
+            <extends>ui_com.conceptwave.system.BaseFinderUserInterface/frmui_Forms/exov_Menu</extends>
+            <label>Menu</label>
+            <overrideList>
+              <override name="cwfAdd" type="eldel"/>
+              <override name="cwfCopy" type="eldel"/>
+              <override name="cwfDelete" type="eldel"/>
+              <override name="cwfDetail" type="eldel"/>
+              <override name="cwfSearch" type="elmnu">
+                <menuAccel type="mAccelP"/>
+                <clickMethod type="varPath">
+                  <variablePathList>
+                    <variablePath>ui_com.conceptwave.system.BaseFinderUserInterface/usrActionMethod_searchAction</variablePath>
+                  </variablePathList>
+                </clickMethod>
+                <icon>/cwf/MenuIconSearch.gif</icon>
+                <label>Search</label>
+                <showDown>true</showDown>
+                <showFocused>true</showFocused>
+                <tooltip>Search</tooltip>
+                <visible type="varPath">
+                  <variablePathList>
+                    <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/permMethod_showMenu</variablePath>
+                  </variablePathList>
+                </visible>
+              </override>
+              <override name="cwfSelect" type="eldel"/>
+              <override name="cwfUpdate" type="eldel"/>
+              <override name="finderMenuLayout" type="elext">
+                <elementList>
+                  <element name="miChart" type="elmnu">
+                    <clickMethod type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/usrActionMethod_showMyChart</variablePath>
+                      </variablePathList>
+                    </clickMethod>
+                    <icon>/cwf/Chart.gif</icon>
+                    <label>Chart</label>
+                    <visible type="varPath">
+                      <variablePathList>
+                        <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/permMethod_showMenu</variablePath>
+                      </variablePathList>
+                    </visible>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+          <overlay name="MyChart" type="vform">
+            <label>MyChart</label>
+            <root name="VerticalLayout" type="elvlt">
+              <alignment>center,center</alignment>
+              <width>100%</width>
+              <elementList>
+                <element name="Chart" type="elchart">
+                  <caption>Stacks Throughput ( last hour )</caption>
+                  <height>400px</height>
+                  <showZeros>true</showZeros>
+                  <type>Line</type>
+                  <variable type="varPath">
+                    <variablePathList>
+                      <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                    </variablePathList>
+                  </variable>
+                  <width>900px</width>
+                  <elementList>
+                    <element name="cat" type="elchartf">
+                      <label>Category</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_id</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack1" type="elchartf">
+                      <label>Stack 1</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value1</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack2" type="elchartf">
+                      <label>Stack 2</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value2</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack3" type="elchartf">
+                      <label>Stack 3</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value3</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack4" type="elchartf">
+                      <label>Stack 4</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value4</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack5" type="elchartf">
+                      <label>Stack 5</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value5</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack6" type="elchartf">
+                      <label>Stack 6</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value6</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack7" type="elchartf">
+                      <label>Stack 7</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value7</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="stack8" type="elchartf">
+                      <label>Stack 8</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>findSql_omMessaging.stacksThroughput/ui_UserInterface/uivar_result</variablePath>
+                          <variablePath>doc_omMessaging.GenericDBDoc/leaf_value8</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="FillStacks" type="usrActionMethod">
+        <script><![CDATA[
+          var tableData = omMessaging.monitor_stackThroughput(this.result, 10);
+
+          var header = tableData[0];
+          var data   = tableData[1];
+
+          var html    = "";
+
+
+
+          var tableStart = '<table border="1" style="text-align:center"><tr style="background-color:#C0C0C0; text-align:center"><td>&nbsp;</td><td colspan="15">Throughput last 1 hour (Group by 10 minutes)</td></tr><tr style="background-color:#C0C0C0; text-align:center"><td width="120px">Stacks</td>';
+          var tableEnd = '</table>';
+
+          html += tableStart;
+
+          for(var k=0; k< header.length; k++){
+              var head = '<td style="width:150px">' + header[k] + "</td>";
+              html += head;
+          }
+
+          html += "</tr>";
+
+          for(var s=0; s<data.length; s++){
+
+              var rowData = data[s];
+              var rowHtml = "<tr><td>" + rowData[0] + "</td>";
+
+              for(var k=1; k< rowData.length; k++){
+                   rowHtml += '<td>' + rowData[k] + "</td>";
+              }
+
+              rowHtml += "</tr>";
+              html += rowHtml;
+          }
+
+          html += tableEnd;
+
+          html = "<html><body><font size=\"1\"> </font></body></html>" + html;
+
+          this.resultGroupByStack =  html;
+        ]]></script>
+      </method>
+      <method name="searchAction" type="action">
+        <parameterList>
+          <parameter name="doValidate" type="rifp">
+            <type>dtype_com.conceptwave.system.Boolean</type>
+          </parameter>
+        </parameterList>
+        <script><![CDATA[
+          this.cw$super_searchAction(doValidate);
+
+          this.FillStacks();
+        ]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <script><![CDATA[
+          this.cw$super_onInit();
+          this.isShowMenu = true;
+        ]]></script>
+      </method>
+      <method name="showMyChart" type="usrActionMethod">
+        <dialogHeight>500</dialogHeight>
+        <dialogWidth>950</dialogWidth>
+        <showInPopup>true</showInPopup>
+        <script><![CDATA[
+          var fnd = new Finder("omMessaging.stacksThroughput");
+          fnd.setResultForm("MyChart");
+
+          var ui = new omMessaging.stacksThroughput.UserInterface(fnd, this);
+
+
+          var tableData = omMessaging.monitor_stackThroughput(this.result, 10);
+
+          var header = tableData[0];
+          var data   = tableData[1];
+
+          var list = new DataObjectList();
+
+          for(var i=0; i<header.length ; i++){
+
+              var doc = new Document("omMessaging.GenericDBDoc");
+              doc.id = header[i];
+
+              for(var v=0; v < data.length && v < 8; v++){
+                  doc["value" + (v + 1)] = data[v][i+1];
+              }
+
+              list.addLast(doc);
+          }
+
+          fnd.setList(list);
+
+          fnd.setResultForm("MyChart");
+
+          return ui;
+        ]]></script>
+      </method>
+      <method name="showMenu" type="permMethod">
+        <script><![CDATA[return this.model.getResultForm() == "ResultGroupByStack";]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+  <viewList>
+    <view name="stacksThroughputView" type="findVView">
+      <outputOverlay>findSql_omMessaging.stacksThroughput/ui_UserInterface/frmui_Forms/vform_ResultGroupByStack</outputOverlay>
+      <searchImmediately>true</searchImmediately>
+    </view>
+  </viewList>
+</findSql>

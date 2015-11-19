@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.in_archiveProcess">
+  <guid>{0a94ef61-2176-7e8b-08f0-c87490af3900}</guid>
+  <label>in_archiveProcess</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[
+    var conf = omMessaging.aux_getConfig();
+
+    if(conf.inboundArchiveEnable == false)
+        return;
+
+    var fnd = new Finder("omMessaging:inboundArchiveFnd");
+    var list = fnd.search();
+
+    omMessaging.debug("Starting Inbound Archive. Archiving:" + list.size());
+
+    var npu = null;
+
+    for(var i = 0; i < list.length; i++)
+    {
+        try{
+            npu = list[i].npu;
+            var archive = new Document("omMessaging:archiveInboundDoc");
+            omMessaging.aux_loadMsgData(list[i]);
+            list[i].mapDocToDoc(archive)
+            archive.save();
+            omMessaging.aux_saveMsgData(archive);
+            list[i].deleteFromDB();
+        }catch(ex){
+            omMessaging.log("EXEPTION: " + ex.message + " [NPU:" + npu + "]", "in_archiveProcess");
+        }
+    }
+  ]]></script>
+</script>

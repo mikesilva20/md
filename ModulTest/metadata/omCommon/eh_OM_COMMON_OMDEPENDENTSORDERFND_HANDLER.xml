@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<event__handler name="omCommon.OM_COMMON_OMDEPENDENTSORDERFND_HANDLER">
+  <flags enum-type="metadataFlag">FINAL</flags>
+  <event>evt_omCommon.OM_COMMON_OMDEPENDENTSORDERFND</event>
+  <eventID>OM_COMMON_OMDEPENDENTSORDERFND</eventID>
+  <eventType>OM_COMMON_OMDEPENDENTSORDERFND</eventType>
+  <label>OM_COMMON_OMDEPENDENTSORDERFND_HANDLER</label>
+  <metaVersion>25</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder ("omCommon.omDependentsOrderFnd");
+    fnd.searchDocument.sourceOrderId         = sourceOrderId;
+    fnd.searchDocument.provisioningItemId    = provisioningItemId;
+    fnd.searchDocument.destinationOrderId    = destinationOrderId;
+    fnd.searchDocument.environment           = environment;
+    fnd.searchDocument.orderCreationNpu      = orderCreationNpu;
+
+    var result = fnd.search();
+    return result;
+  ]]></script>
+</event__handler>

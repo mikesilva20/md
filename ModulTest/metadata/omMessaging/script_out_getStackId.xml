@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_getStackId">
+  <label>out_getStackId</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="interfaceToInvoke" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="operation" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="system" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var arrStacks = new Array();
+    var  usingDefault = false;
+
+    // Has configuration by Interface / Operation ?
+    var confsInterface = omMessaging.aux_getInterfaceToStack_Outbound(interfaceToInvoke, operation);
+
+
+    if(confsInterface != null && confsInterface.length > 0){
+
+        arrStacks = confsInterface;
+
+    }else{
+        // Has configuration by System
+
+        var confSystem = omMessaging.aux_getSystemToStack_Outbound(system);
+
+        if(confSystem != null && confSystem.length > 0){
+
+            arrStacks = confSystem;
+        }
+    }
+
+    var now = new Date();
+    var time = now.getTime();
+
+    if(arrStacks.length > 0){
+
+        var stackId =  RandomStack(arrStacks, time);
+
+        if(omMessaging.aux_validStack(stackId, "OUT")){
+            return stackId;
+        }else{
+            arrStacks = null;
+            omMessaging.log("Invalid Stack ID, use default.", "out_getStackId");
+
+        }
+    }
+
+
+    if(arrStacks == null || arrStacks.length == 0){
+
+        //Use Default;
+
+        arrStacks = omMessaging.aux_getDefaultStacks("OUT");
+
+        if(arrStacks.length > 0){
+            var stackId =  RandomStack(arrStacks, time);
+
+            if(omMessaging.aux_validStack(stackId, "OUT")){
+                return stackId;
+            }else{
+                omMessaging.log("Invalid Stack ID, Invalid default configuration. Messaging will STOP!!!", "out_getStackId", "ERR");
+                return -1;
+            }
+        }
+    }
+
+
+
+    omMessaging.log("Invalid Stack ID, missing configurations. Messaging will STOP!!!", "out_getStackId", "ERR");
+
+
+    return -1;
+
+
+    /*
+    * ###########################################################################
+    *                     AUXILIAR METHODS
+    * ##########################################################################3
+    * /
+    */
+
+
+
+    function RandomStack(arr, time){
+
+        var nStacks = arr.length;
+
+        var tmp =    (time%=nStacks);
+
+        if(tmp < 0){
+            tmp = tmp * -1;
+        }
+
+        if(tmp < 0 || tmp > nStacks){
+            omMessaging.log("Invalid Stack ID:" + tmp + ", use first", "out_getStackId - RandomStack");
+            tmp = 0;
+        }
+
+        return arr[tmp].stackId; ;
+
+    }
+  ]]></script>
+</script>

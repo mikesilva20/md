@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omEnvironment">
+  <dbSchema>OM_COMMON</dbSchema>
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{cc9a0a8b-f65d-4ecb-a10d-5384e7509483}</guid>
+  <label>Order Environment</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="environment" type="leaf">
+      <column>ENVIRONMENT</column>
+      <key>1</key>
+      <table>OM_ENVIRONMENT</table>
+      <valueType>dtype_omCommon.environment</valueType>
+    </variable>
+    <variable name="itemCode" type="leaf">
+      <column>ITEMCODE</column>
+      <key>2</key>
+      <table>OM_ENVIRONMENT</table>
+      <valueType>dtype_omCommon.itemCode</valueType>
+    </variable>
+    <variable name="active" type="leaf">
+      <column>ACTIVE</column>
+      <table>OM_ENVIRONMENT</table>
+      <valueType>dtype_omCommon.active</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omEnvironment</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="GridLayout" type="elgrd">
+                <numOfCols>3</numOfCols>
+                <width>300px</width>
+                <elementList>
+                  <element name="environment" type="elfld">
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omCommon.omEnvironment/ui_UserInterface/uivar_model</variablePath>
+                        <variablePath>doc_omCommon.omEnvironment/leaf_environment</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>150px</width>
+                  </element>
+                  <element name="itemCode" type="elfld">
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omCommon.omEnvironment/ui_UserInterface/uivar_model</variablePath>
+                        <variablePath>doc_omCommon.omEnvironment/leaf_itemCode</variablePath>
+                      </variablePathList>
+                    </variable>
+                    <width>150px</width>
+                  </element>
+                  <element name="active" type="elchk">
+                    <variable type="varPath">
+                      <variablePathList>
+                        <variablePath>doc_omCommon.omEnvironment/ui_UserInterface/uivar_model</variablePath>
+                        <variablePath>doc_omCommon.omEnvironment/leaf_active</variablePath>
+                      </variablePathList>
+                    </variable>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="save" type="usrActionMethod">
+        <allowInvalidObject>true</allowInvalidObject>
+        <validate>true</validate>
+        <script><![CDATA[
+          var doc = this.model;
+          var fnd = this.parent.owner;
+
+          if(this.isValid)
+              doc.save();
+          else
+              Global.throwException("UE0116", this);
+
+          if(fnd)
+              fnd.searchAction();
+
+          return Global.STOP_UI;
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.DELETED">
+  <guid>{035285d8-a58f-64a4-9886-2eec1286f16e}</guid>
+  <label>CON - DELETED</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[return "2";]]></script>
+</script>

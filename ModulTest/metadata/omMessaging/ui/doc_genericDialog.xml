@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.ui.genericDialog">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{7f54d385-e06b-4825-ad60-386f807d901a}</guid>
+  <label>Generic Dialog</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="id" type="leaf">
+      <label>Document ID</label>
+      <valueType>dtype_cwf.docId</valueType>
+    </variable>
+    <variable name="value1" type="leaf">
+      <label>String 256</label>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value2" type="leaf">
+      <label>String 256</label>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value3" type="leaf">
+      <label>String 256</label>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+    <variable name="value4" type="leaf">
+      <label>String 256</label>
+      <valueType>dtype_omMessaging.string256</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.ui.genericDialog</valueType>
+      </variable>
+      <variable name="allRefs" type="leaf">
+        <label>Internal - All Refs</label>
+        <valueType>doc_omMessaging.ui.allRefs</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="UpdateStackId" type="vform">
+            <label>UpdateStackId</label>
+            <root name="UpdateStackIdGrid_vCentering" type="elvltstck">
+              <height>180px</height>
+              <membersMargin>5</membersMargin>
+              <width>100%</width>
+              <elementList>
+                <element name="genericDialogGrid" type="elgrd">
+                  <alignment>center,center</alignment>
+                  <colWidths>150px,150px,80px,100px</colWidths>
+                  <numOfCols>4</numOfCols>
+                  <useDefaultHeight>true</useDefaultHeight>
+                  <width>100%</width>
+                  <elementList>
+                    <element name="genericDialogHeader" type="elhdr">
+                      <cellAlignment>center,center</cellAlignment>
+                      <label>Update stackId in messages</label>
+                    </element>
+                    <element name="id" type="elfld">
+                      <editable type="varPath">
+                        <variablePathList>
+                          <variablePath>dtype_com.conceptwave.system.Boolean/leaf_FALSE</variablePath>
+                        </variablePathList>
+                      </editable>
+                      <label>Old StackId</label>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/uivar_model</variablePath>
+                          <variablePath>doc_omMessaging.ui.genericDialog/leaf_id</variablePath>
+                        </variablePathList>
+                      </variable>
+                    </element>
+                    <element name="refInboundStacks" type="elslct">
+                      <label>New StackId</label>
+                      <onChangeMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.DocumentUserInterface/usrActionMethod_runTrigger</variablePath>
+                        </variablePathList>
+                      </onChangeMethod>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/leaf_allRefs</variablePath>
+                          <variablePath>doc_omMessaging.ui.allRefs/leaf_refInboundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/permMethod_inVisible</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="refOutboundStacks" type="elslct">
+                      <label>New StackId</label>
+                      <onChangeMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>ui_com.conceptwave.system.DocumentUserInterface/usrActionMethod_runTrigger</variablePath>
+                        </variablePathList>
+                      </onChangeMethod>
+                      <variable type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/leaf_allRefs</variablePath>
+                          <variablePath>doc_omMessaging.ui.allRefs/leaf_refOutboundStacks</variablePath>
+                        </variablePathList>
+                      </variable>
+                      <visible type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/permMethod_outVisible</variablePath>
+                        </variablePathList>
+                      </visible>
+                    </element>
+                    <element name="RowSpacer" type="elrsp"/>
+                    <element name="btnUpdate" type="elbtn">
+                      <clickMethod type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/usrActionMethod_updateMessages</variablePath>
+                        </variablePathList>
+                      </clickMethod>
+                      <columnSpan>4</columnSpan>
+                      <disabled type="varPath">
+                        <variablePathList>
+                          <variablePath>doc_omMessaging.ui.genericDialog/ui_UserInterface/permMethod_isValidUpdate</variablePath>
+                        </variablePathList>
+                      </disabled>
+                      <label>Update</label>
+                    </element>
+                  </elementList>
+                </element>
+              </elementList>
+            </root>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="updateMessages" type="usrActionMethod">
+        <validate>true</validate>
+        <script><![CDATA[
+          var oldStack = this.model.id;
+          var newStack = null;
+          var tableName = "";
+
+          if(this.model.value1 == "IN"){
+              newStack = this.allRefs.refInboundStacks;
+              tableName = "om_msg_inbound";
+
+          }else if(this.model.value1 == "OUT"){
+
+              newStack = this.allRefs.refOutboundStacks;
+              tableName = "om_msg_outbound";
+          }
+
+          if(oldStack && newStack){
+
+
+              var currentUser = UserProfile.userId();
+
+              var sql = "update " + tableName + " set stackId = ? where stackId = ? and status = '1'";
+
+              var rowsUpdated = Global.runDBUpdate("ORDER", sql, [newStack, oldStack], false);
+
+              omMessaging.log("The follow user " + currentUser + " change de stackId on " + tableName  + ". OldStack: " + oldStack + " NewStack: " + newStack  + " - Rows Updateted: " + rowsUpdated , "updateMessageStack", "WARN");
+
+               Global.showUserMessage(rowsUpdated + " rows updated");
+
+          }else{
+                  Global.showUserMessage("Invalid Old Stack or New Stack!");
+          }
+        ]]></script>
+      </method>
+      <method name="inVisible" type="permMethod">
+        <script><![CDATA[return this.model.value1 == "IN";]]></script>
+      </method>
+      <method name="outVisible" type="permMethod">
+        <script><![CDATA[return this.model.value1 == "OUT";]]></script>
+      </method>
+      <method name="onInit" type="action">
+        <valueType>nmeta_com.conceptwave.system.Object</valueType>
+        <script><![CDATA[
+          this.allRefs = new Document("omMessaging.ui.allRefs");
+
+          return this.cw$super_onInit();
+        ]]></script>
+      </method>
+      <method name="isValidUpdate" type="permMethod">
+        <script><![CDATA[
+          if(this.model.id){
+              if(this.model.value1 == "IN" && this.allRefs.refInboundStacks){
+                  return false;
+              }else if(this.model.value1 == "OUT" && this.allRefs.refOutboundStacks){
+                  return false;
+              }
+          }
+
+
+          return true;
+        ]]></script>
+      </method>
+      <method name="displayConfirmationDialog" type="uimthd">
+        <script><![CDATA[
+          var m = this.result.selected;
+          if (m != null) {
+
+                return new Confirm("UU0167:YN",null);
+          }
+          else
+                Global.throwException("UU0115");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

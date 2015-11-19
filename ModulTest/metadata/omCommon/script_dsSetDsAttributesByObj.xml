@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetDsAttributesByObj">
+  <label>dsSetDsAttributesByObj</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Update data structure with the source object filtering by includeLeaves or excludeLeaves. The leaves must have the same namo in both objects
+     * @param    {DataStructure}  ds            - Destination data structure
+     * @param    {Object}         sourceObj     - Source object
+     * @param    {Array}          includeLeaves - Leaves to include
+     * @param    {Array}          excludeLeaves - Leaves to exclude
+     * @returns  {DataStructure}  return        - Data structure updated
+     * @version  1.0
+     */
+
+    var objLeaves = null;
+    var msgError  = "";
+
+    // Initial validations
+    if (!sourceObj || !ds){
+        msgError = "missing destination DataStructure or source Object";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setDsAttributesByObj");
+        return null;
+    }
+
+    objLeaves = omCommon.dsIsDsCompatibleByLeaveWithObj(ds, sourceObj, includeLeaves, excludeLeaves);
+
+    if (objLeaves == null) {
+        msgError = "source and destination don't match in attributes/leaves";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.setDsAttributesByObj");
+        return null;
+    }
+
+    for (var i=0; i < objLeaves.length; i++) {
+
+        ds[objLeaves[i]] = omCommon.getLeaveValue(sourceObj, objLeaves[i]);
+    }
+
+    return ds;
+  ]]></script>
+</script>

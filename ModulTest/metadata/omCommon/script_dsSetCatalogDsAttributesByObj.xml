@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetCatalogDsAttributesByObj">
+  <label>dsSetCatalogDsAttributesByObj</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="id" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Set a new order status. Puts the old one has ended.
+     * @param    {Order}  ord - Order
+     * @param    {String}  itemId - Item id
+     * @param    {String}  stateCode - New state code
+     * @returns  {orderStateDoc} Document created
+     * @version  1.0
+     */
+
+    // For a given DataStructure array "ds"  find if name, id and attributes match with "name", "id" and  a source Object "sourceObj".
+    // All Object leaves must have a correspondente data type and name in the destination DataStruture.
+    //------------------------------------------------------------------------------------------------------------------------------------------
+    // {DataStructure}  ds            - Data structure to check
+    // {string}         name          - Name to set
+    // {string}         id            - Id to set
+    // {Object}         sourceObj     - Object that contains the leaves to set
+    // {Array}          includeLeaves - Leaves to include
+    // {Array}          excludeLeaves - Leaves to exclude
+    // {Array}          return        - DataStruture Array
+
+    var catArray = null;            // Array of catalog elements found that will be returned
+    var catElem = null;                  // Catalog element found
+
+    // find if catalog elements allready exist
+    catArray = omCommon.dsGetCatalogDsArrayByObj(ds, name, id);
+
+    // if not found ... create new
+    if (!catArray || catArray.length == 0) {
+
+        catElem = ds[ds.length].set(name, id, sourceObj, includeLeaves, excludeLeaves);
+        if (catElem) {
+
+            catArray = new Array();
+            catArray.unshift(catElem);
+        } else {
+
+            return null;
+        }
+    }
+
+    // if allready exist catalog elements update it
+    for (var i=0; i<catArray.length; i++) {
+
+        catElem = catArray[i].set(name, id, sourceObj, includeLeaves, excludeLeaves);
+        if (!catElem) return null;
+    }
+
+    return catArray;
+  ]]></script>
+</script>

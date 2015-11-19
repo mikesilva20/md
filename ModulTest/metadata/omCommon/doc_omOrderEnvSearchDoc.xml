@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.omOrderEnvSearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{e2cca7c8-7e7b-420a-b064-70641fcf590a}</guid>
+  <label>OM Order Environment Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="orderId" type="leaf">
+      <valueType>dtype_omCommon.orderId</valueType>
+    </variable>
+    <variable name="environmentType" type="leaf">
+      <valueType>dtype_omCommon.environmentType</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.omOrderEnvSearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

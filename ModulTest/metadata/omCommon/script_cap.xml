@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.cap">
+  <label>cap</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="val" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="length" type="rifp">
+      <mandatory>true</mandatory>
+      <type>dtype_com.conceptwave.system.Integer</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if (omCommon.isEmpty(val))
+        return val;
+
+    if (val.length>length)
+        return val.substr(0, length);
+
+    return val;
+  ]]></script>
+</script>

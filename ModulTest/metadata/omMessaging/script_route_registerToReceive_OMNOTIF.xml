@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.route_registerToReceive_OMNOTIF">
+  <label>route_registerToReceive_OMNOTIF</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceProcessId" type="rifp">
+      <type>dtype_cwf_pm.PROCESS_ID</type>
+    </parameter>
+    <parameter name="destinationProcessId" type="rifp"/>
+    <parameter name="type" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(!sourceProcessId || !destinationProcessId)
+        return;
+
+    omMessaging.route_registerToReceive_MSG(sourceProcessId,destinationProcessId, omMessaging.CONST_CREATE_NOTIF_OM(type),null,null,type);
+  ]]></script>
+</script>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetDsAttributesByObjNoValidation">
+  <label>dsSetDsAttributesByObjNoValidation</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="sourceObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Update data structure with the source object. The leaves must have the same namo in both objects
+     * @param    {DataStructure}  obj        - Destination data structure
+     * @param    {Object}         sourceObj  - Source object
+     * @returns  {DataStructure}  Returns Data structure updated
+     * @version  1.0
+     */
+
+
+    var objLeaves = null;
+    var dsLeafs   = null;
+
+    // Initial validations
+    if (!sourceObj || !ds)
+    {
+        var msgError = "Missing mandatory fields";
+        omCommon.writeLog(3, "Message DataStructure (" + ds.metadataType + ") Error: " + msgError, "omCommon.dsSetDsAttributesByObjNoValidation");
+        return null;
+    }
+
+    if (sourceObj instanceof Document)
+        objLeaves = sourceObj.getLeafNames(true);
+    else if (sourceObj instanceof DataStructure)
+        objLeaves = sourceObj.getNodeNames();
+    else if (sourceObj instanceof Array)
+        objLeaves = omCommon.getArrayFrom2dArray(sourceObj, 0);
+
+    // Get the node names for the datastructure
+    dsLeafs=ds.getNodeNames();
+
+    // update DataStructure attributes/leaves
+    for (var i=0; i < objLeaves.length; i++)
+    {
+        if(dsLeafs.indexOf(objLeaves[i])>-1)
+            ds[objLeaves[i]] = omCommon.getLeaveValue(sourceObj, objLeaves[i]);
+    }
+
+    return ds;
+  ]]></script>
+</script>

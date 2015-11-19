@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsSetObjectByDsLeaves">
+  <label>dsSetObjectByDsLeaves</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sourceDs" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="destinationObj" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="includeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="excludeLeaves" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - For a given data structure retrieve leaves/nodes values and map them to destination object.
+     * All leaves/nodes names nust exist as leaves in the destination object.
+     * @param    {DataStructure}  sourceDs       - Source data sructure
+     * @param    {Object}         destinationObj - That contains the leaves to set
+     * @param    {Array}          includeLeaves  - Array with include leaves
+     * @param    {Array}          excludeLeaves  - Array with exclude leaves
+     * @returns  {DataStructure}  Returns destinationObj if everything went wll, otherwise null
+     * @version  1.0
+     */
+
+
+    var sourceLeaves = null;            // Array of the source leaves name
+    var destinationLeaves = null;      // Array of the destination Object leaves name
+    var msgError = "";                        // If something wrong happens this is filled up the information
+    var ok = true;                              // "true" if validation ok, otherwise "false"
+
+
+    // retrieve the source leaves
+    sourceLeaves = sourceDs.getNodeNames();
+
+    if (includeLeaves) {
+        if (omCommon.hasArraySubArray(sourceLeaves, includeLeaves))
+            sourceLeaves = includeLeaves;
+        else {
+            msgError = "source don't match in attributes/leaves";
+            omCommon.writeLog(3, "Message DataStructure (" + sourceDs.metadataType + ") Error: " + msgError, "omCommon.dsSetObjectByDsLeaves");
+            return null;
+        }
+    }
+
+    if (!includeLeaves && excludeLeaves)
+        sourceLeaves = omCommon.getSubArrayByExclusion(sourceLeaves, excludeLeaves);
+
+    // Include or Remove the leaves to check/upadate for the destination object
+    destinationLeaves = omCommon.getLeaveNamesFromObject(destinationObj, includeLeaves, excludeLeaves);
+
+    if (destinationLeaves == null) {
+        msgError = "destination don't match in attributes/leaves";
+        omCommon.writeLog(3, "Message DataStructure (" + destinationObj.metadataType + ") Error: " + msgError, "omCommon.dsSetObjectByDsLeaves");
+        return null;
+    }
+
+
+    // Update destination. Ignore update if leave is a DataStructure
+    for (var i=0; i<sourceLeaves.length; i++) {
+        if (!(sourceDs[sourceLeaves[i]] instanceof DataStructure))
+            destinationObj[sourceLeaves[i]] = sourceDs[sourceLeaves[i]] ;
+    }
+
+    return destinationObj;
+  ]]></script>
+</script>

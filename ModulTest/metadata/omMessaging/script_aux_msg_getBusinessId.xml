@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_msg_getBusinessId">
+  <label>aux_msg_getBusinessId</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="msg" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    if(msg.metadataType == publishEvent("OM_COMMON",FIRST_ONE,null)){//msg.metadataType == 'omCommon:msg'){
+
+          var orderHeader = msg.header;
+
+          if(orderHeader.requestNumber){
+                return orderHeader.requestNumber;
+          }
+    }
+
+    return null;
+  ]]></script>
+</script>

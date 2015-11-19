@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omCommon.marketSegment">
+  <enumeration type="enum">
+    <valueList>
+      <value name="Residential" type="enumItem" code="NRES"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_com.conceptwave.system.String</extends>
+  <label>Market Segment</label>
+  <length>32</length>
+  <metaVersion>4</metaVersion>
+</dataType>

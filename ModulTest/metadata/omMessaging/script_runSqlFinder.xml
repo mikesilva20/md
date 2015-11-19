@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.runSqlFinder">
+  <label>runSqlFinder</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="sDoc" type="rifp">
+      <type>doc_omMessaging.fireAndProceedSrc</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    //var sDoc = this.searchDocument;
+    //variables for runSQLQuery
+    var dbName = "ORDER";
+    var resultDocName = "omMessaging.fireAndProceedRes";
+    var sqlParam = new Array();
+
+    var query = "SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, actionDate, resubmissionNPU, metadataType, typeMsg ";
+    query += "FROM ( ";
+    query +=  " (SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, null actionDate, null resubmissionNpu, 'omMessaging.fireAndProceedMsg' metadataType, typeMsg";
+    query +=  " FROM OM_FIREANDPROCEED_MESSAGE";
+    query +=  " WHERE 1=1";
+
+    if(sDoc.businessId)
+    {
+        query +=  " AND businessId = ?";
+        sqlParam.push(sDoc.businessId);
+    }
+    if(sDoc.npu)
+    {
+        query +=  " AND npu LIKE ? ";
+        sqlParam.push(sDoc.npu);
+    }
+
+    if(sDoc.eCode){
+        query +=  " AND eCode = ?";
+        sqlParam.push(sDoc.eCode);
+    }
+
+    if(sDoc.action){
+        query +=  " AND action = ? ";
+        sqlParam.push(sDoc.action);
+    }
+
+    if(sDoc.correlationNpu){
+        query +=  " AND correlationNpu = ? ";
+        sqlParam.push(sDoc.correlationNpu);
+    }
+    query +=  ") ";
+
+    query +=  " UNION ALL ( ";
+    query +=  " SELECT businessId, npu, eCode, eDescription, correlationNpu, receiveDate, action, actionDate, ressubmissionNpu, 'omMessaging.fireAndProceedArchive' metadataType, typeMsg";
+    query +=  " FROM PT_FIREANDPROCEED_ARCHIVE";
+    query +=  " WHERE 1=1";
+
+    if(sDoc.businessId)
+    {
+        query +=  " AND businessId = ?";
+        sqlParam.push(sDoc.businessId);
+    }
+
+    if(sDoc.npu)
+    {
+        query +=  " AND npu LIKE ? ";
+        sqlParam.push(sDoc.npu);
+    }
+    if(sDoc.eCode){
+        query +=  " AND eCode = ?";
+        sqlParam.push(sDoc.eCode);
+    }
+
+    if(sDoc.action){
+        query +=  " AND action = ? ";
+        sqlParam.push(sDoc.action);
+    }
+
+    if(sDoc.correlationNpu){
+        query +=  " AND correlationNpu = ? ";
+        sqlParam.push(sDoc.correlationNpu);
+    }
+
+    query += ") )";
+    query +=  " ORDER BY RECEIVEDATE DESC, NPU DESC";
+
+
+    return Global.runSQLQuery(dbName,  resultDocName, 5000, sqlParam, query);
+  ]]></script>
+</script>

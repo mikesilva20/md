@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.restartCwProcessActivitiesCounter">
+  <label>Restart Cw Process Activity Counter</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="processId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="maxRepeatCount" type="rifp">
+      <type>dtype_com.conceptwave.system.Integer</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Restart activities REPEAT_COUNT
+     * @param    {String 1024}   act - Process Activity
+     * @version  1.0
+     */
+     if(!maxRepeatCount){
+        maxRepeatCount = omCommon.omEnvironmentGetConfigVariable("maxActivityCount", 500);
+        maxRepeatCount = Number(maxRepeatCount);
+     }
+    /*var activityFnd = new Finder("omCommon.activityFnd");
+    activityFnd.searchDocument.PROCESS_ID = processId;
+    activityFnd.searchDocument.maxRepeatCount = maxRepeatCount;
+    var result = activityFnd.search();*/
+
+    var resultDoc =  Global.runDBStoredProcedure("OM_COMMON",  "call OM_RESTART_ACT_REPEAT_COUNT (?,?,?)",[processId,maxRepeatCount],null,true,false,"omCommon.omStoreProcedureResult","I-I-O");
+
+    if(resultDoc[0].sucess == 1)
+        omCommon.writeLog(0, "Restart activities counter succeed. Max Loop Count Activities achieved. Process ID - " + processId + ". Counter Limit - " + maxRepeatCount, "omCommon.restartCwProcessActivitiesCounter");
+    else
+        omCommon.writeLog(0, "Restart activities counter failed. Max Loop Count Activities achieved. Process ID - " + processId + ". Counter Limit - " + maxRepeatCount, "omCommon.restartCwProcessActivitiesCounter");
+  ]]></script>
+</script>

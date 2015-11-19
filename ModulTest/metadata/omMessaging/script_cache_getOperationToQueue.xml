@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.cache_getOperationToQueue">
+  <label>cache_getOperationToQueue</label>
+  <metaVersion>4</metaVersion>
+  <script><![CDATA[
+    var fnd = new Finder("omMessaging.operationToQueueFnd");
+    fnd.search();
+
+    omMessaging.log("Loading 'Operation to Queue' from DB", "cache_getOperationToQueue");
+
+
+    var cacheDS = new DataStructure("omMessaging.cacheDS");
+    cacheDS.setScriptObject(fnd.list);
+
+    return cacheDS;
+  ]]></script>
+</script>

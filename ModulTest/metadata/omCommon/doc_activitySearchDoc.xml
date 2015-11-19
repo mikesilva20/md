@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omCommon.activitySearchDoc">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{717118b4-1734-43e3-9114-74dcc5e6fd1b}</guid>
+  <label>Activty Search Document</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="PROCESS_ID" type="leaf">
+      <valueType>dtype_cwf_pm.PROCESS_ID</valueType>
+    </variable>
+    <variable name="maxRepeatCount" type="leaf">
+      <valueType>dtype_com.conceptwave.system.Integer</valueType>
+    </variable>
+  </variableList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omCommon.activitySearchDoc</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</document>

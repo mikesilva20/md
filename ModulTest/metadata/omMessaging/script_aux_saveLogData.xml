@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_saveLogData">
+  <guid>{0ab4d1e2-76e4-8909-7dae-c2f940a93244}</guid>
+  <label>aux_saveLogData</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="npu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="corrNpu" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="procId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="reqNumber" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="msgId" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var doc = Document.readDoc("cwf_pm:messageLog",msgId);
+
+    if(doc){
+          doc.userData1 = npu;
+          doc.userData2 = corrNpu;
+          doc.userData3 = reqNumber;
+         // doc.requestNumber = reqNumber;
+
+          if(npu){
+
+                var oper = omMessaging.npu_getOper(npu);
+                var desc = Document.readDoc("omMessaging:operationDescriptionDoc", oper);
+
+                if(desc){
+                      doc.operationdesc = desc.description;
+                }
+          }
+
+          doc.save();
+    }
+  ]]></script>
+</script>

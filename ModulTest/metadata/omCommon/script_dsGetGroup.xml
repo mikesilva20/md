@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omCommon.dsGetGroup">
+  <label>dsGetGroup</label>
+  <metaVersion>4</metaVersion>
+  <parameterList>
+    <parameter name="ds" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="name" type="rifp">
+      <type>dtype_omCommon.name</type>
+    </parameter>
+    <parameter name="type" type="rifp">
+      <type>dtype_com.conceptwave.system.String</type>
+    </parameter>
+    <parameter name="id" type="rifp">
+      <type>dtype_omCommon.id</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    /**
+     * @description - Get from ds the groups that match the parameters.
+     * @param    {DataStructure}  ds            - Data structure
+     * @param    {String}         name          - Group name
+     * @param    {String}         type          - Group Type
+     * @param    {String}         id            - Group Id
+     * @returns  {DataStructure}  Returns Array with the group or groups
+     * @version  1.0
+     */
+
+    var groupArray = [];
+    var    nGroups = null;
+    var      found = null;
+
+    nGroups = ds.group.length;
+    for (var i=0; i<nGroups; i++) {
+
+        found = true;
+        if (found && name && ds.group[i] && name !=  ds.group[i].name) found = false;
+        if (found && type && ds.group[i] && type !=  ds.group[i].type) found = false;
+        if (found && id && ds.group[i] && id !=  ds.group[i].id) found = false;
+
+        if (found) groupArray[groupArray.length] = ds.group[i];
+    }
+
+    return groupArray;
+  ]]></script>
+</script>

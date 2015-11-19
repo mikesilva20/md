@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.customer">
+  <container>true</container>
+  <description>Customer</description>
+  <label>customer</label>
+  <metaVersion>21</metaVersion>
+  <xmlMap type="xmap">
+    <includeXsiType>true</includeXsiType>
+  </xmlMap>
+  <childList>
+    <child name="name" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.fullName</element>
+      <label>name</label>
+    </child>
+    <child name="type" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_cwt_common.customerType</element>
+      <label>type</label>
+    </child>
+    <child name="status" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.customerStatus</element>
+      <label>status</label>
+    </child>
+    <child name="customerId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.customerId</element>
+      <label>customerId</label>
+    </child>
+    <child name="marketSegment" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.marketSegment</element>
+      <label>marketSegment</label>
+    </child>
+    <child name="whiteList" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.whiteList</element>
+      <label>whiteList</label>
+    </child>
+    <child name="fiscalityId" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.fiscalityId</element>
+      <label>fiscalityId</label>
+    </child>
+    <child name="creditScore" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.creditScore</element>
+      <label>creditScore</label>
+    </child>
+    <child name="vipCode" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.vipCode</element>
+      <label>vipCode</label>
+    </child>
+    <child name="primaryCustomer" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.primaryCustomer</element>
+      <label>primaryCustomer</label>
+    </child>
+  </childList>
+  <methodList>
+    <method name="check" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsIsCompatibleByLeaveAndValueWithObj(this, sourceObj, includeLeaves, excludeLeaves);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjectByDsLeaves(this, destinationObj, includeLeaves, excludeLeaves)</script>
+    </method>
+    <method name="set" type="action">
+      <parameterList>
+        <parameter name="sourceObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="noValidations" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        if(noValidations){
+            return omCommon.dsSetDsAttributesByObjNoValidation(this, sourceObj);
+        }else{
+            return omCommon.dsSetDsAttributesByObj(this, sourceObj, includeLeaves, excludeLeaves);
+        }
+      ]]></script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.customer</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.customer</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

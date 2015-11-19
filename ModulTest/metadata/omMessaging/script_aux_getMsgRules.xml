@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.aux_getMsgRules">
+  <guid>{01c31cb5-1f92-92c4-c41d-f43a48d26f33}</guid>
+  <label>aux_getMsgRules</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="nativeErrorCode" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+    <parameter name="sysCode" type="rifp">
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    var fnd = new Finder("ptMsgSys:msgReportRulesFnd");
+    fnd.searchDocument.nativeErrorCode       = nativeErrorCode;
+    fnd.searchDocument.nativeSystemCode = sysCode.leftPad(4, '0');
+
+    var list = fnd.search();
+
+    return (list.length > 0)? list[0] : null;
+  ]]></script>
+</script>

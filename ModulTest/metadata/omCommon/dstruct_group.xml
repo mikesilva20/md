@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataStructure name="omCommon.group">
+  <container>true</container>
+  <label>group</label>
+  <metaVersion>21</metaVersion>
+  <childList>
+    <child name="id" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.String</element>
+      <label>id</label>
+      <xmlMap type="xmap">
+        <length>16</length>
+      </xmlMap>
+    </child>
+    <child name="name" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_omCommon.name</element>
+      <label>name</label>
+    </child>
+    <child name="type" type="dstruct">
+      <datatype>true</datatype>
+      <element>dtype_com.conceptwave.system.String</element>
+      <label>type</label>
+      <xmlMap type="xmap">
+        <length>64</length>
+      </xmlMap>
+    </child>
+    <child name="group" type="dstruct">
+      <array>true</array>
+      <element>dstruct_omCommon.group</element>
+      <label>group</label>
+      <maxInstance>-1</maxInstance>
+    </child>
+    <child name="attributes" type="dstruct">
+      <container>true</container>
+      <label>attributes</label>
+      <childList>
+        <child name="attribute" type="dstruct">
+          <array>true</array>
+          <element>dstruct_omCommon.attribute</element>
+          <label>attribute</label>
+          <maxInstance>-1</maxInstance>
+        </child>
+      </childList>
+    </child>
+  </childList>
+  <methodList>
+    <method name="getAttribute" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsGetAttribute(this, name);</script>
+    </method>
+    <method name="setAttribute" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="value" type="rifp">
+          <type>dtype_omCommon.value</type>
+        </parameter>
+        <parameter name="setOnlyIfExist" type="rifp">
+          <type>dtype_com.conceptwave.system.Boolean</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetAttribute(this, name, value, setOnlyIfExist);</script>
+    </method>
+    <method name="setGroup" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="type" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_omCommon.id</type>
+        </parameter>
+      </parameterList>
+      <script><![CDATA[
+        var groupArray = this.getGroup(name, type, id);
+
+        // new Group
+        if (groupArray.length == 0) {
+
+              var newIndex = this.group.length;
+              this.group[newIndex].name = name;
+              this.group[newIndex].type = type;
+              this.group[newIndex].id = id;
+              groupArray[0] = this.group[newIndex];
+        } else {
+
+              for (var i=0; i<groupArray.length; i++) {
+
+                    groupArray[i].name = name;
+                    groupArray[i].type = type;
+                    groupArray[i].id = id;
+              }
+        }
+
+        return groupArray
+      ]]></script>
+    </method>
+    <method name="getGroup" type="action">
+      <parameterList>
+        <parameter name="name" type="rifp">
+          <type>dtype_omCommon.name</type>
+        </parameter>
+        <parameter name="type" type="rifp">
+          <type>dtype_com.conceptwave.system.String</type>
+        </parameter>
+        <parameter name="id" type="rifp">
+          <type>dtype_omCommon.id</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsGetGroup(this, name, type, id);</script>
+    </method>
+    <method name="mapToObject" type="action">
+      <parameterList>
+        <parameter name="destinationObj" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="includeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+        <parameter name="excludeLeaves" type="rifp">
+          <type>nmeta_com.conceptwave.system.Object</type>
+        </parameter>
+      </parameterList>
+      <script>return omCommon.dsSetObjByCatalogDsAttributes(this, destinationObj, includeLeaves, excludeLeaves);</script>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="tree">
+    <defaultFolderImage>undefined</defaultFolderImage>
+    <defaultLeafImage>undefined</defaultLeafImage>
+    <element>dstruct_omCommon.group</element>
+    <extends>tree_com.conceptwave.system.DataStructureUserInterface</extends>
+    <tableDoc>doc_com.conceptwave.system.TreeDocument</tableDoc>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>dstruct_omCommon.group</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>tree_com.conceptwave.system.DataStructureUserInterface/frmui_Forms</extends>
+      </vform>
+    </vformList>
+  </UserInterface>
+</dataStructure>

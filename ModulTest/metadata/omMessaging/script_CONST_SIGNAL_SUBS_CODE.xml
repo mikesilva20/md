@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.CONST_SIGNAL_SUBS_CODE">
+  <guid>{0a0f3188-0436-716b-d1da-59d461d6198b}</guid>
+  <label>#CONST# NSOM SIGNALS SYS CODE</label>
+  <metaVersion>3</metaVersion>
+  <script><![CDATA[return "0205";]]></script>
+</script>

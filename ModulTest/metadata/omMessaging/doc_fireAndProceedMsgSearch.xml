@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document name="omMessaging.fireAndProceedMsgSearch">
+  <extends>doc_com.conceptwave.system.Document</extends>
+  <guid>{0fb33005-5abc-e2dd-de92-abc4d3cf4e6d}</guid>
+  <label>Fire And Proceed - Message Search</label>
+  <metaVersion>21</metaVersion>
+  <variableList>
+    <variable name="npu" type="leaf">
+      <label>NPU</label>
+      <propertyElement type="elfld">
+        <label>NPU</label>
+      </propertyElement>
+      <valueType>dtype_omCommon.npu</valueType>
+    </variable>
+  </variableList>
+  <methodList>
+    <method name="addPerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+    <method name="deletePerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+    <method name="editablePerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+      <script><![CDATA[
+        // SCRIPT MIGRATION: if null, return false
+        function functionToReturnFalseWhenNull(scriptToReturnFalseWhenNullThis) {
+        return scriptToReturnFalseWhenNullThis.cwIsEditable(true) && $psCondition;
+        }
+
+        var functionToReturnFalseWhenNullRes = functionToReturnFalseWhenNull(this);
+        if(functionToReturnFalseWhenNullRes == null)
+          return false;
+        else
+          return functionToReturnFalseWhenNullRes;
+      ]]></script>
+    </method>
+    <method name="attachPerm" type="permMethod">
+      <privilegesType>NEVER</privilegesType>
+    </method>
+  </methodList>
+  <UserInterface name="UserInterface" type="ui">
+    <extends>doc_com.conceptwave.system.Document/ui_UserInterface</extends>
+    <variableList>
+      <variable name="model" type="uivar">
+        <label>model</label>
+        <valueType>doc_omMessaging.fireAndProceedMsgSearch</valueType>
+      </variable>
+    </variableList>
+    <vformList>
+      <vform name="Forms" type="frmui">
+        <extends>doc_com.conceptwave.system.Document/ui_UserInterface/frmui_Forms</extends>
+        <overlayList>
+          <overlay name="Default" type="exov">
+            <base>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</base>
+            <extends>ui_com.conceptwave.system.DocumentUserInterface/frmui_Forms/exov_Default</extends>
+            <label>Default</label>
+            <overrideList>
+              <override name="DetailsGrid_vCentering" type="elvltstck">
+                <height>100%</height>
+                <membersMargin>5</membersMargin>
+                <width>100%</width>
+                <elementList>
+                  <element name="fireAndProceedMsgSearchHeader" type="elhdr">
+                    <label>Details</label>
+                    <showValidation>true</showValidation>
+                    <style>CwFOT</style>
+                  </element>
+                  <element name="DetailsGrid" type="elgrd">
+                    <colWidths>195,195</colWidths>
+                    <numOfCols>2</numOfCols>
+                    <useDefaultHeight>true</useDefaultHeight>
+                    <width>390px</width>
+                    <elementList>
+                      <element name="npu" type="eltxtArea">
+                        <columnSpan>2</columnSpan>
+                        <height>20px</height>
+                        <removeLabelLine>true</removeLabelLine>
+                        <variable type="varPath">
+                          <variablePathList>
+                            <variablePath>doc_omMessaging.fireAndProceedMsgSearch/ui_UserInterface/uivar_model</variablePath>
+                            <variablePath>doc_omMessaging.fireAndProceedMsgSearch/leaf_npu</variablePath>
+                          </variablePathList>
+                        </variable>
+                        <width>100%</width>
+                      </element>
+                    </elementList>
+                  </element>
+                </elementList>
+              </override>
+            </overrideList>
+          </overlay>
+        </overlayList>
+      </vform>
+    </vformList>
+    <methodList>
+      <method name="runTrigger" type="usrActionMethod">
+        <script><![CDATA[
+          this.cw$super_runTrigger();
+          Global.runContentDisplayScript(this, "displayScript");
+        ]]></script>
+      </method>
+    </methodList>
+  </UserInterface>
+</document>

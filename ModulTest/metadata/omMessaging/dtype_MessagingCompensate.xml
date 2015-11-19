@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataType name="omMessaging.MessagingCompensate">
+  <enumeration type="enum">
+    <valueList>
+      <value name="cpRest" type="enumItem" code="cpRest"/>
+    </valueList>
+  </enumeration>
+  <extends>dtype_cwf.compensate</extends>
+  <label>MessagingCompensate</label>
+  <metaVersion>4</metaVersion>
+</dataType>

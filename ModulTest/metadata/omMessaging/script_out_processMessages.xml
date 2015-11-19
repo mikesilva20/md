@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<script name="omMessaging.out_processMessages">
+  <highlight>34</highlight>
+  <label>out_processMessages</label>
+  <metaVersion>3</metaVersion>
+  <parameterList>
+    <parameter name="proc" type="rifp">
+      <mandatory>true</mandatory>
+      <type>nmeta_com.conceptwave.system.Object</type>
+    </parameter>
+  </parameterList>
+  <script><![CDATA[
+    try{
+
+        var pd            = proc.processDocument;
+        var actDelay      = pd.activityTimeout;
+
+        //#-> GP nao se encontra criado
+        var FIRE_AND_PROCEED_GP = "omMessaging.omFireAndProceedProcess";
+        var FIRE_AND_PROCEED_OP = "fireAndProceedErrorMessage";
+
+        if(publishEvent("OM_COMMON",FIRST_ONE,null))//omCommon.isEmpty(actDelay))
+            actDelay = 60;
+
+        var maxMsg        = pd.msgPerCycle;
+        var stackId        = pd.stackId;
+        var simulator     = pd.simulator;
+        var now           = new Date().getTime();
+        var due           = now + 1000 * actDelay;
+        var dolMsg        = omMessaging.out_getNextMsg(stackId, maxMsg);
+
+        var doc;
+
+        for(var i = 0; i < dolMsg.length; i++)
+        {
+            doc = dolMsg[i];
+            doc.processDate      = new Date();
+            omMessaging.aux_loadMsgPayload(doc);
+
+            var xml = doc.payload;
+            var ds = Global.getItemsFromXML(xml, doc.dataType);
+
+            if(ds)
+            {
+                ds = ds[0];
+
+                var oper = omMessaging.npu_getOper(doc.npu);
+
+                var fqn = omMessaging.aux_getTransformation(oper, "OUT");
+
+                var msg;
+                if(fqn)
+                    msg = Global.runGlobalScript(fqn, false, ds);
+                else
+                    msg = [ds,omMessaging.aux_getSoapHeader(doc)];
+
+                var header = msg[1];
+
+
+                var arr = [msg[0], header];
+
+                var eCodes = omMessaging.out_sendMsg(arr, doc, simulator);
+
+                if (eCodes[0]) // checks if we really sent the message to TIBCO
+                {
+                    var syncRuleDoc = omMessaging.aux_SyncGetRule(eCodes[1]);
+                    if (syncRuleDoc)
+                    {
+                        switch (syncRuleDoc.action)
+                        {
+                            case "SUC":
+                                // Success
+                                successDelivery(doc);
+                                var info = omMessaging.isSyncInterface(doc.system, doc.operation, doc.interfaceToInvoke);
+                                if(info && info.value5 != "false"){
+                                    addMsgToRoute(eCodes[3], info.value2.split('/')[0], info.value2.split('/')[1], doc.processId, doc.npu);
+                                }
+                                break;
+
+                            case "REP":
+                                // Republish
+                                republishDelivery(doc, syncRuleDoc.maxRetries, eCodes[2]);
+                                break;
+
+                            default:
+                                unSuccessfullyDelivery(doc, eCodes[2]);
+                                break;
+                        }
+                    }else
+                        unSuccessfullyDelivery(doc, eCodes[2]);
+                }else // internal error occurred
+                    unSuccessfullyDelivery(doc, eCodes[1]);
+            }
+            //omMessaging.aux_updateMsgOutStatus(doc.npu,doc.status,doc.statusCode,doc.statusText,doc.processId,doc.retryDate,doc.retryCounter);
+            doc.save();
+
+            setMsgLogData(header,doc);
+            now = new Date().getTime();
+
+            if (now > due) break;
+        }
+    }catch(exc){
+        if(doc)
+        {
+            omMessaging.audit_saveInfo("Error", doc);
+            //omMessaging.aux_updateMsgOutStatus(doc.npu,omMessaging.CONST_STATUS_ERROR(),"EXCEPTION",exc.message,doc.processId,doc.retryDate,doc.retryCounter);
+            doc.statusCode  = "EXCEPTION";
+            doc.statusText  = exc.message;
+            doc.status             = omMessaging.CONST_STATUS_ERROR();
+            doc.deliveryDate = new Date();
+            omMessaging.aux_sendException(doc, "SYNCERR", exc.message);
+            doc.save();
+        }
+
+        omMessaging.log(exc.message, "out_processMessages");
+    }
+
+    // :: PRIVATE FUNCTIONS //////////////////////////////////////////////////////////////
+    function setMsgLogData(hr, doc) {
+        var msgId = UserProfile.getMsgLogId();
+        if(hr && msgId){
+            if(!hr.has("processName") || hr.processName==null)
+                omMessaging.aux_saveLogData(doc.npu, doc.correlationNpu, doc.processId, doc.businessId, msgId);
+            else
+                omMessaging.aux_saveLogData(doc.npu, doc.correlationNpu, doc.processId, hr.processName, msgId);
+        }else{
+
+            omMessaging.log("UserProfile.getMsgLogId return null, [msgId:" + msgId + ' NPU:' + doc.npu + ']' , "out_processMessages");
+        }
+    }
+
+    /***
+    * Message was delivered successfully, all went ok.ç
+    ***/
+    function successDelivery(outDoc)
+    {
+        outDoc.status        = omMessaging.CONST_STATUS_PROCESSED();
+        outDoc.deliveryDate  = new Date();
+        outDoc.statusCode    = "SENT";
+        outDoc.statusText    = "Message sent";
+
+        if (outDoc.processId)
+            omMessaging.route_addProcId(outDoc.npu, outDoc.processId);
+
+        omMessaging.audit_saveInfo("Success", doc);
+    }
+
+    /***
+    * Message wasn't delivered, message has received a timeout error.
+    ***/
+    function republishDelivery(outDoc, maxRetries, eDescription)
+    {
+        //outDoc.statusText   = omCommon.cap(eDescription, 500);
+        outDoc.statusText = publishEvent("OM_COMMON",FIRST_ONE,null);
+
+        if (outDoc.retryCounter < maxRetries)
+        {
+            outDoc.statusCode   = "RETRY";
+            outDoc.status       = omMessaging.CONST_STATUS_RETRY();
+            outDoc.retryDate    = omMessaging.aux_getNextRetryDate( outDoc.retryCounter);
+            outDoc.retryCounter += 1;
+
+            omMessaging.audit_saveInfo("Retry", doc);
+
+        }
+        else
+        {
+            outDoc.statusCode   = "SYNCERR";
+            outDoc.status       = omMessaging.CONST_STATUS_ERROR();
+            outDoc.deliveryDate = new Date();
+
+            omMessaging.aux_sendException(outDoc, "SYNCERR",eDescription);
+            omMessaging.audit_saveInfo("Error", doc);
+        }
+    }
+
+    /***
+    * Message wasn't delivered, unknown error.
+    ***/
+    function unSuccessfullyDelivery(outDoc, eDescription)
+    {
+        outDoc.statusCode   = "SYNCERR";
+        //outDoc.statusText   = omCommon.cap(eDescription, 500);
+        outDoc.statusText   = publishEvent("OM_COMMON",FIRST_ONE,null)
+        outDoc.status       = omMessaging.CONST_STATUS_ERROR();
+        outDoc.deliveryDate = new Date();
+
+        if(outDoc.certificationNeeded == omMessaging.OM_MSG_FIRE_AND_PROCEED()) // Fire & Proceed
+        {
+            //var dsNew = new DataStructure("omCommon.msgReport");
+            var dsNew = publishEvent("OM_COMMON",FIRST_ONE,null);
+            dsNew.headerReport.npu = outDoc.npu;
+            dsNew.headerReport.correlationNpu = outDoc.correlationNpu;
+            dsNew.headerReport.businessId = outDoc.businessId;
+            dsNew.headerReport.certificationNeeded = outDoc.certificationNeeded;
+            dsNew.headerReport.creationTime = outDoc.creationDate;
+            dsNew.status.eCode.code = outDoc.statusCode;
+            dsNew.status.eCode.description = outDoc.statusText;
+            dsNew.status.eCode.systemCode = "-1";
+            Process.sendMessageToQueue(FIRE_AND_PROCEED_GP, FIRE_AND_PROCEED_OP, dsNew);
+        }
+        else
+            omMessaging.aux_sendException(outDoc, "SYNCERR", eDescription);
+
+        omMessaging.audit_saveInfo("Error", doc);
+    }
+
+    //to sync interface only
+    function addMsgToRoute(input, interfaceInvoked, operationToInvoke, process_Id, correlationNpu) {
+        var eCodes = new Array();
+        var ack = null;
+        var npu = null;
+        var msgId = UserProfile.getMsgLogId();
+        var procId = null;
+        var reqNumber = null;
+        var msgDoc = null;
+        var oper = null;
+        var header = null;
+        var headerReq= null;
+
+        //header = UserProfile.getSoapRequestHeader("omCommon.headerRequest");
+        header = publishEvent("OM_COMMON",FIRST_ONE,null);
+        if (header == null)
+        {
+            //headerReq = UserProfile.getSoapResponseHeader("omCommon.msgAckHeader");
+            headerReq = publishEvent("OM_COMMON",FIRST_ONE,null);
+            if(headerReq)
+            {
+                //header = new DataStructure("omCommon.headerRequest");
+                header = publishEvent("OM_COMMON",FIRST_ONE,null);
+                header.npu            = headerReq.npu;
+                header.correlationNpu = correlationNpu;
+            }else{
+                // Mensagens sem resposta
+                //header = new DataStructure("omCommon.headerRequest");
+                header = publishEvent("OM_COMMON",FIRST_ONE,null);
+                header.npu            = correlationNpu + "_S";
+                header.correlationNpu = correlationNpu;
+            }
+        }
+
+        if (header && header.has("npu")) npu = header.npu;
+
+        reqNumber = doc.businessId;
+
+        if (process_Id != null){
+            if (process_Id == 'NotFound'){
+                //var codeDescription = omConfig.getErrorCodeDescription("5E0006");
+                var codeDescription = publishEvent("OM_CONFIG_ACTIVE_EVENT",FIRST_ONE,null);
+                omMessaging.aux_addError(eCodes,codeDescription[0], codeDescription[1]);
+            }
+        }
+
+        var ack = omMessaging.in_createSyncAck(header, eCodes, "");
+
+        msgDoc = omMessaging.in_saveMsg(input, header, ack, interfaceInvoked, operationToInvoke, reqNumber, process_Id);
+
+        omMessaging.aux_saveLogData(npu, header.correlationNpu, process_Id, reqNumber, msgId);
+    }
+  ]]></script>
+</script>
